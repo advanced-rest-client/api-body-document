@@ -1,0 +1,323 @@
+<link rel="import" href="../polymer/polymer-element.html">
+<link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../raml-aware/raml-aware.html">
+<link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
+<link rel="import" href="../api-type-document/api-type-document.html">
+<link rel="import" href="../iron-collapse/iron-collapse.html">
+<link rel="import" href="../iron-icon/iron-icon.html">
+<link rel="import" href="../arc-icons/arc-icons.html">
+<link rel="import" href="../paper-button/paper-button.html">
+<link rel="import" href="../api-schema-document/api-schema-document.html">
+
+<dom-module id="api-body-document">
+  <template>
+    <style>
+    :host {
+      display: block;
+      @apply --api-body-document;
+    }
+
+    [hidden] {
+      display: none !important;
+    }
+
+    .section-title-area {
+      @apply --layout-horizontal;
+      @apply --layout-center;
+      border-bottom: 1px var(--api-body-document-title-border-color, #e5e5e5) solid;
+    }
+
+    .section-title-area h3 {
+      @apply --layout-flex;
+    }
+
+    .toggle-button {
+      color: var(--api-body-document-toggle-view-color, var(--arc-toggle-view-icon-color, rgba(0, 0, 0, 0.74)));
+      transition: color 0.25s ease-in-out;
+      @apply --toggle-button;
+    }
+
+    .toggle-button:hover {
+      color: var(--api-body-document-toggle-view-hover-color, var(--arc-toggle-view-icon-hover-color, rgba(0, 0, 0, 0.88)));
+      @apply --toggle-button-hover;
+    }
+
+    .toggle-icon {
+      transform: rotateZ(0deg);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .toggle-icon.opened {
+      transform: rotateZ(-180deg);
+    }
+
+    .table-title {
+      @apply --arc-font-title;
+      @apply --api-body-document-title;
+    }
+
+    paper-button[active] {
+      background-color: var(--api-body-document-media-button-background-color, #CDDC39);
+    }
+
+    .media-type-selector {
+      margin: 20px 0;
+    }
+    </style>
+    <template is="dom-if" if="[[aware]]">
+      <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
+    </template>
+    <div class="section-title-area">
+      <h3 class="table-title">Body</h3>
+      <div class="title-area-actions">
+        <paper-button on-click="toggle" class="toggle-button" title="Toogle body details">
+          [[_computeToggleActionLabel(opened)]]
+          <iron-icon icon="arc:expand-more" class$="[[_computeToggleIconClass(opened)]]"></iron-icon>
+        </paper-button>
+      </div>
+    </div>
+    <iron-collapse opened="[[opened]]">
+      <template is="dom-if" if="[[renderMediaSelector]]">
+        <div class="media-type-selector">
+          <span>Media type:</span>
+          <template is="dom-repeat" items="[[mediaTypes]]">
+            <paper-button class="union-toggle" active="[[_mediaTypeActive(selected, index)]]" on-click="_selectMediaType" title$="Select [[item.label]] media type">[[item.label]]</paper-button>
+          </template>
+        </div>
+      </template>
+      <template is="dom-if" if="[[isObject]]">
+        <api-type-document amf-model="[[amfModel]]" type="[[selectedBody]]"></api-type-document>
+      </template>
+      <template is="dom-if" if="[[isSchema]]">
+        <api-schema-document schema-model="[[selectedBody]]"></api-schema-document>
+      </template>
+    </iron-collapse>
+  </template>
+  <script>
+  /**
+   * `api-body-document`
+   *
+   * A component to render HTTP method body documentation based on AMF model
+   *
+   * ## Styling
+   *
+   * `<api-body-document>` provides the following custom properties and mixins for styling:
+   *
+   * Custom property | Description | Default
+   * ----------------|-------------|----------
+   * `--api-body-document` | Mixin applied to this elment | `{}`
+   *
+   * @customElement
+   * @polymer
+   * @demo demo/index.html
+   * @memberof ApiElements
+   */
+  class ApiBodyDocument extends Polymer.Element {
+    static get is() { return 'api-body-document'; }
+    static get properties() {
+      return {
+        /**
+         * `raml-aware` scope property to use.
+         */
+        aware: String,
+        /**
+         * Generated AMF json/ld model form the API spec.
+         * The element assumes the object of the first array item to be a
+         * type of `"http://raml.org/vocabularies/document#Document`
+         * on AMF vocabulary.
+         *
+         * It is only usefult for the element to resolve references.
+         *
+         * @type {Object|Array}
+         */
+        amfModel: Object,
+        /**
+         * Set to true to open the body view.
+         * Autormatically updated when the view is toggled from the UI.
+         */
+        opened: Boolean,
+        /**
+         * AMF model for body as a `http://raml.org/vocabularies/http#payload`
+         * type.
+         * @type {Array<Object>}
+         */
+        body: {
+          type: Array,
+          observer: '_bodyChanged'
+        },
+        /**
+         * List of discovered media types in the `body`.
+         * @type {Array<Object>}
+         */
+        mediaTypes: {
+          type: Array,
+          readOnly: true
+        },
+        /**
+         * Computed value. True when mediaTypes has more than one item.
+         */
+        renderMediaSelector: {
+          type: Boolean,
+          readOnly: true,
+          value: false,
+          computed: '_computeRenderMediaSelector(mediaTypes.*)'
+        },
+        /**
+         * Currently selected media type.
+         * It is an index of a media type in `mediaTypes` array.
+         * It is set to `0` each time the body changes.
+         */
+        selected: Number,
+        /**
+         * A body model for selected media type.
+         * Computed automatically when selection change.
+         */
+        selectedBody: {
+          type: Object,
+          readOnly: true,
+          computed: '_computeSelectedBody(selected, body)',
+          observer: '_selectedBodyChanged'
+        },
+        /**
+         * True if selected body is a structured object
+         */
+        isObject: {
+          type: Boolean,
+          readOnly: true
+        },
+        /**
+         * True if selected body is a schema (JSON, XML, ...) data
+         */
+        isSchema: {
+          type: Boolean,
+          readOnly: true
+        }
+      };
+    }
+    /**
+     * Computes basic view values when body change.
+     * @param {Array} body Current value of the body.
+     */
+    _bodyChanged(body) {
+      if (!body) {
+        return;
+      }
+      const media = this._computeMediaTypes(body);
+      this._setMediaTypes(media);
+      this.selected = 0;
+    }
+    /**
+     * Computes list of media types in the `body`
+     * @param {Array} body Current value of the body.
+     * @return {Array<Object>}
+     */
+    _computeMediaTypes(body) {
+      return body.map((item) => {
+        return {
+          label: item['http://raml.org/vocabularies/http#mediaType'][0]['@value']
+        };
+      });
+    }
+    /**
+     * Computes value for `renderMediaSelector` properety.
+     * @param {Object} record `mediaTypes` change record.
+     * @return {Boolean} True if there's more than one item in mediaType
+     */
+    _computeRenderMediaSelector(record) {
+      return !!(record && record.base && record.base.length && record.base.length > 1);
+    }
+    /**
+     * Computes if `selected` equals current item index.
+     *
+     * @param {Number} selected
+     * @param {Number} index
+     * @return {Boolean}
+     */
+    _mediaTypeActive(selected, index) {
+      return selected === index;
+    }
+    /**
+     * Handler for media type type button click.
+     * Sets `selected` property.
+     *
+     * @param {ClickEvent} e
+     */
+    _selectMediaType(e) {
+      const index = e.model.get('index');
+      if (index !== this.selected) {
+        this.selected = index;
+      } else {
+        e.target.active = true;
+      }
+    }
+    /**
+     * Computes value of `http://raml.org/vocabularies/http#schema` for body.
+     * @param {Number} selected Index of currently selected media type in
+     * `mediaTypes` array
+     * @param {Array<Object>} body List of body in request.
+     * @return {Object|undefined}
+     */
+    _computeSelectedBody(selected, body) {
+      if (!body || (!selected && selected !== 0)) {
+        return;
+      }
+      const data = body[selected];
+      if (!data) {
+        return;
+      }
+      const schema = data['http://raml.org/vocabularies/http#schema'];
+      return schema ? schema[0] : undefined;
+    }
+
+    _selectedBodyChanged(body) {
+      if (!body) {
+        return;
+      }
+      let isObject = false;
+      let isSchema = false;
+      if (this._hasType(body, 'http://www.w3.org/ns/shacl#NodeShape')) {
+        isObject = true;
+      } else if (this._hasType(body, 'http://www.w3.org/ns/shacl#SchemaShape')) {
+        isSchema = true;
+      }
+      this._setIsObject(isObject);
+      this._setIsSchema(isSchema);
+    }
+
+    /**
+     * Checks if property item has a type.
+     * @param {Object} model Model item.
+     * @param {String} type A type to lookup
+     * @return {Boolean}
+     */
+    _hasType(model, type) {
+      if (!model) {
+        return false;
+      }
+      const types = model['@type'] || [];
+      return types.findIndex((item) => item === type) !== -1;
+    }
+    // Computes a label for the section toggle buttons.
+    _computeToggleActionLabel(opened) {
+      return opened ? 'Hide' : 'Show';
+    }
+
+    // Computes class for the toggle's button icon.
+    _computeToggleIconClass(opened) {
+      var clazz = 'toggle-icon';
+      if (opened) {
+        clazz += ' opened';
+      }
+      return clazz;
+    }
+    /**
+     * Toggles URI parameters view.
+     * Use `pathOpened` property instead.
+     */
+    toggle() {
+      this.opened = !this.opened;
+    }
+  }
+  window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);
+  </script>
+</dom-module>
