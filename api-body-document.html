@@ -8,12 +8,17 @@
 <link rel="import" href="../arc-icons/arc-icons.html">
 <link rel="import" href="../paper-button/paper-button.html">
 <link rel="import" href="../api-schema-document/api-schema-document.html">
+<link rel="import" href="../markdown-styles/markdown-styles.html">
+<link rel="import" href="../marked-element/marked-element.html">
+<link rel="import" href="../api-resource-example-document/api-resource-example-document.html">
 
 <dom-module id="api-body-document">
   <template>
+    <style include="markdown-styles"></style>
     <style>
     :host {
       display: block;
+      @apply --arc-font-body1;
       @apply --api-body-document;
     }
 
@@ -56,12 +61,32 @@
       @apply --api-body-document-title;
     }
 
+    h4 {
+      @apply --arc-font-subhead;
+    }
+
     paper-button[active] {
       background-color: var(--api-body-document-media-button-background-color, #CDDC39);
     }
 
     .media-type-selector {
       margin: 20px 0;
+    }
+
+    .markdown-body {
+      margin-bottom: 28px;
+      margin-top: 28px;
+      color: var(--api-body-document-description-color, rgba(0, 0, 0, 0.74));
+      @apply --arc-font-body1;
+    }
+
+    .markdown-body[data-with-title] {
+      margin-top: 0;
+    }
+
+    .examples-section-title {
+      @apply --arc-font-body1;
+      font-size: 16px;
     }
     </style>
     <template is="dom-if" if="[[aware]]">
@@ -85,7 +110,19 @@
           </template>
         </div>
       </template>
+      <template is="dom-if" if="[[hasTypeName]]">
+        <h4>[[typeName]]</h4>
+      </template>
+      <template is="dom-if" if="[[hasDescription]]">
+        <marked-element markdown="[[description]]">
+          <div slot="markdown-html" class="markdown-body" data-with-title$="[[hasTypeName]]"></div>
+        </marked-element>
+      </template>
       <template is="dom-if" if="[[isObject]]">
+        <template is="dom-if" if="[[hasExamples]]">
+          <h5 class="examples-section-title">Examples</h5>
+          <api-resource-example-document examples="[[examples]]"></api-resource-example-document>
+        </template>
         <api-type-document amf-model="[[amfModel]]" type="[[selectedBody]]"></api-type-document>
       </template>
       <template is="dom-if" if="[[isSchema]]">
@@ -191,6 +228,50 @@
         isSchema: {
           type: Boolean,
           readOnly: true
+        },
+        /**
+         * Name of the resource type if any.
+         */
+        typeName: {
+          type: String,
+          computed: '_computeTypeName(selectedBody)'
+        },
+        /**
+         * Computed value, true if `typeName` is set.
+         */
+        hasTypeName: {
+          type: Boolean,
+          computed: '_computeHasName(typeName)'
+        },
+        /**
+         * Name of the resource type if any.
+         */
+        description: {
+          type: String,
+          computed: '_computeDescription(selectedBody)'
+        },
+        /**
+         * Computed value, true if `typeName` is set.
+         */
+        hasDescription: {
+          type: Boolean,
+          computed: '_computeHasDescription(description)'
+        },
+        /**
+         * Computed value of examples in the body model.
+         *
+         * @type {Array<Object>}
+         */
+        examples: {
+          type: Array,
+          computed: '_computeExamples(selectedBody)'
+        },
+        /**
+         * Computed valie if examples are set.
+         */
+        hasExamples: {
+          type: Boolean,
+          computed: '_computeHasExamples(examples)'
         }
       };
     }
@@ -279,6 +360,8 @@
         isObject = true;
       } else if (this._hasType(body, 'http://www.w3.org/ns/shacl#SchemaShape')) {
         isSchema = true;
+      } else if (this._hasType(body, 'http://raml.org/vocabularies/shapes#ArrayShape')) {
+        isObject = true;
       }
       this._setIsObject(isObject);
       this._setIsSchema(isSchema);
@@ -317,6 +400,64 @@
     toggle() {
       this.opened = !this.opened;
     }
+    /**
+     * Computes `typeName` as a name of body in the AMF model.
+     *
+     * @param {Object} body Currently selected body.
+     * @return {String|undefined}
+     */
+    _computeTypeName(body) {
+      const name = body && body['http://schema.org/name'];
+      return name ? name[0]['@value'] : undefined;
+    }
+    /**
+     * Computes value for `hasTypeName`
+     *
+     * @param {?String} name Current `typeName`
+     * @return {Boolean}
+     */
+    _computeHasName(name) {
+      return !!name;
+    }
+    /**
+     * Computes `description` from AMF model.
+     *
+     * @param {Object} body Currently selected body.
+     * @return {String|undefined}
+     */
+    _computeDescription(body) {
+      const name = body && body['http://schema.org/description'];
+      return name ? name[0]['@value'] : undefined;
+    }
+    /**
+     * Computes value for `hasDescription`
+     *
+     * @param {?String} name Current `typeName`
+     * @return {Boolean}
+     */
+    _computeHasDescription(name) {
+      return !!name;
+    }
+    /**
+     * Computes `examples` property from AMF model.
+     *
+     * @param {Object} body Currently selected body.
+     * @return {Array|undefined} List of examples in the body
+     */
+    _computeExamples(body) {
+      return body && body['http://raml.org/vocabularies/document#examples'];
+    }
+    /**
+     * Computes value for `hasExamples`
+     *
+     * @param {?Array} examples Current `examples`
+     * @return {Boolean}
+     */
+    _computeHasExamples(examples) {
+      return !!(examples && examples.length);
+    }
+
+
   }
   window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);
   </script>

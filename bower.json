@@ -20,7 +20,10 @@
     "iron-icon": "PolymerElements/iron-icon#^2.1.0",
     "paper-button": "PolymerElements/paper-button#^2.1.0",
     "arc-icons": "advanced-rest-client/arc-icons#^2.0.2",
-    "api-schema-document": "advanced-rest-client/api-schema-document#2.0.0-preview"
+    "api-schema-document": "advanced-rest-client/api-schema-document#2.0.0-preview",
+    "marked-element": "PolymerElements/marked-element#^2.4.0",
+    "markdown-styles": "advanced-rest-client/markdown-styles#^2.0.2",
+    "api-resource-example-document": "advanced-rest-client/api-resource-example-document#2.0.0-preview"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
