@@ -69,7 +69,6 @@
         .then((response) => response.json())
         .then((data) => {
           app.amfModel = data;
-          this._sendBaseParams(data);
         });
       };
       app._navChanged = function(e) {
@@ -80,11 +79,6 @@
         } else {
           app.hasData = false;
         }
-      };
-      app._sendBaseParams = function(data) {
-        const enc = data[0]['http://raml.org/vocabularies/document#encodes'][0];
-        const srv = enc['http://raml.org/vocabularies/http#server'][0];
-        app.baseUriParameters = srv['http://raml.org/vocabularies/http#variable'];
       };
       app.setData = function(id) {
         const enc = app.amfModel[0]['http://raml.org/vocabularies/document#encodes'][0];

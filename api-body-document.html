@@ -106,7 +106,7 @@
         <div class="media-type-selector">
           <span>Media type:</span>
           <template is="dom-repeat" items="[[mediaTypes]]">
-            <paper-button class="union-toggle" active="[[_mediaTypeActive(selected, index)]]" on-click="_selectMediaType" title$="Select [[item.label]] media type">[[item.label]]</paper-button>
+            <paper-button class="media-toggle" active="[[_mediaTypeActive(selected, index)]]" on-click="_selectMediaType" title$="Select [[item.label]] media type">[[item.label]]</paper-button>
           </template>
         </div>
       </template>
