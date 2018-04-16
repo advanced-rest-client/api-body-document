@@ -496,7 +496,7 @@
                                         ],
                                         "http://raml.org/vocabularies/document#value": [
                                           {
-                                            "@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+                                            "@value": "  url: https://domain.com/profile/pawel.psztyc/image\r\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\r\n"
                                           }
                                         ],
                                         "http://raml.org/vocabularies/document#strict": [
@@ -776,7 +776,7 @@
                                 ],
                                 "http://raml.org/vocabularies/document#value": [
                                   {
-                                    "@value": "          id: \"R34fg663H9KW9MMSKISI\"\n          name: \"Pawel Psztyc\"\n          birthday: \"1983-10-20\"\n          gender: male\n          url: \"https://domain.com/profile/pawel.psztyc\"\n          image:\n            url: https://domain.com/profile/pawel.psztyc/image\n            thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n          tagline: Some text about me.\n          language: en_GB\n          etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n"
+                                    "@value": "          id: \"R34fg663H9KW9MMSKISI\"\r\n          name: \"Pawel Psztyc\"\r\n          birthday: \"1983-10-20\"\r\n          gender: male\r\n          url: \"https://domain.com/profile/pawel.psztyc\"\r\n          image:\r\n            url: https://domain.com/profile/pawel.psztyc/image\r\n            thumb: https://domain.com/profile/pawel.psztyc/image/thumb\r\n          tagline: Some text about me.\r\n          language: en_GB\r\n          etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\r\n"
                                   }
                                 ],
                                 "http://raml.org/vocabularies/document#strict": [
@@ -994,7 +994,7 @@
                             ],
                             "http://www.w3.org/ns/shacl#raw": [
                               {
-                                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"birthday\" type=\"xs:date\"></xs:element>\n        <xs:element name=\"gender\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"image\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n              <xs:element name=\"thumb\" type=\"xs:string\"></xs:element>\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n        <xs:element name=\"tagline\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"language\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"></xs:attribute>\n      <xs:attribute name=\"type\" type=\"xs:string\" use=\"required\"></xs:attribute>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
+                                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\r\n  <xs:element name=\"resource\">\r\n    <xs:complexType>\r\n      <xs:sequence>\r\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"birthday\" type=\"xs:date\"></xs:element>\r\n        <xs:element name=\"gender\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"url\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"image\">\r\n          <xs:complexType>\r\n            <xs:sequence>\r\n              <xs:element name=\"url\" type=\"xs:string\"></xs:element>\r\n              <xs:element name=\"thumb\" type=\"xs:string\"></xs:element>\r\n            </xs:sequence>\r\n          </xs:complexType>\r\n        </xs:element>\r\n        <xs:element name=\"tagline\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"language\" type=\"xs:string\"></xs:element>\r\n      </xs:sequence>\r\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"></xs:attribute>\r\n      <xs:attribute name=\"type\" type=\"xs:string\" use=\"required\"></xs:attribute>\r\n    </xs:complexType>\r\n  </xs:element>\r\n</xs:schema>\r\n"
                               }
                             ],
                             "http://www.w3.org/ns/shacl#name": [
@@ -1805,7 +1805,7 @@
                                 ],
                                 "http://raml.org/vocabularies/document#value": [
                                   {
-                                    "@value": "{\n  \"id\": \"R34fg663H9KW9MMSKISI\",\n  \"name\": \"Pawel Psztyc\",\n  \"birthday\": \"1983-10-20\",\n  \"gender\": \"male\",\n  \"url\": \"https://domain.com/profile/pawel.psztyc\",\n  \"image\": {\n    \"url\": \"https://domain.com/profile/pawel.psztyc/image\",\n    \"thumb\": \"https://domain.com/profile/pawel.psztyc/image/thumb\"\n  },\n  \"tagline\": \"Some text about me.\",\n  \"language\": \"en_GB\",\n  \"etag\": \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n}"
+                                    "@value": "{\r\n  \"id\": \"R34fg663H9KW9MMSKISI\",\r\n  \"name\": \"Pawel Psztyc\",\r\n  \"birthday\": \"1983-10-20\",\r\n  \"gender\": \"male\",\r\n  \"url\": \"https://domain.com/profile/pawel.psztyc\",\r\n  \"image\": {\r\n    \"url\": \"https://domain.com/profile/pawel.psztyc/image\",\r\n    \"thumb\": \"https://domain.com/profile/pawel.psztyc/image/thumb\"\r\n  },\r\n  \"tagline\": \"Some text about me.\",\r\n  \"language\": \"en_GB\",\r\n  \"etag\": \"W\\\\244m4n5kj3gbn2nj4k4n4\"\r\n}"
                                   }
                                 ],
                                 "http://raml.org/vocabularies/document#strict": [
@@ -2001,7 +2001,7 @@
                             ],
                             "http://www.w3.org/ns/shacl#raw": [
                               {
-                                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"birthday\" type=\"xs:date\"></xs:element>\n        <xs:element name=\"gender\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"image\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n              <xs:element name=\"thumb\" type=\"xs:string\"></xs:element>\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n        <xs:element name=\"tagline\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"language\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"></xs:attribute>\n      <xs:attribute name=\"type\" type=\"xs:string\" use=\"required\"></xs:attribute>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
+                                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\r\n  <xs:element name=\"resource\">\r\n    <xs:complexType>\r\n      <xs:sequence>\r\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"birthday\" type=\"xs:date\"></xs:element>\r\n        <xs:element name=\"gender\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"url\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"image\">\r\n          <xs:complexType>\r\n            <xs:sequence>\r\n              <xs:element name=\"url\" type=\"xs:string\"></xs:element>\r\n              <xs:element name=\"thumb\" type=\"xs:string\"></xs:element>\r\n            </xs:sequence>\r\n          </xs:complexType>\r\n        </xs:element>\r\n        <xs:element name=\"tagline\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"language\" type=\"xs:string\"></xs:element>\r\n      </xs:sequence>\r\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"></xs:attribute>\r\n      <xs:attribute name=\"type\" type=\"xs:string\" use=\"required\"></xs:attribute>\r\n    </xs:complexType>\r\n  </xs:element>\r\n</xs:schema>\r\n"
                               }
                             ],
                             "http://www.w3.org/ns/shacl#name": [
@@ -3227,7 +3227,7 @@
                                 ],
                                 "http://raml.org/vocabularies/document#value": [
                                   {
-                                    "@value": "\n                id: d697f5cea85011e680f576304dec7eb7\n                name: Super product\n                quantity: 125\n                unit: ml\n                upc: \"123456789101\"\n                available: true\n                etag: \"W/\\\"686897696a7c876b7e\\\"\"\n"
+                                    "@value": "\r\n                id: d697f5cea85011e680f576304dec7eb7\r\n                name: Super product\r\n                quantity: 125\r\n                unit: ml\r\n                upc: \"123456789101\"\r\n                available: true\r\n                etag: \"W/\\\"686897696a7c876b7e\\\"\"\r\n"
                                   }
                                 ],
                                 "http://raml.org/vocabularies/document#strict": [
@@ -3355,7 +3355,7 @@
                                 ],
                                 "http://raml.org/vocabularies/document#value": [
                                   {
-                                    "@value": "\n                id: 123e4567e89b12d3a456426655440000\n                name: Acme Product\n                quantity: 1\n                unit: kg\n                upc: \"223456789101\"\n                available: true\n                etag: \"W/\\\"123456789\\\"\"\n"
+                                    "@value": "\r\n                id: 123e4567e89b12d3a456426655440000\r\n                name: Acme Product\r\n                quantity: 1\r\n                unit: kg\r\n                upc: \"223456789101\"\r\n                available: true\r\n                etag: \"W/\\\"123456789\\\"\"\r\n"
                                   }
                                 ],
                                 "http://raml.org/vocabularies/document#strict": [
@@ -3501,7 +3501,7 @@
                             ],
                             "http://www.w3.org/ns/shacl#raw": [
                               {
-                                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"quantity\" type=\"xs:double\"></xs:element>\n        <xs:element name=\"unit\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"upc\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"available\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:string\"></xs:attribute>\n      <xs:attribute name=\"type\" type=\"xs:string\"></xs:attribute>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
+                                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\r\n  <xs:element name=\"resource\">\r\n    <xs:complexType>\r\n      <xs:sequence>\r\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"quantity\" type=\"xs:double\"></xs:element>\r\n        <xs:element name=\"unit\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"upc\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"available\" type=\"xs:string\"></xs:element>\r\n      </xs:sequence>\r\n      <xs:attribute name=\"error\" type=\"xs:string\"></xs:attribute>\r\n      <xs:attribute name=\"type\" type=\"xs:string\"></xs:attribute>\r\n    </xs:complexType>\r\n  </xs:element>\r\n</xs:schema>\r\n"
                               }
                             ],
                             "http://www.w3.org/ns/shacl#name": [
@@ -3930,7 +3930,7 @@
                                                         ],
                                                         "http://raml.org/vocabularies/document#value": [
                                                           {
-                                                            "@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+                                                            "@value": "      firstname: Pawel\r\n      lastname: Psztyc\r\n      title: Mr.\r\n      kind: Manager\r\n"
                                                           }
                                                         ],
                                                         "http://raml.org/vocabularies/document#strict": [
@@ -4918,7 +4918,7 @@
                                                     ],
                                                     "http://raml.org/vocabularies/document#value": [
                                                       {
-                                                        "@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+                                                        "@value": "      firstname: Pawel\r\n      lastname: Psztyc\r\n      title: Mr.\r\n      kind: Manager\r\n"
                                                       }
                                                     ],
                                                     "http://raml.org/vocabularies/document#strict": [
@@ -5589,7 +5589,7 @@
                                                         ],
                                                         "http://raml.org/vocabularies/document#value": [
                                                           {
-                                                            "@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+                                                            "@value": "      firstname: Pawel\r\n      lastname: Psztyc\r\n      title: Mr.\r\n      kind: Manager\r\n"
                                                           }
                                                         ],
                                                         "http://raml.org/vocabularies/document#strict": [
@@ -6528,7 +6528,7 @@
                                                     ],
                                                     "http://raml.org/vocabularies/document#value": [
                                                       {
-                                                        "@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+                                                        "@value": "      firstname: Pawel\r\n      lastname: Psztyc\r\n      title: Mr.\r\n      kind: Manager\r\n"
                                                       }
                                                     ],
                                                     "http://raml.org/vocabularies/document#strict": [
@@ -7484,7 +7484,7 @@
                                 ],
                                 "http://raml.org/vocabularies/document#value": [
                                   {
-                                    "@value": "[\n  {\n    \"email\": \"bea3d5e8-4abf-11e7-a919-92ebcb67fe33-em-vbc@domain.com\",\n    \"message\": \"This is an example message. Hello.\",\n    \"timestamp\": 1496757380,\n    \"attachements\": [\n      \"https://attc.domain.com/01332c24-4ac0-11e7-a919-92ebcb67fe33\"\n    ]\n  }, {\n    \"email\": \"220ce9bc-4abf-11e7-a919-92ebcb67fe33-oa-vbc@domain.com\",\n    \"message\": \"Howdy?\",\n    \"timestamp\": 1496757498,\n    \"important\": true\n  }\n]"
+                                    "@value": "[\r\n  {\r\n    \"email\": \"bea3d5e8-4abf-11e7-a919-92ebcb67fe33-em-vbc@domain.com\",\r\n    \"message\": \"This is an example message. Hello.\",\r\n    \"timestamp\": 1496757380,\r\n    \"attachements\": [\r\n      \"https://attc.domain.com/01332c24-4ac0-11e7-a919-92ebcb67fe33\"\r\n    ]\r\n  }, {\r\n    \"email\": \"220ce9bc-4abf-11e7-a919-92ebcb67fe33-oa-vbc@domain.com\",\r\n    \"message\": \"Howdy?\",\r\n    \"timestamp\": 1496757498,\r\n    \"important\": true\r\n  }\r\n]"
                                   }
                                 ],
                                 "http://raml.org/vocabularies/document#strict": [
@@ -8292,7 +8292,7 @@
                     ],
                     "http://raml.org/vocabularies/document#value": [
                       {
-                        "@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+                        "@value": "  url: https://domain.com/profile/pawel.psztyc/image\r\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\r\n"
                       }
                     ],
                     "http://raml.org/vocabularies/document#strict": [
@@ -8572,7 +8572,7 @@
             ],
             "http://raml.org/vocabularies/document#value": [
               {
-                "@value": "  id: \"R34fg663H9KW9MMSKISI\"\n  name: \"Pawel Psztyc\"\n  birthday: \"1983-10-20\"\n  gender: male\n  url: \"https://domain.com/profile/pawel.psztyc\"\n  image:\n    url: https://domain.com/profile/pawel.psztyc/image\n    thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n  tagline: Some text about me.\n  language: en_GB\n  etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n"
+                "@value": "  id: \"R34fg663H9KW9MMSKISI\"\r\n  name: \"Pawel Psztyc\"\r\n  birthday: \"1983-10-20\"\r\n  gender: male\r\n  url: \"https://domain.com/profile/pawel.psztyc\"\r\n  image:\r\n    url: https://domain.com/profile/pawel.psztyc/image\r\n    thumb: https://domain.com/profile/pawel.psztyc/image/thumb\r\n  tagline: Some text about me.\r\n  language: en_GB\r\n  etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\r\n"
               }
             ],
             "http://raml.org/vocabularies/document#strict": [
@@ -9371,7 +9371,7 @@
             ],
             "http://raml.org/vocabularies/document#value": [
               {
-                "@value": "  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"W\\sd3deef3rgrgf4r\"\n"
+                "@value": "  id: we2322-4f4f4f-f4f4ff-f4f4ff4\r\n  name: Acme Product\r\n  quantity: 200\r\n  unit: ml\r\n  upc: \"123456789101\"\r\n  available: true\r\n  etag: \"W\\sd3deef3rgrgf4r\"\r\n"
               }
             ],
             "http://raml.org/vocabularies/document#strict": [
@@ -9625,7 +9625,7 @@
             ],
             "http://raml.org/vocabularies/document#value": [
               {
-                "@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+                "@value": "  url: https://domain.com/profile/pawel.psztyc/image\r\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\r\n"
               }
             ],
             "http://raml.org/vocabularies/document#strict": [
@@ -9872,7 +9872,7 @@
                                     ],
                                     "http://raml.org/vocabularies/data#value": [
                                       {
-                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Not found</message>\n</resource>\n",
+                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<resource error=\"true\">\r\n  <message>Not found</message>\r\n</resource>\r\n",
                                         "@type": "http://www.w3.org/2001/XMLSchema#string"
                                       }
                                     ]
@@ -9886,7 +9886,7 @@
                                     ],
                                     "http://raml.org/vocabularies/data#value": [
                                       {
-                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"message\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"/>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n",
+                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\r\n  <xs:element name=\"resource\">\r\n    <xs:complexType>\r\n      <xs:sequence>\r\n        <xs:element name=\"message\" type=\"xs:string\"></xs:element>\r\n      </xs:sequence>\r\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"/>\r\n    </xs:complexType>\r\n  </xs:element>\r\n</xs:schema>\r\n",
                                         "@type": "http://www.w3.org/2001/XMLSchema#string"
                                       }
                                     ]
@@ -10025,7 +10025,7 @@
                                     ],
                                     "http://raml.org/vocabularies/data#value": [
                                       {
-                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Unauthorized</message>\n</resource>\n",
+                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<resource error=\"true\">\r\n  <message>Unauthorized</message>\r\n</resource>\r\n",
                                         "@type": "http://www.w3.org/2001/XMLSchema#string"
                                       }
                                     ]
@@ -10039,7 +10039,7 @@
                                     ],
                                     "http://raml.org/vocabularies/data#value": [
                                       {
-                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"message\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"/>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n",
+                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\r\n  <xs:element name=\"resource\">\r\n    <xs:complexType>\r\n      <xs:sequence>\r\n        <xs:element name=\"message\" type=\"xs:string\"></xs:element>\r\n      </xs:sequence>\r\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"/>\r\n    </xs:complexType>\r\n  </xs:element>\r\n</xs:schema>\r\n",
                                         "@type": "http://www.w3.org/2001/XMLSchema#string"
                                       }
                                     ]
@@ -10178,7 +10178,7 @@
                                     ],
                                     "http://raml.org/vocabularies/data#value": [
                                       {
-                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Invalid request</message>\n</resource>\n",
+                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<resource error=\"true\">\r\n  <message>Invalid request</message>\r\n</resource>\r\n",
                                         "@type": "http://www.w3.org/2001/XMLSchema#string"
                                       }
                                     ]
@@ -10192,7 +10192,7 @@
                                     ],
                                     "http://raml.org/vocabularies/data#value": [
                                       {
-                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"message\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"/>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n",
+                                        "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\r\n  <xs:element name=\"resource\">\r\n    <xs:complexType>\r\n      <xs:sequence>\r\n        <xs:element name=\"message\" type=\"xs:string\"></xs:element>\r\n      </xs:sequence>\r\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"/>\r\n    </xs:complexType>\r\n  </xs:element>\r\n</xs:schema>\r\n",
                                         "@type": "http://www.w3.org/2001/XMLSchema#string"
                                       }
                                     ]
@@ -10342,7 +10342,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "[\n  {\n    \"email\": \"bea3d5e8-4abf-11e7-a919-92ebcb67fe33-em-vbc@domain.com\",\n    \"message\": \"This is an example message. Hello.\",\n    \"timestamp\": 1496757380,\n    \"attachements\": [\n      \"https://attc.domain.com/01332c24-4ac0-11e7-a919-92ebcb67fe33\"\n    ]\n  }, {\n    \"email\": \"220ce9bc-4abf-11e7-a919-92ebcb67fe33-oa-vbc@domain.com\",\n    \"message\": \"Howdy?\",\n    \"timestamp\": 1496757498,\n    \"important\": true\n  }\n]\n"
+                "@value": "[\r\n  {\r\n    \"email\": \"bea3d5e8-4abf-11e7-a919-92ebcb67fe33-em-vbc@domain.com\",\r\n    \"message\": \"This is an example message. Hello.\",\r\n    \"timestamp\": 1496757380,\r\n    \"attachements\": [\r\n      \"https://attc.domain.com/01332c24-4ac0-11e7-a919-92ebcb67fe33\"\r\n    ]\r\n  }, {\r\n    \"email\": \"220ce9bc-4abf-11e7-a919-92ebcb67fe33-oa-vbc@domain.com\",\r\n    \"message\": \"Howdy?\",\r\n    \"timestamp\": 1496757498,\r\n    \"important\": true\r\n  }\r\n]\r\n"
               }
             ],
             "http://raml.org/vocabularies/http#mediaType": [
@@ -10369,7 +10369,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Invalid request</message>\n</resource>\n"
+                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<resource error=\"true\">\r\n  <message>Invalid request</message>\r\n</resource>\r\n"
               }
             ]
           }
@@ -10391,7 +10391,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Not found</message>\n</resource>\n"
+                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<resource error=\"true\">\r\n  <message>Not found</message>\r\n</resource>\r\n"
               }
             ]
           }
@@ -10413,7 +10413,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"birthday\" type=\"xs:date\"></xs:element>\n        <xs:element name=\"gender\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"image\">\n          <xs:complexType>\n            <xs:sequence>\n              <xs:element name=\"url\" type=\"xs:string\"></xs:element>\n              <xs:element name=\"thumb\" type=\"xs:string\"></xs:element>\n            </xs:sequence>\n          </xs:complexType>\n        </xs:element>\n        <xs:element name=\"tagline\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"language\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"></xs:attribute>\n      <xs:attribute name=\"type\" type=\"xs:string\" use=\"required\"></xs:attribute>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
+                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\r\n  <xs:element name=\"resource\">\r\n    <xs:complexType>\r\n      <xs:sequence>\r\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"birthday\" type=\"xs:date\"></xs:element>\r\n        <xs:element name=\"gender\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"url\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"image\">\r\n          <xs:complexType>\r\n            <xs:sequence>\r\n              <xs:element name=\"url\" type=\"xs:string\"></xs:element>\r\n              <xs:element name=\"thumb\" type=\"xs:string\"></xs:element>\r\n            </xs:sequence>\r\n          </xs:complexType>\r\n        </xs:element>\r\n        <xs:element name=\"tagline\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"language\" type=\"xs:string\"></xs:element>\r\n      </xs:sequence>\r\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"></xs:attribute>\r\n      <xs:attribute name=\"type\" type=\"xs:string\" use=\"required\"></xs:attribute>\r\n    </xs:complexType>\r\n  </xs:element>\r\n</xs:schema>\r\n"
               }
             ]
           }
@@ -10727,7 +10727,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"quantity\" type=\"xs:double\"></xs:element>\n        <xs:element name=\"unit\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"upc\" type=\"xs:string\"></xs:element>\n        <xs:element name=\"available\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:string\"></xs:attribute>\n      <xs:attribute name=\"type\" type=\"xs:string\"></xs:attribute>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
+                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\r\n  <xs:element name=\"resource\">\r\n    <xs:complexType>\r\n      <xs:sequence>\r\n        <xs:element name=\"id\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"name\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"quantity\" type=\"xs:double\"></xs:element>\r\n        <xs:element name=\"unit\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"upc\" type=\"xs:string\"></xs:element>\r\n        <xs:element name=\"available\" type=\"xs:string\"></xs:element>\r\n      </xs:sequence>\r\n      <xs:attribute name=\"error\" type=\"xs:string\"></xs:attribute>\r\n      <xs:attribute name=\"type\" type=\"xs:string\"></xs:attribute>\r\n    </xs:complexType>\r\n  </xs:element>\r\n</xs:schema>\r\n"
               }
             ]
           }
@@ -11329,7 +11329,7 @@
                                 ],
                                 "http://raml.org/vocabularies/document#value": [
                                   {
-                                    "@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+                                    "@value": "      firstname: Pawel\r\n      lastname: Psztyc\r\n      title: Mr.\r\n      kind: Manager\r\n"
                                   }
                                 ],
                                 "http://raml.org/vocabularies/document#strict": [
@@ -12278,7 +12278,7 @@
                                         ],
                                         "http://raml.org/vocabularies/document#value": [
                                           {
-                                            "@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+                                            "@value": "      firstname: Pawel\r\n      lastname: Psztyc\r\n      title: Mr.\r\n      kind: Manager\r\n"
                                           }
                                         ],
                                         "http://raml.org/vocabularies/document#strict": [
@@ -13217,7 +13217,7 @@
                                     ],
                                     "http://raml.org/vocabularies/document#value": [
                                       {
-                                        "@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+                                        "@value": "      firstname: Pawel\r\n      lastname: Psztyc\r\n      title: Mr.\r\n      kind: Manager\r\n"
                                       }
                                     ],
                                     "http://raml.org/vocabularies/document#strict": [
@@ -13747,7 +13747,7 @@
                 ],
                 "http://raml.org/vocabularies/document#value": [
                   {
-                    "@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+                    "@value": "      firstname: Pawel\r\n      lastname: Psztyc\r\n      title: Mr.\r\n      kind: Manager\r\n"
                   }
                 ],
                 "http://raml.org/vocabularies/document#strict": [
@@ -14122,7 +14122,7 @@
                             ],
                             "http://raml.org/vocabularies/document#value": [
                               {
-                                "@value": "      firstname: Pawel\n      lastname: Psztyc\n      title: Mr.\n      kind: Manager\n"
+                                "@value": "      firstname: Pawel\r\n      lastname: Psztyc\r\n      title: Mr.\r\n      kind: Manager\r\n"
                               }
                             ],
                             "http://raml.org/vocabularies/document#strict": [
@@ -14747,7 +14747,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "{\n  \"id\": \"R34fg663H9KW9MMSKISI\",\n  \"name\": \"Pawel Psztyc\",\n  \"birthday\": \"1983-10-20\",\n  \"gender\": \"male\",\n  \"url\": \"https://domain.com/profile/pawel.psztyc\",\n  \"image\": {\n    \"url\": \"https://domain.com/profile/pawel.psztyc/image\",\n    \"thumb\": \"https://domain.com/profile/pawel.psztyc/image/thumb\"\n  },\n  \"tagline\": \"Some text about me.\",\n  \"language\": \"en_GB\",\n  \"etag\": \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n}\n"
+                "@value": "{\r\n  \"id\": \"R34fg663H9KW9MMSKISI\",\r\n  \"name\": \"Pawel Psztyc\",\r\n  \"birthday\": \"1983-10-20\",\r\n  \"gender\": \"male\",\r\n  \"url\": \"https://domain.com/profile/pawel.psztyc\",\r\n  \"image\": {\r\n    \"url\": \"https://domain.com/profile/pawel.psztyc/image\",\r\n    \"thumb\": \"https://domain.com/profile/pawel.psztyc/image/thumb\"\r\n  },\r\n  \"tagline\": \"Some text about me.\",\r\n  \"language\": \"en_GB\",\r\n  \"etag\": \"W\\\\244m4n5kj3gbn2nj4k4n4\"\r\n}\r\n"
               }
             ],
             "http://raml.org/vocabularies/http#mediaType": [
@@ -14774,7 +14774,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\n  <xs:element name=\"resource\">\n    <xs:complexType>\n      <xs:sequence>\n        <xs:element name=\"message\" type=\"xs:string\"></xs:element>\n      </xs:sequence>\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"/>\n    </xs:complexType>\n  </xs:element>\n</xs:schema>\n"
+                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<xs:schema xmlns:xs=\"http://www.w3.org/2001/XMLSchema\" elementFormDefault=\"qualified\" attributeFormDefault=\"unqualified\">\r\n  <xs:element name=\"resource\">\r\n    <xs:complexType>\r\n      <xs:sequence>\r\n        <xs:element name=\"message\" type=\"xs:string\"></xs:element>\r\n      </xs:sequence>\r\n      <xs:attribute name=\"error\" type=\"xs:boolean\" use=\"required\"/>\r\n    </xs:complexType>\r\n  </xs:element>\r\n</xs:schema>\r\n"
               }
             ]
           }
@@ -15186,7 +15186,7 @@
                         ],
                         "http://raml.org/vocabularies/document#value": [
                           {
-                            "@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+                            "@value": "  url: https://domain.com/profile/pawel.psztyc/image\r\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\r\n"
                           }
                         ],
                         "http://raml.org/vocabularies/document#strict": [
@@ -15466,7 +15466,7 @@
                 ],
                 "http://raml.org/vocabularies/document#value": [
                   {
-                    "@value": "  id: \"R34fg663H9KW9MMSKISI\"\n  name: \"Pawel Psztyc\"\n  birthday: \"1983-10-20\"\n  gender: male\n  url: \"https://domain.com/profile/pawel.psztyc\"\n  image:\n    url: https://domain.com/profile/pawel.psztyc/image\n    thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n  tagline: Some text about me.\n  language: en_GB\n  etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n"
+                    "@value": "  id: \"R34fg663H9KW9MMSKISI\"\r\n  name: \"Pawel Psztyc\"\r\n  birthday: \"1983-10-20\"\r\n  gender: male\r\n  url: \"https://domain.com/profile/pawel.psztyc\"\r\n  image:\r\n    url: https://domain.com/profile/pawel.psztyc/image\r\n    thumb: https://domain.com/profile/pawel.psztyc/image/thumb\r\n  tagline: Some text about me.\r\n  language: en_GB\r\n  etag: \"W\\\\244m4n5kj3gbn2nj4k4n4\"\r\n"
                   }
                 ],
                 "http://raml.org/vocabularies/document#strict": [
@@ -15780,7 +15780,7 @@
                     ],
                     "http://raml.org/vocabularies/document#value": [
                       {
-                        "@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+                        "@value": "  url: https://domain.com/profile/pawel.psztyc/image\r\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\r\n"
                       }
                     ],
                     "http://raml.org/vocabularies/document#strict": [
@@ -15932,7 +15932,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"false\" type=\"Product\">\n  <id>f2f7933a-a9ce-11e6-80f5-76304dec7eb7</id>\n  <name>Acme product - mentol flavor, 500 ml.</name>\n  <quantity>500</quantity>\n  <unit>ml</unit>\n  <upc>042100005264</upc>\n  <available>true</available>\n</resource>\n"
+                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<resource error=\"false\" type=\"Product\">\r\n  <id>f2f7933a-a9ce-11e6-80f5-76304dec7eb7</id>\r\n  <name>Acme product - mentol flavor, 500 ml.</name>\r\n  <quantity>500</quantity>\r\n  <unit>ml</unit>\r\n  <upc>042100005264</upc>\r\n  <available>true</available>\r\n</resource>\r\n"
               }
             ]
           }
@@ -15954,7 +15954,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"false\" type=\"AppPerson\">\n  <id>Qawer63J73HJ6khjswuqyq62382jG21s</id>\n  <name>John Smith</name>\n  <birthday>1990-10-12</birthday>\n  <gender>male</gender>\n  <url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s</url>\n  <image>\n    <url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image</url>\n    <thumb>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb</thumb>\n  </image>\n  <tagline>Hi, I'm John!</tagline>\n  <language>en_US</language>\n</resource>\n"
+                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<resource error=\"false\" type=\"AppPerson\">\r\n  <id>Qawer63J73HJ6khjswuqyq62382jG21s</id>\r\n  <name>John Smith</name>\r\n  <birthday>1990-10-12</birthday>\r\n  <gender>male</gender>\r\n  <url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s</url>\r\n  <image>\r\n    <url>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image</url>\r\n    <thumb>https://www.domain.com/people/Qawer63J73HJ6khjswuqyq62382jG21s/image/thumb</thumb>\r\n  </image>\r\n  <tagline>Hi, I'm John!</tagline>\r\n  <language>en_US</language>\r\n</resource>\r\n"
               }
             ]
           }
@@ -15976,7 +15976,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "{\n  \"$id\": \"http://example.com/example.json\",\n  \"type\": \"object\",\n  \"definitions\": {},\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\n  \"properties\": {\n    \"id\": {\n      \"$id\": \"/properties/id\",\n      \"type\": \"string\",\n      \"title\": \"The Id Schema \",\n      \"default\": \"\",\n      \"examples\": [\n        \"R34fg663H9KW9MMSKISI\"\n      ]\n    },\n    \"name\": {\n      \"$id\": \"/properties/name\",\n      \"type\": \"string\",\n      \"title\": \"The Name Schema \",\n      \"default\": \"\",\n      \"examples\": [\n        \"Pawel Psztyc\"\n      ]\n    },\n    \"birthday\": {\n      \"$id\": \"/properties/birthday\",\n      \"type\": \"string\",\n      \"title\": \"The Birthday Schema \",\n      \"default\": \"\",\n      \"examples\": [\n        \"1983-10-20\"\n      ]\n    },\n    \"gender\": {\n      \"$id\": \"/properties/gender\",\n      \"type\": \"string\",\n      \"title\": \"The Gender Schema \",\n      \"default\": \"\",\n      \"examples\": [\n        \"male\"\n      ]\n    },\n    \"url\": {\n      \"$id\": \"/properties/url\",\n      \"type\": \"string\",\n      \"title\": \"The Url Schema \",\n      \"default\": \"\",\n      \"examples\": [\n        \"https://domain.com/profile/pawel.psztyc\"\n      ]\n    },\n    \"image\": {\n      \"$id\": \"/properties/image\",\n      \"type\": \"object\",\n      \"properties\": {\n        \"url\": {\n          \"$id\": \"/properties/image/properties/url\",\n          \"type\": \"string\",\n          \"title\": \"The Url Schema \",\n          \"default\": \"\",\n          \"examples\": [\n            \"https://domain.com/profile/pawel.psztyc/image\"\n          ]\n        },\n        \"thumb\": {\n          \"$id\": \"/properties/image/properties/thumb\",\n          \"type\": \"string\",\n          \"title\": \"The Thumb Schema \",\n          \"default\": \"\",\n          \"examples\": [\n            \"https://domain.com/profile/pawel.psztyc/image/thumb\"\n          ]\n        }\n      }\n    },\n    \"tagline\": {\n      \"$id\": \"/properties/tagline\",\n      \"type\": \"string\",\n      \"title\": \"The Tagline Schema \",\n      \"default\": \"\",\n      \"examples\": [\n        \"Some text about me.\"\n      ]\n    },\n    \"language\": {\n      \"$id\": \"/properties/language\",\n      \"type\": \"string\",\n      \"title\": \"The Language Schema \",\n      \"default\": \"\",\n      \"examples\": [\n        \"en_GB\"\n      ]\n    },\n    \"etag\": {\n      \"$id\": \"/properties/etag\",\n      \"type\": \"string\",\n      \"title\": \"The Etag Schema \",\n      \"default\": \"\",\n      \"examples\": [\n        \"W\\\\244m4n5kj3gbn2nj4k4n4\"\n      ]\n    }\n  }\n}\n"
+                "@value": "{\r\n  \"$id\": \"http://example.com/example.json\",\r\n  \"type\": \"object\",\r\n  \"definitions\": {},\r\n  \"$schema\": \"http://json-schema.org/draft-07/schema#\",\r\n  \"properties\": {\r\n    \"id\": {\r\n      \"$id\": \"/properties/id\",\r\n      \"type\": \"string\",\r\n      \"title\": \"The Id Schema \",\r\n      \"default\": \"\",\r\n      \"examples\": [\r\n        \"R34fg663H9KW9MMSKISI\"\r\n      ]\r\n    },\r\n    \"name\": {\r\n      \"$id\": \"/properties/name\",\r\n      \"type\": \"string\",\r\n      \"title\": \"The Name Schema \",\r\n      \"default\": \"\",\r\n      \"examples\": [\r\n        \"Pawel Psztyc\"\r\n      ]\r\n    },\r\n    \"birthday\": {\r\n      \"$id\": \"/properties/birthday\",\r\n      \"type\": \"string\",\r\n      \"title\": \"The Birthday Schema \",\r\n      \"default\": \"\",\r\n      \"examples\": [\r\n        \"1983-10-20\"\r\n      ]\r\n    },\r\n    \"gender\": {\r\n      \"$id\": \"/properties/gender\",\r\n      \"type\": \"string\",\r\n      \"title\": \"The Gender Schema \",\r\n      \"default\": \"\",\r\n      \"examples\": [\r\n        \"male\"\r\n      ]\r\n    },\r\n    \"url\": {\r\n      \"$id\": \"/properties/url\",\r\n      \"type\": \"string\",\r\n      \"title\": \"The Url Schema \",\r\n      \"default\": \"\",\r\n      \"examples\": [\r\n        \"https://domain.com/profile/pawel.psztyc\"\r\n      ]\r\n    },\r\n    \"image\": {\r\n      \"$id\": \"/properties/image\",\r\n      \"type\": \"object\",\r\n      \"properties\": {\r\n        \"url\": {\r\n          \"$id\": \"/properties/image/properties/url\",\r\n          \"type\": \"string\",\r\n          \"title\": \"The Url Schema \",\r\n          \"default\": \"\",\r\n          \"examples\": [\r\n            \"https://domain.com/profile/pawel.psztyc/image\"\r\n          ]\r\n        },\r\n        \"thumb\": {\r\n          \"$id\": \"/properties/image/properties/thumb\",\r\n          \"type\": \"string\",\r\n          \"title\": \"The Thumb Schema \",\r\n          \"default\": \"\",\r\n          \"examples\": [\r\n            \"https://domain.com/profile/pawel.psztyc/image/thumb\"\r\n          ]\r\n        }\r\n      }\r\n    },\r\n    \"tagline\": {\r\n      \"$id\": \"/properties/tagline\",\r\n      \"type\": \"string\",\r\n      \"title\": \"The Tagline Schema \",\r\n      \"default\": \"\",\r\n      \"examples\": [\r\n        \"Some text about me.\"\r\n      ]\r\n    },\r\n    \"language\": {\r\n      \"$id\": \"/properties/language\",\r\n      \"type\": \"string\",\r\n      \"title\": \"The Language Schema \",\r\n      \"default\": \"\",\r\n      \"examples\": [\r\n        \"en_GB\"\r\n      ]\r\n    },\r\n    \"etag\": {\r\n      \"$id\": \"/properties/etag\",\r\n      \"type\": \"string\",\r\n      \"title\": \"The Etag Schema \",\r\n      \"default\": \"\",\r\n      \"examples\": [\r\n        \"W\\\\244m4n5kj3gbn2nj4k4n4\"\r\n      ]\r\n    }\r\n  }\r\n}\r\n"
               }
             ],
             "http://raml.org/vocabularies/http#mediaType": [
@@ -16003,7 +16003,7 @@
             ],
             "http://raml.org/vocabularies/document#raw": [
               {
-                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<resource error=\"true\">\n  <message>Unauthorized</message>\n</resource>\n"
+                "@value": "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<resource error=\"true\">\r\n  <message>Unauthorized</message>\r\n</resource>\r\n"
               }
             ]
           }
@@ -16574,7 +16574,7 @@
                 ],
                 "http://raml.org/vocabularies/document#value": [
                   {
-                    "@value": "  id: we2322-4f4f4f-f4f4ff-f4f4ff4\n  name: Acme Product\n  quantity: 200\n  unit: ml\n  upc: \"123456789101\"\n  available: true\n  etag: \"W\\sd3deef3rgrgf4r\"\n"
+                    "@value": "  id: we2322-4f4f4f-f4f4ff-f4f4ff4\r\n  name: Acme Product\r\n  quantity: 200\r\n  unit: ml\r\n  upc: \"123456789101\"\r\n  available: true\r\n  etag: \"W\\sd3deef3rgrgf4r\"\r\n"
                   }
                 ],
                 "http://raml.org/vocabularies/document#strict": [
@@ -16925,7 +16925,7 @@
                 ],
                 "http://raml.org/vocabularies/document#value": [
                   {
-                    "@value": "  url: https://domain.com/profile/pawel.psztyc/image\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\n"
+                    "@value": "  url: https://domain.com/profile/pawel.psztyc/image\r\n  thumb: https://domain.com/profile/pawel.psztyc/image/thumb\r\n"
                   }
                 ],
                 "http://raml.org/vocabularies/document#strict": [
