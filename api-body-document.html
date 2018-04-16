@@ -34,6 +34,7 @@
 
     .section-title-area h3 {
       @apply --layout-flex;
+      @apply --api-body-document-title;
     }
 
     .toggle-button {
@@ -84,9 +85,28 @@
       margin-top: 0;
     }
 
+    .examples {
+      margin-top: 12px;
+      border: 1px var(--api-body-document-examples-border-color, transparent) solid;
+    }
+
+    .examples,
+    api-schema-document {
+      background-color: var(--code-background-color);
+    }
+
     .examples-section-title {
       @apply --arc-font-body1;
       font-size: 16px;
+      padding: 16px 12px;
+      margin: 0;
+      color: var(--api-body-document-examples-title-color);
+    }
+
+    api-resource-example-document,
+    api-schema-document {
+      padding: 8px;
+      color: var(--api-body-document-code-color);
     }
     </style>
     <template is="dom-if" if="[[aware]]">
@@ -120,8 +140,10 @@
       </template>
       <template is="dom-if" if="[[isObject]]">
         <template is="dom-if" if="[[hasExamples]]">
-          <h5 class="examples-section-title">Examples</h5>
-          <api-resource-example-document examples="[[examples]]"></api-resource-example-document>
+          <section class="examples">
+            <h5 class="examples-section-title">Examples</h5>
+            <api-resource-example-document examples="[[examples]]"></api-resource-example-document>
+          </section>
         </template>
         <api-type-document amf-model="[[amfModel]]" type="[[selectedBody]]"></api-type-document>
       </template>
@@ -150,6 +172,9 @@
    * `--api-body-document-description-color` | Color of the type description | `rgba(0, 0, 0, 0.74)`
    * `--arc-font-subhead` | Mixin applied to the resource title | `{}`
    * `--api-body-document-media-button-background-color` | Selection color of the media type selector | `#CDDC39`
+   * `--api-body-document-examples-title-color` | Color of examples section title | ``
+   * `--api-body-document-examples-border-color` | Example section border color | `transparent`
+   * `--code-background-color` | Background color of the examples section | ``
    *
    * @customElement
    * @polymer
