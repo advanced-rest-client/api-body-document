@@ -43,6 +43,9 @@ declare namespace ApiElements {
    * `--api-body-document-description-color` | Color of the type description | `rgba(0, 0, 0, 0.74)`
    * `--arc-font-subhead` | Mixin applied to the resource title | `{}`
    * `--api-body-document-media-button-background-color` | Selection color of the media type selector | `#CDDC39`
+   * `--api-body-document-examples-title-color` | Color of examples section title | ``
+   * `--api-body-document-examples-border-color` | Example section border color | `transparent`
+   * `--code-background-color` | Background color of the examples section | ``
    */
   class ApiBodyDocument extends Polymer.Element {
 
