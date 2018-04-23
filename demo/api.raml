@@ -197,3 +197,48 @@ resourceTypes:
           type: array
           items: !include resourceTypes/message-sent-type.raml
           example: !include examples/messages-sent-example.json
+/assets:
+  displayName: Assets
+
+  post:
+    description: Upload an asset. Its required to respect the order of the fields described
+    body:
+      multipart/form-data:
+        properties: 
+          organizationId:
+            description: The target organization where the asset will be uploaded
+            required: true
+            type: string
+          groupId:
+            description: The groupId for the asset
+            required: true
+            type: string
+          assetId:
+            description: The assetId for the asset
+            required: true
+            type: string
+          version:
+            description: The version for the asset
+            required: true
+            type: string
+          name:
+            description: The name of the asset
+            required: true
+            type: string
+          classifier:
+            description: The classifier of the file that will be uploaded, it can be one of oas, wsdl, custom or http
+            required: true
+            type: string
+          apiVersion:
+            description: API version for when uploading an OAS or an HTTP
+            type: string
+          assetLink:
+            description: A link for an external source
+            type: string
+          asset:
+            description: The file to be uploaded
+            required: true
+            type: file
+    responses:
+      201:
+        description: Asset created
