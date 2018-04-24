@@ -109,6 +109,10 @@
       padding: 8px;
       color: var(--api-body-document-code-color);
     }
+
+    .media-type-label {
+      font-weight: 500;
+    }
     </style>
     <template is="dom-if" if="[[aware]]">
       <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
@@ -123,14 +127,18 @@
       </div>
     </div>
     <iron-collapse opened="[[opened]]">
-      <template is="dom-if" if="[[renderMediaSelector]]">
-        <div class="media-type-selector">
-          <span>Media type:</span>
+      <div class="media-type-selector">
+        <span>Media type:</span>
+        <template is="dom-if" if="[[renderMediaSelector]]">
           <template is="dom-repeat" items="[[mediaTypes]]">
             <paper-button class="media-toggle" active="[[_mediaTypeActive(selected, index)]]" on-click="_selectMediaType" title$="Select [[item.label]] media type">[[item.label]]</paper-button>
           </template>
-        </div>
-      </template>
+        </template>
+        <template is="dom-if" if="[[!renderMediaSelector]]">
+          <span class="media-type-label">[[selectedMediaType]]</span>
+        </template>
+      </div>
+
       <template is="dom-if" if="[[hasTypeName]]">
         <h4>[[typeName]]</h4>
       </template>
@@ -247,6 +255,14 @@
           readOnly: true,
           computed: '_computeSelectedBody(selected, body)',
           observer: '_selectedBodyChanged'
+        },
+        /**
+         * Name of the selected media type.
+         */
+        selectedMediaType: {
+          type: String,
+          readOnly: true,
+          computed: '_computeSelectedMediaName(selected, body)'
         },
         /**
          * True if selected body is a structured object
@@ -383,6 +399,17 @@
       return schema ? schema[0] : undefined;
     }
 
+    _computeSelectedMediaName(selected, body) {
+      if (!body || (!selected && selected !== 0)) {
+        return;
+      }
+      const data = body[selected];
+      if (!data) {
+        return;
+      }
+      return data['http://raml.org/vocabularies/http#mediaType'][0]['@value'];
+    }
+
     _selectedBodyChanged(body) {
       if (!body) {
         return;
@@ -489,8 +516,6 @@
     _computeHasExamples(examples) {
       return !!(examples && examples.length);
     }
-
-
   }
   window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);
   </script>
