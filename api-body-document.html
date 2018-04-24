@@ -11,6 +11,7 @@
 <link rel="import" href="../markdown-styles/markdown-styles.html">
 <link rel="import" href="../marked-element/marked-element.html">
 <link rel="import" href="../api-resource-example-document/api-resource-example-document.html">
+<link rel="import" href="../amf-helper-mixin/amf-helper-mixin.html">
 
 <dom-module id="api-body-document">
   <template>
@@ -189,8 +190,9 @@
    * @polymer
    * @demo demo/index.html
    * @memberof ApiElements
+   * @appliesMixin ApiElements.AmfHelperMixin
    */
-  class ApiBodyDocument extends Polymer.Element {
+  class ApiBodyDocument extends ApiElements.AmfHelperMixin(Polymer.Element) {
     static get is() { return 'api-body-document'; }
     static get properties() {
       return {
@@ -198,17 +200,6 @@
          * `raml-aware` scope property to use.
          */
         aware: String,
-        /**
-         * Generated AMF json/ld model form the API spec.
-         * The element assumes the object of the first array item to be a
-         * type of `"http://raml.org/vocabularies/document#Document`
-         * on AMF vocabulary.
-         *
-         * It is only usefult for the element to resolve references.
-         *
-         * @type {Object|Array}
-         */
-        amfModel: Object,
         /**
          * Set to true to open the body view.
          * Autormatically updated when the view is toggled from the UI.
@@ -290,7 +281,7 @@
          */
         hasTypeName: {
           type: Boolean,
-          computed: '_computeHasName(typeName)'
+          computed: '_computeHasStringValue(typeName)'
         },
         /**
          * Name of the resource type if any.
@@ -304,7 +295,7 @@
          */
         hasDescription: {
           type: Boolean,
-          computed: '_computeHasDescription(description)'
+          computed: '_computeHasStringValue(description)'
         },
         /**
          * Computed value of examples in the body model.
@@ -320,7 +311,7 @@
          */
         hasExamples: {
           type: Boolean,
-          computed: '_computeHasExamples(examples)'
+          computed: '_computeHasArrayValue(examples)'
         }
       };
     }
@@ -344,7 +335,7 @@
     _computeMediaTypes(body) {
       return body.map((item) => {
         return {
-          label: item['http://raml.org/vocabularies/http#mediaType'][0]['@value']
+          label: this._getValue(item, 'http://raml.org/vocabularies/http#mediaType')
         };
       });
     }
@@ -354,7 +345,8 @@
      * @return {Boolean} True if there's more than one item in mediaType
      */
     _computeRenderMediaSelector(record) {
-      return !!(record && record.base && record.base.length && record.base.length > 1);
+      const body = record && record.base;
+      return !!(body && body.length && body.length > 1);
     }
     /**
      * Computes if `selected` equals current item index.
@@ -404,10 +396,7 @@
         return;
       }
       const data = body[selected];
-      if (!data) {
-        return;
-      }
-      return data['http://raml.org/vocabularies/http#mediaType'][0]['@value'];
+      return this._getValue(data, 'http://raml.org/vocabularies/http#mediaType');
     }
 
     _selectedBodyChanged(body) {
@@ -426,25 +415,10 @@
       this._setIsObject(isObject);
       this._setIsSchema(isSchema);
     }
-
-    /**
-     * Checks if property item has a type.
-     * @param {Object} model Model item.
-     * @param {String} type A type to lookup
-     * @return {Boolean}
-     */
-    _hasType(model, type) {
-      if (!model) {
-        return false;
-      }
-      const types = model['@type'] || [];
-      return types.findIndex((item) => item === type) !== -1;
-    }
     // Computes a label for the section toggle buttons.
     _computeToggleActionLabel(opened) {
       return opened ? 'Hide' : 'Show';
     }
-
     // Computes class for the toggle's button icon.
     _computeToggleIconClass(opened) {
       var clazz = 'toggle-icon';
@@ -467,36 +441,7 @@
      * @return {String|undefined}
      */
     _computeTypeName(body) {
-      const name = body && body['http://schema.org/name'];
-      return name ? name[0]['@value'] : undefined;
-    }
-    /**
-     * Computes value for `hasTypeName`
-     *
-     * @param {?String} name Current `typeName`
-     * @return {Boolean}
-     */
-    _computeHasName(name) {
-      return !!name;
-    }
-    /**
-     * Computes `description` from AMF model.
-     *
-     * @param {Object} body Currently selected body.
-     * @return {String|undefined}
-     */
-    _computeDescription(body) {
-      const name = body && body['http://schema.org/description'];
-      return name ? name[0]['@value'] : undefined;
-    }
-    /**
-     * Computes value for `hasDescription`
-     *
-     * @param {?String} name Current `typeName`
-     * @return {Boolean}
-     */
-    _computeHasDescription(name) {
-      return !!name;
+      return this._getValue(body, 'http://schema.org/name');
     }
     /**
      * Computes `examples` property from AMF model.
@@ -506,15 +451,6 @@
      */
     _computeExamples(body) {
       return body && body['http://raml.org/vocabularies/document#examples'];
-    }
-    /**
-     * Computes value for `hasExamples`
-     *
-     * @param {?Array} examples Current `examples`
-     * @return {Boolean}
-     */
-    _computeHasExamples(examples) {
-      return !!(examples && examples.length);
     }
   }
   window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);

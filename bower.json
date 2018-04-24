@@ -23,7 +23,8 @@
     "api-schema-document": "advanced-rest-client/api-schema-document#2.0.0-preview",
     "marked-element": "PolymerElements/marked-element#^2.4.0",
     "markdown-styles": "advanced-rest-client/markdown-styles#^2.0.2",
-    "api-resource-example-document": "advanced-rest-client/api-resource-example-document#2.0.0-preview"
+    "api-resource-example-document": "advanced-rest-client/api-resource-example-document#2.0.0-preview",
+    "amf-helper-mixin": "advanced-rest-client/amf-helper-mixin#2.0.0-preview"
   },
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
