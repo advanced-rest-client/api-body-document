@@ -51,10 +51,11 @@
   <body>
     <dom-bind id="demo">
       <template is="dom-bind">
+        <raml-aware raml="[[amfModel]]" scope="demo"></raml-aware>
         <div class="vertical-section-container centered" role="main">
-          <api-navigation amf-model="[[amfModel]]" endpoints-opened></api-navigation>
+          <api-navigation aware="demo" endpoints-opened></api-navigation>
           <template is="dom-if" if="[[hasData]]">
-            <api-body-document aware="model" body="[[body]]" opened></api-body-document>
+            <api-body-document aware="demo" body="[[body]]" opened></api-body-document>
           </template>
           <template is="dom-if" if="[[!hasData]]">
             <p>Select a HTTP method in the navigation to see the demo.</p>

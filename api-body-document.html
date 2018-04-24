@@ -158,7 +158,7 @@
         <api-type-document amf-model="[[amfModel]]" type="[[selectedBody]]"></api-type-document>
       </template>
       <template is="dom-if" if="[[isSchema]]">
-        <api-schema-document schema-model="[[selectedBody]]"></api-schema-document>
+        <api-schema-document amf-model="[[amfModel]]" shape="[[selectedBody]]"></api-schema-document>
       </template>
     </iron-collapse>
   </template>

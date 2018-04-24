@@ -36,20 +36,18 @@ types:
       - C
 resourceTypes:
   ErrorredResource:
-    get:
+    patch:
   ResourceNotFound:
     type: ErrorredResource
-    get:
-      responses:
-        404:
-          body:
-            application/json:
-              displayName: Not found response
-              type: ErrorResource
-            application/xml:
-              displayName: Not found response
-              type: !include schemas/error-response.xsd
-              example: !include examples/e404.xml
+    patch:
+      body:
+        application/json:
+          displayName: Not found response
+          type: ErrorResource
+        application/xml:
+          displayName: Not found response
+          type: !include schemas/error-response.xsd
+          example: !include examples/e404.xml
   UnauthorizedResponse:
     type: ErrorredResource
     get:
@@ -65,21 +63,20 @@ resourceTypes:
               example: !include examples/e401.xml
   RequestErrorResponse:
     type: ErrorredResource
-    get:
-      responses:
-        400:
-          description: The error response when one of the parameters is invalid and can't be parsed. Nothing can be done at the time except correcting the request to send valid data.
-          body:
-            application/json:
-              displayName: Invalid request
-              type: ErrorResource
-            application/xml:
-              displayName: Invalid request
-              type: !include schemas/error-response.xsd
-              example: !include examples/e400.xml
+    patch:
+      body:
+        application/json:
+          displayName: Invalid request
+          type: ErrorResource
+          example: !include examples/e400.json
+        application/xml:
+          displayName: Invalid request
+          type: !include schemas/error-response.xsd
+          example: !include examples/e400.xml
 
 /people:
   displayName: People
+  type: RequestErrorResponse
   post:
     displayName: Create a person
     description: Use this method to add new person
@@ -204,7 +201,7 @@ resourceTypes:
     description: Upload an asset. Its required to respect the order of the fields described
     body:
       multipart/form-data:
-        properties: 
+        properties:
           organizationId:
             description: The target organization where the asset will be uploaded
             required: true
