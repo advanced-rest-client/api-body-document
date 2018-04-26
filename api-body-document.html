@@ -139,7 +139,6 @@
           <span class="media-type-label">[[selectedMediaType]]</span>
         </template>
       </div>
-
       <template is="dom-if" if="[[hasTypeName]]">
         <h4>[[typeName]]</h4>
       </template>
@@ -152,7 +151,7 @@
         <template is="dom-if" if="[[hasExamples]]">
           <section class="examples">
             <h5 class="examples-section-title">Examples</h5>
-            <api-resource-example-document examples="[[examples]]"></api-resource-example-document>
+            <api-resource-example-document amf-model="[[amfModel]]" examples="[[examples]]"></api-resource-example-document>
           </section>
         </template>
         <api-type-document amf-model="[[amfModel]]" type="[[selectedBody]]"></api-type-document>
