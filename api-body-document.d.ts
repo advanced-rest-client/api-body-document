@@ -21,6 +21,7 @@
 /// <reference path="../markdown-styles/markdown-styles.d.ts" />
 /// <reference path="../marked-element/marked-element.d.ts" />
 /// <reference path="../api-resource-example-document/api-resource-example-document.d.ts" />
+/// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
 
 declare namespace ApiElements {
 
@@ -47,22 +48,14 @@ declare namespace ApiElements {
    * `--api-body-document-examples-border-color` | Example section border color | `transparent`
    * `--code-background-color` | Background color of the examples section | ``
    */
-  class ApiBodyDocument extends Polymer.Element {
+  class ApiBodyDocument extends
+    ApiElements.AmfHelperMixin(
+    Polymer.Element) {
 
     /**
      * `raml-aware` scope property to use.
      */
     aware: string|null|undefined;
-
-    /**
-     * Generated AMF json/ld model form the API spec.
-     * The element assumes the object of the first array item to be a
-     * type of `"http://raml.org/vocabularies/document#Document`
-     * on AMF vocabulary.
-     *
-     * It is only usefult for the element to resolve references.
-     */
-    amfModel: object|any[]|null;
 
     /**
      * Set to true to open the body view.
@@ -98,6 +91,11 @@ declare namespace ApiElements {
      * Computed automatically when selection change.
      */
     readonly selectedBody: object|null|undefined;
+
+    /**
+     * Name of the selected media type.
+     */
+    readonly selectedMediaType: string|null|undefined;
 
     /**
      * True if selected body is a structured object
@@ -180,15 +178,8 @@ declare namespace ApiElements {
      * @param body List of body in request.
      */
     _computeSelectedBody(selected: Number|null, body: Array<object|null>|null): object|null|undefined;
+    _computeSelectedMediaName(selected: any, body: any): any;
     _selectedBodyChanged(body: any): void;
-
-    /**
-     * Checks if property item has a type.
-     *
-     * @param model Model item.
-     * @param type A type to lookup
-     */
-    _hasType(model: object|null, type: String|null): Boolean|null;
 
     /**
      * Computes a label for the section toggle buttons.
@@ -214,40 +205,12 @@ declare namespace ApiElements {
     _computeTypeName(body: object|null): String|null|undefined;
 
     /**
-     * Computes value for `hasTypeName`
-     *
-     * @param name Current `typeName`
-     */
-    _computeHasName(name: String|null): Boolean|null;
-
-    /**
-     * Computes `description` from AMF model.
-     *
-     * @param body Currently selected body.
-     */
-    _computeDescription(body: object|null): String|null|undefined;
-
-    /**
-     * Computes value for `hasDescription`
-     *
-     * @param name Current `typeName`
-     */
-    _computeHasDescription(name: String|null): Boolean|null;
-
-    /**
      * Computes `examples` property from AMF model.
      *
      * @param body Currently selected body.
      * @returns List of examples in the body
      */
     _computeExamples(body: object|null): any[]|null|undefined;
-
-    /**
-     * Computes value for `hasExamples`
-     *
-     * @param examples Current `examples`
-     */
-    _computeHasExamples(examples: any[]|null): Boolean|null;
   }
 }
 
