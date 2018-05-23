@@ -47,6 +47,7 @@ declare namespace ApiElements {
    * `--api-body-document-examples-title-color` | Color of examples section title | ``
    * `--api-body-document-examples-border-color` | Example section border color | `transparent`
    * `--code-background-color` | Background color of the examples section | ``
+   * `--api-body-document-media-type-label-font-weight` | Font weight of the media type label (when selection is not available) | `500`
    */
   class ApiBodyDocument extends
     ApiElements.AmfHelperMixin(
