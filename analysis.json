@@ -2,7 +2,7 @@
   "schema_version": "1.0.0",
   "elements": [
     {
-      "description": "`api-body-document`\n\nA component to render HTTP method body documentation based on AMF model\n\n## Styling\n\n`<api-body-document>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--api-body-document` | Mixin applied to this elment | `{}`\n`--api-body-document-title-border-color` | Border color of the section title | `#e5e5e5`\n`--api-body-document-title` | Mixni apploied to the title element | `{}`\n`--api-body-document-toggle-view-color` | Color of the toggle view button | `--arc-toggle-view-icon-color` or `rgba(0, 0, 0, 0.74)`\n`--api-body-document-toggle-view-hover-color` | Color of the toggle view button when hovered | `var(--arc-toggle-view-icon-hover-color` or `rgba(0, 0, 0, 0.88)`\n`--api-body-document-description-color` | Color of the type description | `rgba(0, 0, 0, 0.74)`\n`--arc-font-subhead` | Mixin applied to the resource title | `{}`\n`--api-body-document-media-button-background-color` | Selection color of the media type selector | `#CDDC39`\n`--api-body-document-examples-title-color` | Color of examples section title | ``\n`--api-body-document-examples-border-color` | Example section border color | `transparent`\n`--code-background-color` | Background color of the examples section | ``",
+      "description": "`api-body-document`\n\nA component to render HTTP method body documentation based on AMF model\n\n## Styling\n\n`<api-body-document>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--api-body-document` | Mixin applied to this elment | `{}`\n`--api-body-document-title-border-color` | Border color of the section title | `#e5e5e5`\n`--api-body-document-title` | Mixni apploied to the title element | `{}`\n`--api-body-document-toggle-view-color` | Color of the toggle view button | `--arc-toggle-view-icon-color` or `rgba(0, 0, 0, 0.74)`\n`--api-body-document-toggle-view-hover-color` | Color of the toggle view button when hovered | `var(--arc-toggle-view-icon-hover-color` or `rgba(0, 0, 0, 0.88)`\n`--api-body-document-description-color` | Color of the type description | `rgba(0, 0, 0, 0.74)`\n`--arc-font-subhead` | Mixin applied to the resource title | `{}`\n`--api-body-document-media-button-background-color` | Selection color of the media type selector | `#CDDC39`\n`--api-body-document-examples-title-color` | Color of examples section title | ``\n`--api-body-document-examples-border-color` | Example section border color | `transparent`\n`--code-background-color` | Background color of the examples section | ``\n`--api-body-document-media-type-label-font-weight` | Font weight of the media type label (when selection is not available) | `500`",
       "summary": "",
       "path": "api-body-document.html",
       "properties": [
@@ -36,11 +36,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 200,
+              "line": 202,
               "column": 8
             },
             "end": {
-              "line": 200,
+              "line": 202,
               "column": 21
             }
           },
@@ -57,11 +57,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 205,
+              "line": 207,
               "column": 8
             },
             "end": {
-              "line": 205,
+              "line": 207,
               "column": 23
             }
           },
@@ -78,11 +78,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 211,
+              "line": 213,
               "column": 8
             },
             "end": {
-              "line": 214,
+              "line": 216,
               "column": 9
             }
           },
@@ -100,11 +100,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 219,
+              "line": 221,
               "column": 8
             },
             "end": {
-              "line": 222,
+              "line": 224,
               "column": 9
             }
           },
@@ -122,11 +122,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 226,
+              "line": 228,
               "column": 8
             },
             "end": {
-              "line": 231,
+              "line": 233,
               "column": 9
             }
           },
@@ -145,11 +145,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 237,
+              "line": 239,
               "column": 8
             },
             "end": {
-              "line": 237,
+              "line": 239,
               "column": 24
             }
           },
@@ -166,11 +166,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 242,
+              "line": 244,
               "column": 8
             },
             "end": {
-              "line": 247,
+              "line": 249,
               "column": 9
             }
           },
@@ -189,11 +189,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 251,
+              "line": 253,
               "column": 8
             },
             "end": {
-              "line": 255,
+              "line": 257,
               "column": 9
             }
           },
@@ -211,11 +211,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 259,
+              "line": 261,
               "column": 8
             },
             "end": {
-              "line": 262,
+              "line": 264,
               "column": 9
             }
           },
@@ -233,11 +233,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 266,
+              "line": 268,
               "column": 8
             },
             "end": {
-              "line": 269,
+              "line": 271,
               "column": 9
             }
           },
@@ -255,11 +255,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 273,
+              "line": 275,
               "column": 8
             },
             "end": {
-              "line": 276,
+              "line": 278,
               "column": 9
             }
           },
@@ -277,11 +277,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 280,
+              "line": 282,
               "column": 8
             },
             "end": {
-              "line": 283,
+              "line": 285,
               "column": 9
             }
           },
@@ -299,11 +299,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 287,
+              "line": 289,
               "column": 8
             },
             "end": {
-              "line": 290,
+              "line": 292,
               "column": 9
             }
           },
@@ -321,11 +321,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 294,
+              "line": 296,
               "column": 8
             },
             "end": {
-              "line": 297,
+              "line": 299,
               "column": 9
             }
           },
@@ -343,11 +343,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 303,
+              "line": 305,
               "column": 8
             },
             "end": {
-              "line": 306,
+              "line": 308,
               "column": 9
             }
           },
@@ -365,11 +365,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 310,
+              "line": 312,
               "column": 8
             },
             "end": {
-              "line": 313,
+              "line": 315,
               "column": 9
             }
           },
@@ -1663,11 +1663,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 320,
+              "line": 322,
               "column": 4
             },
             "end": {
-              "line": 327,
+              "line": 329,
               "column": 5
             }
           },
@@ -1689,11 +1689,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 333,
+              "line": 335,
               "column": 4
             },
             "end": {
-              "line": 339,
+              "line": 341,
               "column": 5
             }
           },
@@ -1715,11 +1715,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 345,
+              "line": 347,
               "column": 4
             },
             "end": {
-              "line": 348,
+              "line": 350,
               "column": 5
             }
           },
@@ -1742,11 +1742,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 356,
+              "line": 358,
               "column": 4
             },
             "end": {
-              "line": 358,
+              "line": 360,
               "column": 5
             }
           },
@@ -1771,11 +1771,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 365,
+              "line": 367,
               "column": 4
             },
             "end": {
-              "line": 372,
+              "line": 374,
               "column": 5
             }
           },
@@ -1796,11 +1796,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 380,
+              "line": 382,
               "column": 4
             },
             "end": {
-              "line": 390,
+              "line": 392,
               "column": 5
             }
           },
@@ -1827,11 +1827,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 392,
+              "line": 394,
               "column": 4
             },
             "end": {
-              "line": 398,
+              "line": 400,
               "column": 5
             }
           },
@@ -1851,11 +1851,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 400,
+              "line": 402,
               "column": 4
             },
             "end": {
-              "line": 415,
+              "line": 417,
               "column": 5
             }
           },
@@ -1875,11 +1875,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 417,
+              "line": 419,
               "column": 4
             },
             "end": {
-              "line": 419,
+              "line": 421,
               "column": 5
             }
           },
@@ -1896,11 +1896,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 421,
+              "line": 423,
               "column": 4
             },
             "end": {
-              "line": 427,
+              "line": 429,
               "column": 5
             }
           },
@@ -1917,11 +1917,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 432,
+              "line": 434,
               "column": 4
             },
             "end": {
-              "line": 434,
+              "line": 436,
               "column": 5
             }
           },
@@ -1937,11 +1937,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 441,
+              "line": 443,
               "column": 4
             },
             "end": {
-              "line": 443,
+              "line": 445,
               "column": 5
             }
           },
@@ -1963,11 +1963,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 450,
+              "line": 452,
               "column": 4
             },
             "end": {
-              "line": 452,
+              "line": 454,
               "column": 5
             }
           },
@@ -1995,11 +1995,11 @@
       "metadata": {},
       "sourceRange": {
         "start": {
-          "line": 193,
+          "line": 195,
           "column": 2
         },
         "end": {
-          "line": 453,
+          "line": 455,
           "column": 3
         }
       },
@@ -2030,11 +2030,11 @@
           "description": "`raml-aware` scope property to use.",
           "sourceRange": {
             "start": {
-              "line": 200,
+              "line": 202,
               "column": 8
             },
             "end": {
-              "line": 200,
+              "line": 202,
               "column": 21
             }
           },
@@ -2046,11 +2046,11 @@
           "description": "Set to true to open the body view.\nAutormatically updated when the view is toggled from the UI.",
           "sourceRange": {
             "start": {
-              "line": 205,
+              "line": 207,
               "column": 8
             },
             "end": {
-              "line": 205,
+              "line": 207,
               "column": 23
             }
           },
@@ -2062,11 +2062,11 @@
           "description": "AMF model for body as a `http://raml.org/vocabularies/http#payload`\ntype.",
           "sourceRange": {
             "start": {
-              "line": 211,
+              "line": 213,
               "column": 8
             },
             "end": {
-              "line": 214,
+              "line": 216,
               "column": 9
             }
           },
@@ -2078,11 +2078,11 @@
           "description": "List of discovered media types in the `body`.",
           "sourceRange": {
             "start": {
-              "line": 219,
+              "line": 221,
               "column": 8
             },
             "end": {
-              "line": 222,
+              "line": 224,
               "column": 9
             }
           },
@@ -2094,11 +2094,11 @@
           "description": "Computed value. True when mediaTypes has more than one item.",
           "sourceRange": {
             "start": {
-              "line": 226,
+              "line": 228,
               "column": 8
             },
             "end": {
-              "line": 231,
+              "line": 233,
               "column": 9
             }
           },
@@ -2110,11 +2110,11 @@
           "description": "Currently selected media type.\nIt is an index of a media type in `mediaTypes` array.\nIt is set to `0` each time the body changes.",
           "sourceRange": {
             "start": {
-              "line": 237,
+              "line": 239,
               "column": 8
             },
             "end": {
-              "line": 237,
+              "line": 239,
               "column": 24
             }
           },
@@ -2126,11 +2126,11 @@
           "description": "A body model for selected media type.\nComputed automatically when selection change.",
           "sourceRange": {
             "start": {
-              "line": 242,
+              "line": 244,
               "column": 8
             },
             "end": {
-              "line": 247,
+              "line": 249,
               "column": 9
             }
           },
@@ -2142,11 +2142,11 @@
           "description": "Name of the selected media type.",
           "sourceRange": {
             "start": {
-              "line": 251,
+              "line": 253,
               "column": 8
             },
             "end": {
-              "line": 255,
+              "line": 257,
               "column": 9
             }
           },
@@ -2158,11 +2158,11 @@
           "description": "True if selected body is a structured object",
           "sourceRange": {
             "start": {
-              "line": 259,
+              "line": 261,
               "column": 8
             },
             "end": {
-              "line": 262,
+              "line": 264,
               "column": 9
             }
           },
@@ -2174,11 +2174,11 @@
           "description": "True if selected body is a schema (JSON, XML, ...) data",
           "sourceRange": {
             "start": {
-              "line": 266,
+              "line": 268,
               "column": 8
             },
             "end": {
-              "line": 269,
+              "line": 271,
               "column": 9
             }
           },
@@ -2190,11 +2190,11 @@
           "description": "Name of the resource type if any.",
           "sourceRange": {
             "start": {
-              "line": 273,
+              "line": 275,
               "column": 8
             },
             "end": {
-              "line": 276,
+              "line": 278,
               "column": 9
             }
           },
@@ -2206,11 +2206,11 @@
           "description": "Computed value, true if `typeName` is set.",
           "sourceRange": {
             "start": {
-              "line": 280,
+              "line": 282,
               "column": 8
             },
             "end": {
-              "line": 283,
+              "line": 285,
               "column": 9
             }
           },
@@ -2222,11 +2222,11 @@
           "description": "Name of the resource type if any.",
           "sourceRange": {
             "start": {
-              "line": 287,
+              "line": 289,
               "column": 8
             },
             "end": {
-              "line": 290,
+              "line": 292,
               "column": 9
             }
           },
@@ -2238,11 +2238,11 @@
           "description": "Computed value, true if `typeName` is set.",
           "sourceRange": {
             "start": {
-              "line": 294,
+              "line": 296,
               "column": 8
             },
             "end": {
-              "line": 297,
+              "line": 299,
               "column": 9
             }
           },
@@ -2254,11 +2254,11 @@
           "description": "Computed value of examples in the body model.",
           "sourceRange": {
             "start": {
-              "line": 303,
+              "line": 305,
               "column": 8
             },
             "end": {
-              "line": 306,
+              "line": 308,
               "column": 9
             }
           },
@@ -2270,11 +2270,11 @@
           "description": "Computed valie if examples are set.",
           "sourceRange": {
             "start": {
-              "line": 310,
+              "line": 312,
               "column": 8
             },
             "end": {
-              "line": 313,
+              "line": 315,
               "column": 9
             }
           },
