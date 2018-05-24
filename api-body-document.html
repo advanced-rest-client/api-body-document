@@ -408,7 +408,9 @@
       let isSchema = false;
       if (this._hasType(body, 'http://www.w3.org/ns/shacl#NodeShape')) {
         isObject = true;
-      } else if (this._hasType(body, 'http://www.w3.org/ns/shacl#SchemaShape')) {
+      } else if (this._hasType(body, 'http://www.w3.org/ns/shacl#SchemaShape') ||
+        this._hasType(body, 'http://raml.org/vocabularies/shapes#AnyShape') ||
+        this._hasType(body, 'http://raml.org/vocabularies/shapes#ScalarShape')) {
         isSchema = true;
       } else if (this._hasType(body, 'http://raml.org/vocabularies/shapes#ArrayShape')) {
         isObject = true;
