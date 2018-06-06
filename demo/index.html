@@ -13,6 +13,10 @@
     <link rel="import" href="../../paper-styles/typography.html">
     <link rel="import" href="../../raml-aware/raml-aware.html">
     <link rel="import" href="../../api-navigation/api-navigation.html">
+    <link rel="import" href="../../paper-dropdown-menu/paper-dropdown-menu.html">
+    <link rel="import" href="../../paper-item/paper-item.html">
+    <link rel="import" href="../../paper-listbox/paper-listbox.html">
+    <link rel="import" href="../../neon-animation/web-animations.html">
     <link rel="import" href="../api-body-document.html">
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
@@ -26,6 +30,22 @@
         };
         --arc-font-body1: {
           @apply --paper-font-body1;
+        };
+      }
+
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      header {
+        padding: 12px 24px;
+        background-color: #C5E1A5;
+        --iron-icon-fill-color: #3E2723;
+        --paper-input-container-focus-color: #33691E;
+        --paper-input-container-label: {
+          color: #3E2723;
         };
       }
 
@@ -51,6 +71,15 @@
   <body>
     <dom-bind id="demo">
       <template is="dom-bind">
+        <header>
+          <paper-dropdown-menu label="Select demo API">
+            <paper-listbox slot="dropdown-content" id="apiList" on-selected-changed="_apiChanged">
+              <paper-item data-file="demo-api.json">Demo API</paper-item>
+              <paper-item data-file="caro-api.json">Carolina API issue</paper-item>
+            </paper-listbox>
+          </paper-dropdown-menu>
+        </header>
+
         <raml-aware raml="[[amfModel]]" scope="demo"></raml-aware>
         <div class="vertical-section-container centered" role="main">
           <api-navigation aware="demo" endpoints-opened></api-navigation>
@@ -67,7 +96,14 @@
     (function(app) {
       app.hasData = false;
       app._load = function() {
-        fetch('./amf-model.json')
+        document.getElementById('apiList').selected = 0;
+      };
+      app._apiChanged = function(e) {
+        const file = e.target.selectedItem.dataset.file;
+        app._loadFile(file);
+      };
+      app._loadFile = function(file) {
+        fetch('./' + file)
         .then((response) => response.json())
         .then((data) => {
           app.amfModel = data;
