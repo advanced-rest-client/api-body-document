@@ -6,16 +6,6 @@
 
 A component to render HTTP method body documentation based on AMF model
 
-<!---
-```
-<custom-element-demo>
-  <template>
-    <link rel="import" href="api-body-document.html">
-    <next-code-block></next-code-block>
-  </template>
-</custom-element-demo>
-```
--->
 
 ```html
 <api-body-document></api-body-document>
