@@ -2,32 +2,32 @@
   {
     "@id": "file://demo/caro-api/caro-api.raml",
     "@type": [
-      "http://raml.org/vocabularies/document#Document",
-      "http://raml.org/vocabularies/document#Fragment",
-      "http://raml.org/vocabularies/document#Module",
-      "http://raml.org/vocabularies/document#Unit"
+      "http://a.ml/vocabularies/document#Document",
+      "http://a.ml/vocabularies/document#Fragment",
+      "http://a.ml/vocabularies/document#Module",
+      "http://a.ml/vocabularies/document#Unit"
     ],
-    "http://raml.org/vocabularies/document#encodes": [
+    "http://a.ml/vocabularies/document#encodes": [
       {
         "@id": "file://demo/caro-api/caro-api.raml#/web-api",
         "@type": [
           "http://schema.org/WebAPI",
-          "http://raml.org/vocabularies/document#RootDomainElement",
-          "http://raml.org/vocabularies/document#DomainElement"
+          "http://a.ml/vocabularies/document#RootDomainElement",
+          "http://a.ml/vocabularies/document#DomainElement"
         ],
         "http://schema.org/name": [
           {
             "@value": "notification service api"
           }
         ],
-        "http://raml.org/vocabularies/http#server": [
+        "http://a.ml/vocabularies/http#server": [
           {
             "@id": "file://demo/caro-api/caro-api.raml#/web-api/https%3A%2F%2Fmocksvc.qax.mulesoft.com%2Fmocks%2Ffee4c9aa-91a2-4ff7-8f38-2793d1f0d204",
             "@type": [
-              "http://raml.org/vocabularies/http#Server",
-              "http://raml.org/vocabularies/document#DomainElement"
+              "http://a.ml/vocabularies/http#Server",
+              "http://a.ml/vocabularies/document#DomainElement"
             ],
-            "http://raml.org/vocabularies/http#url": [
+            "http://a.ml/vocabularies/http#url": [
               {
                 "@value": "https://mocksvc.qax.mulesoft.com/mocks/fee4c9aa-91a2-4ff7-8f38-2793d1f0d204"
               }
@@ -39,14 +39,14 @@
             "@value": "1.0"
           }
         ],
-        "http://raml.org/vocabularies/http#endpoint": [
+        "http://a.ml/vocabularies/http#endpoint": [
           {
             "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails",
             "@type": [
-              "http://raml.org/vocabularies/http#EndPoint",
-              "http://raml.org/vocabularies/document#DomainElement"
+              "http://a.ml/vocabularies/http#EndPoint",
+              "http://a.ml/vocabularies/document#DomainElement"
             ],
-            "http://raml.org/vocabularies/http#path": [
+            "http://a.ml/vocabularies/http#path": [
               {
                 "@value": "/notifications/emails"
               }
@@ -56,7 +56,7 @@
                 "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post",
                 "@type": [
                   "http://www.w3.org/ns/hydra/core#Operation",
-                  "http://raml.org/vocabularies/document#DomainElement"
+                  "http://a.ml/vocabularies/document#DomainElement"
                 ],
                 "http://www.w3.org/ns/hydra/core#method": [
                   {
@@ -67,29 +67,29 @@
                   {
                     "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request",
                     "@type": [
-                      "http://raml.org/vocabularies/http#Request",
-                      "http://raml.org/vocabularies/document#DomainElement"
+                      "http://a.ml/vocabularies/http#Request",
+                      "http://a.ml/vocabularies/document#DomainElement"
                     ],
-                    "http://raml.org/vocabularies/http#payload": [
+                    "http://a.ml/vocabularies/http#payload": [
                       {
-                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json",
+                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application%2Fjson",
                         "@type": [
-                          "http://raml.org/vocabularies/http#Payload",
-                          "http://raml.org/vocabularies/document#DomainElement"
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://raml.org/vocabularies/http#mediaType": [
+                        "http://a.ml/vocabularies/http#mediaType": [
                           {
                             "@value": "application/json"
                           }
                         ],
-                        "http://raml.org/vocabularies/http#schema": [
+                        "http://a.ml/vocabularies/http#schema": [
                           {
-                            "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema",
+                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
-                              "http://raml.org/vocabularies/shapes#Shape",
-                              "http://raml.org/vocabularies/document#DomainElement"
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
                             ],
                             "http://www.w3.org/ns/shacl#closed": [
                               {
@@ -98,94 +98,34 @@
                             ],
                             "http://www.w3.org/ns/shacl#property": [
                               {
-                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/another",
+                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
-                                  "http://raml.org/vocabularies/shapes#Shape"
+                                  "http://a.ml/vocabularies/shapes#Shape"
                                 ],
                                 "http://www.w3.org/ns/shacl#path": [
                                   {
-                                    "@id": "http://raml.org/vocabularies/data#another"
+                                    "@id": "http://a.ml/vocabularies/data#recipients"
                                   }
                                 ],
-                                "http://raml.org/vocabularies/shapes#range": [
+                                "http://a.ml/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/another/array/another",
+                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients",
                                     "@type": [
-                                      "http://raml.org/vocabularies/shapes#ArrayShape",
+                                      "http://a.ml/vocabularies/shapes#ArrayShape",
                                       "http://www.w3.org/ns/shacl#Shape",
-                                      "http://raml.org/vocabularies/shapes#Shape",
-                                      "http://raml.org/vocabularies/document#DomainElement"
+                                      "http://a.ml/vocabularies/shapes#Shape",
+                                      "http://a.ml/vocabularies/document#DomainElement"
                                     ],
-                                    "http://raml.org/vocabularies/shapes#items": [
+                                    "http://a.ml/vocabularies/shapes#items": [
                                       {
-                                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/another/array/another/scalar/items",
-                                        "@type": [
-                                          "http://raml.org/vocabularies/shapes#ScalarShape",
-                                          "http://www.w3.org/ns/shacl#Shape",
-                                          "http://raml.org/vocabularies/shapes#Shape",
-                                          "http://raml.org/vocabularies/document#DomainElement"
-                                        ],
-                                        "http://www.w3.org/ns/shacl#datatype": [
-                                          {
-                                            "@id": "http://www.w3.org/2001/XMLSchema#integer"
-                                          }
-                                        ],
-                                        "http://www.w3.org/ns/shacl#name": [
-                                          {
-                                            "@value": "items"
-                                          }
-                                        ]
-                                      }
-                                    ],
-                                    "http://www.w3.org/ns/shacl#name": [
-                                      {
-                                        "@value": "another"
-                                      }
-                                    ]
-                                  }
-                                ],
-                                "http://www.w3.org/ns/shacl#minCount": [
-                                  {
-                                    "@value": 1
-                                  }
-                                ],
-                                "http://www.w3.org/ns/shacl#name": [
-                                  {
-                                    "@value": "another"
-                                  }
-                                ]
-                              },
-                              {
-                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients",
-                                "@type": [
-                                  "http://www.w3.org/ns/shacl#PropertyShape",
-                                  "http://www.w3.org/ns/shacl#Shape",
-                                  "http://raml.org/vocabularies/shapes#Shape"
-                                ],
-                                "http://www.w3.org/ns/shacl#path": [
-                                  {
-                                    "@id": "http://raml.org/vocabularies/data#recipients"
-                                  }
-                                ],
-                                "http://raml.org/vocabularies/shapes#range": [
-                                  {
-                                    "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients",
-                                    "@type": [
-                                      "http://raml.org/vocabularies/shapes#ArrayShape",
-                                      "http://www.w3.org/ns/shacl#Shape",
-                                      "http://raml.org/vocabularies/shapes#Shape",
-                                      "http://raml.org/vocabularies/document#DomainElement"
-                                    ],
-                                    "http://raml.org/vocabularies/shapes#items": [
-                                      {
-                                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist",
+                                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist",
                                         "@type": [
                                           "http://www.w3.org/ns/shacl#NodeShape",
                                           "http://www.w3.org/ns/shacl#Shape",
-                                          "http://raml.org/vocabularies/shapes#Shape",
-                                          "http://raml.org/vocabularies/document#DomainElement"
+                                          "http://a.ml/vocabularies/shapes#Shape",
+                                          "http://a.ml/vocabularies/document#DomainElement"
                                         ],
                                         "http://www.w3.org/ns/shacl#closed": [
                                           {
@@ -194,25 +134,25 @@
                                         ],
                                         "http://www.w3.org/ns/shacl#property": [
                                           {
-                                            "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/substitution",
+                                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
-                                              "http://raml.org/vocabularies/shapes#Shape"
+                                              "http://a.ml/vocabularies/shapes#Shape"
                                             ],
                                             "http://www.w3.org/ns/shacl#path": [
                                               {
-                                                "@id": "http://raml.org/vocabularies/data#substitution"
+                                                "@id": "http://a.ml/vocabularies/data#substitution"
                                               }
                                             ],
-                                            "http://raml.org/vocabularies/shapes#range": [
+                                            "http://a.ml/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/substitution/substitution",
+                                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution",
                                                 "@type": [
                                                   "http://www.w3.org/ns/shacl#NodeShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
-                                                  "http://raml.org/vocabularies/shapes#Shape",
-                                                  "http://raml.org/vocabularies/document#DomainElement"
+                                                  "http://a.ml/vocabularies/shapes#Shape",
+                                                  "http://a.ml/vocabularies/document#DomainElement"
                                                 ],
                                                 "http://www.w3.org/ns/shacl#closed": [
                                                   {
@@ -221,69 +161,25 @@
                                                 ],
                                                 "http://www.w3.org/ns/shacl#property": [
                                                   {
-                                                    "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value",
+                                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key",
                                                     "@type": [
                                                       "http://www.w3.org/ns/shacl#PropertyShape",
                                                       "http://www.w3.org/ns/shacl#Shape",
-                                                      "http://raml.org/vocabularies/shapes#Shape"
+                                                      "http://a.ml/vocabularies/shapes#Shape"
                                                     ],
                                                     "http://www.w3.org/ns/shacl#path": [
                                                       {
-                                                        "@id": "http://raml.org/vocabularies/data#value"
+                                                        "@id": "http://a.ml/vocabularies/data#key"
                                                       }
                                                     ],
-                                                    "http://raml.org/vocabularies/shapes#range": [
+                                                    "http://a.ml/vocabularies/shapes#range": [
                                                       {
-                                                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value/scalar/value",
+                                                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key/scalar/key",
                                                         "@type": [
-                                                          "http://raml.org/vocabularies/shapes#ScalarShape",
+                                                          "http://a.ml/vocabularies/shapes#ScalarShape",
                                                           "http://www.w3.org/ns/shacl#Shape",
-                                                          "http://raml.org/vocabularies/shapes#Shape",
-                                                          "http://raml.org/vocabularies/document#DomainElement"
-                                                        ],
-                                                        "http://www.w3.org/ns/shacl#datatype": [
-                                                          {
-                                                            "@id": "http://www.w3.org/2001/XMLSchema#string"
-                                                          }
-                                                        ],
-                                                        "http://www.w3.org/ns/shacl#name": [
-                                                          {
-                                                            "@value": "value"
-                                                          }
-                                                        ]
-                                                      }
-                                                    ],
-                                                    "http://www.w3.org/ns/shacl#minCount": [
-                                                      {
-                                                        "@value": 1
-                                                      }
-                                                    ],
-                                                    "http://www.w3.org/ns/shacl#name": [
-                                                      {
-                                                        "@value": "value"
-                                                      }
-                                                    ]
-                                                  },
-                                                  {
-                                                    "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key",
-                                                    "@type": [
-                                                      "http://www.w3.org/ns/shacl#PropertyShape",
-                                                      "http://www.w3.org/ns/shacl#Shape",
-                                                      "http://raml.org/vocabularies/shapes#Shape"
-                                                    ],
-                                                    "http://www.w3.org/ns/shacl#path": [
-                                                      {
-                                                        "@id": "http://raml.org/vocabularies/data#key"
-                                                      }
-                                                    ],
-                                                    "http://raml.org/vocabularies/shapes#range": [
-                                                      {
-                                                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key/scalar/key",
-                                                        "@type": [
-                                                          "http://raml.org/vocabularies/shapes#ScalarShape",
-                                                          "http://www.w3.org/ns/shacl#Shape",
-                                                          "http://raml.org/vocabularies/shapes#Shape",
-                                                          "http://raml.org/vocabularies/document#DomainElement"
+                                                          "http://a.ml/vocabularies/shapes#Shape",
+                                                          "http://a.ml/vocabularies/document#DomainElement"
                                                         ],
                                                         "http://www.w3.org/ns/shacl#datatype": [
                                                           {
@@ -307,6 +203,50 @@
                                                         "@value": "key"
                                                       }
                                                     ]
+                                                  },
+                                                  {
+                                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value",
+                                                    "@type": [
+                                                      "http://www.w3.org/ns/shacl#PropertyShape",
+                                                      "http://www.w3.org/ns/shacl#Shape",
+                                                      "http://a.ml/vocabularies/shapes#Shape"
+                                                    ],
+                                                    "http://www.w3.org/ns/shacl#path": [
+                                                      {
+                                                        "@id": "http://a.ml/vocabularies/data#value"
+                                                      }
+                                                    ],
+                                                    "http://a.ml/vocabularies/shapes#range": [
+                                                      {
+                                                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value/scalar/value",
+                                                        "@type": [
+                                                          "http://a.ml/vocabularies/shapes#ScalarShape",
+                                                          "http://www.w3.org/ns/shacl#Shape",
+                                                          "http://a.ml/vocabularies/shapes#Shape",
+                                                          "http://a.ml/vocabularies/document#DomainElement"
+                                                        ],
+                                                        "http://www.w3.org/ns/shacl#datatype": [
+                                                          {
+                                                            "@id": "http://www.w3.org/2001/XMLSchema#string"
+                                                          }
+                                                        ],
+                                                        "http://www.w3.org/ns/shacl#name": [
+                                                          {
+                                                            "@value": "value"
+                                                          }
+                                                        ]
+                                                      }
+                                                    ],
+                                                    "http://www.w3.org/ns/shacl#minCount": [
+                                                      {
+                                                        "@value": 1
+                                                      }
+                                                    ],
+                                                    "http://www.w3.org/ns/shacl#name": [
+                                                      {
+                                                        "@value": "value"
+                                                      }
+                                                    ]
                                                   }
                                                 ],
                                                 "http://www.w3.org/ns/shacl#name": [
@@ -328,25 +268,25 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/email",
+                                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/email",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
-                                              "http://raml.org/vocabularies/shapes#Shape"
+                                              "http://a.ml/vocabularies/shapes#Shape"
                                             ],
                                             "http://www.w3.org/ns/shacl#path": [
                                               {
-                                                "@id": "http://raml.org/vocabularies/data#email"
+                                                "@id": "http://a.ml/vocabularies/data#email"
                                               }
                                             ],
-                                            "http://raml.org/vocabularies/shapes#range": [
+                                            "http://a.ml/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/email/scalar/email",
+                                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/email/scalar/email",
                                                 "@type": [
-                                                  "http://raml.org/vocabularies/shapes#ScalarShape",
+                                                  "http://a.ml/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
-                                                  "http://raml.org/vocabularies/shapes#Shape",
-                                                  "http://raml.org/vocabularies/document#DomainElement"
+                                                  "http://a.ml/vocabularies/shapes#Shape",
+                                                  "http://a.ml/vocabularies/document#DomainElement"
                                                 ],
                                                 "http://www.w3.org/ns/shacl#datatype": [
                                                   {
@@ -382,25 +322,25 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/type",
+                                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/type",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
-                                              "http://raml.org/vocabularies/shapes#Shape"
+                                              "http://a.ml/vocabularies/shapes#Shape"
                                             ],
                                             "http://www.w3.org/ns/shacl#path": [
                                               {
-                                                "@id": "http://raml.org/vocabularies/data#type"
+                                                "@id": "http://a.ml/vocabularies/data#type"
                                               }
                                             ],
-                                            "http://raml.org/vocabularies/shapes#range": [
+                                            "http://a.ml/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/type/scalar/type",
+                                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/type/scalar/type",
                                                 "@type": [
-                                                  "http://raml.org/vocabularies/shapes#ScalarShape",
+                                                  "http://a.ml/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
-                                                  "http://raml.org/vocabularies/shapes#Shape",
-                                                  "http://raml.org/vocabularies/document#DomainElement"
+                                                  "http://a.ml/vocabularies/shapes#Shape",
+                                                  "http://a.ml/vocabularies/document#DomainElement"
                                                 ],
                                                 "http://www.w3.org/ns/shacl#datatype": [
                                                   {
@@ -419,35 +359,21 @@
                                                 ],
                                                 "http://www.w3.org/ns/shacl#in": [
                                                   {
-                                                    "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/type/scalar/type/list",
-                                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
+                                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/type/scalar/type/list",
+                                                    "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
+                                                    "http://www.w3.org/2000/01/rdf-schema#_1": [
                                                       {
                                                         "@value": "TO"
                                                       }
                                                     ],
-                                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
+                                                    "http://www.w3.org/2000/01/rdf-schema#_2": [
                                                       {
-                                                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/type/scalar/type/list/list",
-                                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                                          {
-                                                            "@value": "CC"
-                                                          }
-                                                        ],
-                                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                                          {
-                                                            "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/recipients/array/recipients/recipientslist/property/type/scalar/type/list/list/list",
-                                                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                                              {
-                                                                "@value": "BCC"
-                                                              }
-                                                            ],
-                                                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                                              {
-                                                                "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"
-                                                              }
-                                                            ]
-                                                          }
-                                                        ]
+                                                        "@value": "CC"
+                                                      }
+                                                    ],
+                                                    "http://www.w3.org/2000/01/rdf-schema#_3": [
+                                                      {
+                                                        "@value": "BCC"
                                                       }
                                                     ]
                                                   }
@@ -497,89 +423,34 @@
                                 ]
                               },
                               {
-                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/other",
+                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/substitutionlist",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
-                                  "http://raml.org/vocabularies/shapes#Shape"
+                                  "http://a.ml/vocabularies/shapes#Shape"
                                 ],
                                 "http://www.w3.org/ns/shacl#path": [
                                   {
-                                    "@id": "http://raml.org/vocabularies/data#other"
+                                    "@id": "http://a.ml/vocabularies/data#substitutionlist"
                                   }
                                 ],
-                                "http://raml.org/vocabularies/shapes#range": [
+                                "http://a.ml/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/other/array/other",
+                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/substitutionlist/array/substitutionlist",
                                     "@type": [
-                                      "http://raml.org/vocabularies/shapes#ArrayShape",
+                                      "http://a.ml/vocabularies/shapes#ArrayShape",
                                       "http://www.w3.org/ns/shacl#Shape",
-                                      "http://raml.org/vocabularies/shapes#Shape",
-                                      "http://raml.org/vocabularies/document#DomainElement"
+                                      "http://a.ml/vocabularies/shapes#Shape",
+                                      "http://a.ml/vocabularies/document#DomainElement"
                                     ],
-                                    "http://raml.org/vocabularies/shapes#items": [
+                                    "http://a.ml/vocabularies/shapes#items": [
                                       {
-                                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/other/array/other/scalar/default-scalar",
-                                        "@type": [
-                                          "http://raml.org/vocabularies/shapes#ScalarShape",
-                                          "http://www.w3.org/ns/shacl#Shape",
-                                          "http://raml.org/vocabularies/shapes#Shape",
-                                          "http://raml.org/vocabularies/document#DomainElement"
-                                        ],
-                                        "http://www.w3.org/ns/shacl#datatype": [
-                                          {
-                                            "@id": "http://www.w3.org/2001/XMLSchema#string"
-                                          }
-                                        ]
-                                      }
-                                    ],
-                                    "http://www.w3.org/ns/shacl#name": [
-                                      {
-                                        "@value": "other"
-                                      }
-                                    ]
-                                  }
-                                ],
-                                "http://www.w3.org/ns/shacl#minCount": [
-                                  {
-                                    "@value": 0
-                                  }
-                                ],
-                                "http://www.w3.org/ns/shacl#name": [
-                                  {
-                                    "@value": "other"
-                                  }
-                                ]
-                              },
-                              {
-                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/substitutionlist",
-                                "@type": [
-                                  "http://www.w3.org/ns/shacl#PropertyShape",
-                                  "http://www.w3.org/ns/shacl#Shape",
-                                  "http://raml.org/vocabularies/shapes#Shape"
-                                ],
-                                "http://www.w3.org/ns/shacl#path": [
-                                  {
-                                    "@id": "http://raml.org/vocabularies/data#substitutionlist"
-                                  }
-                                ],
-                                "http://raml.org/vocabularies/shapes#range": [
-                                  {
-                                    "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/substitutionlist/array/substitutionlist",
-                                    "@type": [
-                                      "http://raml.org/vocabularies/shapes#ArrayShape",
-                                      "http://www.w3.org/ns/shacl#Shape",
-                                      "http://raml.org/vocabularies/shapes#Shape",
-                                      "http://raml.org/vocabularies/document#DomainElement"
-                                    ],
-                                    "http://raml.org/vocabularies/shapes#items": [
-                                      {
-                                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/substitutionlist/array/substitutionlist/substitution",
+                                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution",
                                         "@type": [
                                           "http://www.w3.org/ns/shacl#NodeShape",
                                           "http://www.w3.org/ns/shacl#Shape",
-                                          "http://raml.org/vocabularies/shapes#Shape",
-                                          "http://raml.org/vocabularies/document#DomainElement"
+                                          "http://a.ml/vocabularies/shapes#Shape",
+                                          "http://a.ml/vocabularies/document#DomainElement"
                                         ],
                                         "http://www.w3.org/ns/shacl#closed": [
                                           {
@@ -588,25 +459,25 @@
                                         ],
                                         "http://www.w3.org/ns/shacl#property": [
                                           {
-                                            "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/substitutionlist/array/substitutionlist/substitution/property/key",
+                                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
-                                              "http://raml.org/vocabularies/shapes#Shape"
+                                              "http://a.ml/vocabularies/shapes#Shape"
                                             ],
                                             "http://www.w3.org/ns/shacl#path": [
                                               {
-                                                "@id": "http://raml.org/vocabularies/data#key"
+                                                "@id": "http://a.ml/vocabularies/data#key"
                                               }
                                             ],
-                                            "http://raml.org/vocabularies/shapes#range": [
+                                            "http://a.ml/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/substitutionlist/array/substitutionlist/substitution/property/key/scalar/key",
+                                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key/scalar/key",
                                                 "@type": [
-                                                  "http://raml.org/vocabularies/shapes#ScalarShape",
+                                                  "http://a.ml/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
-                                                  "http://raml.org/vocabularies/shapes#Shape",
-                                                  "http://raml.org/vocabularies/document#DomainElement"
+                                                  "http://a.ml/vocabularies/shapes#Shape",
+                                                  "http://a.ml/vocabularies/document#DomainElement"
                                                 ],
                                                 "http://www.w3.org/ns/shacl#datatype": [
                                                   {
@@ -632,25 +503,25 @@
                                             ]
                                           },
                                           {
-                                            "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/substitutionlist/array/substitutionlist/substitution/property/value",
+                                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value",
                                             "@type": [
                                               "http://www.w3.org/ns/shacl#PropertyShape",
                                               "http://www.w3.org/ns/shacl#Shape",
-                                              "http://raml.org/vocabularies/shapes#Shape"
+                                              "http://a.ml/vocabularies/shapes#Shape"
                                             ],
                                             "http://www.w3.org/ns/shacl#path": [
                                               {
-                                                "@id": "http://raml.org/vocabularies/data#value"
+                                                "@id": "http://a.ml/vocabularies/data#value"
                                               }
                                             ],
-                                            "http://raml.org/vocabularies/shapes#range": [
+                                            "http://a.ml/vocabularies/shapes#range": [
                                               {
-                                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/request/application/json/schema/property/substitutionlist/array/substitutionlist/substitution/property/value/scalar/value",
+                                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value/scalar/value",
                                                 "@type": [
-                                                  "http://raml.org/vocabularies/shapes#ScalarShape",
+                                                  "http://a.ml/vocabularies/shapes#ScalarShape",
                                                   "http://www.w3.org/ns/shacl#Shape",
-                                                  "http://raml.org/vocabularies/shapes#Shape",
-                                                  "http://raml.org/vocabularies/document#DomainElement"
+                                                  "http://a.ml/vocabularies/shapes#Shape",
+                                                  "http://a.ml/vocabularies/document#DomainElement"
                                                 ],
                                                 "http://www.w3.org/ns/shacl#datatype": [
                                                   {
@@ -700,6 +571,116 @@
                                     "@value": "substitutionlist"
                                   }
                                 ]
+                              },
+                              {
+                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/another",
+                                "@type": [
+                                  "http://www.w3.org/ns/shacl#PropertyShape",
+                                  "http://www.w3.org/ns/shacl#Shape",
+                                  "http://a.ml/vocabularies/shapes#Shape"
+                                ],
+                                "http://www.w3.org/ns/shacl#path": [
+                                  {
+                                    "@id": "http://a.ml/vocabularies/data#another"
+                                  }
+                                ],
+                                "http://a.ml/vocabularies/shapes#range": [
+                                  {
+                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/another/array/another",
+                                    "@type": [
+                                      "http://a.ml/vocabularies/shapes#ArrayShape",
+                                      "http://www.w3.org/ns/shacl#Shape",
+                                      "http://a.ml/vocabularies/shapes#Shape",
+                                      "http://a.ml/vocabularies/document#DomainElement"
+                                    ],
+                                    "http://a.ml/vocabularies/shapes#items": [
+                                      {
+                                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/another/array/another/scalar/items",
+                                        "@type": [
+                                          "http://a.ml/vocabularies/shapes#ScalarShape",
+                                          "http://www.w3.org/ns/shacl#Shape",
+                                          "http://a.ml/vocabularies/shapes#Shape",
+                                          "http://a.ml/vocabularies/document#DomainElement"
+                                        ],
+                                        "http://www.w3.org/ns/shacl#datatype": [
+                                          {
+                                            "@id": "http://www.w3.org/2001/XMLSchema#integer"
+                                          }
+                                        ],
+                                        "http://www.w3.org/ns/shacl#name": [
+                                          {
+                                            "@value": "items"
+                                          }
+                                        ]
+                                      }
+                                    ],
+                                    "http://www.w3.org/ns/shacl#name": [
+                                      {
+                                        "@value": "another"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "http://www.w3.org/ns/shacl#minCount": [
+                                  {
+                                    "@value": 1
+                                  }
+                                ],
+                                "http://www.w3.org/ns/shacl#name": [
+                                  {
+                                    "@value": "another"
+                                  }
+                                ]
+                              },
+                              {
+                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/other",
+                                "@type": [
+                                  "http://www.w3.org/ns/shacl#PropertyShape",
+                                  "http://www.w3.org/ns/shacl#Shape",
+                                  "http://a.ml/vocabularies/shapes#Shape"
+                                ],
+                                "http://www.w3.org/ns/shacl#path": [
+                                  {
+                                    "@id": "http://a.ml/vocabularies/data#other"
+                                  }
+                                ],
+                                "http://a.ml/vocabularies/shapes#range": [
+                                  {
+                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/other/array/other/array/default-array",
+                                    "@type": [
+                                      "http://a.ml/vocabularies/shapes#ArrayShape",
+                                      "http://www.w3.org/ns/shacl#Shape",
+                                      "http://a.ml/vocabularies/shapes#Shape",
+                                      "http://a.ml/vocabularies/document#DomainElement"
+                                    ],
+                                    "http://a.ml/vocabularies/shapes#items": [
+                                      {
+                                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/other/array/other/array/default-array/scalar/default-scalar",
+                                        "@type": [
+                                          "http://a.ml/vocabularies/shapes#ScalarShape",
+                                          "http://www.w3.org/ns/shacl#Shape",
+                                          "http://a.ml/vocabularies/shapes#Shape",
+                                          "http://a.ml/vocabularies/document#DomainElement"
+                                        ],
+                                        "http://www.w3.org/ns/shacl#datatype": [
+                                          {
+                                            "@id": "http://www.w3.org/2001/XMLSchema#string"
+                                          }
+                                        ]
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "http://www.w3.org/ns/shacl#minCount": [
+                                  {
+                                    "@value": 0
+                                  }
+                                ],
+                                "http://www.w3.org/ns/shacl#name": [
+                                  {
+                                    "@value": "other"
+                                  }
+                                ]
                               }
                             ],
                             "http://www.w3.org/ns/shacl#name": [
@@ -717,8 +698,8 @@
                   {
                     "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200",
                     "@type": [
-                      "http://raml.org/vocabularies/http#Response",
-                      "http://raml.org/vocabularies/document#DomainElement"
+                      "http://a.ml/vocabularies/http#Response",
+                      "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://schema.org/name": [
                       {
@@ -730,56 +711,56 @@
                         "@value": "200"
                       }
                     ],
-                    "http://raml.org/vocabularies/http#payload": [
+                    "http://a.ml/vocabularies/http#payload": [
                       {
-                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application/json",
+                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application%2Fjson",
                         "@type": [
-                          "http://raml.org/vocabularies/http#Payload",
-                          "http://raml.org/vocabularies/document#DomainElement"
+                          "http://a.ml/vocabularies/http#Payload",
+                          "http://a.ml/vocabularies/document#DomainElement"
                         ],
-                        "http://raml.org/vocabularies/http#mediaType": [
+                        "http://a.ml/vocabularies/http#mediaType": [
                           {
                             "@value": "application/json"
                           }
                         ],
-                        "http://raml.org/vocabularies/http#schema": [
+                        "http://a.ml/vocabularies/http#schema": [
                           {
-                            "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application/json/any/schema",
+                            "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application%2Fjson/any/schema",
                             "@type": [
-                              "http://raml.org/vocabularies/shapes#AnyShape",
+                              "http://a.ml/vocabularies/shapes#AnyShape",
                               "http://www.w3.org/ns/shacl#Shape",
-                              "http://raml.org/vocabularies/shapes#Shape"
+                              "http://a.ml/vocabularies/shapes#Shape"
                             ],
                             "http://www.w3.org/ns/shacl#name": [
                               {
                                 "@value": "schema"
                               }
                             ],
-                            "http://raml.org/vocabularies/document#examples": [
+                            "http://a.ml/vocabularies/document#examples": [
                               {
-                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application/json/any/schema/example/default-example",
+                                "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application%2Fjson/any/schema/example/default-example",
                                 "@type": [
-                                  "http://raml.org/vocabularies/document#Example",
-                                  "http://raml.org/vocabularies/document#DomainElement"
+                                  "http://a.ml/vocabularies/document#Example",
+                                  "http://a.ml/vocabularies/document#DomainElement"
                                 ],
-                                "http://raml.org/vocabularies/document#strict": [
+                                "http://a.ml/vocabularies/document#strict": [
                                   {
                                     "@value": true
                                   }
                                 ],
-                                "http://raml.org/vocabularies/document#structuredValue": [
+                                "http://a.ml/vocabularies/document#structuredValue": [
                                   {
-                                    "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application/json/any/schema/example/default-example/object_1",
+                                    "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application%2Fjson/any/schema/example/default-example/object_1",
                                     "@type": [
-                                      "http://raml.org/vocabularies/data#Object"
+                                      "http://a.ml/vocabularies/data#Object"
                                     ],
-                                    "http://raml.org/vocabularies/data#status": [
+                                    "http://a.ml/vocabularies/data#status": [
                                       {
-                                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application/json/any/schema/example/default-example/object_1/scalar_2",
+                                        "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application%2Fjson/any/schema/example/default-example/object_1/scalar_2",
                                         "@type": [
-                                          "http://raml.org/vocabularies/data#Scalar"
+                                          "http://a.ml/vocabularies/data#Scalar"
                                         ],
-                                        "http://raml.org/vocabularies/data#value": [
+                                        "http://a.ml/vocabularies/data#value": [
                                           {
                                             "@value": "success",
                                             "@type": "http://www.w3.org/2001/XMLSchema#string"
@@ -808,14 +789,14 @@
         ]
       }
     ],
-    "http://raml.org/vocabularies/document#declares": [
+    "http://a.ml/vocabularies/document#declares": [
       {
-        "@id": "file://demo/caro-api/caro-api.raml#/declarations/substitution",
+        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution",
         "@type": [
           "http://www.w3.org/ns/shacl#NodeShape",
           "http://www.w3.org/ns/shacl#Shape",
-          "http://raml.org/vocabularies/shapes#Shape",
-          "http://raml.org/vocabularies/document#DomainElement"
+          "http://a.ml/vocabularies/shapes#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
         ],
         "http://www.w3.org/ns/shacl#closed": [
           {
@@ -824,25 +805,25 @@
         ],
         "http://www.w3.org/ns/shacl#property": [
           {
-            "@id": "file://demo/caro-api/caro-api.raml#/declarations/substitution/property/key",
+            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key",
             "@type": [
               "http://www.w3.org/ns/shacl#PropertyShape",
               "http://www.w3.org/ns/shacl#Shape",
-              "http://raml.org/vocabularies/shapes#Shape"
+              "http://a.ml/vocabularies/shapes#Shape"
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://raml.org/vocabularies/data#key"
+                "@id": "http://a.ml/vocabularies/data#key"
               }
             ],
-            "http://raml.org/vocabularies/shapes#range": [
+            "http://a.ml/vocabularies/shapes#range": [
               {
-                "@id": "file://demo/caro-api/caro-api.raml#/declarations/substitution/property/key/scalar/key",
+                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key/scalar/key",
                 "@type": [
-                  "http://raml.org/vocabularies/shapes#ScalarShape",
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
                   "http://www.w3.org/ns/shacl#Shape",
-                  "http://raml.org/vocabularies/shapes#Shape",
-                  "http://raml.org/vocabularies/document#DomainElement"
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
                 ],
                 "http://www.w3.org/ns/shacl#datatype": [
                   {
@@ -868,25 +849,25 @@
             ]
           },
           {
-            "@id": "file://demo/caro-api/caro-api.raml#/declarations/substitution/property/value",
+            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value",
             "@type": [
               "http://www.w3.org/ns/shacl#PropertyShape",
               "http://www.w3.org/ns/shacl#Shape",
-              "http://raml.org/vocabularies/shapes#Shape"
+              "http://a.ml/vocabularies/shapes#Shape"
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://raml.org/vocabularies/data#value"
+                "@id": "http://a.ml/vocabularies/data#value"
               }
             ],
-            "http://raml.org/vocabularies/shapes#range": [
+            "http://a.ml/vocabularies/shapes#range": [
               {
-                "@id": "file://demo/caro-api/caro-api.raml#/declarations/substitution/property/value/scalar/value",
+                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value/scalar/value",
                 "@type": [
-                  "http://raml.org/vocabularies/shapes#ScalarShape",
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
                   "http://www.w3.org/ns/shacl#Shape",
-                  "http://raml.org/vocabularies/shapes#Shape",
-                  "http://raml.org/vocabularies/document#DomainElement"
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
                 ],
                 "http://www.w3.org/ns/shacl#datatype": [
                   {
@@ -919,12 +900,12 @@
         ]
       },
       {
-        "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist",
+        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist",
         "@type": [
           "http://www.w3.org/ns/shacl#NodeShape",
           "http://www.w3.org/ns/shacl#Shape",
-          "http://raml.org/vocabularies/shapes#Shape",
-          "http://raml.org/vocabularies/document#DomainElement"
+          "http://a.ml/vocabularies/shapes#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
         ],
         "http://www.w3.org/ns/shacl#closed": [
           {
@@ -933,25 +914,25 @@
         ],
         "http://www.w3.org/ns/shacl#property": [
           {
-            "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/substitution",
+            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution",
             "@type": [
               "http://www.w3.org/ns/shacl#PropertyShape",
               "http://www.w3.org/ns/shacl#Shape",
-              "http://raml.org/vocabularies/shapes#Shape"
+              "http://a.ml/vocabularies/shapes#Shape"
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://raml.org/vocabularies/data#substitution"
+                "@id": "http://a.ml/vocabularies/data#substitution"
               }
             ],
-            "http://raml.org/vocabularies/shapes#range": [
+            "http://a.ml/vocabularies/shapes#range": [
               {
-                "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/substitution/substitution",
+                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution",
                 "@type": [
                   "http://www.w3.org/ns/shacl#NodeShape",
                   "http://www.w3.org/ns/shacl#Shape",
-                  "http://raml.org/vocabularies/shapes#Shape",
-                  "http://raml.org/vocabularies/document#DomainElement"
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
                 ],
                 "http://www.w3.org/ns/shacl#closed": [
                   {
@@ -960,69 +941,25 @@
                 ],
                 "http://www.w3.org/ns/shacl#property": [
                   {
-                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/substitution/substitution/property/value",
+                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key",
                     "@type": [
                       "http://www.w3.org/ns/shacl#PropertyShape",
                       "http://www.w3.org/ns/shacl#Shape",
-                      "http://raml.org/vocabularies/shapes#Shape"
+                      "http://a.ml/vocabularies/shapes#Shape"
                     ],
                     "http://www.w3.org/ns/shacl#path": [
                       {
-                        "@id": "http://raml.org/vocabularies/data#value"
+                        "@id": "http://a.ml/vocabularies/data#key"
                       }
                     ],
-                    "http://raml.org/vocabularies/shapes#range": [
+                    "http://a.ml/vocabularies/shapes#range": [
                       {
-                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/substitution/substitution/property/value/scalar/value",
+                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key/scalar/key",
                         "@type": [
-                          "http://raml.org/vocabularies/shapes#ScalarShape",
+                          "http://a.ml/vocabularies/shapes#ScalarShape",
                           "http://www.w3.org/ns/shacl#Shape",
-                          "http://raml.org/vocabularies/shapes#Shape",
-                          "http://raml.org/vocabularies/document#DomainElement"
-                        ],
-                        "http://www.w3.org/ns/shacl#datatype": [
-                          {
-                            "@id": "http://www.w3.org/2001/XMLSchema#string"
-                          }
-                        ],
-                        "http://www.w3.org/ns/shacl#name": [
-                          {
-                            "@value": "value"
-                          }
-                        ]
-                      }
-                    ],
-                    "http://www.w3.org/ns/shacl#minCount": [
-                      {
-                        "@value": 1
-                      }
-                    ],
-                    "http://www.w3.org/ns/shacl#name": [
-                      {
-                        "@value": "value"
-                      }
-                    ]
-                  },
-                  {
-                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/substitution/substitution/property/key",
-                    "@type": [
-                      "http://www.w3.org/ns/shacl#PropertyShape",
-                      "http://www.w3.org/ns/shacl#Shape",
-                      "http://raml.org/vocabularies/shapes#Shape"
-                    ],
-                    "http://www.w3.org/ns/shacl#path": [
-                      {
-                        "@id": "http://raml.org/vocabularies/data#key"
-                      }
-                    ],
-                    "http://raml.org/vocabularies/shapes#range": [
-                      {
-                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/substitution/substitution/property/key/scalar/key",
-                        "@type": [
-                          "http://raml.org/vocabularies/shapes#ScalarShape",
-                          "http://www.w3.org/ns/shacl#Shape",
-                          "http://raml.org/vocabularies/shapes#Shape",
-                          "http://raml.org/vocabularies/document#DomainElement"
+                          "http://a.ml/vocabularies/shapes#Shape",
+                          "http://a.ml/vocabularies/document#DomainElement"
                         ],
                         "http://www.w3.org/ns/shacl#datatype": [
                           {
@@ -1046,6 +983,50 @@
                         "@value": "key"
                       }
                     ]
+                  },
+                  {
+                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value",
+                    "@type": [
+                      "http://www.w3.org/ns/shacl#PropertyShape",
+                      "http://www.w3.org/ns/shacl#Shape",
+                      "http://a.ml/vocabularies/shapes#Shape"
+                    ],
+                    "http://www.w3.org/ns/shacl#path": [
+                      {
+                        "@id": "http://a.ml/vocabularies/data#value"
+                      }
+                    ],
+                    "http://a.ml/vocabularies/shapes#range": [
+                      {
+                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value/scalar/value",
+                        "@type": [
+                          "http://a.ml/vocabularies/shapes#ScalarShape",
+                          "http://www.w3.org/ns/shacl#Shape",
+                          "http://a.ml/vocabularies/shapes#Shape",
+                          "http://a.ml/vocabularies/document#DomainElement"
+                        ],
+                        "http://www.w3.org/ns/shacl#datatype": [
+                          {
+                            "@id": "http://www.w3.org/2001/XMLSchema#string"
+                          }
+                        ],
+                        "http://www.w3.org/ns/shacl#name": [
+                          {
+                            "@value": "value"
+                          }
+                        ]
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#minCount": [
+                      {
+                        "@value": 1
+                      }
+                    ],
+                    "http://www.w3.org/ns/shacl#name": [
+                      {
+                        "@value": "value"
+                      }
+                    ]
                   }
                 ],
                 "http://www.w3.org/ns/shacl#name": [
@@ -1067,25 +1048,25 @@
             ]
           },
           {
-            "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/email",
+            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/email",
             "@type": [
               "http://www.w3.org/ns/shacl#PropertyShape",
               "http://www.w3.org/ns/shacl#Shape",
-              "http://raml.org/vocabularies/shapes#Shape"
+              "http://a.ml/vocabularies/shapes#Shape"
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://raml.org/vocabularies/data#email"
+                "@id": "http://a.ml/vocabularies/data#email"
               }
             ],
-            "http://raml.org/vocabularies/shapes#range": [
+            "http://a.ml/vocabularies/shapes#range": [
               {
-                "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/email/scalar/email",
+                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/email/scalar/email",
                 "@type": [
-                  "http://raml.org/vocabularies/shapes#ScalarShape",
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
                   "http://www.w3.org/ns/shacl#Shape",
-                  "http://raml.org/vocabularies/shapes#Shape",
-                  "http://raml.org/vocabularies/document#DomainElement"
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
                 ],
                 "http://www.w3.org/ns/shacl#datatype": [
                   {
@@ -1121,25 +1102,25 @@
             ]
           },
           {
-            "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/type",
+            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/type",
             "@type": [
               "http://www.w3.org/ns/shacl#PropertyShape",
               "http://www.w3.org/ns/shacl#Shape",
-              "http://raml.org/vocabularies/shapes#Shape"
+              "http://a.ml/vocabularies/shapes#Shape"
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://raml.org/vocabularies/data#type"
+                "@id": "http://a.ml/vocabularies/data#type"
               }
             ],
-            "http://raml.org/vocabularies/shapes#range": [
+            "http://a.ml/vocabularies/shapes#range": [
               {
-                "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/type/scalar/type",
+                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/type/scalar/type",
                 "@type": [
-                  "http://raml.org/vocabularies/shapes#ScalarShape",
+                  "http://a.ml/vocabularies/shapes#ScalarShape",
                   "http://www.w3.org/ns/shacl#Shape",
-                  "http://raml.org/vocabularies/shapes#Shape",
-                  "http://raml.org/vocabularies/document#DomainElement"
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
                 ],
                 "http://www.w3.org/ns/shacl#datatype": [
                   {
@@ -1158,35 +1139,21 @@
                 ],
                 "http://www.w3.org/ns/shacl#in": [
                   {
-                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/type/scalar/type/list",
-                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
+                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/type/scalar/type/list",
+                    "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
+                    "http://www.w3.org/2000/01/rdf-schema#_1": [
                       {
                         "@value": "TO"
                       }
                     ],
-                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
+                    "http://www.w3.org/2000/01/rdf-schema#_2": [
                       {
-                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/type/scalar/type/list/list",
-                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                          {
-                            "@value": "CC"
-                          }
-                        ],
-                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                          {
-                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/recipientslist/property/type/scalar/type/list/list/list",
-                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                              {
-                                "@value": "BCC"
-                              }
-                            ],
-                            "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                              {
-                                "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"
-                              }
-                            ]
-                          }
-                        ]
+                        "@value": "CC"
+                      }
+                    ],
+                    "http://www.w3.org/2000/01/rdf-schema#_3": [
+                      {
+                        "@value": "BCC"
                       }
                     ]
                   }
@@ -1212,12 +1179,12 @@
         ]
       },
       {
-        "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification",
+        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification",
         "@type": [
           "http://www.w3.org/ns/shacl#NodeShape",
           "http://www.w3.org/ns/shacl#Shape",
-          "http://raml.org/vocabularies/shapes#Shape",
-          "http://raml.org/vocabularies/document#DomainElement"
+          "http://a.ml/vocabularies/shapes#Shape",
+          "http://a.ml/vocabularies/document#DomainElement"
         ],
         "http://www.w3.org/ns/shacl#closed": [
           {
@@ -1226,34 +1193,34 @@
         ],
         "http://www.w3.org/ns/shacl#property": [
           {
-            "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients",
+            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients",
             "@type": [
               "http://www.w3.org/ns/shacl#PropertyShape",
               "http://www.w3.org/ns/shacl#Shape",
-              "http://raml.org/vocabularies/shapes#Shape"
+              "http://a.ml/vocabularies/shapes#Shape"
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://raml.org/vocabularies/data#recipients"
+                "@id": "http://a.ml/vocabularies/data#recipients"
               }
             ],
-            "http://raml.org/vocabularies/shapes#range": [
+            "http://a.ml/vocabularies/shapes#range": [
               {
-                "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients",
+                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients",
                 "@type": [
-                  "http://raml.org/vocabularies/shapes#ArrayShape",
+                  "http://a.ml/vocabularies/shapes#ArrayShape",
                   "http://www.w3.org/ns/shacl#Shape",
-                  "http://raml.org/vocabularies/shapes#Shape",
-                  "http://raml.org/vocabularies/document#DomainElement"
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
                 ],
-                "http://raml.org/vocabularies/shapes#items": [
+                "http://a.ml/vocabularies/shapes#items": [
                   {
-                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist",
+                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist",
                     "@type": [
                       "http://www.w3.org/ns/shacl#NodeShape",
                       "http://www.w3.org/ns/shacl#Shape",
-                      "http://raml.org/vocabularies/shapes#Shape",
-                      "http://raml.org/vocabularies/document#DomainElement"
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://www.w3.org/ns/shacl#closed": [
                       {
@@ -1262,25 +1229,25 @@
                     ],
                     "http://www.w3.org/ns/shacl#property": [
                       {
-                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/substitution",
+                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution",
                         "@type": [
                           "http://www.w3.org/ns/shacl#PropertyShape",
                           "http://www.w3.org/ns/shacl#Shape",
-                          "http://raml.org/vocabularies/shapes#Shape"
+                          "http://a.ml/vocabularies/shapes#Shape"
                         ],
                         "http://www.w3.org/ns/shacl#path": [
                           {
-                            "@id": "http://raml.org/vocabularies/data#substitution"
+                            "@id": "http://a.ml/vocabularies/data#substitution"
                           }
                         ],
-                        "http://raml.org/vocabularies/shapes#range": [
+                        "http://a.ml/vocabularies/shapes#range": [
                           {
-                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution",
+                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution",
                             "@type": [
                               "http://www.w3.org/ns/shacl#NodeShape",
                               "http://www.w3.org/ns/shacl#Shape",
-                              "http://raml.org/vocabularies/shapes#Shape",
-                              "http://raml.org/vocabularies/document#DomainElement"
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
                             ],
                             "http://www.w3.org/ns/shacl#closed": [
                               {
@@ -1289,69 +1256,25 @@
                             ],
                             "http://www.w3.org/ns/shacl#property": [
                               {
-                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value",
+                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key",
                                 "@type": [
                                   "http://www.w3.org/ns/shacl#PropertyShape",
                                   "http://www.w3.org/ns/shacl#Shape",
-                                  "http://raml.org/vocabularies/shapes#Shape"
+                                  "http://a.ml/vocabularies/shapes#Shape"
                                 ],
                                 "http://www.w3.org/ns/shacl#path": [
                                   {
-                                    "@id": "http://raml.org/vocabularies/data#value"
+                                    "@id": "http://a.ml/vocabularies/data#key"
                                   }
                                 ],
-                                "http://raml.org/vocabularies/shapes#range": [
+                                "http://a.ml/vocabularies/shapes#range": [
                                   {
-                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value/scalar/value",
+                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key/scalar/key",
                                     "@type": [
-                                      "http://raml.org/vocabularies/shapes#ScalarShape",
+                                      "http://a.ml/vocabularies/shapes#ScalarShape",
                                       "http://www.w3.org/ns/shacl#Shape",
-                                      "http://raml.org/vocabularies/shapes#Shape",
-                                      "http://raml.org/vocabularies/document#DomainElement"
-                                    ],
-                                    "http://www.w3.org/ns/shacl#datatype": [
-                                      {
-                                        "@id": "http://www.w3.org/2001/XMLSchema#string"
-                                      }
-                                    ],
-                                    "http://www.w3.org/ns/shacl#name": [
-                                      {
-                                        "@value": "value"
-                                      }
-                                    ]
-                                  }
-                                ],
-                                "http://www.w3.org/ns/shacl#minCount": [
-                                  {
-                                    "@value": 1
-                                  }
-                                ],
-                                "http://www.w3.org/ns/shacl#name": [
-                                  {
-                                    "@value": "value"
-                                  }
-                                ]
-                              },
-                              {
-                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key",
-                                "@type": [
-                                  "http://www.w3.org/ns/shacl#PropertyShape",
-                                  "http://www.w3.org/ns/shacl#Shape",
-                                  "http://raml.org/vocabularies/shapes#Shape"
-                                ],
-                                "http://www.w3.org/ns/shacl#path": [
-                                  {
-                                    "@id": "http://raml.org/vocabularies/data#key"
-                                  }
-                                ],
-                                "http://raml.org/vocabularies/shapes#range": [
-                                  {
-                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key/scalar/key",
-                                    "@type": [
-                                      "http://raml.org/vocabularies/shapes#ScalarShape",
-                                      "http://www.w3.org/ns/shacl#Shape",
-                                      "http://raml.org/vocabularies/shapes#Shape",
-                                      "http://raml.org/vocabularies/document#DomainElement"
+                                      "http://a.ml/vocabularies/shapes#Shape",
+                                      "http://a.ml/vocabularies/document#DomainElement"
                                     ],
                                     "http://www.w3.org/ns/shacl#datatype": [
                                       {
@@ -1375,6 +1298,50 @@
                                     "@value": "key"
                                   }
                                 ]
+                              },
+                              {
+                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value",
+                                "@type": [
+                                  "http://www.w3.org/ns/shacl#PropertyShape",
+                                  "http://www.w3.org/ns/shacl#Shape",
+                                  "http://a.ml/vocabularies/shapes#Shape"
+                                ],
+                                "http://www.w3.org/ns/shacl#path": [
+                                  {
+                                    "@id": "http://a.ml/vocabularies/data#value"
+                                  }
+                                ],
+                                "http://a.ml/vocabularies/shapes#range": [
+                                  {
+                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value/scalar/value",
+                                    "@type": [
+                                      "http://a.ml/vocabularies/shapes#ScalarShape",
+                                      "http://www.w3.org/ns/shacl#Shape",
+                                      "http://a.ml/vocabularies/shapes#Shape",
+                                      "http://a.ml/vocabularies/document#DomainElement"
+                                    ],
+                                    "http://www.w3.org/ns/shacl#datatype": [
+                                      {
+                                        "@id": "http://www.w3.org/2001/XMLSchema#string"
+                                      }
+                                    ],
+                                    "http://www.w3.org/ns/shacl#name": [
+                                      {
+                                        "@value": "value"
+                                      }
+                                    ]
+                                  }
+                                ],
+                                "http://www.w3.org/ns/shacl#minCount": [
+                                  {
+                                    "@value": 1
+                                  }
+                                ],
+                                "http://www.w3.org/ns/shacl#name": [
+                                  {
+                                    "@value": "value"
+                                  }
+                                ]
                               }
                             ],
                             "http://www.w3.org/ns/shacl#name": [
@@ -1396,25 +1363,25 @@
                         ]
                       },
                       {
-                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/email",
+                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/email",
                         "@type": [
                           "http://www.w3.org/ns/shacl#PropertyShape",
                           "http://www.w3.org/ns/shacl#Shape",
-                          "http://raml.org/vocabularies/shapes#Shape"
+                          "http://a.ml/vocabularies/shapes#Shape"
                         ],
                         "http://www.w3.org/ns/shacl#path": [
                           {
-                            "@id": "http://raml.org/vocabularies/data#email"
+                            "@id": "http://a.ml/vocabularies/data#email"
                           }
                         ],
-                        "http://raml.org/vocabularies/shapes#range": [
+                        "http://a.ml/vocabularies/shapes#range": [
                           {
-                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/email/scalar/email",
+                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/email/scalar/email",
                             "@type": [
-                              "http://raml.org/vocabularies/shapes#ScalarShape",
+                              "http://a.ml/vocabularies/shapes#ScalarShape",
                               "http://www.w3.org/ns/shacl#Shape",
-                              "http://raml.org/vocabularies/shapes#Shape",
-                              "http://raml.org/vocabularies/document#DomainElement"
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
                             ],
                             "http://www.w3.org/ns/shacl#datatype": [
                               {
@@ -1450,25 +1417,25 @@
                         ]
                       },
                       {
-                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/type",
+                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/type",
                         "@type": [
                           "http://www.w3.org/ns/shacl#PropertyShape",
                           "http://www.w3.org/ns/shacl#Shape",
-                          "http://raml.org/vocabularies/shapes#Shape"
+                          "http://a.ml/vocabularies/shapes#Shape"
                         ],
                         "http://www.w3.org/ns/shacl#path": [
                           {
-                            "@id": "http://raml.org/vocabularies/data#type"
+                            "@id": "http://a.ml/vocabularies/data#type"
                           }
                         ],
-                        "http://raml.org/vocabularies/shapes#range": [
+                        "http://a.ml/vocabularies/shapes#range": [
                           {
-                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/type/scalar/type",
+                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/type/scalar/type",
                             "@type": [
-                              "http://raml.org/vocabularies/shapes#ScalarShape",
+                              "http://a.ml/vocabularies/shapes#ScalarShape",
                               "http://www.w3.org/ns/shacl#Shape",
-                              "http://raml.org/vocabularies/shapes#Shape",
-                              "http://raml.org/vocabularies/document#DomainElement"
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
                             ],
                             "http://www.w3.org/ns/shacl#datatype": [
                               {
@@ -1487,35 +1454,21 @@
                             ],
                             "http://www.w3.org/ns/shacl#in": [
                               {
-                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/type/scalar/type/list",
-                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
+                                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/type/scalar/type/list",
+                                "@type": "http://www.w3.org/2000/01/rdf-schema#Seq",
+                                "http://www.w3.org/2000/01/rdf-schema#_1": [
                                   {
                                     "@value": "TO"
                                   }
                                 ],
-                                "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
+                                "http://www.w3.org/2000/01/rdf-schema#_2": [
                                   {
-                                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/type/scalar/type/list/list",
-                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                      {
-                                        "@value": "CC"
-                                      }
-                                    ],
-                                    "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                      {
-                                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/recipients/array/recipients/recipientslist/property/type/scalar/type/list/list/list",
-                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#first": [
-                                          {
-                                            "@value": "BCC"
-                                          }
-                                        ],
-                                        "http://www.w3.org/1999/02/22-rdf-syntax-ns#rest": [
-                                          {
-                                            "@id": "http://www.w3.org/1999/02/22-rdf-syntax-ns#nil"
-                                          }
-                                        ]
-                                      }
-                                    ]
+                                    "@value": "CC"
+                                  }
+                                ],
+                                "http://www.w3.org/2000/01/rdf-schema#_3": [
+                                  {
+                                    "@value": "BCC"
                                   }
                                 ]
                               }
@@ -1565,34 +1518,34 @@
             ]
           },
           {
-            "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/substitutionlist",
+            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/substitutionlist",
             "@type": [
               "http://www.w3.org/ns/shacl#PropertyShape",
               "http://www.w3.org/ns/shacl#Shape",
-              "http://raml.org/vocabularies/shapes#Shape"
+              "http://a.ml/vocabularies/shapes#Shape"
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://raml.org/vocabularies/data#substitutionlist"
+                "@id": "http://a.ml/vocabularies/data#substitutionlist"
               }
             ],
-            "http://raml.org/vocabularies/shapes#range": [
+            "http://a.ml/vocabularies/shapes#range": [
               {
-                "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/substitutionlist/array/substitutionlist",
+                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/substitutionlist/array/substitutionlist",
                 "@type": [
-                  "http://raml.org/vocabularies/shapes#ArrayShape",
+                  "http://a.ml/vocabularies/shapes#ArrayShape",
                   "http://www.w3.org/ns/shacl#Shape",
-                  "http://raml.org/vocabularies/shapes#Shape",
-                  "http://raml.org/vocabularies/document#DomainElement"
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
                 ],
-                "http://raml.org/vocabularies/shapes#items": [
+                "http://a.ml/vocabularies/shapes#items": [
                   {
-                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/substitutionlist/array/substitutionlist/substitution",
+                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution",
                     "@type": [
                       "http://www.w3.org/ns/shacl#NodeShape",
                       "http://www.w3.org/ns/shacl#Shape",
-                      "http://raml.org/vocabularies/shapes#Shape",
-                      "http://raml.org/vocabularies/document#DomainElement"
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://www.w3.org/ns/shacl#closed": [
                       {
@@ -1601,25 +1554,25 @@
                     ],
                     "http://www.w3.org/ns/shacl#property": [
                       {
-                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/substitutionlist/array/substitutionlist/substitution/property/key",
+                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key",
                         "@type": [
                           "http://www.w3.org/ns/shacl#PropertyShape",
                           "http://www.w3.org/ns/shacl#Shape",
-                          "http://raml.org/vocabularies/shapes#Shape"
+                          "http://a.ml/vocabularies/shapes#Shape"
                         ],
                         "http://www.w3.org/ns/shacl#path": [
                           {
-                            "@id": "http://raml.org/vocabularies/data#key"
+                            "@id": "http://a.ml/vocabularies/data#key"
                           }
                         ],
-                        "http://raml.org/vocabularies/shapes#range": [
+                        "http://a.ml/vocabularies/shapes#range": [
                           {
-                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/substitutionlist/array/substitutionlist/substitution/property/key/scalar/key",
+                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/key/scalar/key",
                             "@type": [
-                              "http://raml.org/vocabularies/shapes#ScalarShape",
+                              "http://a.ml/vocabularies/shapes#ScalarShape",
                               "http://www.w3.org/ns/shacl#Shape",
-                              "http://raml.org/vocabularies/shapes#Shape",
-                              "http://raml.org/vocabularies/document#DomainElement"
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
                             ],
                             "http://www.w3.org/ns/shacl#datatype": [
                               {
@@ -1645,25 +1598,25 @@
                         ]
                       },
                       {
-                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/substitutionlist/array/substitutionlist/substitution/property/value",
+                        "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value",
                         "@type": [
                           "http://www.w3.org/ns/shacl#PropertyShape",
                           "http://www.w3.org/ns/shacl#Shape",
-                          "http://raml.org/vocabularies/shapes#Shape"
+                          "http://a.ml/vocabularies/shapes#Shape"
                         ],
                         "http://www.w3.org/ns/shacl#path": [
                           {
-                            "@id": "http://raml.org/vocabularies/data#value"
+                            "@id": "http://a.ml/vocabularies/data#value"
                           }
                         ],
-                        "http://raml.org/vocabularies/shapes#range": [
+                        "http://a.ml/vocabularies/shapes#range": [
                           {
-                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/substitutionlist/array/substitutionlist/substitution/property/value/scalar/value",
+                            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/recipients/array/recipients/recipientslist/property/substitution/substitution/property/value/scalar/value",
                             "@type": [
-                              "http://raml.org/vocabularies/shapes#ScalarShape",
+                              "http://a.ml/vocabularies/shapes#ScalarShape",
                               "http://www.w3.org/ns/shacl#Shape",
-                              "http://raml.org/vocabularies/shapes#Shape",
-                              "http://raml.org/vocabularies/document#DomainElement"
+                              "http://a.ml/vocabularies/shapes#Shape",
+                              "http://a.ml/vocabularies/document#DomainElement"
                             ],
                             "http://www.w3.org/ns/shacl#datatype": [
                               {
@@ -1715,34 +1668,34 @@
             ]
           },
           {
-            "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/another",
+            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/another",
             "@type": [
               "http://www.w3.org/ns/shacl#PropertyShape",
               "http://www.w3.org/ns/shacl#Shape",
-              "http://raml.org/vocabularies/shapes#Shape"
+              "http://a.ml/vocabularies/shapes#Shape"
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://raml.org/vocabularies/data#another"
+                "@id": "http://a.ml/vocabularies/data#another"
               }
             ],
-            "http://raml.org/vocabularies/shapes#range": [
+            "http://a.ml/vocabularies/shapes#range": [
               {
-                "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/another/array/another",
+                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/another/array/another",
                 "@type": [
-                  "http://raml.org/vocabularies/shapes#ArrayShape",
+                  "http://a.ml/vocabularies/shapes#ArrayShape",
                   "http://www.w3.org/ns/shacl#Shape",
-                  "http://raml.org/vocabularies/shapes#Shape",
-                  "http://raml.org/vocabularies/document#DomainElement"
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
                 ],
-                "http://raml.org/vocabularies/shapes#items": [
+                "http://a.ml/vocabularies/shapes#items": [
                   {
-                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/another/array/another/scalar/items",
+                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/another/array/another/scalar/items",
                     "@type": [
-                      "http://raml.org/vocabularies/shapes#ScalarShape",
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
                       "http://www.w3.org/ns/shacl#Shape",
-                      "http://raml.org/vocabularies/shapes#Shape",
-                      "http://raml.org/vocabularies/document#DomainElement"
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://www.w3.org/ns/shacl#datatype": [
                       {
@@ -1775,45 +1728,40 @@
             ]
           },
           {
-            "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/other",
+            "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/other",
             "@type": [
               "http://www.w3.org/ns/shacl#PropertyShape",
               "http://www.w3.org/ns/shacl#Shape",
-              "http://raml.org/vocabularies/shapes#Shape"
+              "http://a.ml/vocabularies/shapes#Shape"
             ],
             "http://www.w3.org/ns/shacl#path": [
               {
-                "@id": "http://raml.org/vocabularies/data#other"
+                "@id": "http://a.ml/vocabularies/data#other"
               }
             ],
-            "http://raml.org/vocabularies/shapes#range": [
+            "http://a.ml/vocabularies/shapes#range": [
               {
-                "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/other/array/other",
+                "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/other/array/other/array/default-array",
                 "@type": [
-                  "http://raml.org/vocabularies/shapes#ArrayShape",
+                  "http://a.ml/vocabularies/shapes#ArrayShape",
                   "http://www.w3.org/ns/shacl#Shape",
-                  "http://raml.org/vocabularies/shapes#Shape",
-                  "http://raml.org/vocabularies/document#DomainElement"
+                  "http://a.ml/vocabularies/shapes#Shape",
+                  "http://a.ml/vocabularies/document#DomainElement"
                 ],
-                "http://raml.org/vocabularies/shapes#items": [
+                "http://a.ml/vocabularies/shapes#items": [
                   {
-                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/Notification/property/other/array/other/scalar/default-scalar",
+                    "@id": "file://demo/caro-api/caro-api.raml#/declarations/types/Notification/property/other/array/other/array/default-array/scalar/default-scalar",
                     "@type": [
-                      "http://raml.org/vocabularies/shapes#ScalarShape",
+                      "http://a.ml/vocabularies/shapes#ScalarShape",
                       "http://www.w3.org/ns/shacl#Shape",
-                      "http://raml.org/vocabularies/shapes#Shape",
-                      "http://raml.org/vocabularies/document#DomainElement"
+                      "http://a.ml/vocabularies/shapes#Shape",
+                      "http://a.ml/vocabularies/document#DomainElement"
                     ],
                     "http://www.w3.org/ns/shacl#datatype": [
                       {
                         "@id": "http://www.w3.org/2001/XMLSchema#string"
                       }
                     ]
-                  }
-                ],
-                "http://www.w3.org/ns/shacl#name": [
-                  {
-                    "@value": "other"
                   }
                 ]
               }

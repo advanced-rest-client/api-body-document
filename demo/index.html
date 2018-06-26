@@ -119,8 +119,8 @@
         }
       };
       app.setData = function(id) {
-        const enc = app.amfModel[0]['http://raml.org/vocabularies/document#encodes'][0];
-        const endpoints = enc['http://raml.org/vocabularies/http#endpoint'];
+        const enc = app.amfModel[0]['http://a.ml/vocabularies/document#encodes'][0];
+        const endpoints = enc['http://a.ml/vocabularies/http#endpoint'];
         const endpointId = id.substr(0, id.lastIndexOf('/'));
         const endpoint = endpoints.find((item) => item['@id'] === endpointId);
         const methods = endpoint['http://www.w3.org/ns/hydra/core#supportedOperation'];
@@ -129,8 +129,8 @@
         if (!expects) {
           return;
         }
-        const request = expects.find((item) => item['@type'].indexOf('http://raml.org/vocabularies/http#Request') !== -1);
-        app.body = request['http://raml.org/vocabularies/http#payload'];
+        const request = expects.find((item) => item['@type'].indexOf('http://a.ml/vocabularies/http#Request') !== -1);
+        app.body = request['http://a.ml/vocabularies/http#payload'];
       };
       window.addEventListener('WebComponentsReady', () => app._load());
       window.addEventListener('api-navigation-selection-changed', app._navChanged);

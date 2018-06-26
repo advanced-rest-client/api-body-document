@@ -336,7 +336,7 @@
     _computeMediaTypes(body) {
       return body.map((item) => {
         return {
-          label: this._getValue(item, 'http://raml.org/vocabularies/http#mediaType')
+          label: this._getValue(item, this.ns.raml.vocabularies.http + 'mediaType')
         };
       });
     }
@@ -388,7 +388,7 @@
       if (!data) {
         return;
       }
-      const schema = data['http://raml.org/vocabularies/http#schema'];
+      const schema = data[this.ns.raml.vocabularies.http + 'schema'];
       return schema ? schema[0] : undefined;
     }
 
@@ -397,7 +397,7 @@
         return;
       }
       const data = body[selected];
-      return this._getValue(data, 'http://raml.org/vocabularies/http#mediaType');
+      return this._getValue(data, this.ns.raml.vocabularies.http + 'mediaType');
     }
 
     _selectedBodyChanged(body) {
@@ -406,13 +406,13 @@
       }
       let isObject = false;
       let isSchema = false;
-      if (this._hasType(body, 'http://www.w3.org/ns/shacl#NodeShape')) {
+      if (this._hasType(body, this.ns.w3.shacl.name + 'NodeShape')) {
         isObject = true;
-      } else if (this._hasType(body, 'http://www.w3.org/ns/shacl#SchemaShape') ||
-        this._hasType(body, 'http://raml.org/vocabularies/shapes#AnyShape') ||
-        this._hasType(body, 'http://raml.org/vocabularies/shapes#ScalarShape')) {
+      } else if (this._hasType(body, this.ns.w3.shacl.name + 'SchemaShape') ||
+        this._hasType(body, this.ns.raml.vocabularies.shapes + 'AnyShape') ||
+        this._hasType(body, this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
         isSchema = true;
-      } else if (this._hasType(body, 'http://raml.org/vocabularies/shapes#ArrayShape')) {
+      } else if (this._hasType(body, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
         isObject = true;
       }
       this._setIsObject(isObject);
@@ -444,7 +444,7 @@
      * @return {String|undefined}
      */
     _computeTypeName(body) {
-      return this._getValue(body, 'http://schema.org/name');
+      return this._getValue(body, this.ns.schema.schemaName);
     }
     /**
      * Computes `examples` property from AMF model.
@@ -453,7 +453,7 @@
      * @return {Array|undefined} List of examples in the body
      */
     _computeExamples(body) {
-      return body && body['http://raml.org/vocabularies/document#examples'];
+      return body && body[this.ns.raml.vocabularies.document + 'examples'];
     }
   }
   window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);

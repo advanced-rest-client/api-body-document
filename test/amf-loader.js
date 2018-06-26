@@ -15,12 +15,12 @@ AmfLoader.load = function(endpointIndex, methodIndex) {
         reject(e);
         return;
       }
-      const def = data[0]['http://raml.org/vocabularies/document#encodes'][0];
-      const endpoint = def['http://raml.org/vocabularies/http#endpoint'][endpointIndex];
+      const def = data[0]['http://a.ml/vocabularies/document#encodes'][0];
+      const endpoint = def['http://a.ml/vocabularies/http#endpoint'][endpointIndex];
       const method = endpoint['http://www.w3.org/ns/hydra/core#supportedOperation'][methodIndex];
       const expects = method['http://www.w3.org/ns/hydra/core#expects'];
-      const request = expects.find((item) => item['@type'].indexOf('http://raml.org/vocabularies/http#Request') !== -1);
-      const payload = request['http://raml.org/vocabularies/http#payload'];
+      const request = expects.find((item) => item['@type'].indexOf('http://a.ml/vocabularies/http#Request') !== -1);
+      const payload = request['http://a.ml/vocabularies/http#payload'];
       resolve([data, payload]);
     });
     xhr.addEventListener('error',
