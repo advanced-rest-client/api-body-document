@@ -48,6 +48,7 @@ declare namespace ApiElements {
    * `--api-body-document-examples-border-color` | Example section border color | `transparent`
    * `--code-background-color` | Background color of the examples section | ``
    * `--api-body-document-media-type-label-font-weight` | Font weight of the media type label (when selection is not available) | `500`
+   * `--api-body-document-title-narrow` | Mixin applied to the title when in narrow layout | `{}`
    */
   class ApiBodyDocument extends
     ApiElements.AmfHelperMixin(
@@ -137,6 +138,11 @@ declare namespace ApiElements {
      * Computed valie if examples are set.
      */
     readonly hasExamples: boolean|null|undefined;
+
+    /**
+     * Set to render a mobile friendly view.
+     */
+    narrow: boolean|null|undefined;
 
     /**
      * Computes basic view values when body change.

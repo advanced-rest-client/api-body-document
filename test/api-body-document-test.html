@@ -10,6 +10,16 @@
   <script src="amf-loader.js"></script>
   <link rel="import" href="../../arc-polyfills/arc-polyfills.html">
   <link rel="import" href="../api-body-document.html">
+  <custom-style>
+    <style is="custom-style">
+    :root {
+      --api-body-document-title-narrow: {
+        font-weight: 200;
+        font-size: 16px;
+      };
+    }
+    </style>
+  </custom-style>
 </head>
 <body>
   <test-fixture id="Basic">
@@ -21,6 +31,12 @@
   <test-fixture id="Opened">
     <template>
       <api-body-document opened></api-body-document>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="Narrow">
+    <template>
+      <api-body-document opened narrow></api-body-document>
     </template>
   </test-fixture>
 
@@ -135,6 +151,38 @@
           assert.ok(node);
           done();
         });
+      });
+    });
+
+    suite('Narrow layout', () => {
+      let element;
+      let amf;
+      let payload;
+      suiteSetup(() => {
+        return AmfLoader.load(0, 0)
+        .then((data) => {
+          amf = data[0];
+          payload = data[1];
+        });
+      });
+
+      setup((done) => {
+        element = fixture('Narrow');
+        element.amfModel = amf;
+        element.body = payload;
+        flush(() => done());
+      });
+
+      test('Has narrow attribute', () => {
+        assert.isTrue(element.hasAttribute('narrow'));
+      });
+
+      test('Narrow style is applied to the URI title', () => {
+        const title = element.shadowRoot.querySelector('.table-title');
+        const fontWeight = getComputedStyle(title).fontWeight;
+        const fontSize = getComputedStyle(title).fontSize;
+        assert.equal(fontWeight, '200');
+        assert.equal(fontSize, '16px');
       });
     });
   });
