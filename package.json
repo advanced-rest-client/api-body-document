@@ -26,5 +26,8 @@
   "bugs": {
     "url": "https://github.com/advanced-rest-client/api-body-document/issues",
     "email": "arc@mulesoft.com"
+  },
+  "dependencies": {
+    "conventional-changelog-cli": "^2.0.1"
   }
 }
