@@ -1,7 +1,7 @@
 {
   "name": "api-body-document",
   "description": "A component to render HTTP method body documentation based on AMF model",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "license": "Apache-2.0",
   "main": "api-body-document.html",
   "keywords": [
