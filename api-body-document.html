@@ -30,6 +30,11 @@
     .section-title-area {
       @apply --layout-horizontal;
       @apply --layout-center;
+      cursor: pointer;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
       border-bottom: 1px var(--api-body-document-title-border-color, #e5e5e5) solid;
     }
 
@@ -39,6 +44,7 @@
     }
 
     .toggle-button {
+      outline: none;
       color: var(--api-body-document-toggle-view-color, var(--arc-toggle-view-icon-color, rgba(0, 0, 0, 0.74)));
       transition: color 0.25s ease-in-out;
       @apply --toggle-button;
@@ -119,14 +125,18 @@
       font-weight: var(--api-body-document-media-type-label-font-weight, 500);
       margin-left: 8px;
     }
+
+    .media-toggle {
+      outline: none;
+    }
     </style>
     <template is="dom-if" if="[[aware]]">
       <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
     </template>
-    <div class="section-title-area">
+    <div class="section-title-area" on-click="toggle" title="Toogle body details">
       <h3 class="table-title">Body</h3>
       <div class="title-area-actions">
-        <paper-button on-click="toggle" class="toggle-button" title="Toogle body details">
+        <paper-button class="toggle-button">
           [[_computeToggleActionLabel(opened)]]
           <iron-icon icon="arc:expand-more" class$="[[_computeToggleIconClass(opened)]]"></iron-icon>
         </paper-button>

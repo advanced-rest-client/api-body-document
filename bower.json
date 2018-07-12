@@ -1,7 +1,7 @@
 {
   "name": "api-body-document",
   "description": "A component to render HTTP method body documentation based on AMF model",
-  "version": "2.0.4",
+  "version": "2.0.6",
   "license": "Apache-2.0",
   "main": "api-body-document.html",
   "keywords": [
@@ -29,7 +29,6 @@
   "devDependencies": {
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "iron-component-page": "PolymerElements/iron-component-page#^3.0.1",
-    "iron-test-helpers": "PolymerElements/iron-test-helpers#^2.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
     "api-navigation": "advanced-rest-client/api-navigation#^2.0.0",
