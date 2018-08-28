@@ -17,22 +17,10 @@
     <link rel="import" href="../../paper-item/paper-item.html">
     <link rel="import" href="../../paper-listbox/paper-listbox.html">
     <link rel="import" href="../../neon-animation/web-animations.html">
+    <link rel="import" href="../../api-console-default-theme/api-console-default-theme.html">
     <link rel="import" href="../api-body-document.html">
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
-      :root {
-        --code-background-color: #f5f2f0;
-        --arc-font-title: {
-          @apply --paper-font-title;
-        };
-        --arc-font-subhead: {
-          @apply --paper-font-subhead;
-        };
-        --arc-font-body1: {
-          @apply --paper-font-body1;
-        };
-      }
-
       html,
       body {
         margin: 0;
@@ -47,6 +35,12 @@
         --paper-input-container-label: {
           color: #3E2723;
         };
+        @apply --layout-horizontal;
+        @apply --layout-center;
+      }
+
+      .spacer {
+        @apply --layout-flex;
       }
 
       [role="main"] {
@@ -74,10 +68,13 @@
         <header>
           <paper-dropdown-menu label="Select demo API">
             <paper-listbox slot="dropdown-content" id="apiList" on-selected-changed="_apiChanged">
-              <paper-item data-file="demo-api.json">Demo API</paper-item>
-              <paper-item data-file="caro-api.json">Carolina API issue</paper-item>
+              <paper-item data-src="demo-api.json">Demo API</paper-item>
+              <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
+              <paper-item data-src="caro-api.json">Carolina API issue</paper-item>
+              <paper-item data-src="caro-api-compact.json">Carolina API issue - compact model</paper-item>
             </paper-listbox>
           </paper-dropdown-menu>
+          <div class="spacer"></div>
         </header>
 
         <raml-aware raml="[[amfModel]]" scope="demo"></raml-aware>
@@ -90,16 +87,21 @@
             <p>Select a HTTP method in the navigation to see the demo.</p>
           </template>
         </div>
+
+        <demo-element id="helper" amf-model="{{amfModel}}"></demo-element>
       </template>
     </dom-bind>
     <script>
     (function(app) {
+      class DemoElement extends ApiElements.AmfHelperMixin(Polymer.Element) {}
+      window.customElements.define('demo-element', DemoElement);
+
       app.hasData = false;
       app._load = function() {
         document.getElementById('apiList').selected = 0;
       };
       app._apiChanged = function(e) {
-        const file = e.target.selectedItem.dataset.file;
+        const file = e.target.selectedItem.dataset.src;
         app._loadFile(file);
       };
       app._loadFile = function(file) {
@@ -119,18 +121,24 @@
         }
       };
       app.setData = function(id) {
-        const enc = app.amfModel[0]['http://a.ml/vocabularies/document#encodes'][0];
-        const endpoints = enc['http://a.ml/vocabularies/http#endpoint'];
-        const endpointId = id.substr(0, id.lastIndexOf('/'));
-        const endpoint = endpoints.find((item) => item['@id'] === endpointId);
-        const methods = endpoint['http://www.w3.org/ns/hydra/core#supportedOperation'];
-        const method = methods.find((item) => item['@id'] === id);
-        const expects = method['http://www.w3.org/ns/hydra/core#expects'];
-        if (!expects) {
-          return;
-        }
-        const request = expects.find((item) => item['@type'].indexOf('http://a.ml/vocabularies/http#Request') !== -1);
-        app.body = request['http://a.ml/vocabularies/http#payload'];
+        const webApi = app.$.helper._computeWebApi(app.amfModel);
+        const method = app.$.helper._computeMethodModel(webApi, id);
+        const expects = app.$.helper._computeExpects(method);
+        const payload = app.$.helper._computePayload(expects);
+        app.body = payload;
+        // const returns = app.$.helper._computeReturns(method);
+        // const enc = app.amfModel[0]['http://a.ml/vocabularies/document#encodes'][0];
+        // const endpoints = enc['http://a.ml/vocabularies/http#endpoint'];
+        // const endpointId = id.substr(0, id.lastIndexOf('/'));
+        // const endpoint = endpoints.find((item) => item['@id'] === endpointId);
+        // const methods = endpoint['http://www.w3.org/ns/hydra/core#supportedOperation'];
+        // const method = methods.find((item) => item['@id'] === id);
+        // const expects = method['http://www.w3.org/ns/hydra/core#expects'];
+        // if (!expects) {
+        //   return;
+        // }
+        // const request = expects.find((item) => item['@type'].indexOf('http://a.ml/vocabularies/http#Request') !== -1);
+        // app.body = request['http://a.ml/vocabularies/http#payload'];
       };
       window.addEventListener('WebComponentsReady', () => app._load());
       window.addEventListener('api-navigation-selection-changed', app._navChanged);

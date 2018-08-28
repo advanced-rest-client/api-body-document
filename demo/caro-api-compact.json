@@ -1,0 +1,748 @@
+{
+  "@context": {
+    "raml-http": "http://a.ml/vocabularies/http#",
+    "shacl": "http://www.w3.org/ns/shacl#",
+    "raml-shapes": "http://a.ml/vocabularies/shapes#",
+    "security": "http://a.ml/vocabularies/security#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+    "data": "http://a.ml/vocabularies/data#",
+    "doc": "http://a.ml/vocabularies/document#",
+    "schema-org": "http://schema.org/",
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "hydra": "http://www.w3.org/ns/hydra/core#"
+  },
+  "@id": "amf://id",
+  "@type": [
+    "doc:Document",
+    "doc:Fragment",
+    "doc:Module",
+    "doc:Unit"
+  ],
+  "doc:declares": [
+    {
+      "@id": "amf://id#1",
+      "@type": [
+        "shacl:NodeShape",
+        "shacl:Shape",
+        "raml-shapes:Shape",
+        "doc:DomainElement"
+      ],
+      "shacl:closed": false,
+      "shacl:name": "substitution",
+      "shacl:property": [
+        {
+          "@id": "amf://id#2",
+          "@type": [
+            "shacl:PropertyShape",
+            "shacl:Shape",
+            "raml-shapes:Shape"
+          ],
+          "raml-shapes:range": {
+            "@id": "amf://id#3",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:name": "key"
+          },
+          "shacl:minCount": 0,
+          "shacl:name": "key",
+          "shacl:path": {
+            "@id": "data:key"
+          }
+        },
+        {
+          "@id": "amf://id#4",
+          "@type": [
+            "shacl:PropertyShape",
+            "shacl:Shape",
+            "raml-shapes:Shape"
+          ],
+          "raml-shapes:range": {
+            "@id": "amf://id#5",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:name": "value"
+          },
+          "shacl:minCount": 1,
+          "shacl:name": "value",
+          "shacl:path": {
+            "@id": "data:value"
+          }
+        }
+      ]
+    },
+    {
+      "@id": "amf://id#8",
+      "@type": [
+        "shacl:NodeShape",
+        "shacl:Shape",
+        "raml-shapes:Shape",
+        "doc:DomainElement"
+      ],
+      "shacl:closed": false,
+      "shacl:name": "recipientslist",
+      "shacl:property": [
+        {
+          "@id": "amf://id#9",
+          "@type": [
+            "shacl:PropertyShape",
+            "shacl:Shape",
+            "raml-shapes:Shape"
+          ],
+          "raml-shapes:range": {
+            "@id": "amf://id#1",
+            "@type": [
+              "shacl:NodeShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "shacl:closed": false,
+            "shacl:name": "substitution",
+            "shacl:property": [
+              {
+                "@id": "amf://id#2",
+                "@type": [
+                  "shacl:PropertyShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape"
+                ],
+                "raml-shapes:range": {
+                  "@id": "amf://id#3",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "key"
+                },
+                "shacl:minCount": 0,
+                "shacl:name": "key",
+                "shacl:path": {
+                  "@id": "data:key"
+                }
+              },
+              {
+                "@id": "amf://id#4",
+                "@type": [
+                  "shacl:PropertyShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape"
+                ],
+                "raml-shapes:range": {
+                  "@id": "amf://id#5",
+                  "@type": [
+                    "raml-shapes:ScalarShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape",
+                    "doc:DomainElement"
+                  ],
+                  "shacl:datatype": {
+                    "@id": "xsd:string"
+                  },
+                  "shacl:name": "value"
+                },
+                "shacl:minCount": 1,
+                "shacl:name": "value",
+                "shacl:path": {
+                  "@id": "data:value"
+                }
+              }
+            ]
+          },
+          "shacl:minCount": 0,
+          "shacl:name": "substitution",
+          "shacl:path": {
+            "@id": "data:substitution"
+          }
+        },
+        {
+          "@id": "amf://id#10",
+          "@type": [
+            "shacl:PropertyShape",
+            "shacl:Shape",
+            "raml-shapes:Shape"
+          ],
+          "raml-shapes:range": {
+            "@id": "amf://id#11",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:name": "Email Address",
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:name": "email",
+            "shacl:pattern": "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$"
+          },
+          "shacl:minCount": 1,
+          "shacl:name": "email",
+          "shacl:path": {
+            "@id": "data:email"
+          }
+        },
+        {
+          "@id": "amf://id#12",
+          "@type": [
+            "shacl:PropertyShape",
+            "shacl:Shape",
+            "raml-shapes:Shape"
+          ],
+          "raml-shapes:range": {
+            "@id": "amf://id#13",
+            "@type": [
+              "raml-shapes:ScalarShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "schema-org:name": "Email Type",
+            "shacl:datatype": {
+              "@id": "xsd:string"
+            },
+            "shacl:in": {
+              "@id": "amf://id#13/list",
+              "@type": "rdfs:Seq",
+              "rdfs:_1": {
+                "@id": "amf://id#14",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "TO"
+                }
+              },
+              "rdfs:_2": {
+                "@id": "amf://id#15",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "CC"
+                }
+              },
+              "rdfs:_3": {
+                "@id": "amf://id#16",
+                "@type": "data:Scalar",
+                "data:value": {
+                  "@type": "xsd:string",
+                  "@value": "BCC"
+                }
+              }
+            },
+            "shacl:name": "type"
+          },
+          "shacl:minCount": 1,
+          "shacl:name": "type",
+          "shacl:path": {
+            "@id": "data:type"
+          }
+        }
+      ]
+    },
+    {
+      "@id": "amf://id#18",
+      "@type": [
+        "shacl:NodeShape",
+        "shacl:Shape",
+        "raml-shapes:Shape",
+        "doc:DomainElement"
+      ],
+      "shacl:closed": false,
+      "shacl:name": "Notification",
+      "shacl:property": [
+        {
+          "@id": "amf://id#19",
+          "@type": [
+            "shacl:PropertyShape",
+            "shacl:Shape",
+            "raml-shapes:Shape"
+          ],
+          "raml-shapes:range": {
+            "@id": "amf://id#20",
+            "@type": [
+              "raml-shapes:ArrayShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "raml-shapes:items": {
+              "@id": "amf://id#8",
+              "@type": [
+                "shacl:NodeShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "shacl:closed": false,
+              "shacl:name": "recipientslist",
+              "shacl:property": [
+                {
+                  "@id": "amf://id#9",
+                  "@type": [
+                    "shacl:PropertyShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape"
+                  ],
+                  "raml-shapes:range": {
+                    "@id": "amf://id#1",
+                    "@type": [
+                      "shacl:NodeShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "shacl:closed": false,
+                    "shacl:name": "substitution",
+                    "shacl:property": [
+                      {
+                        "@id": "amf://id#2",
+                        "@type": [
+                          "shacl:PropertyShape",
+                          "shacl:Shape",
+                          "raml-shapes:Shape"
+                        ],
+                        "raml-shapes:range": {
+                          "@id": "amf://id#3",
+                          "@type": [
+                            "raml-shapes:ScalarShape",
+                            "shacl:Shape",
+                            "raml-shapes:Shape",
+                            "doc:DomainElement"
+                          ],
+                          "shacl:datatype": {
+                            "@id": "xsd:string"
+                          },
+                          "shacl:name": "key"
+                        },
+                        "shacl:minCount": 0,
+                        "shacl:name": "key",
+                        "shacl:path": {
+                          "@id": "data:key"
+                        }
+                      },
+                      {
+                        "@id": "amf://id#4",
+                        "@type": [
+                          "shacl:PropertyShape",
+                          "shacl:Shape",
+                          "raml-shapes:Shape"
+                        ],
+                        "raml-shapes:range": {
+                          "@id": "amf://id#5",
+                          "@type": [
+                            "raml-shapes:ScalarShape",
+                            "shacl:Shape",
+                            "raml-shapes:Shape",
+                            "doc:DomainElement"
+                          ],
+                          "shacl:datatype": {
+                            "@id": "xsd:string"
+                          },
+                          "shacl:name": "value"
+                        },
+                        "shacl:minCount": 1,
+                        "shacl:name": "value",
+                        "shacl:path": {
+                          "@id": "data:value"
+                        }
+                      }
+                    ]
+                  },
+                  "shacl:minCount": 0,
+                  "shacl:name": "substitution",
+                  "shacl:path": {
+                    "@id": "data:substitution"
+                  }
+                },
+                {
+                  "@id": "amf://id#10",
+                  "@type": [
+                    "shacl:PropertyShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape"
+                  ],
+                  "raml-shapes:range": {
+                    "@id": "amf://id#11",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "schema-org:name": "Email Address",
+                    "shacl:datatype": {
+                      "@id": "xsd:string"
+                    },
+                    "shacl:name": "email",
+                    "shacl:pattern": "^[_a-z0-9-]+(\\.[_a-z0-9-]+)*@[a-z0-9-]+(\\.[a-z0-9-]+)*(\\.[a-z]{2,4})$"
+                  },
+                  "shacl:minCount": 1,
+                  "shacl:name": "email",
+                  "shacl:path": {
+                    "@id": "data:email"
+                  }
+                },
+                {
+                  "@id": "amf://id#12",
+                  "@type": [
+                    "shacl:PropertyShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape"
+                  ],
+                  "raml-shapes:range": {
+                    "@id": "amf://id#13",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "schema-org:name": "Email Type",
+                    "shacl:datatype": {
+                      "@id": "xsd:string"
+                    },
+                    "shacl:in": {
+                      "@id": "amf://id#13/list",
+                      "@type": "rdfs:Seq",
+                      "rdfs:_1": {
+                        "@id": "amf://id#14",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "TO"
+                        }
+                      },
+                      "rdfs:_2": {
+                        "@id": "amf://id#15",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "CC"
+                        }
+                      },
+                      "rdfs:_3": {
+                        "@id": "amf://id#16",
+                        "@type": "data:Scalar",
+                        "data:value": {
+                          "@type": "xsd:string",
+                          "@value": "BCC"
+                        }
+                      }
+                    },
+                    "shacl:name": "type"
+                  },
+                  "shacl:minCount": 1,
+                  "shacl:name": "type",
+                  "shacl:path": {
+                    "@id": "data:type"
+                  }
+                }
+              ]
+            },
+            "schema-org:name": "Recipients",
+            "shacl:name": "recipients"
+          },
+          "shacl:minCount": 1,
+          "shacl:name": "recipients",
+          "shacl:path": {
+            "@id": "data:recipients"
+          }
+        },
+        {
+          "@id": "amf://id#22",
+          "@type": [
+            "shacl:PropertyShape",
+            "shacl:Shape",
+            "raml-shapes:Shape"
+          ],
+          "raml-shapes:range": {
+            "@id": "amf://id#23",
+            "@type": [
+              "raml-shapes:ArrayShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "raml-shapes:items": {
+              "@id": "amf://id#1",
+              "@type": [
+                "shacl:NodeShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "shacl:closed": false,
+              "shacl:name": "substitution",
+              "shacl:property": [
+                {
+                  "@id": "amf://id#2",
+                  "@type": [
+                    "shacl:PropertyShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape"
+                  ],
+                  "raml-shapes:range": {
+                    "@id": "amf://id#3",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "shacl:datatype": {
+                      "@id": "xsd:string"
+                    },
+                    "shacl:name": "key"
+                  },
+                  "shacl:minCount": 0,
+                  "shacl:name": "key",
+                  "shacl:path": {
+                    "@id": "data:key"
+                  }
+                },
+                {
+                  "@id": "amf://id#4",
+                  "@type": [
+                    "shacl:PropertyShape",
+                    "shacl:Shape",
+                    "raml-shapes:Shape"
+                  ],
+                  "raml-shapes:range": {
+                    "@id": "amf://id#5",
+                    "@type": [
+                      "raml-shapes:ScalarShape",
+                      "shacl:Shape",
+                      "raml-shapes:Shape",
+                      "doc:DomainElement"
+                    ],
+                    "shacl:datatype": {
+                      "@id": "xsd:string"
+                    },
+                    "shacl:name": "value"
+                  },
+                  "shacl:minCount": 1,
+                  "shacl:name": "value",
+                  "shacl:path": {
+                    "@id": "data:value"
+                  }
+                }
+              ]
+            },
+            "shacl:name": "substitutionlist"
+          },
+          "shacl:minCount": 0,
+          "shacl:name": "substitutionlist",
+          "shacl:path": {
+            "@id": "data:substitutionlist"
+          }
+        },
+        {
+          "@id": "amf://id#24",
+          "@type": [
+            "shacl:PropertyShape",
+            "shacl:Shape",
+            "raml-shapes:Shape"
+          ],
+          "raml-shapes:range": {
+            "@id": "amf://id#25",
+            "@type": [
+              "raml-shapes:ArrayShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "raml-shapes:items": {
+              "@id": "amf://id#26",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "shacl:datatype": {
+                "@id": "xsd:integer"
+              },
+              "shacl:name": "items"
+            },
+            "shacl:name": "another"
+          },
+          "shacl:minCount": 1,
+          "shacl:name": "another",
+          "shacl:path": {
+            "@id": "data:another"
+          }
+        },
+        {
+          "@id": "amf://id#27",
+          "@type": [
+            "shacl:PropertyShape",
+            "shacl:Shape",
+            "raml-shapes:Shape"
+          ],
+          "raml-shapes:range": {
+            "@id": "amf://id#28",
+            "@type": [
+              "raml-shapes:ArrayShape",
+              "shacl:Shape",
+              "raml-shapes:Shape",
+              "doc:DomainElement"
+            ],
+            "raml-shapes:items": {
+              "@id": "amf://id#29",
+              "@type": [
+                "raml-shapes:ScalarShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "shacl:datatype": {
+                "@id": "xsd:string"
+              }
+            }
+          },
+          "shacl:minCount": 0,
+          "shacl:name": "other",
+          "shacl:path": {
+            "@id": "data:other"
+          }
+        }
+      ]
+    }
+  ],
+  "doc:encodes": {
+    "@id": "amf://id#31",
+    "@type": [
+      "schema-org:WebAPI",
+      "doc:RootDomainElement",
+      "doc:DomainElement"
+    ],
+    "raml-http:endpoint": {
+      "@id": "amf://id#32",
+      "@type": [
+        "raml-http:EndPoint",
+        "doc:DomainElement"
+      ],
+      "raml-http:path": "/notifications/emails",
+      "hydra:supportedOperation": {
+        "@id": "amf://id#33",
+        "@type": [
+          "hydra:Operation",
+          "doc:DomainElement"
+        ],
+        "hydra:expects": {
+          "@id": "amf://id#34",
+          "@type": [
+            "raml-http:Request",
+            "doc:DomainElement"
+          ],
+          "raml-http:payload": {
+            "@id": "amf://id#35",
+            "@type": [
+              "raml-http:Payload",
+              "doc:DomainElement"
+            ],
+            "raml-http:mediaType": "application/json",
+            "raml-http:schema": {
+              "@id": "amf://id#18/linked_2",
+              "@type": [
+                "shacl:NodeShape",
+                "shacl:Shape",
+                "raml-shapes:Shape",
+                "doc:DomainElement"
+              ],
+              "doc:link-label": "Notification",
+              "doc:link-target": {
+                "@id": "amf://id#18"
+              }
+            }
+          }
+        },
+        "hydra:method": "post",
+        "hydra:returns": {
+          "@id": "amf://id#36",
+          "@type": [
+            "raml-http:Response",
+            "doc:DomainElement"
+          ],
+          "raml-http:payload": {
+            "@id": "amf://id#37",
+            "@type": [
+              "raml-http:Payload",
+              "doc:DomainElement"
+            ],
+            "raml-http:mediaType": "application/json",
+            "raml-http:schema": {
+              "@id": "amf://id#38",
+              "@type": [
+                "raml-shapes:AnyShape",
+                "shacl:Shape",
+                "raml-shapes:Shape"
+              ],
+              "doc:examples": {
+                "@id": "amf://id#39",
+                "@type": [
+                  "doc:Example",
+                  "doc:DomainElement"
+                ],
+                "doc:strict": true,
+                "doc:structuredValue": {
+                  "@id": "amf://id#40",
+                  "@type": "data:Object",
+                  "data:status": {
+                    "@id": "file://demo/caro-api/caro-api.raml#/web-api/end-points/%2Fnotifications%2Femails/post/200/application%2Fjson/any/schema/example/default-example/object_1/scalar_2",
+                    "@type": "data:Scalar",
+                    "data:value": {
+                      "@type": "xsd:string",
+                      "@value": "success"
+                    }
+                  }
+                },
+                "http://a.ml/vocabularies/document-source-maps#sources": {
+                  "@id": "amf://id#39/source-map",
+                  "@type": "http://a.ml/vocabularies/document-source-maps#SourceMap",
+                  "http://a.ml/vocabularies/document-source-maps#tracked-element": {
+                    "http://a.ml/vocabularies/document-source-maps#element": "amf://id#39",
+                    "http://a.ml/vocabularies/document-source-maps#value": "amf://id#37"
+                  }
+                },
+                "shacl:raw": "{\n\"status\":\"success\"\n}\n"
+              },
+              "shacl:name": "schema"
+            }
+          },
+          "schema-org:name": "200",
+          "hydra:statusCode": "200"
+        }
+      }
+    },
+    "raml-http:server": {
+      "@id": "amf://id#41",
+      "@type": [
+        "raml-http:Server",
+        "doc:DomainElement"
+      ],
+      "raml-http:url": "https://mocksvc.qax.mulesoft.com/mocks/fee4c9aa-91a2-4ff7-8f38-2793d1f0d204"
+    },
+    "schema-org:name": "notification service api",
+    "schema-org:version": "1.0"
+  }
+}

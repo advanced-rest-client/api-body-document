@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../polymer/lib/utils/render-status.html">
 <link rel="import" href="../raml-aware/raml-aware.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../api-type-document/api-type-document.html">
@@ -209,7 +210,7 @@
    * @appliesMixin ApiElements.AmfHelperMixin
    */
   class ApiBodyDocument extends ApiElements.AmfHelperMixin(Polymer.Element) {
-    static get is() { return 'api-body-document'; }
+    static get is() {return 'api-body-document';}
     static get properties() {
       return {
         /**
@@ -226,10 +227,7 @@
          * type.
          * @type {Array<Object>}
          */
-        body: {
-          type: Array,
-          observer: '_bodyChanged'
-        },
+        body: Array,
         /**
          * List of discovered media types in the `body`.
          * @type {Array<Object>}
@@ -338,17 +336,30 @@
          }
       };
     }
+
+    static get observers() {
+      return [
+        '_bodyChanged(body, amfModel)'
+      ];
+    }
+
     /**
      * Computes basic view values when body change.
-     * @param {Array} body Current value of the body.
+     *
+     * @param {Object} body
      */
     _bodyChanged(body) {
-      if (!body) {
+      if (!body || this.__bodyChangeDebounce) {
         return;
       }
-      const media = this._computeMediaTypes(body);
-      this._setMediaTypes(media);
-      this.selected = 0;
+      this.selected = -1;
+      this.__bodyChangeDebounce = true;
+      Polymer.RenderStatus.afterNextRender(this, () => {
+        this.__bodyChangeDebounce = false;
+        const media = this._computeMediaTypes(this.body);
+        this._setMediaTypes(media);
+        this.selected = 0;
+      });
     }
     /**
      * Computes list of media types in the `body`
@@ -410,7 +421,8 @@
       if (!data) {
         return;
       }
-      const schema = data[this.ns.raml.vocabularies.http + 'schema'];
+      const key = this._getAmfKey(this.ns.raml.vocabularies.http + 'schema');
+      const schema = this._ensureArray(data[key]);
       return schema ? schema[0] : undefined;
     }
 
@@ -446,7 +458,7 @@
     }
     // Computes class for the toggle's button icon.
     _computeToggleIconClass(opened) {
-      var clazz = 'toggle-icon';
+      let clazz = 'toggle-icon';
       if (opened) {
         clazz += ' opened';
       }
@@ -475,7 +487,11 @@
      * @return {Array|undefined} List of examples in the body
      */
     _computeExamples(body) {
-      return body && body[this.ns.raml.vocabularies.document + 'examples'];
+      if (!body) {
+        return;
+      }
+      const examplesKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+      return this._ensureArray(body[examplesKey]);
     }
   }
   window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);
