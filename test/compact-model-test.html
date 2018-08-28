@@ -21,55 +21,20 @@
   </custom-style>
 </head>
 <body>
-  <test-fixture id="Basic">
-    <template>
-      <api-body-document></api-body-document>
-    </template>
-  </test-fixture>
-
   <test-fixture id="Opened">
     <template>
       <api-body-document opened></api-body-document>
     </template>
   </test-fixture>
-
-  <test-fixture id="Narrow">
-    <template>
-      <api-body-document opened narrow></api-body-document>
-    </template>
-  </test-fixture>
-
   <script>
   /* global AmfLoader */
-  suite('api-body-document', () => {
-    suite('Basic', () => {
-      let element;
-      setup((done) => {
-        element = fixture('Basic');
-        flush(() => done());
-      });
-
-      test('Toggle button opens the table', (done) => {
-        const button = element.shadowRoot.querySelector('.section-title-area');
-        button.click();
-        flush(() => {
-          const collapse = element.shadowRoot.querySelector('iron-collapse');
-          assert.isTrue(collapse.opened);
-          done();
-        });
-      });
-
-      test('renderMediaSelector is false', () => {
-        assert.isFalse(element.renderMediaSelector);
-      });
-    });
-
+  suite('Compact data model', () => {
     suite('With data', () => {
       let element;
       let amf;
       let payload;
       suiteSetup(() => {
-        return AmfLoader.load(0, 0)
+        return AmfLoader.load(0, 0, true)
         .then((data) => {
           amf = data[0];
           payload = data[1];
@@ -151,38 +116,6 @@
           assert.ok(node);
           done();
         });
-      });
-    });
-
-    suite('Narrow layout', () => {
-      let element;
-      let amf;
-      let payload;
-      suiteSetup(() => {
-        return AmfLoader.load(0, 0)
-        .then((data) => {
-          amf = data[0];
-          payload = data[1];
-        });
-      });
-
-      setup((done) => {
-        element = fixture('Narrow');
-        element.amfModel = amf;
-        element.body = payload;
-        flush(() => done());
-      });
-
-      test('Has narrow attribute', () => {
-        assert.isTrue(element.hasAttribute('narrow'));
-      });
-
-      test('Narrow style is applied to the URI title', () => {
-        const title = element.shadowRoot.querySelector('.table-title');
-        const fontWeight = getComputedStyle(title).fontWeight;
-        const fontSize = getComputedStyle(title).fontSize;
-        assert.equal(fontWeight, '200');
-        assert.equal(fontSize, '16px');
       });
     });
   });

@@ -1,7 +1,7 @@
 {
   "name": "api-body-document",
   "description": "A component to render HTTP method body documentation based on AMF model",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "license": "Apache-2.0",
   "main": "api-body-document.html",
   "keywords": [
@@ -36,7 +36,8 @@
     "paper-dropdown-menu": "PolymerElements/paper-dropdown-menu#^2.0.3",
     "paper-listbox": "PolymerElements/paper-listbox#^2.0.0",
     "paper-item": "PolymerElements/paper-item#^2.1.0",
-    "web-animations-js": "web-animations/web-animations-js#^2.3"
+    "web-animations-js": "web-animations/web-animations-js#^2.3",
+    "api-console-default-theme": "advanced-rest-client/api-console-default-theme#5.0.0-preview"
   },
   "repository": {
     "type": "git",
