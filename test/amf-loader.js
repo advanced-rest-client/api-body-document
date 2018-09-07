@@ -1,10 +1,11 @@
 const AmfLoader = {};
-AmfLoader.load = function(endpointIndex, methodIndex) {
+AmfLoader.load = function(endpointIndex, methodIndex, compact) {
   endpointIndex = endpointIndex || 0;
   methodIndex = methodIndex || 0;
+  const file = '/demo-api' + (compact ? '-compact' : '') + '.json';
   const url = location.protocol + '//' + location.host +
     location.pathname.substr(0, location.pathname.lastIndexOf('/'))
-    .replace('/test', '/demo') + '/demo-api.json';
+    .replace('/test', '/demo') + file;
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', (e) => {
@@ -15,13 +16,42 @@ AmfLoader.load = function(endpointIndex, methodIndex) {
         reject(e);
         return;
       }
-      const def = data[0]['http://a.ml/vocabularies/document#encodes'][0];
-      const endpoint = def['http://a.ml/vocabularies/http#endpoint'][endpointIndex];
-      const method = endpoint['http://www.w3.org/ns/hydra/core#supportedOperation'][methodIndex];
-      const expects = method['http://www.w3.org/ns/hydra/core#expects'];
-      const request = expects.find((item) => item['@type'].indexOf('http://a.ml/vocabularies/http#Request') !== -1);
-      const payload = request['http://a.ml/vocabularies/http#payload'];
-      resolve([data, payload]);
+      const ns = ApiElements.Amf.ns;
+      const original = data;
+      if (data instanceof Array) {
+        data = data[0];
+      }
+      const encKey = compact ? 'doc:encodes' :
+        ns.raml.vocabularies.document + 'encodes';
+      let encodes = data[encKey];
+      if (encodes instanceof Array) {
+        encodes = encodes[0];
+      }
+      const endKey = compact ? 'raml-http:endpoint' :
+        ns.raml.vocabularies.http + 'endpoint';
+      let endpoints = encodes[endKey];
+      if (endpoints && !(endpoints instanceof Array)) {
+        endpoints = [endpoints];
+      }
+      const endpoint = endpoints[endpointIndex];
+      const opKey = compact ? 'hydra:supportedOperation' :
+        ns.w3.hydra.core + 'supportedOperation';
+      let methods = endpoint[opKey];
+      if (!(methods instanceof Array)) {
+        methods = [methods];
+      }
+      const method = methods[methodIndex];
+      const expKey = compact ? 'hydra:expects' : ns.w3.hydra.core + 'expects';
+      let request = method[expKey];
+      if (request instanceof Array) {
+        request = request[0];
+      }
+      const pKey = compact ? 'raml-http:payload' : 'http://a.ml/vocabularies/http#payload';
+      let payload = request[pKey];
+      if (!(payload instanceof Array)) {
+        payload = [payload];
+      }
+      resolve([original, payload]);
     });
     xhr.addEventListener('error',
       () => reject(new Error('Unable to load model file')));

@@ -42,7 +42,6 @@
   <script>
   /* global AmfLoader */
   suite('api-body-document', () => {
-
     suite('Basic', () => {
       let element;
       setup((done) => {
@@ -66,122 +65,143 @@
     });
 
     suite('With data', () => {
-      let element;
-      let amf;
-      let payload;
-      suiteSetup(() => {
-        return AmfLoader.load(0, 0)
-        .then((data) => {
-          amf = data[0];
-          payload = data[1];
-        });
-      });
+      [
+        ['Full AMF model', false],
+        ['Compact AMF model', true]
+      ].forEach((item) => {
+        suite(item[0], () => {
+          let element;
+          let amf;
+          let payload;
+          suiteSetup(() => {
+            return AmfLoader.load(0, 0)
+            .then((data) => {
+              amf = data[0];
+              payload = data[1];
+            });
+          });
 
-      setup((done) => {
-        element = fixture('Opened');
-        element.amfModel = amf;
-        element.body = payload;
-        flush(() => done());
-      });
+          setup((done) => {
+            element = fixture('Opened');
+            element.amfModel = amf;
+            element.body = payload;
+            flush(() => {
+              Polymer.RenderStatus.afterNextRender(this, () => done());
+            });
+          });
 
-      test('renderMediaSelector is true', () => {
-        assert.isTrue(element.renderMediaSelector);
-      });
+          test('renderMediaSelector is true', () => {
+            assert.isTrue(element.renderMediaSelector);
+          });
 
-      test('mediaTypes is computed', () => {
-        assert.typeOf(element.mediaTypes, 'array');
-        assert.lengthOf(element.mediaTypes, 2);
-      });
+          test('mediaTypes is computed', () => {
+            assert.typeOf(element.mediaTypes, 'array');
+            assert.lengthOf(element.mediaTypes, 2);
+          });
 
-      test('selected is set automatically', () => {
-        assert.equal(element.selected, 0);
-      });
+          test('selected is set automatically', () => {
+            assert.equal(element.selected, 0);
+          });
 
-      test('selectedBody is computed with selection', () => {
-        assert.typeOf(element.selectedBody, 'object');
-      });
+          test('selectedBody is computed with selection', () => {
+            assert.typeOf(element.selectedBody, 'object');
+          });
 
-      test('isObject is computed for objects', () => {
-        assert.isTrue(element.isObject);
-      });
+          test('isObject is computed for objects', () => {
+            assert.isTrue(element.isObject);
+          });
 
-      test('isSchema is computed for objects', () => {
-        assert.isFalse(element.isSchema);
-      });
+          test('isSchema is computed for objects', () => {
+            assert.isFalse(element.isSchema);
+          });
 
-      test('typeName is computed', () => {
-        assert.equal(element.typeName, 'A person resource');
-      });
+          test('typeName is computed', () => {
+            assert.equal(element.typeName, 'A person resource');
+          });
 
-      test('hasTypeName is computed', () => {
-        assert.isTrue(element.hasTypeName);
-      });
+          test('hasTypeName is computed', () => {
+            assert.isTrue(element.hasTypeName);
+          });
 
-      test('description is computed', () => {
-        assert.typeOf(element.description, 'string');
-      });
+          test('description is computed', () => {
+            assert.typeOf(element.description, 'string');
+          });
 
-      test('hasDescription is computed', () => {
-        assert.isTrue(element.hasDescription);
-      });
+          test('hasDescription is computed', () => {
+            assert.isTrue(element.hasDescription);
+          });
 
-      test('examples is computed', () => {
-        assert.typeOf(element.examples, 'array');
-        assert.lengthOf(element.examples, 1);
-      });
+          test('examples is computed', () => {
+            assert.typeOf(element.examples, 'array');
+            assert.lengthOf(element.examples, 1);
+          });
 
-      test('hasExamples is computed', () => {
-        assert.isTrue(element.hasExamples);
-      });
+          test('hasExamples is computed', () => {
+            assert.isTrue(element.hasExamples);
+          });
 
-      test('Media type tap changes selection', () => {
-        const button = element.shadowRoot.querySelectorAll('.media-toggle')[1];
-        button.click();
-        assert.isFalse(element.isObject);
-        assert.isTrue(element.isSchema);
-        assert.isFalse(element.hasTypeName);
-        assert.isFalse(element.hasDescription);
-      });
+          test('Media type tap changes selection', (done) => {
+            flush(() => {
+              const button = element.shadowRoot.querySelectorAll('.media-toggle')[1];
+              button.click();
+              assert.isFalse(element.isObject);
+              assert.isTrue(element.isSchema);
+              assert.isFalse(element.hasTypeName);
+              assert.isFalse(element.hasDescription);
+              done();
+            });
+          });
 
-      test('Renders api-schema-document', (done) => {
-        element.selected = 1;
-        flush(() => {
-          const node = element.shadowRoot.querySelector('api-schema-document');
-          assert.ok(node);
-          done();
+          test('Renders api-schema-document', (done) => {
+            element.selected = 1;
+            flush(() => {
+              const node = element.shadowRoot.querySelector('api-schema-document');
+              assert.ok(node);
+              done();
+            });
+          });
         });
       });
     });
 
     suite('Narrow layout', () => {
-      let element;
-      let amf;
-      let payload;
-      suiteSetup(() => {
-        return AmfLoader.load(0, 0)
-        .then((data) => {
-          amf = data[0];
-          payload = data[1];
+      [
+        ['Full AMF model', false],
+        ['Compact AMF model', true]
+      ].forEach((item) => {
+        suite(item[0], () => {
+          let element;
+          let amf;
+          let payload;
+          suiteSetup(() => {
+            return AmfLoader.load(0, 0)
+            .then((data) => {
+              amf = data[0];
+              payload = data[1];
+            });
+          });
+
+          setup((done) => {
+            element = fixture('Narrow');
+            element.amfModel = amf;
+            element.body = payload;
+            flush(() => {
+              Polymer.RenderStatus.afterNextRender(this, () => done());
+            });
+          });
+
+          test('Has narrow attribute', () => {
+            assert.isTrue(element.hasAttribute('narrow'));
+          });
+
+          test('Narrow style is applied to the URI title', () => {
+            const title = element.shadowRoot.querySelector('.table-title');
+            const fontWeight = getComputedStyle(title).fontWeight;
+            const fontSize = getComputedStyle(title).fontSize;
+            assert.equal(fontWeight, '200');
+            assert.equal(fontSize, '16px');
+          });
         });
-      });
-
-      setup((done) => {
-        element = fixture('Narrow');
-        element.amfModel = amf;
-        element.body = payload;
-        flush(() => done());
-      });
-
-      test('Has narrow attribute', () => {
-        assert.isTrue(element.hasAttribute('narrow'));
-      });
-
-      test('Narrow style is applied to the URI title', () => {
-        const title = element.shadowRoot.querySelector('.table-title');
-        const fontWeight = getComputedStyle(title).fontWeight;
-        const fontSize = getComputedStyle(title).fontSize;
-        assert.equal(fontWeight, '200');
-        assert.equal(fontSize, '16px');
       });
     });
   });
