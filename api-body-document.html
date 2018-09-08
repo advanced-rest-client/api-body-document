@@ -364,13 +364,9 @@
         return;
       }
       this.selected = -1;
-      this.__bodyChangeDebounce = true;
-      Polymer.RenderStatus.afterNextRender(this, () => {
-        this.__bodyChangeDebounce = false;
-        const media = this._computeMediaTypes(this.body);
-        this._setMediaTypes(media);
-        this.selected = 0;
-      });
+      const media = this._computeMediaTypes(this.body);
+      this._setMediaTypes(media);
+      this.selected = 0;
     }
     /**
      * Computes list of media types in the `body`

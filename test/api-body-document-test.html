@@ -46,7 +46,9 @@
       let element;
       setup((done) => {
         element = fixture('Basic');
-        flush(() => done());
+        flush(() => {
+          Polymer.RenderStatus.afterNextRender(this, () => done());
+        });
       });
 
       test('Toggle button opens the table', (done) => {
