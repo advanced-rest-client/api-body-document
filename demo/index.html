@@ -54,6 +54,12 @@
         --paper-input-container-label: {
           color: #3E2723;
         };
+        @apply --layout-horizontal;
+        @apply --layout-center;
+      }
+
+      .spacer {
+        @apply --layout-flex;
       }
 
       .spacer {
@@ -85,6 +91,7 @@
               <paper-item data-src="caro-api-compact.json">Carolina API issue - compact model</paper-item>
             </paper-listbox>
           </paper-dropdown-menu>
+          <div class="spacer"></div>
         </header>
 
         <raml-aware raml="[[amfModel]]" scope="demo"></raml-aware>

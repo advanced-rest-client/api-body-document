@@ -1,5 +1,6 @@
 <link rel="import" href="../polymer/polymer-element.html">
 <link rel="import" href="../polymer/lib/elements/dom-if.html">
+<link rel="import" href="../polymer/lib/utils/render-status.html">
 <link rel="import" href="../raml-aware/raml-aware.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../api-type-document/api-type-document.html">
@@ -209,7 +210,7 @@
    * @appliesMixin ApiElements.AmfHelperMixin
    */
   class ApiBodyDocument extends ApiElements.AmfHelperMixin(Polymer.Element) {
-    static get is() { return 'api-body-document'; }
+    static get is() {return 'api-body-document';}
     static get properties() {
       return {
         /**
@@ -355,15 +356,21 @@
 
     /**
      * Computes basic view values when body change.
-     * @param {Array} body Current value of the body.
+     *
+     * @param {Object} body
      */
     __bodyChanged(body) {
       if (!body) {
         return;
       }
-      const media = this._computeMediaTypes(body);
-      this._setMediaTypes(media);
-      this.selected = 0;
+      this.selected = -1;
+      this.__bodyChangeDebounce = true;
+      Polymer.RenderStatus.afterNextRender(this, () => {
+        this.__bodyChangeDebounce = false;
+        const media = this._computeMediaTypes(this.body);
+        this._setMediaTypes(media);
+        this.selected = 0;
+      });
     }
     /**
      * Computes list of media types in the `body`
@@ -468,7 +475,7 @@
     }
     // Computes class for the toggle's button icon.
     _computeToggleIconClass(opened) {
-      var clazz = 'toggle-icon';
+      let clazz = 'toggle-icon';
       if (opened) {
         clazz += ' opened';
       }
