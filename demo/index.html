@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes">
-    <title>api-request-editor demo</title>
+    <title>api-body-document demo</title>
     <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
     <link rel="import" href="../../shadycss/apply-shim.html">
     <link rel="import" href="../../polymer/lib/elements/custom-style.html">
@@ -21,15 +21,34 @@
     <link rel="import" href="../api-body-document.html">
     <custom-style>
       <style is="custom-style" include="demo-pages-shared-styles">
-      html,
-      body {
+      body,
+      html {
+        background-color: #e5e5e5;
+        height: 100vh;
         margin: 0;
         padding: 0;
+      }
+
+      [role="main"] {
+        max-width: 1100px;
+        @apply --layout-horizontal;
+        @apply --layout-start;
+      }
+
+      .card {
+        @apply --shadow-elevation-4dp;
+        padding: 20px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        box-sizing: border-box;
+        background-color: #fff;
       }
 
       header {
         padding: 12px 24px;
         background-color: #C5E1A5;
+        @apply --layout-horizontal;
+        @apply --layout-center;
         --iron-icon-fill-color: #3E2723;
         --paper-input-container-focus-color: #33691E;
         --paper-input-container-label: {
@@ -43,21 +62,19 @@
         @apply --layout-flex;
       }
 
-      [role="main"] {
-        max-width: 1100px;
-        @apply --layout-horizontal;
-        @apply --layout-start;
+      .spacer {
+        @apply --layout-flex;
+      }
+
+      .main {
+        margin-top: 40px;
+        @apply --shadow-elevation-4dp;
+        padding: 24px;
+        margin-bottom: 40px;
       }
 
       api-navigation {
-        width: 320px;
-        min-width: 320px;
-        overflow: auto;
-      }
-
-      api-body-document {
-        margin-left: 40px;
-        @apply --layout-flex;
+        min-width: 256px;
       }
       </style>
     </custom-style>
@@ -67,7 +84,7 @@
       <template is="dom-bind">
         <header>
           <paper-dropdown-menu label="Select demo API">
-            <paper-listbox slot="dropdown-content" id="apiList" on-selected-changed="_apiChanged">
+            <paper-listbox slot="dropdown-content" id="apisList" on-selected-changed="_apiChanged">
               <paper-item data-src="demo-api.json">Demo API</paper-item>
               <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
               <paper-item data-src="caro-api.json">Carolina API issue</paper-item>
@@ -78,15 +95,16 @@
         </header>
 
         <raml-aware raml="[[amfModel]]" scope="demo"></raml-aware>
-        <div class="vertical-section-container centered" role="main">
+
+        <section role="main" class="centered card">
           <api-navigation aware="demo" endpoints-opened></api-navigation>
           <template is="dom-if" if="[[hasData]]">
-            <api-body-document aware="demo" body="[[body]]" opened></api-body-document>
+            <api-body-document amf-model="[[amfModel]]" body="[[body]]" opened></api-body-document>
           </template>
           <template is="dom-if" if="[[!hasData]]">
             <p>Select a HTTP method in the navigation to see the demo.</p>
           </template>
-        </div>
+        </section>
 
         <demo-element id="helper" amf-model="{{amfModel}}"></demo-element>
       </template>
@@ -98,12 +116,9 @@
 
       app.hasData = false;
       app._load = function() {
-        document.getElementById('apiList').selected = 0;
+        document.getElementById('apisList').selected = 0;
       };
-      app._apiChanged = function(e) {
-        const file = e.target.selectedItem.dataset.src;
-        app._loadFile(file);
-      };
+
       app._loadFile = function(file) {
         fetch('./' + file)
         .then((response) => response.json())
@@ -111,6 +126,12 @@
           app.amfModel = data;
         });
       };
+
+      app._apiChanged = function(e) {
+        const file = e.target.selectedItem.dataset.src;
+        app._loadFile(file);
+      };
+
       app._navChanged = function(e) {
         const type = e.detail.type;
         if (type === 'method') {
@@ -120,25 +141,25 @@
           app.hasData = false;
         }
       };
-      app.setData = function(id) {
+
+      app.setData = function(selected) {
+        const ns = ApiElements.Amf.ns;
         const webApi = app.$.helper._computeWebApi(app.amfModel);
-        const method = app.$.helper._computeMethodModel(webApi, id);
-        const expects = app.$.helper._computeExpects(method);
-        const payload = app.$.helper._computePayload(expects);
-        app.body = payload;
-        // const returns = app.$.helper._computeReturns(method);
-        // const enc = app.amfModel[0]['http://a.ml/vocabularies/document#encodes'][0];
-        // const endpoints = enc['http://a.ml/vocabularies/http#endpoint'];
-        // const endpointId = id.substr(0, id.lastIndexOf('/'));
-        // const endpoint = endpoints.find((item) => item['@id'] === endpointId);
-        // const methods = endpoint['http://www.w3.org/ns/hydra/core#supportedOperation'];
-        // const method = methods.find((item) => item['@id'] === id);
-        // const expects = method['http://www.w3.org/ns/hydra/core#expects'];
-        // if (!expects) {
-        //   return;
-        // }
-        // const request = expects.find((item) => item['@type'].indexOf('http://a.ml/vocabularies/http#Request') !== -1);
-        // app.body = request['http://a.ml/vocabularies/http#payload'];
+        const method = app.$.helper._computeMethodModel(webApi, selected);
+        const expKey = app.$.helper._getAmfKey(ns.w3.hydra.core + 'expects');
+        let expects = method[expKey];
+        if (!expects) {
+          return;
+        }
+        if (expects instanceof Array) {
+          expects = expects[0];
+        }
+        const pKey = app.$.helper._getAmfKey(ns.raml.vocabularies.http + 'payload');
+        let payloads = expects[pKey];
+        if (payloads && !(payloads instanceof Array)) {
+          payloads = [payloads];
+        }
+        app.body = payloads;
       };
       window.addEventListener('WebComponentsReady', () => app._load());
       window.addEventListener('api-navigation-selection-changed', app._navChanged);

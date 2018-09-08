@@ -343,23 +343,30 @@
       ];
     }
 
+    _bodyChanged() {
+      if (this.__bodyChangedDebounce) {
+        return;
+      }
+      this.__bodyChangedDebounce = true;
+      Polymer.RenderStatus.afterNextRender(this, () => {
+        this.__bodyChangedDebounce = false;
+        this.__bodyChanged(this.body);
+      });
+    }
+
     /**
      * Computes basic view values when body change.
      *
      * @param {Object} body
      */
-    _bodyChanged(body) {
-      if (!body || this.__bodyChangeDebounce) {
+    __bodyChanged(body) {
+      if (!body) {
         return;
       }
       this.selected = -1;
-      this.__bodyChangeDebounce = true;
-      Polymer.RenderStatus.afterNextRender(this, () => {
-        this.__bodyChangeDebounce = false;
-        const media = this._computeMediaTypes(this.body);
-        this._setMediaTypes(media);
-        this.selected = 0;
-      });
+      const media = this._computeMediaTypes(this.body);
+      this._setMediaTypes(media);
+      this.selected = 0;
     }
     /**
      * Computes list of media types in the `body`
@@ -422,8 +429,14 @@
         return;
       }
       const key = this._getAmfKey(this.ns.raml.vocabularies.http + 'schema');
-      const schema = this._ensureArray(data[key]);
-      return schema ? schema[0] : undefined;
+      let schema = data[key];
+      if (!schema) {
+        return;
+      }
+      if (schema instanceof Array) {
+        schema = schema[0];
+      }
+      return this._resolve(schema);
     }
 
     _computeSelectedMediaName(selected, body) {
@@ -490,8 +503,15 @@
       if (!body) {
         return;
       }
-      const examplesKey = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
-      return this._ensureArray(body[examplesKey]);
+      const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
+      let exs = body[key];
+      if (!exs) {
+        return;
+      }
+      if (!(exs instanceof Array)) {
+        exs = [exs];
+      }
+      return exs;
     }
   }
   window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);

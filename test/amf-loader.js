@@ -16,28 +16,39 @@ AmfLoader.load = function(endpointIndex, methodIndex, compact) {
         reject(e);
         return;
       }
+      const ns = ApiElements.Amf.ns;
       const original = data;
       if (data instanceof Array) {
         data = data[0];
       }
-      const encKey = compact ? 'doc:encodes' : 'http://a.ml/vocabularies/document#encodes';
+      const encKey = compact ? 'doc:encodes' :
+        ns.raml.vocabularies.document + 'encodes';
       let encodes = data[encKey];
       if (encodes instanceof Array) {
         encodes = encodes[0];
       }
-      const endKey = compact ? 'raml-http:endpoint' : 'http://a.ml/vocabularies/http#endpoint';
-      const endpoint = encodes[endKey][endpointIndex];
-      const opKey = compact ? 'hydra:supportedOperation':
-        'http://www.w3.org/ns/hydra/core#supportedOperation';
-      const method = endpoint[opKey][methodIndex];
-      const expKey = compact ? 'hydra:expects' : 'http://www.w3.org/ns/hydra/core#expects';
+      const endKey = compact ? 'raml-http:endpoint' :
+        ns.raml.vocabularies.http + 'endpoint';
+      let endpoints = encodes[endKey];
+      if (endpoints && !(endpoints instanceof Array)) {
+        endpoints = [endpoints];
+      }
+      const endpoint = endpoints[endpointIndex];
+      const opKey = compact ? 'hydra:supportedOperation' :
+        ns.w3.hydra.core + 'supportedOperation';
+      let methods = endpoint[opKey];
+      if (!(methods instanceof Array)) {
+        methods = [methods];
+      }
+      const method = methods[methodIndex];
+      const expKey = compact ? 'hydra:expects' : ns.w3.hydra.core + 'expects';
       let request = method[expKey];
       if (request instanceof Array) {
         request = request[0];
       }
-      const payKey = compact ? 'raml-http:payload' : 'http://a.ml/vocabularies/http#payload';
-      let payload = request[payKey];
-      if (payload && !(payload instanceof Array)) {
+      const pKey = compact ? 'raml-http:payload' : 'http://a.ml/vocabularies/http#payload';
+      let payload = request[pKey];
+      if (!(payload instanceof Array)) {
         payload = [payload];
       }
       resolve([original, payload]);
