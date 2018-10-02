@@ -6029,10 +6029,49 @@
             "hydra:statusCode": "201"
           }
         }
+      },
+      {
+        "@id": "amf://id#324",
+        "@type": [
+          "raml-http:EndPoint",
+          "doc:DomainElement"
+        ],
+        "raml-http:path": "/emptybody",
+        "hydra:supportedOperation": {
+          "@id": "amf://id#325",
+          "@type": [
+            "hydra:Operation",
+            "doc:DomainElement"
+          ],
+          "hydra:expects": {
+            "@id": "amf://id#326",
+            "@type": [
+              "raml-http:Request",
+              "doc:DomainElement"
+            ],
+            "raml-http:payload": {
+              "@id": "amf://id#327",
+              "@type": [
+                "raml-http:Payload",
+                "doc:DomainElement"
+              ],
+              "raml-http:schema": {
+                "@id": "amf://id#328",
+                "@type": [
+                  "raml-shapes:AnyShape",
+                  "shacl:Shape",
+                  "raml-shapes:Shape"
+                ],
+                "shacl:name": "default"
+              }
+            }
+          },
+          "hydra:method": "post"
+        }
       }
     ],
     "raml-http:server": {
-      "@id": "amf://id#324",
+      "@id": "amf://id#329",
       "@type": [
         "raml-http:Server",
         "doc:DomainElement"

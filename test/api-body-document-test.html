@@ -206,6 +206,56 @@
         });
       });
     });
+
+    suite('"Any" type view', () => {
+      [
+        ['Full AMF model', false],
+        ['Compact AMF model', true]
+      ].forEach((item) => {
+        suite(item[0], () => {
+          let element;
+          let amf;
+          let payload;
+          suiteSetup(() => {
+            return AmfLoader.load(7, 0)
+            .then((data) => {
+              amf = data[0];
+              payload = data[1];
+            });
+          });
+
+          setup((done) => {
+            element = fixture('Narrow');
+            element.amfModel = amf;
+            element.body = payload;
+            flush(() => {
+              Polymer.RenderStatus.afterNextRender(this, () => done());
+            });
+          });
+
+          test('Computes isAnyType attribute', () => {
+            assert.isTrue(element.isAnyType);
+          });
+
+          test('Renders "any" mode info message', (done) => {
+            flush(() => {
+              const label = element.shadowRoot.querySelector('.any-info');
+              assert.ok(label);
+              done();
+            });
+          });
+
+          test('Do not render media types', (done) => {
+            flush(() => {
+              const node = element.shadowRoot.querySelector('.media-type-selector');
+              const display = getComputedStyle(node).display;
+              assert.equal(display, 'none');
+              done();
+            });
+          });
+        });
+      });
+    });
   });
   </script>
 </body>

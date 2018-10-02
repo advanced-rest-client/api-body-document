@@ -130,6 +130,16 @@
     .media-toggle {
       outline: none;
     }
+
+    .any-info,
+    .any-info-description {
+      @apply --arc-font-body1;
+      color: var(--api-body-document-description-color, rgba(0, 0, 0, 0.74));
+    }
+
+    .any-info {
+      font-size: 16px;
+    }
     </style>
     <template is="dom-if" if="[[aware]]">
       <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
@@ -144,36 +154,42 @@
       </div>
     </div>
     <iron-collapse opened="[[opened]]">
-      <div class="media-type-selector">
-        <span>Media type:</span>
-        <template is="dom-if" if="[[renderMediaSelector]]">
-          <template is="dom-repeat" items="[[mediaTypes]]">
-            <paper-button class="media-toggle" active="[[_mediaTypeActive(selected, index)]]" on-click="_selectMediaType" title$="Select [[item.label]] media type">[[item.label]]</paper-button>
+      <template is="dom-if" if="[[isAnyType]]">
+        <p class="any-info">Any instance of data is allowed.</p>
+        <p class="any-info-description">The API file specifies body for this request but it does not specify the data model.</p>
+      </template>
+      <template is="dom-if" if="[[!isAnyType]]">
+        <div class="media-type-selector">
+          <span>Media type:</span>
+          <template is="dom-if" if="[[renderMediaSelector]]">
+            <template is="dom-repeat" items="[[mediaTypes]]">
+              <paper-button class="media-toggle" active="[[_mediaTypeActive(selected, index)]]" on-click="_selectMediaType" title$="Select [[item.label]] media type">[[item.label]]</paper-button>
+            </template>
           </template>
+          <template is="dom-if" if="[[!renderMediaSelector]]">
+            <span class="media-type-label">[[selectedMediaType]]</span>
+          </template>
+        </div>
+        <template is="dom-if" if="[[hasTypeName]]">
+          <h4>[[typeName]]</h4>
         </template>
-        <template is="dom-if" if="[[!renderMediaSelector]]">
-          <span class="media-type-label">[[selectedMediaType]]</span>
+        <template is="dom-if" if="[[hasDescription]]">
+          <marked-element markdown="[[description]]">
+            <div slot="markdown-html" class="markdown-body" data-with-title$="[[hasTypeName]]"></div>
+          </marked-element>
         </template>
-      </div>
-      <template is="dom-if" if="[[hasTypeName]]">
-        <h4>[[typeName]]</h4>
-      </template>
-      <template is="dom-if" if="[[hasDescription]]">
-        <marked-element markdown="[[description]]">
-          <div slot="markdown-html" class="markdown-body" data-with-title$="[[hasTypeName]]"></div>
-        </marked-element>
-      </template>
-      <template is="dom-if" if="[[isObject]]">
-        <template is="dom-if" if="[[hasExamples]]">
-          <section class="examples">
-            <h5 class="examples-section-title">Examples</h5>
-            <api-resource-example-document amf-model="[[amfModel]]" examples="[[examples]]"></api-resource-example-document>
-          </section>
+        <template is="dom-if" if="[[isObject]]">
+          <template is="dom-if" if="[[hasExamples]]">
+            <section class="examples">
+              <h5 class="examples-section-title">Examples</h5>
+              <api-resource-example-document amf-model="[[amfModel]]" examples="[[examples]]"></api-resource-example-document>
+            </section>
+          </template>
+          <api-type-document amf-model="[[amfModel]]" type="[[selectedBody]]" narrow="[[narrow]]"></api-type-document>
         </template>
-        <api-type-document amf-model="[[amfModel]]" type="[[selectedBody]]" narrow="[[narrow]]"></api-type-document>
-      </template>
-      <template is="dom-if" if="[[isSchema]]">
-        <api-schema-document amf-model="[[amfModel]]" shape="[[selectedBody]]"></api-schema-document>
+        <template is="dom-if" if="[[isSchema]]">
+          <api-schema-document amf-model="[[amfModel]]" shape="[[selectedBody]]"></api-schema-document>
+        </template>
       </template>
     </iron-collapse>
   </template>
@@ -284,6 +300,14 @@
           readOnly: true
         },
         /**
+         * Computed value, true if the body is of "any" type.
+         */
+        isAnyType: {
+          type: Boolean,
+          value: false,
+          readOnly: true
+        },
+        /**
          * Name of the resource type if any.
          */
         typeName: {
@@ -374,11 +398,14 @@
      * @return {Array<Object>}
      */
     _computeMediaTypes(body) {
-      return body.map((item) => {
-        return {
-          label: this._getValue(item, this.ns.raml.vocabularies.http + 'mediaType')
-        };
+      const result = [];
+      body.forEach((item) => {
+        const label = this._getValue(item, this.ns.raml.vocabularies.http + 'mediaType');
+        if (label) {
+          result.push({label});
+        }
       });
+      return result.length ? result : undefined;
     }
     /**
      * Computes value for `renderMediaSelector` properety.
@@ -453,17 +480,20 @@
       }
       let isObject = false;
       let isSchema = false;
+      let isAnyType = false;
       if (this._hasType(body, this.ns.w3.shacl.name + 'NodeShape')) {
         isObject = true;
       } else if (this._hasType(body, this.ns.w3.shacl.name + 'SchemaShape') ||
-        this._hasType(body, this.ns.raml.vocabularies.shapes + 'AnyShape') ||
         this._hasType(body, this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
         isSchema = true;
       } else if (this._hasType(body, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
         isObject = true;
+      } else if (this._hasType(body, this.ns.raml.vocabularies.shapes + 'AnyShape')) {
+        isAnyType = true;
       }
       this._setIsObject(isObject);
       this._setIsSchema(isSchema);
+      this._setIsAnyType(isAnyType);
     }
     // Computes a label for the section toggle buttons.
     _computeToggleActionLabel(opened) {
