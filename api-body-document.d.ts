@@ -111,6 +111,11 @@ declare namespace ApiElements {
     readonly isSchema: boolean|null|undefined;
 
     /**
+     * Computed value, true if the body is of "any" type.
+     */
+    readonly isAnyType: boolean|null|undefined;
+
+    /**
      * Name of the resource type if any.
      */
     readonly typeName: string|null|undefined;
@@ -144,11 +149,7 @@ declare namespace ApiElements {
      * Set to render a mobile friendly view.
      */
     narrow: boolean|null|undefined;
-
-    /**
-     * Computes basic view values when body change.
-     */
-    _bodyChanged(body: object|null): void;
+    _bodyChanged(): void;
 
     /**
      * Computes list of media types in the `body`
