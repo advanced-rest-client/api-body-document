@@ -1,3 +1,33 @@
+<a name="2.0.11"></a>
+## 2.0.11 (2018-10-19)
+
+
+### Breaking
+
+* Updating AMF data model ([2286bb40557de75c3679d5d44468aab4d7253cb5](https://github.com/advanced-rest-client/api-body-document/commit/2286bb40557de75c3679d5d44468aab4d7253cb5))
+
+### Docs
+
+* Updated documentation ([1455ffebbc7e286bde47f3cc9573b1427614ca73](https://github.com/advanced-rest-client/api-body-document/commit/1455ffebbc7e286bde47f3cc9573b1427614ca73))
+* Updating documentation after styles API change ([eeeeb00475ba23af9475e72eb081d3534376a961](https://github.com/advanced-rest-client/api-body-document/commit/eeeeb00475ba23af9475e72eb081d3534376a961))
+* Updating documentation. ([6bb206b8cc9b7053c051b812666f6e731d3da041](https://github.com/advanced-rest-client/api-body-document/commit/6bb206b8cc9b7053c051b812666f6e731d3da041))
+
+### Fix
+
+* Fixing examples rendering ([948a596a9aae7f8ca88e7e4900fa0b19256ca363](https://github.com/advanced-rest-client/api-body-document/commit/948a596a9aae7f8ca88e7e4900fa0b19256ca363))
+
+### Update
+
+* Adding array example computation ([aaaae1869e586503b2baf4bdff24e2dadbca203e](https://github.com/advanced-rest-client/api-body-document/commit/aaaae1869e586503b2baf4bdff24e2dadbca203e))
+* Adding info message for "any" data type ([b2d16bfde693844659530cf0861881b67ec6f81d](https://github.com/advanced-rest-client/api-body-document/commit/b2d16bfde693844659530cf0861881b67ec6f81d))
+* Adding support for compact json-ld model ([c48372025db7e3d399ab4d91947607a662b160de](https://github.com/advanced-rest-client/api-body-document/commit/c48372025db7e3d399ab4d91947607a662b160de))
+* Making whole section title area clickable ([11db259fa8ac2ea0ce239b7bf501d854681d810b](https://github.com/advanced-rest-client/api-body-document/commit/11db259fa8ac2ea0ce239b7bf501d854681d810b))
+* Updated Travis configuration to connect to Sauce Labs. ([af0acccd2dda343b59fd4ec59ad49cf6930167e5](https://github.com/advanced-rest-client/api-body-document/commit/af0acccd2dda343b59fd4ec59ad49cf6930167e5))
+* Updating component to use compact data model ([5f359a191a0df180f45fd48aeb11788ef0fd0dda](https://github.com/advanced-rest-client/api-body-document/commit/5f359a191a0df180f45fd48aeb11788ef0fd0dda))
+* Updating styling API - adding `narrow` attribute ([41fdb940a62f27ceee0a86f5e4fd3815b5beaedd](https://github.com/advanced-rest-client/api-body-document/commit/41fdb940a62f27ceee0a86f5e4fd3815b5beaedd))
+
+
+
 <a name="2.0.10"></a>
 ## 2.0.10 (2018-10-02)
 

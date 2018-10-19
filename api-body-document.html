@@ -536,12 +536,32 @@
       const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
       let exs = body[key];
       if (!exs) {
+        if (this._hasType(body, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
+          return this._computeArrayExample(body);
+        }
         return;
       }
       if (!(exs instanceof Array)) {
         exs = [exs];
       }
       return exs;
+    }
+    /**
+     * For an array shape it takes first item and tries to use it's example, if
+     * any.
+     * @param {Object} shape
+     * @return {Array|undefined} List of examples in the shape
+     */
+    _computeArrayExample(shape) {
+      const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
+      let item = shape[key];
+      if (!item) {
+        return;
+      }
+      if (item instanceof Array) {
+        item = item[0];
+      }
+      return this._computeExamples(item);
     }
   }
   window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);
