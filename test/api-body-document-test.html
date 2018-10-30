@@ -256,6 +256,59 @@
         });
       });
     });
+
+    suite('"Union" type view', () => {
+      [
+        ['Full AMF model', false],
+        ['Compact AMF model', true]
+      ].forEach((item) => {
+        suite(item[0], () => {
+          let element;
+          let amf;
+          let payload;
+          suiteSetup(() => {
+            return AmfLoader.load(8, 0)
+            .then((data) => {
+              amf = data[0];
+              payload = data[1];
+            });
+          });
+
+          setup((done) => {
+            element = fixture('Opened');
+            element.amfModel = amf;
+            element.body = payload;
+            flush(() => {
+              Polymer.RenderStatus.afterNextRender(this, () => done());
+            });
+          });
+
+          test('Computes isObject attribute', () => {
+            assert.isTrue(element.isObject);
+          });
+
+          test('Computes "hasExamples"', () => {
+            assert.isTrue(element.hasExamples);
+          });
+
+          test('Renders api-type-document', (done) => {
+            flush(() => {
+              const label = element.shadowRoot.querySelector('api-type-document');
+              assert.ok(label);
+              done();
+            });
+          });
+
+          test('Renders api-resource-example-document', (done) => {
+            flush(() => {
+              const label = element.shadowRoot.querySelector('api-resource-example-document');
+              assert.ok(label);
+              done();
+            });
+          });
+        });
+      });
+    });
   });
   </script>
 </body>

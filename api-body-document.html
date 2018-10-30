@@ -481,7 +481,8 @@
       let isObject = false;
       let isSchema = false;
       let isAnyType = false;
-      if (this._hasType(body, this.ns.w3.shacl.name + 'NodeShape')) {
+      if (this._hasType(body, this.ns.w3.shacl.name + 'NodeShape') ||
+        this._hasType(body, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
         isObject = true;
       } else if (this._hasType(body, this.ns.w3.shacl.name + 'SchemaShape') ||
         this._hasType(body, this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
