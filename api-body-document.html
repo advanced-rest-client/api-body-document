@@ -465,7 +465,12 @@
       }
       return this._resolve(schema);
     }
-
+    /**
+     * Computes value for `selectedMediaType` property.
+     * @param {Number} selected Currently selected media type index in the selector.
+     * @param {Array<Object>} body List of bodies.
+     * @return {String} Content type value.
+     */
     _computeSelectedMediaName(selected, body) {
       if (!body || (!selected && selected !== 0)) {
         return;
@@ -473,7 +478,10 @@
       const data = body[selected];
       return this._getValue(data, this.ns.raml.vocabularies.http + 'mediaType');
     }
-
+    /**
+     * Handler for body value change. Computes basic view control properties.
+     * @param {Object} body Currently computed body.
+     */
     _selectedBodyChanged(body) {
       if (!body) {
         return;
