@@ -2212,46 +2212,56 @@
         },
         {
           "name": "_computeSelectedMediaName",
-          "description": "",
+          "description": "Computes value for `selectedMediaType` property.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 468,
+              "line": 473,
               "column": 4
             },
             "end": {
-              "line": 474,
+              "line": 479,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "selected"
+              "name": "selected",
+              "type": "Number",
+              "description": "Currently selected media type index in the selector."
             },
             {
-              "name": "body"
+              "name": "body",
+              "type": "Array.<Object>",
+              "description": "List of bodies."
             }
-          ]
+          ],
+          "return": {
+            "type": "String",
+            "desc": "Content type value."
+          }
         },
         {
           "name": "_selectedBodyChanged",
-          "description": "",
+          "description": "Handler for body value change. Computes basic view control properties.",
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 476,
+              "line": 484,
               "column": 4
             },
             "end": {
-              "line": 496,
+              "line": 505,
               "column": 5
             }
           },
           "metadata": {},
           "params": [
             {
-              "name": "body"
+              "name": "body",
+              "type": "Object",
+              "description": "Currently computed body."
             }
           ],
           "return": {
@@ -2264,11 +2274,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 498,
+              "line": 507,
               "column": 4
             },
             "end": {
-              "line": 500,
+              "line": 509,
               "column": 5
             }
           },
@@ -2285,11 +2295,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 502,
+              "line": 511,
               "column": 4
             },
             "end": {
-              "line": 508,
+              "line": 517,
               "column": 5
             }
           },
@@ -2306,11 +2316,11 @@
           "privacy": "public",
           "sourceRange": {
             "start": {
-              "line": 513,
+              "line": 522,
               "column": 4
             },
             "end": {
-              "line": 515,
+              "line": 524,
               "column": 5
             }
           },
@@ -2326,11 +2336,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 522,
+              "line": 531,
               "column": 4
             },
             "end": {
-              "line": 524,
+              "line": 533,
               "column": 5
             }
           },
@@ -2352,11 +2362,11 @@
           "privacy": "protected",
           "sourceRange": {
             "start": {
-              "line": 531,
+              "line": 540,
               "column": 4
             },
             "end": {
-              "line": 544,
+              "line": 556,
               "column": 5
             }
           },
@@ -2371,6 +2381,32 @@
           "return": {
             "type": "(Array | undefined)",
             "desc": "List of examples in the body"
+          }
+        },
+        {
+          "name": "_computeArrayExample",
+          "description": "For an array shape it takes first item and tries to use it's example, if\nany.",
+          "privacy": "protected",
+          "sourceRange": {
+            "start": {
+              "line": 563,
+              "column": 4
+            },
+            "end": {
+              "line": 573,
+              "column": 5
+            }
+          },
+          "metadata": {},
+          "params": [
+            {
+              "name": "shape",
+              "type": "Object"
+            }
+          ],
+          "return": {
+            "type": "(Array | undefined)",
+            "desc": "List of examples in the shape"
           }
         }
       ],
@@ -2388,7 +2424,7 @@
           "column": 2
         },
         "end": {
-          "line": 545,
+          "line": 574,
           "column": 3
         }
       },

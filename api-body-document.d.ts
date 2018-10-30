@@ -185,8 +185,22 @@ declare namespace ApiElements {
      * @param body List of body in request.
      */
     _computeSelectedBody(selected: Number|null, body: Array<object|null>|null): object|null|undefined;
-    _computeSelectedMediaName(selected: any, body: any): any;
-    _selectedBodyChanged(body: any): void;
+
+    /**
+     * Computes value for `selectedMediaType` property.
+     *
+     * @param selected Currently selected media type index in the selector.
+     * @param body List of bodies.
+     * @returns Content type value.
+     */
+    _computeSelectedMediaName(selected: Number|null, body: Array<object|null>|null): String|null;
+
+    /**
+     * Handler for body value change. Computes basic view control properties.
+     *
+     * @param body Currently computed body.
+     */
+    _selectedBodyChanged(body: object|null): void;
 
     /**
      * Computes a label for the section toggle buttons.
@@ -218,6 +232,14 @@ declare namespace ApiElements {
      * @returns List of examples in the body
      */
     _computeExamples(body: object|null): any[]|null|undefined;
+
+    /**
+     * For an array shape it takes first item and tries to use it's example, if
+     * any.
+     *
+     * @returns List of examples in the shape
+     */
+    _computeArrayExample(shape: object|null): any[]|null|undefined;
   }
 }
 

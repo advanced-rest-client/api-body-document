@@ -88,6 +88,8 @@
               <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
               <paper-item data-src="caro-api-compact.json">Carolina API issue - compact model</paper-item>
               <paper-item data-src="array-example-compact.json">Array examples issue - compact model</paper-item>
+              <paper-item data-src="data-types-union.json">APIC-157</paper-item>
+              <paper-item data-src="data-types-union-compact.json">APIC-157 - compact model</paper-item>
             </paper-listbox>
           </paper-dropdown-menu>
           <div class="spacer"></div>
@@ -110,11 +112,10 @@
     </dom-bind>
     <script>
     (function(app) {
-      class DemoElement extends ApiElements.AmfHelperMixin(Polymer.Element) {}
-      window.customElements.define('demo-element', DemoElement);
-
       app.hasData = false;
       app._load = function() {
+        class DemoElement extends ApiElements.AmfHelperMixin(Polymer.Element) {}
+        window.customElements.define('demo-element', DemoElement);
         document.getElementById('apisList').selected = 0;
       };
 
