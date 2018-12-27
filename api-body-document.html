@@ -182,13 +182,13 @@
           <template is="dom-if" if="[[hasExamples]]">
             <section class="examples">
               <h5 class="examples-section-title">Examples</h5>
-              <api-resource-example-document amf-model="[[amfModel]]" examples="[[examples]]"></api-resource-example-document>
+              <api-resource-example-document amf-model="[[amfModel]]" examples="[[examples]]" media-type="[[selectedMediaType]]" type-name="[[typeName]]"></api-resource-example-document>
             </section>
           </template>
-          <api-type-document amf-model="[[amfModel]]" type="[[selectedBody]]" narrow="[[narrow]]"></api-type-document>
+          <api-type-document amf-model="[[amfModel]]" type="[[selectedSchema]]" narrow="[[narrow]]"></api-type-document>
         </template>
         <template is="dom-if" if="[[isSchema]]">
-          <api-schema-document amf-model="[[amfModel]]" shape="[[selectedBody]]"></api-schema-document>
+          <api-schema-document amf-model="[[amfModel]]" shape="[[selectedSchema]]"></api-schema-document>
         </template>
       </template>
     </iron-collapse>
@@ -226,7 +226,9 @@
    * @appliesMixin ApiElements.AmfHelperMixin
    */
   class ApiBodyDocument extends ApiElements.AmfHelperMixin(Polymer.Element) {
-    static get is() {return 'api-body-document';}
+    static get is() {
+      return 'api-body-document';
+    }
     static get properties() {
       return {
         /**
@@ -273,9 +275,15 @@
          */
         selectedBody: {
           type: Object,
-          readOnly: true,
-          computed: '_computeSelectedBody(selected, body)',
-          observer: '_selectedBodyChanged'
+          computed: '_computeSelectedBody(selected, body)'
+        },
+        /**
+         * Computed AMF schema object for the body.
+         */
+        selectedSchema: {
+          type: Object,
+          computed: '_computeSelectedSchema(selectedBody)',
+          observer: '_selectedSchemaChanged'
         },
         /**
          * Name of the selected media type.
@@ -312,7 +320,7 @@
          */
         typeName: {
           type: String,
-          computed: '_computeTypeName(selectedBody)'
+          computed: '_computeTypeName(selectedSchema)'
         },
         /**
          * Computed value, true if `typeName` is set.
@@ -326,7 +334,7 @@
          */
         description: {
           type: String,
-          computed: '_computeDescription(selectedBody)'
+          computed: '_computeDescription(selectedSchema)'
         },
         /**
          * Computed value, true if `typeName` is set.
@@ -342,7 +350,7 @@
          */
         examples: {
           type: Array,
-          computed: '_computeExamples(selectedBody)'
+          computed: '_computeExamples(selectedBody, selectedSchema)'
         },
         /**
          * Computed valie if examples are set.
@@ -451,12 +459,15 @@
       if (!body || (!selected && selected !== 0)) {
         return;
       }
-      const data = body[selected];
-      if (!data) {
+      return body[selected];
+    }
+
+    _computeSelectedSchema(selectedBody) {
+      if (!selectedBody) {
         return;
       }
       const key = this._getAmfKey(this.ns.raml.vocabularies.http + 'schema');
-      let schema = data[key];
+      let schema = selectedBody[key];
       if (!schema) {
         return;
       }
@@ -482,7 +493,7 @@
      * Handler for body value change. Computes basic view control properties.
      * @param {Object} body Currently computed body.
      */
-    _selectedBodyChanged(body) {
+    _selectedSchemaChanged(body) {
       if (!body) {
         return;
       }
@@ -530,30 +541,85 @@
      * @return {String|undefined}
      */
     _computeTypeName(body) {
-      return this._getValue(body, this.ns.schema.schemaName);
+      let value = this._getValue(body, this.ns.schema.schemaName);
+      if (!value) {
+        value = this._getValue(body, this.ns.w3.shacl.name + 'name');
+      }
+      if (value && (value === 'schema' || value.indexOf('amf_inline_type') === 0)) {
+        value = undefined;
+      }
+      return value;
     }
     /**
      * Computes `examples` property from AMF model.
      *
      * @param {Object} body Currently selected body.
+     * @param {Object} schema Schema computed from the body.
      * @return {Array|undefined} List of examples in the body
      */
-    _computeExamples(body) {
-      if (!body) {
+    _computeExamples(body, schema) {
+      if (!body || !schema) {
         return;
       }
       const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
-      let exs = body[key];
+      let exs = schema[key];
       if (!exs) {
-        if (this._hasType(body, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
-          return this._computeArrayExample(body);
+        if (this._hasType(schema, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
+          return this._computeArrayExample(body, schema);
         }
         return;
       }
       if (!(exs instanceof Array)) {
         exs = [exs];
       }
-      return exs;
+      const id = body['@id'];
+      const example = this._compuuteExamplesBySourceId(id, exs);
+      if (example) {
+        return example;
+      }
+    }
+    /**
+     * Computes examples value by associated source maps element.
+     * @param {String} id Body model AMF id.
+     * @param {Array<Object>} examples An array of examples with source maps.
+     * @return {Array<Object>|undefined} List of examples or undefined if not found
+     */
+    _compuuteExamplesBySourceId(id, examples) {
+      const sourceKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'sources');
+      const trackedKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'tracked-element');
+      const valueKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'value');
+      const longId = 'amf://id' + id;
+      const result = [];
+      for (let i = 0, len = examples.length; i < len; i++) {
+        let example = examples[i];
+        if (example instanceof Array) {
+          example = example[0];
+        }
+        let sm = example[sourceKey];
+        if (!sm) {
+          continue;
+        }
+        if (sm instanceof Array) {
+          sm = sm[0];
+        }
+        let tracked = sm[trackedKey];
+        if (!tracked) {
+          if (len === 1) {
+            // Sometimes it happens...
+            // Not sure why, I am too tired to figure it out.
+            return [example];
+          }
+          continue;
+        }
+        if (tracked instanceof Array) {
+          tracked = tracked[0];
+        }
+        const value = this._getValue(tracked, valueKey);
+        if (value && (value === id || value === longId)) {
+          result[result.length] = example;
+        }
+      }
+      return result.length ? result : undefined;
     }
     /**
      * For an array shape it takes first item and tries to use it's example, if
@@ -561,7 +627,7 @@
      * @param {Object} shape
      * @return {Array|undefined} List of examples in the shape
      */
-    _computeArrayExample(shape) {
+    _computeArrayExample(body, shape) {
       const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
       let item = shape[key];
       if (!item) {
@@ -570,7 +636,7 @@
       if (item instanceof Array) {
         item = item[0];
       }
-      return this._computeExamples(item);
+      return this._computeExamples(body, item);
     }
   }
   window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);
