@@ -8,6 +8,10 @@
  *   api-body-document.html
  */
 
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
+
 /// <reference path="../polymer/types/polymer-element.d.ts" />
 /// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
 /// <reference path="../polymer/types/lib/utils/render-status.d.ts" />
@@ -94,6 +98,11 @@ declare namespace ApiElements {
      * Computed automatically when selection change.
      */
     readonly selectedBody: object|null|undefined;
+
+    /**
+     * Computed AMF schema object for the body.
+     */
+    readonly selectedSchema: object|null|undefined;
 
     /**
      * Name of the selected media type.
@@ -185,6 +194,7 @@ declare namespace ApiElements {
      * @param body List of body in request.
      */
     _computeSelectedBody(selected: Number|null, body: Array<object|null>|null): object|null|undefined;
+    _computeSelectedSchema(selectedBody: any): any;
 
     /**
      * Computes value for `selectedMediaType` property.
@@ -200,7 +210,7 @@ declare namespace ApiElements {
      *
      * @param body Currently computed body.
      */
-    _selectedBodyChanged(body: object|null): void;
+    _selectedSchemaChanged(body: object|null): void;
 
     /**
      * Computes a label for the section toggle buttons.
@@ -229,17 +239,29 @@ declare namespace ApiElements {
      * Computes `examples` property from AMF model.
      *
      * @param body Currently selected body.
+     * @param schema Schema computed from the body.
      * @returns List of examples in the body
      */
-    _computeExamples(body: object|null): any[]|null|undefined;
+    _computeExamples(body: object|null, schema: object|null): any[]|null|undefined;
+
+    /**
+     * Computes examples value by associated source maps element.
+     *
+     * @param id Body model AMF id.
+     * @param examples An array of examples with source maps.
+     * @returns List of examples or undefined if not found
+     */
+    _compuuteExamplesBySourceId(id: String|null, examples: Array<object|null>|null): Array<object|null>|null|undefined;
 
     /**
      * For an array shape it takes first item and tries to use it's example, if
      * any.
      *
+     * @param body Selected body
+     * @param shape Selected shape of the body
      * @returns List of examples in the shape
      */
-    _computeArrayExample(shape: object|null): any[]|null|undefined;
+    _computeArrayExample(body: object|null, shape: object|null): any[]|null|undefined;
   }
 }
 

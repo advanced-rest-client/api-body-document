@@ -42,12 +42,33 @@
   <script>
   /* global AmfLoader */
   suite('api-body-document', () => {
+    function getPayload(element, amf, endpoint, method) {
+      const webApi = element._computeWebApi(amf);
+      const endPoint = element._computeEndpointByPath(webApi, endpoint);
+      const opKey = element._getAmfKey(element.ns.w3.hydra.supportedOperation);
+      const ops = element._ensureArray(endPoint[opKey]);
+      const op = ops.find((item) => element._getValue(item, element.ns.w3.hydra.core + 'method') === method);
+      const expects = element._computeExpects(op);
+      return element._ensureArray(element._computePayload(expects));
+    }
+    function getPayloadSchema(element, amf, endpoint, method, payloadIndex) {
+      if (!payloadIndex) {
+        payloadIndex = 0;
+      }
+      const payload = getPayload(element, amf, endpoint, method)[payloadIndex];
+      const sKey = element._getAmfKey(element.ns.raml.vocabularies.http + 'schema');
+      let schema = payload[sKey];
+      if (schema instanceof Array) {
+        schema = schema[0];
+      }
+      return element._resolve(schema);
+    }
     suite('Basic', () => {
       let element;
       setup((done) => {
         element = fixture('Basic');
         flush(() => {
-          Polymer.RenderStatus.afterNextRender(this, () => done());
+          Polymer.RenderStatus.afterNextRender(element, () => done());
         });
       });
 
@@ -88,7 +109,7 @@
             element.amfModel = amf;
             element.body = payload;
             flush(() => {
-              Polymer.RenderStatus.afterNextRender(this, () => done());
+              Polymer.RenderStatus.afterNextRender(element, () => done());
             });
           });
 
@@ -162,6 +183,17 @@
               done();
             });
           });
+
+          test('Renderss example for array shape', (done) => {
+            const type = getPayload(element, amf, '/messages/bulk', 'post');
+            element.body = type;
+            Polymer.RenderStatus.afterNextRender(element, () => {
+              assert.typeOf(element.examples, 'array');
+              const node = element.shadowRoot.querySelector('api-resource-example-document');
+              assert.ok(node);
+              done();
+            });
+          });
         });
       });
     });
@@ -188,7 +220,7 @@
             element.amfModel = amf;
             element.body = payload;
             flush(() => {
-              Polymer.RenderStatus.afterNextRender(this, () => done());
+              Polymer.RenderStatus.afterNextRender(element, () => done());
             });
           });
 
@@ -229,7 +261,7 @@
             element.amfModel = amf;
             element.body = payload;
             flush(() => {
-              Polymer.RenderStatus.afterNextRender(this, () => done());
+              Polymer.RenderStatus.afterNextRender(element, () => done());
             });
           });
 
@@ -279,7 +311,7 @@
             element.amfModel = amf;
             element.body = payload;
             flush(() => {
-              Polymer.RenderStatus.afterNextRender(this, () => done());
+              Polymer.RenderStatus.afterNextRender(element, () => done());
             });
           });
 
@@ -305,6 +337,61 @@
               assert.ok(label);
               done();
             });
+          });
+        });
+      });
+    });
+
+    suite('_computeArrayExample()', () => {
+      [
+        ['Full AMF model', false],
+        ['Compact AMF model', true]
+      ].forEach((item) => {
+        suite(item[0], () => {
+          let element;
+          let amf;
+          suiteSetup(() => {
+            return AmfLoader.load(0, 0)
+            .then((data) => {
+              amf = data[0];
+            });
+          });
+
+          setup(() => {
+            element = fixture('Opened');
+            element.amfModel = amf;
+          });
+
+          test('Calls _computeExamples()', () => {
+            const body = getPayloadSchema(element, amf, '/messages/bulk', 'post');
+            const schema = getPayloadSchema(element, amf, '/messages/bulk', 'post');
+            const spy = sinon.spy(element, '_computeExamples');
+            element._computeArrayExample(body, schema);
+            assert.isTrue(spy.called);
+          });
+
+          test('_computeExamples() called with the same body', () => {
+            const body = getPayloadSchema(element, amf, '/messages/bulk', 'post');
+            const schema = getPayloadSchema(element, amf, '/messages/bulk', 'post');
+            const spy = sinon.spy(element, '_computeExamples');
+            element._computeArrayExample(body, schema);
+            assert.isTrue(spy.called);
+            assert.isTrue(spy.args[0][0] === body);
+          });
+
+          test('_computeExamples() called with one of the items', () => {
+            const body = getPayloadSchema(element, amf, '/messages/bulk', 'post');
+            const schema = getPayloadSchema(element, amf, '/messages/bulk', 'post');
+            const spy = sinon.spy(element, '_computeExamples');
+            element._computeArrayExample(body, schema);
+            assert.isTrue(spy.called);
+            assert.isTrue(element._hasType(spy.args[0][1], element.ns.w3.shacl.name + 'NodeShape'));
+          });
+
+          test('Returns undefined if shape has no items', () => {
+            const body = getPayloadSchema(element, amf, '/messages/bulk', 'post');
+            const result = element._computeArrayExample(body, {});
+            assert.isUndefined(result);
           });
         });
       });
