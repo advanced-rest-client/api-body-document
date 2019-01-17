@@ -139,11 +139,19 @@
           });
 
           test('typeName is computed', () => {
-            assert.equal(element.typeName, 'A person resource');
+            assert.equal(element.typeName, 'AppPerson');
           });
 
           test('hasTypeName is computed', () => {
             assert.isTrue(element.hasTypeName);
+          });
+
+          test('bodyName is computed', () => {
+            assert.equal(element.bodyName, 'A person resource');
+          });
+
+          test('hasBodyName is computed', () => {
+            assert.isTrue(element.hasBodyName);
           });
 
           test('description is computed', () => {
@@ -392,6 +400,84 @@
             const body = getPayloadSchema(element, amf, '/messages/bulk', 'post');
             const result = element._computeArrayExample(body, {});
             assert.isUndefined(result);
+          });
+        });
+      });
+    });
+
+    suite('Any type rendering', () => {
+      [
+        ['Full AMF model', false],
+        ['Compact AMF model', true]
+      ].forEach((item) => {
+        suite(item[0], () => {
+          let element;
+          let amf;
+          suiteSetup(() => {
+            return AmfLoader.load(9, 0)
+            .then((data) => {
+              amf = data[0];
+            });
+          });
+
+          setup(() => {
+            element = fixture('Opened');
+            element.amfModel = amf;
+          });
+
+          test('Renders example for any type', (done) => {
+            const type = getPayload(element, amf, '/emptyBodyWithExample', 'post');
+            element.body = type;
+            Polymer.RenderStatus.afterNextRender(element, () => {
+              assert.isTrue(element.isAnyType, 'isAnyType is set');
+              assert.isTrue(element.hasExamples, 'hasExamples is set');
+              flush(() => {
+                const node = element.shadowRoot.querySelector('.examples');
+                assert.ok(node, 'Examples section is rendered');
+                done();
+              });
+            });
+          });
+
+          test('Won\'t render example for any type when example is not defined', (done) => {
+            const type = getPayload(element, amf, '/emptyBodyWithName', 'post');
+            element.body = type;
+            Polymer.RenderStatus.afterNextRender(element, () => {
+              assert.isTrue(element.isAnyType, 'isAnyType is set');
+              flush(() => {
+                const node = element.shadowRoot.querySelector('.examples');
+                assert.notOk(node, 'Examples section is not rendered');
+                done();
+              });
+            });
+          });
+
+          test('Renders body title', (done) => {
+            const type = getPayload(element, amf, '/emptyBodyWithAllProperties', 'post');
+            element.body = type;
+            Polymer.RenderStatus.afterNextRender(element, () => {
+              assert.isTrue(element.hasBodyName, 'hasBodyName is set');
+              assert.equal(element.bodyName, 'My body name', 'bodyName is set');
+              flush(() => {
+                const node = element.shadowRoot.querySelector('.body-name');
+                assert.ok(node, 'Body name label is rendered');
+                done();
+              });
+            });
+          });
+
+          test('Renders body description', (done) => {
+            const type = getPayload(element, amf, '/emptyBodyWithAllProperties', 'post');
+            element.body = type;
+            Polymer.RenderStatus.afterNextRender(element, () => {
+              assert.isTrue(element.hasDescription, 'hasDescription is set');
+              assert.equal(element.description, 'My description of `body`.');
+              flush(() => {
+                const node = element.shadowRoot.querySelector('.markdown-body');
+                assert.ok(node, 'Example is rendered');
+                done();
+              });
+            });
           });
         });
       });
