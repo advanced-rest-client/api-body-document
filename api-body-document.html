@@ -140,6 +140,10 @@
     .any-info {
       font-size: 16px;
     }
+
+    .body-name {
+      font-weight: 500;
+    }
     </style>
     <template is="dom-if" if="[[aware]]">
       <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
@@ -155,8 +159,22 @@
     </div>
     <iron-collapse opened="[[opened]]">
       <template is="dom-if" if="[[isAnyType]]">
+        <template is="dom-if" if="[[hasBodyName]]">
+          <h4 class="body-name">[[bodyName]]</h4>
+        </template>
+        <template is="dom-if" if="[[hasDescription]]">
+          <marked-element markdown="[[description]]">
+            <div slot="markdown-html" class="markdown-body" data-with-title$="[[hasTypeName]]"></div>
+          </marked-element>
+        </template>
         <p class="any-info">Any instance of data is allowed.</p>
         <p class="any-info-description">The API file specifies body for this request but it does not specify the data model.</p>
+        <template is="dom-if" if="[[hasExamples]]">
+          <section class="examples">
+            <h5 class="examples-section-title">Examples</h5>
+            <api-resource-example-document amf-model="[[amfModel]]" examples="[[examples]]" media-type="[[selectedMediaType]]" type-name="[[typeName]]"></api-resource-example-document>
+          </section>
+        </template>
       </template>
       <template is="dom-if" if="[[!isAnyType]]">
         <div class="media-type-selector">
@@ -170,6 +188,9 @@
             <span class="media-type-label">[[selectedMediaType]]</span>
           </template>
         </div>
+        <template is="dom-if" if="[[hasBodyName]]">
+          <h4 class="body-name">[[bodyName]]</h4>
+        </template>
         <template is="dom-if" if="[[hasTypeName]]">
           <h4>[[typeName]]</h4>
         </template>
@@ -328,6 +349,20 @@
         hasTypeName: {
           type: Boolean,
           computed: '_computeHasStringValue(typeName)'
+        },
+        /**
+         * Body name, if defined
+         */
+        bodyName: {
+          type: String,
+          computed: '_computeBodyName(selectedSchema)'
+        },
+        /**
+         * Computed value, true if `bodyName` is set.
+         */
+        hasBodyName: {
+          type: Boolean,
+          computed: '_computeHasStringValue(bodyName)'
         },
         /**
          * Name of the resource type if any.
@@ -541,14 +576,19 @@
      * @return {String|undefined}
      */
     _computeTypeName(body) {
-      let value = this._getValue(body, this.ns.schema.schemaName);
-      if (!value) {
-        value = this._getValue(body, this.ns.w3.shacl.name + 'name');
-      }
+      let value = this._getValue(body, this.ns.w3.shacl.name + 'name');
       if (value && (value === 'schema' || value.indexOf('amf_inline_type') === 0)) {
         value = undefined;
       }
       return value;
+    }
+    /**
+     * Computes value for `bodyName`.
+     * @param {Object} schema Computed body schema
+     * @return {String|undefined} Computed body name
+     */
+    _computeBodyName(schema) {
+      return this._getValue(schema, this.ns.schema.schemaName);
     }
     /**
      * Computes `examples` property from AMF model.
