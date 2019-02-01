@@ -163,10 +163,13 @@
           });
 
           test('Renders examples section', (done) => {
-            Polymer.RenderStatus.afterNextRender(element, () => {
-              const node = element.shadowRoot.querySelector('.examples');
-              assert.isFalse(node.hasAttribute('hidden'));
-              done();
+            element.selected = 0;
+            flush(() => {
+              Polymer.RenderStatus.afterNextRender(element, () => {
+                const node = element.shadowRoot.querySelector('.examples');
+                assert.isFalse(node.hasAttribute('hidden'));
+                done();
+              });
             });
           });
 
