@@ -135,6 +135,16 @@ declare namespace ApiElements {
     readonly hasTypeName: boolean|null|undefined;
 
     /**
+     * Body name, if defined
+     */
+    readonly bodyName: string|null|undefined;
+
+    /**
+     * Computed value, true if `bodyName` is set.
+     */
+    readonly hasBodyName: boolean|null|undefined;
+
+    /**
      * Name of the resource type if any.
      */
     readonly description: string|null|undefined;
@@ -145,20 +155,13 @@ declare namespace ApiElements {
     readonly hasDescription: boolean|null|undefined;
 
     /**
-     * Computed value of examples in the body model.
-     */
-    readonly examples: Array<object|null>|null;
-
-    /**
-     * Computed valie if examples are set.
-     */
-    readonly hasExamples: boolean|null|undefined;
-
-    /**
      * Set to render a mobile friendly view.
      */
     narrow: boolean|null|undefined;
+    _hasObjectExamples: boolean|null|undefined;
+    _hasAnyExamples: boolean|null|undefined;
     _bodyChanged(): void;
+    _selectedBodyChanged(): void;
 
     /**
      * Computes list of media types in the `body`
@@ -236,32 +239,12 @@ declare namespace ApiElements {
     _computeTypeName(body: object|null): String|null|undefined;
 
     /**
-     * Computes `examples` property from AMF model.
+     * Computes value for `bodyName`.
      *
-     * @param body Currently selected body.
-     * @param schema Schema computed from the body.
-     * @returns List of examples in the body
+     * @param schema Computed body schema
+     * @returns Computed body name
      */
-    _computeExamples(body: object|null, schema: object|null): any[]|null|undefined;
-
-    /**
-     * Computes examples value by associated source maps element.
-     *
-     * @param id Body model AMF id.
-     * @param examples An array of examples with source maps.
-     * @returns List of examples or undefined if not found
-     */
-    _compuuteExamplesBySourceId(id: String|null, examples: Array<object|null>|null): Array<object|null>|null|undefined;
-
-    /**
-     * For an array shape it takes first item and tries to use it's example, if
-     * any.
-     *
-     * @param body Selected body
-     * @param shape Selected shape of the body
-     * @returns List of examples in the shape
-     */
-    _computeArrayExample(body: object|null, shape: object|null): any[]|null|undefined;
+    _computeBodyName(schema: object|null): String|null|undefined;
   }
 }
 

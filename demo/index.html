@@ -76,6 +76,11 @@
       api-navigation {
         min-width: 256px;
       }
+
+      api-body-document {
+        flex: 1;
+        margin-left: 12px;
+      }
       </style>
     </custom-style>
   </head>
@@ -87,6 +92,8 @@
             <paper-listbox slot="dropdown-content" id="apisList" on-selected-changed="_apiChanged">
               <paper-item data-src="demo-api.json">Demo api</paper-item>
               <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
+              <paper-item data-src="examples-api.json">Examples render demo api</paper-item>
+              <paper-item data-src="examples-api-compact.json">Examples render demo - compact model</paper-item>
               <paper-item data-src="raml-types.json">RAML types with raml examples</paper-item>
               <paper-item data-src="raml-types-compact.json">RAML types with raml examples - compact model</paper-item>
               <paper-item data-src="caro-api-compact.json">Carolina API issue - compact model</paper-item>

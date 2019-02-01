@@ -158,7 +158,7 @@
       </div>
     </div>
     <iron-collapse opened="[[opened]]">
-      <template is="dom-if" if="[[isAnyType]]">
+      <template is="dom-if" if="[[isAnyType]]" restamp>
         <template is="dom-if" if="[[hasBodyName]]">
           <h4 class="body-name">[[bodyName]]</h4>
         </template>
@@ -169,12 +169,10 @@
         </template>
         <p class="any-info">Any instance of data is allowed.</p>
         <p class="any-info-description">The API file specifies body for this request but it does not specify the data model.</p>
-        <template is="dom-if" if="[[hasExamples]]">
-          <section class="examples">
-            <h5 class="examples-section-title">Examples</h5>
-            <api-resource-example-document amf-model="[[amfModel]]" examples="[[examples]]" media-type="[[selectedMediaType]]" type-name="[[typeName]]"></api-resource-example-document>
-          </section>
-        </template>
+        <section class="examples" hidden$="[[!_hasAnyExamples]]">
+          <h5 class="examples-section-title">Examples</h5>
+          <api-resource-example-document amf-model="[[amfModel]]" examples="[[selectedBody]]" media-type="[[selectedMediaType]]" type-name="[[typeName]]" has-examples="{{_hasAnyExamples}}"></api-resource-example-document>
+        </section>
       </template>
       <template is="dom-if" if="[[!isAnyType]]">
         <div class="media-type-selector">
@@ -199,13 +197,11 @@
             <div slot="markdown-html" class="markdown-body" data-with-title$="[[hasTypeName]]"></div>
           </marked-element>
         </template>
-        <template is="dom-if" if="[[isObject]]">
-          <template is="dom-if" if="[[hasExamples]]">
-            <section class="examples">
-              <h5 class="examples-section-title">Examples</h5>
-              <api-resource-example-document amf-model="[[amfModel]]" examples="[[examples]]" media-type="[[selectedMediaType]]" type-name="[[typeName]]"></api-resource-example-document>
-            </section>
-          </template>
+        <template is="dom-if" if="[[isObject]]" restamp>
+          <section class="examples" hidden$="[[!_hasObjectExamples]]">
+            <h5 class="examples-section-title">Examples</h5>
+            <api-resource-example-document amf-model="[[amfModel]]" examples="[[selectedBody]]" media-type="[[selectedMediaType]]" type-name="[[typeName]]" has-examples="{{_hasObjectExamples}}"></api-resource-example-document>
+          </section>
           <api-type-document amf-model="[[amfModel]]" type="[[selectedSchema]]" narrow="[[narrow]]"></api-type-document>
         </template>
         <template is="dom-if" if="[[isSchema]]">
@@ -296,7 +292,8 @@
          */
         selectedBody: {
           type: Object,
-          computed: '_computeSelectedBody(selected, body)'
+          computed: '_computeSelectedBody(selected, body)',
+          observer: '_selectedBodyChanged'
         },
         /**
          * Computed AMF schema object for the body.
@@ -379,28 +376,14 @@
           computed: '_computeHasStringValue(description)'
         },
         /**
-         * Computed value of examples in the body model.
-         *
-         * @type {Array<Object>}
-         */
-        examples: {
-          type: Array,
-          computed: '_computeExamples(selectedBody, selectedSchema)'
-        },
-        /**
-         * Computed valie if examples are set.
-         */
-        hasExamples: {
-          type: Boolean,
-          computed: '_computeHasArrayValue(examples)'
-        },
-        /**
          * Set to render a mobile friendly view.
          */
          narrow: {
            type: Boolean,
            reflectToAttribute: true
-         }
+         },
+         _hasObjectExamples: {type: Boolean, value: false},
+         _hasAnyExamples: {type: Boolean, value: false}
       };
     }
 
@@ -434,6 +417,11 @@
       const media = this._computeMediaTypes(this.body);
       this._setMediaTypes(media);
       this.selected = 0;
+    }
+
+    _selectedBodyChanged() {
+      this._hasObjectExamples = false;
+      this._hasAnyExamples = false;
     }
     /**
      * Computes list of media types in the `body`
@@ -589,95 +577,6 @@
      */
     _computeBodyName(schema) {
       return this._getValue(schema, this.ns.schema.schemaName);
-    }
-    /**
-     * Computes `examples` property from AMF model.
-     *
-     * @param {Object} body Currently selected body.
-     * @param {Object} schema Schema computed from the body.
-     * @return {Array|undefined} List of examples in the body
-     */
-    _computeExamples(body, schema) {
-      if (!body || !schema) {
-        return;
-      }
-      const key = this._getAmfKey(this.ns.raml.vocabularies.document + 'examples');
-      let exs = schema[key];
-      if (!exs) {
-        if (this._hasType(schema, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
-          return this._computeArrayExample(body, schema);
-        }
-        return;
-      }
-      if (!(exs instanceof Array)) {
-        exs = [exs];
-      }
-      const id = body['@id'];
-      const example = this._compuuteExamplesBySourceId(id, exs);
-      if (example) {
-        return example;
-      }
-    }
-    /**
-     * Computes examples value by associated source maps element.
-     * @param {String} id Body model AMF id.
-     * @param {Array<Object>} examples An array of examples with source maps.
-     * @return {Array<Object>|undefined} List of examples or undefined if not found
-     */
-    _compuuteExamplesBySourceId(id, examples) {
-      const sourceKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'sources');
-      const trackedKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'tracked-element');
-      const valueKey = this._getAmfKey(this.ns.raml.vocabularies.docSourceMaps + 'value');
-      const longId = 'amf://id' + id;
-      const result = [];
-      for (let i = 0, len = examples.length; i < len; i++) {
-        let example = examples[i];
-        if (example instanceof Array) {
-          example = example[0];
-        }
-        let sm = example[sourceKey];
-        if (!sm) {
-          continue;
-        }
-        if (sm instanceof Array) {
-          sm = sm[0];
-        }
-        let tracked = sm[trackedKey];
-        if (!tracked) {
-          if (len === 1) {
-            // Sometimes it happens...
-            // Not sure why, I am too tired to figure it out.
-            return [example];
-          }
-          continue;
-        }
-        if (tracked instanceof Array) {
-          tracked = tracked[0];
-        }
-        const value = this._getValue(tracked, valueKey);
-        if (value && (value === id || value === longId)) {
-          result[result.length] = example;
-        }
-      }
-      return result.length ? result : undefined;
-    }
-    /**
-     * For an array shape it takes first item and tries to use it's example, if
-     * any.
-     * @param {Object} body Selected body
-     * @param {Object} shape Selected shape of the body
-     * @return {Array|undefined} List of examples in the shape
-     */
-    _computeArrayExample(body, shape) {
-      const key = this._getAmfKey(this.ns.raml.vocabularies.shapes + 'items');
-      let item = shape[key];
-      if (!item) {
-        return;
-      }
-      if (item instanceof Array) {
-        item = item[0];
-      }
-      return this._computeExamples(body, item);
     }
   }
   window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);
