@@ -162,17 +162,6 @@
             assert.isTrue(element.hasDescription);
           });
 
-          test('Renders examples section', (done) => {
-            element.selected = 0;
-            flush(() => {
-              Polymer.RenderStatus.afterNextRender(element, () => {
-                const node = element.shadowRoot.querySelector('.examples');
-                assert.isFalse(node.hasAttribute('hidden'));
-                done();
-              });
-            });
-          });
-
           test('Media type tap changes selection', (done) => {
             flush(() => {
               const button = element.shadowRoot.querySelectorAll('.media-toggle')[1];
@@ -321,14 +310,6 @@
           test('Renders api-type-document', (done) => {
             flush(() => {
               const label = element.shadowRoot.querySelector('api-type-document');
-              assert.ok(label);
-              done();
-            });
-          });
-
-          test('Renders api-resource-example-document', (done) => {
-            flush(() => {
-              const label = element.shadowRoot.querySelector('api-resource-example-document');
               assert.ok(label);
               done();
             });

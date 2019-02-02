@@ -198,11 +198,7 @@
           </marked-element>
         </template>
         <template is="dom-if" if="[[isObject]]" restamp>
-          <section class="examples" hidden$="[[!_hasObjectExamples]]">
-            <h5 class="examples-section-title">Examples</h5>
-            <api-resource-example-document amf-model="[[amfModel]]" examples="[[selectedBody]]" media-type="[[selectedMediaType]]" type-name="[[typeName]]" has-examples="{{_hasObjectExamples}}"></api-resource-example-document>
-          </section>
-          <api-type-document amf-model="[[amfModel]]" type="[[selectedSchema]]" narrow="[[narrow]]"></api-type-document>
+          <api-type-document amf-model="[[amfModel]]" type="[[selectedSchema]]" narrow="[[narrow]]" media-type="[[selectedMediaType]]"></api-type-document>
         </template>
         <template is="dom-if" if="[[isSchema]]">
           <api-schema-document amf-model="[[amfModel]]" shape="[[selectedSchema]]"></api-schema-document>
