@@ -1,4 +1,5 @@
-const AmfLoader = {};
+import {ns} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+export const AmfLoader = {};
 AmfLoader.load = function(endpointIndex, methodIndex, compact) {
   endpointIndex = endpointIndex || 0;
   methodIndex = methodIndex || 0;
@@ -16,7 +17,6 @@ AmfLoader.load = function(endpointIndex, methodIndex, compact) {
         reject(e);
         return;
       }
-      const ns = ApiElements.Amf.ns;
       const original = data;
       if (data instanceof Array) {
         data = data[0];

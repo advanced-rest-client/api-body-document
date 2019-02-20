@@ -5,28 +5,20 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   api-body-document.html
+ *   api-body-document.js
  */
 
 
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-/// <reference path="../polymer/types/polymer-element.d.ts" />
-/// <reference path="../polymer/types/lib/elements/dom-if.d.ts" />
-/// <reference path="../polymer/types/lib/utils/render-status.d.ts" />
-/// <reference path="../raml-aware/raml-aware.d.ts" />
-/// <reference path="../iron-flex-layout/iron-flex-layout.d.ts" />
-/// <reference path="../api-type-document/api-type-document.d.ts" />
-/// <reference path="../iron-collapse/iron-collapse.d.ts" />
-/// <reference path="../iron-icon/iron-icon.d.ts" />
-/// <reference path="../arc-icons/arc-icons.d.ts" />
-/// <reference path="../paper-button/paper-button.d.ts" />
-/// <reference path="../api-schema-document/api-schema-document.d.ts" />
-/// <reference path="../markdown-styles/markdown-styles.d.ts" />
-/// <reference path="../marked-element/marked-element.d.ts" />
-/// <reference path="../api-resource-example-document/api-resource-example-document.d.ts" />
-/// <reference path="../amf-helper-mixin/amf-helper-mixin.d.ts" />
+import {PolymerElement} from '@polymer/polymer/polymer-element.js';
+
+import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
+
+import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+
+import {html} from '@polymer/polymer/lib/utils/html-tag.js';
 
 declare namespace ApiElements {
 
@@ -56,7 +48,7 @@ declare namespace ApiElements {
    * `--api-body-document-title-narrow` | Mixin applied to the title when in narrow layout | `{}`
    */
   class ApiBodyDocument extends
-    ApiElements.AmfHelperMixin(
+    AmfHelperMixin(
     Object) {
 
     /**
@@ -248,6 +240,9 @@ declare namespace ApiElements {
   }
 }
 
-interface HTMLElementTagNameMap {
-  "api-body-document": ApiElements.ApiBodyDocument;
+declare global {
+
+  interface HTMLElementTagNameMap {
+    "api-body-document": ApiElements.ApiBodyDocument;
+  }
 }
