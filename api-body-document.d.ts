@@ -12,14 +12,6 @@
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-
-import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
-
-import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
-
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
-
 declare namespace ApiElements {
 
   /**
@@ -246,3 +238,5 @@ declare global {
     "api-body-document": ApiElements.ApiBodyDocument;
   }
 }
+
+export {};
