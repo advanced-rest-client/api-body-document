@@ -1,19 +1,18 @@
-import {PolymerElement} from '@polymer/polymer/polymer-element.js';
-import {afterNextRender} from '@polymer/polymer/lib/utils/render-status.js';
-import '@polymer/polymer/lib/elements/dom-if.js';
-import '@api-components/raml-aware/raml-aware.js';
-import '@polymer/iron-flex-layout/iron-flex-layout.js';
-import '@api-components/api-type-document/api-type-document.js';
-import '@polymer/iron-collapse/iron-collapse.js';
-import '@polymer/iron-icon/iron-icon.js';
-import '@advanced-rest-client//arc-icons/arc-icons.js';
-import '@polymer/paper-button/paper-button.js';
-import '@api-components/api-schema-document/api-schema-document.js';
-import '@advanced-rest-client/markdown-styles/markdown-styles.js';
-import '@polymer/marked-element/marked-element.js';
-import '@api-components/api-resource-example-document/api-resource-example-document.js';
-import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
-import {html} from '@polymer/polymer/lib/utils/html-tag.js';
+import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
+import {afterNextRender} from '../../@polymer/polymer/lib/utils/render-status.js';
+import {AmfHelperMixin} from '../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
+import '../../@api-components/raml-aware/raml-aware.js';
+import '../../@polymer/iron-flex-layout/iron-flex-layout.js';
+import '../../@api-components/api-type-document/api-type-document.js';
+import '../../@polymer/iron-collapse/iron-collapse.js';
+import '../../@polymer/iron-icon/iron-icon.js';
+import '../../@advanced-rest-client/arc-icons/arc-icons.js';
+import '../../@polymer/paper-button/paper-button.js';
+import '../../@api-components/api-schema-document/api-schema-document.js';
+import '../../@advanced-rest-client/markdown-styles/markdown-styles.js';
+import '../../@polymer/marked-element/marked-element.js';
+import '../../@api-components/api-resource-example-document/api-resource-example-document.js';
 /**
  * `api-body-document`
  *
