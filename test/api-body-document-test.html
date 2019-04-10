@@ -41,28 +41,46 @@
 
   <script>
   /* global AmfLoader */
+  function computeOperation(element, amf, endpoint, method) {
+    const webApi = element._computeWebApi(amf);
+    const endPoint = element._computeEndpointByPath(webApi, endpoint);
+    const opKey = element._getAmfKey(element.ns.w3.hydra.supportedOperation);
+    const ops = element._ensureArray(endPoint[opKey]);
+    return ops.find((item) => element._getValue(item, element.ns.w3.hydra.core + 'method') === method);
+  }
+
+  function getPayload(element, amf, endpoint, method) {
+    const op = computeOperation(element, amf, endpoint, method);
+    const expects = element._computeExpects(op);
+    return element._ensureArray(element._computePayload(expects));
+  }
+
+  // function getOperationSchema(element, operation) {
+  //   const expects = element._computeExpects(operation);
+  //   const payload = element._ensureArray(element._computePayload(expects));
+  //   const sKey = element._getAmfKey(element.ns.raml.vocabularies.http + 'schema');
+  //   let schema = payload[sKey];
+  //   if (schema instanceof Array) {
+  //     schema = schema[0];
+  //   }
+  //   return element._resolve(schema);
+  // }
+
+  function computeReturnsPayload(element, operation, code) {
+    const rKey = element._getAmfKey(element.ns.w3.hydra.core + 'returns');
+    const returns = element._ensureArray(operation[rKey]);
+    const response = returns.find((item) => {
+      if (element._getValue(item, element.ns.w3.hydra.core + 'statusCode') === String(code)) {
+        return true;
+      }
+      return false;
+    });
+    const pKey = element._getAmfKey(element.ns.raml.vocabularies.http + 'payload');
+    const payload = response[pKey];
+    return payload instanceof Array ? payload : [payload];
+  }
+
   suite('api-body-document', () => {
-    function getPayload(element, amf, endpoint, method) {
-      const webApi = element._computeWebApi(amf);
-      const endPoint = element._computeEndpointByPath(webApi, endpoint);
-      const opKey = element._getAmfKey(element.ns.w3.hydra.supportedOperation);
-      const ops = element._ensureArray(endPoint[opKey]);
-      const op = ops.find((item) => element._getValue(item, element.ns.w3.hydra.core + 'method') === method);
-      const expects = element._computeExpects(op);
-      return element._ensureArray(element._computePayload(expects));
-    }
-    function getPayloadSchema(element, amf, endpoint, method, payloadIndex) {
-      if (!payloadIndex) {
-        payloadIndex = 0;
-      }
-      const payload = getPayload(element, amf, endpoint, method)[payloadIndex];
-      const sKey = element._getAmfKey(element.ns.raml.vocabularies.http + 'schema');
-      let schema = payload[sKey];
-      if (schema instanceof Array) {
-        schema = schema[0];
-      }
-      return element._resolve(schema);
-    }
     suite('Basic', () => {
       let element;
       setup((done) => {
@@ -394,6 +412,58 @@
                 done();
               });
             });
+          });
+        });
+      });
+    });
+
+    suite('Examples from schema [SE-11508]', () => {
+      [
+        ['Full AMF model', false],
+        ['Compact AMF model', true]
+      ].forEach((item) => {
+        suite(item[0], () => {
+          let element;
+          let amf;
+          suiteSetup(() => {
+            return AmfLoader.load(0, 0, item[1], 'SE-11508')
+            .then((data) => {
+              amf = data[0];
+            });
+          });
+
+          setup((done) => {
+            element = fixture('Opened');
+            element.amfModel = amf;
+            flush(() => done());
+          });
+
+          test('Renders api-type-document element', (done) => {
+            const op = computeOperation(element, amf, '/validatecustomeraccounthash', 'post');
+            const payload = computeReturnsPayload(element, op, '400');
+            element.body = payload;
+            flush(() => {
+              Polymer.RenderStatus.afterNextRender(element, () => {
+                flush(() => {
+                  const typeNode = element.shadowRoot.querySelector('api-type-document');
+                  assert.typeOf(typeNode.selectedBodyId, 'string', 'selected body id is set');
+                  done();
+                });
+              });
+            });
+          });
+
+          test('api-type-document renders api-resource-example-document element', (done) => {
+            const op = computeOperation(element, amf, '/validatecustomeraccounthash', 'post');
+            const payload = computeReturnsPayload(element, op, '400');
+            element.body = payload;
+            setTimeout(() => {
+              const typeNode = element.shadowRoot.querySelector('api-type-document');
+              const node = typeNode.shadowRoot.querySelector('api-resource-example-document');
+              assert.lengthOf(node.renderedExamples, 1, 'Examples render has 1 example');
+              assert.equal(node.renderedExamples[0].title, '400_badrequest_validate_customer_account_hash');
+              done();
+            }, 120);
           });
         });
       });

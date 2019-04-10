@@ -81,6 +81,10 @@
         flex: 1;
         margin-left: 12px;
       }
+
+      .list {
+        flex: 1;
+      }
       </style>
     </custom-style>
   </head>
@@ -100,6 +104,8 @@
               <paper-item data-src="array-example-compact.json">Array examples issue - compact model</paper-item>
               <paper-item data-src="data-types-union.json">APIC-157</paper-item>
               <paper-item data-src="data-types-union-compact.json">APIC-157 - compact model</paper-item>
+              <paper-item data-src="SE-11508.json">SE-11508</paper-item>
+              <paper-item data-src="SE-11508.json">SE-11508 - compact model</paper-item>
             </paper-listbox>
           </paper-dropdown-menu>
           <div class="spacer"></div>
@@ -110,7 +116,9 @@
         <section role="main" class="centered card">
           <api-navigation aware="demo" endpoints-opened></api-navigation>
           <template is="dom-if" if="[[hasData]]">
-            <api-body-document amf-model="[[amfModel]]" body="[[body]]" opened></api-body-document>
+            <div class="list">
+              <api-body-document amf-model="[[amfModel]]" body="[[payloads]]" opened></api-body-document>
+            </div>
           </template>
           <template is="dom-if" if="[[!hasData]]">
             <p>Select a HTTP method in the navigation to see the demo.</p>
@@ -153,23 +161,41 @@
       };
 
       app.setData = function(selected) {
-        const ns = ApiElements.Amf.ns;
         const webApi = app.$.helper._computeWebApi(app.amfModel);
         const method = app.$.helper._computeMethodModel(webApi, selected);
-        const expKey = app.$.helper._getAmfKey(ns.w3.hydra.core + 'expects');
-        let expects = method[expKey];
-        if (!expects) {
+        const payloads = app.computePayloads(method);
+        app.payloads = payloads;
+      };
+
+      app.computePayloads = function(model) {
+        if (!model) {
           return;
         }
-        if (expects instanceof Array) {
-          expects = expects[0];
+        let result = [];
+        const expects = app.$.helper._computeExpects(model);
+        if (expects) {
+          let payloads = app.$.helper._computePayload(expects);
+          if (payloads) {
+            if (!(payloads instanceof Array)) {
+              payloads = [payloads];
+            }
+            result = payloads;
+          }
         }
-        const pKey = app.$.helper._getAmfKey(ns.raml.vocabularies.http + 'payload');
-        let payloads = expects[pKey];
-        if (payloads && !(payloads instanceof Array)) {
-          payloads = [payloads];
+        const returns = app.$.helper._computeReturns(model);
+        if (returns) {
+          for (let i = 0, len = returns.length; i < len; i++) {
+            let payloads = app.$.helper._computePayload(returns[i]);
+            if (payloads) {
+              if (!(payloads instanceof Array)) {
+                payloads = [payloads];
+              }
+              result = result.concat(payloads);
+            }
+          }
         }
-        app.body = payloads;
+
+        return result.length ? result : undefined;
       };
       window.addEventListener('WebComponentsReady', () => app._load());
       window.addEventListener('api-navigation-selection-changed', app._navChanged);
