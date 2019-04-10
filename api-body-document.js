@@ -202,7 +202,7 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
         <p class="any-info-description">The API file specifies body for this request but it does not specify the data model.</p>
         <section class="examples" hidden\$="[[!_hasAnyExamples]]">
           <h5 class="examples-section-title">Examples</h5>
-          <api-resource-example-document amf-model="[[amfModel]]" examples="[[selectedBody]]" media-type="[[selectedMediaType]]" type-name="[[typeName]]" has-examples="{{_hasAnyExamples}}"></api-resource-example-document>
+          <api-resource-example-document amf-model="[[amfModel]]" examples="[[selectedBody]]" media-type="[[selectedMediaType]]" type-name="[[typeName]]" payload-id="[[selectedBodyId]]" has-examples="{{_hasAnyExamples}}"></api-resource-example-document>
         </section>
       </template>
       <template is="dom-if" if="[[!isAnyType]]">
@@ -229,7 +229,7 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
           </marked-element>
         </template>
         <template is="dom-if" if="[[isObject]]" restamp="">
-          <api-type-document amf-model="[[amfModel]]" type="[[selectedSchema]]" narrow="[[narrow]]" media-type="[[selectedMediaType]]"></api-type-document>
+          <api-type-document amf-model="[[amfModel]]" selected-body-id="[[selectedBodyId]]" type="[[selectedSchema]]" narrow="[[narrow]]" media-type="[[selectedMediaType]]"></api-type-document>
         </template>
         <template is="dom-if" if="[[isSchema]]">
           <api-schema-document amf-model="[[amfModel]]" shape="[[selectedSchema]]"></api-schema-document>
@@ -290,6 +290,15 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
         type: Object,
         computed: '_computeSelectedBody(selected, body)',
         observer: '_selectedBodyChanged'
+      },
+      /**
+       * Selected body ID.
+       * It is computed here and passed to the type document to render
+       * examples.
+       */
+      selectedBodyId: {
+        type: String,
+        computed: '_computeSelectedId(selectedBody)',
       },
       /**
        * Computed AMF schema object for the body.
@@ -573,6 +582,10 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
    */
   _computeBodyName(schema) {
     return this._getValue(schema, this.ns.schema.schemaName);
+  }
+
+  _computeSelectedId(selectedBody) {
+    return selectedBody && selectedBody['@id'];
   }
 }
 window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);
