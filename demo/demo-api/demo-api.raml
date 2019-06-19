@@ -104,7 +104,7 @@ resourceTypes:
     description: Updates the person in the datastore.
     body:
       application/json:
-        schema: !include schemas/person.json
+        type: !include schemas/person.json
         example: !include examples/person.json
       application/xml:
         type: !include schemas/person.xsd
@@ -242,6 +242,8 @@ resourceTypes:
 /emptybody:
   post:
     body:
+      application/json:
+
 /unionBody:
   post:
     body:

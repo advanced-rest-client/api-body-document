@@ -181,6 +181,18 @@
 "@value": "[(51,4)-(54,0)]"
 }
 ]
+},
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#29"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(51,0)-(63,0)]"
+}
+]
 }
 ]
 }
@@ -245,13 +257,17 @@
 {
 "@id": "#35",
 "@type": [
-"data:Object"
+"data:Object",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:status": [
 {
 "@id": "#36",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -421,6 +437,20 @@
 "@id": "#33/source-map",
 "@type": [
 "sourcemaps:SourceMap"
+],
+"sourcemaps:auto-generated-name": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#33"
+}
+],
+"sourcemaps:value": [
+{
+"@value": ""
+}
+]
+}
 ],
 "sourcemaps:lexical": [
 {
@@ -1582,7 +1612,9 @@
 {
 "@id": "#12",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -1618,7 +1650,9 @@
 {
 "@id": "#13",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -1654,7 +1688,9 @@
 {
 "@id": "#14",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -2524,7 +2560,9 @@
 {
 "@id": "#12",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -2560,7 +2598,9 @@
 {
 "@id": "#13",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {
@@ -2596,7 +2636,9 @@
 {
 "@id": "#14",
 "@type": [
-"data:Scalar"
+"data:Scalar",
+"data:Node",
+"doc:DomainElement"
 ],
 "data:value": [
 {

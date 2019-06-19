@@ -1,23 +1,15 @@
-const AmfLoader = {};
-AmfLoader.load = function(endpointIndex, methodIndex, compact, fileName) {
+import {ns} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+export const AmfLoader = {};
+AmfLoader.load = async function(endpointIndex, methodIndex, compact, fileName) {
   endpointIndex = endpointIndex || 0;
   methodIndex = methodIndex || 0;
   fileName = fileName || 'demo-api';
   const file = '/' + fileName + (compact ? '-compact' : '') + '.json';
-  const url = location.protocol + '//' + location.host +
-    location.pathname.substr(0, location.pathname.lastIndexOf('/'))
-    .replace('/test', '/demo') + file;
-  return new Promise((resolve, reject) => {
+  const url = location.protocol + '//' + location.host + '/demo/'+ file;
+  return new Promise((resolve) => {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', (e) => {
-      let data;
-      try {
-        data = JSON.parse(e.target.response);
-      } catch (e) {
-        reject(e);
-        return;
-      }
-      const ns = ApiElements.Amf.ns;
+      let data = JSON.parse(e.target.response);
       const original = data;
       if (data instanceof Array) {
         data = data[0];
@@ -54,8 +46,6 @@ AmfLoader.load = function(endpointIndex, methodIndex, compact, fileName) {
       }
       resolve([original, payload]);
     });
-    xhr.addEventListener('error',
-      () => reject(new Error('Unable to load model file')));
     xhr.open('GET', url);
     xhr.send();
   });
