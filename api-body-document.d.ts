@@ -12,6 +12,10 @@
 // tslint:disable:variable-name Describing an API that's defined elsewhere.
 // tslint:disable:no-any describes the API as best we are able today
 
+import {LitElement, html, css} from 'lit-element';
+
+import {AmfHelperMixin} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+
 declare namespace ApiElements {
 
   /**
@@ -42,6 +46,36 @@ declare namespace ApiElements {
   class ApiBodyDocument extends
     AmfHelperMixin(
     Object) {
+    amf: any;
+
+    /**
+     * List of discovered media types in the `body`.
+     */
+    _mediaTypes: Array<object|null>|null;
+
+    /**
+     * A body model for selected media type.
+     * Computed automatically when selection change.
+     */
+    _selectedBody: object|null|undefined;
+
+    /**
+     * Computed AMF schema object for the body.
+     */
+    _selectedSchema: object|null|undefined;
+
+    /**
+     * Currently selected media type.
+     * It is an index of a media type in `mediaTypes` array.
+     * It is set to `0` each time the body changes.
+     */
+    selected: number|null|undefined;
+
+    /**
+     * AMF model for body as a `http://raml.org/vocabularies/http#payload`
+     * type.
+     */
+    body: Array<object|null>|null;
 
     /**
      * `raml-aware` scope property to use.
@@ -55,88 +89,56 @@ declare namespace ApiElements {
     opened: boolean|null|undefined;
 
     /**
-     * AMF model for body as a `http://raml.org/vocabularies/http#payload`
-     * type.
-     */
-    body: Array<object|null>|null;
-
-    /**
-     * List of discovered media types in the `body`.
-     */
-    readonly mediaTypes: Array<object|null>|null;
-
-    /**
      * Computed value. True when mediaTypes has more than one item.
      */
-    readonly renderMediaSelector: boolean|null|undefined;
+    _renderMediaSelector: boolean|null|undefined;
 
     /**
-     * Currently selected media type.
-     * It is an index of a media type in `mediaTypes` array.
-     * It is set to `0` each time the body changes.
+     * Selected body ID.
+     * It is computed here and passed to the type document to render
+     * examples.
      */
-    selected: number|null|undefined;
-
-    /**
-     * A body model for selected media type.
-     * Computed automatically when selection change.
-     */
-    readonly selectedBody: object|null|undefined;
-
-    /**
-     * Computed AMF schema object for the body.
-     */
-    readonly selectedSchema: object|null|undefined;
+    _selectedBodyId: string|null|undefined;
 
     /**
      * Name of the selected media type.
      */
-    readonly selectedMediaType: string|null|undefined;
+    _selectedMediaType: string|null|undefined;
 
     /**
      * True if selected body is a structured object
      */
-    readonly isObject: boolean|null|undefined;
+    _isObject: boolean|null|undefined;
 
     /**
      * True if selected body is a schema (JSON, XML, ...) data
      */
-    readonly isSchema: boolean|null|undefined;
+    _isSchema: boolean|null|undefined;
 
     /**
      * Computed value, true if the body is of "any" type.
      */
-    readonly isAnyType: boolean|null|undefined;
+    _isAnyType: boolean|null|undefined;
 
     /**
      * Name of the resource type if any.
      */
-    readonly typeName: string|null|undefined;
+    _typeName: string|null|undefined;
 
     /**
      * Computed value, true if `typeName` is set.
      */
-    readonly hasTypeName: boolean|null|undefined;
+    _hasTypeName: boolean|null|undefined;
 
     /**
      * Body name, if defined
      */
-    readonly bodyName: string|null|undefined;
-
-    /**
-     * Computed value, true if `bodyName` is set.
-     */
-    readonly hasBodyName: boolean|null|undefined;
+    _bodyName: string|null|undefined;
 
     /**
      * Name of the resource type if any.
      */
-    readonly description: string|null|undefined;
-
-    /**
-     * Computed value, true if `typeName` is set.
-     */
-    readonly hasDescription: boolean|null|undefined;
+    _description: string|null|undefined;
 
     /**
      * Set to render a mobile friendly view.
@@ -144,8 +146,17 @@ declare namespace ApiElements {
     narrow: boolean|null|undefined;
     _hasObjectExamples: boolean|null|undefined;
     _hasAnyExamples: boolean|null|undefined;
+
+    /**
+     * Sets observable property that causes render action.
+     *
+     * @param prop Property name
+     * @param value Value to set
+     * @returns True when the property has been updated.
+     */
+    _sop(prop: String|null, value: any|null): Boolean|null;
     _bodyChanged(): void;
-    _selectedBodyChanged(): void;
+    _selectedBodyChanged(value: any): void;
 
     /**
      * Computes list of media types in the `body`
@@ -157,10 +168,9 @@ declare namespace ApiElements {
     /**
      * Computes value for `renderMediaSelector` properety.
      *
-     * @param record `mediaTypes` change record.
-     * @returns True if there's more than one item in mediaType
+     * @param types `mediaTypes` change record.
      */
-    _computeRenderMediaSelector(record: object|null): Boolean|null;
+    _computeRenderMediaSelector(types: object|null): Boolean|null;
 
     /**
      * Computes if `selected` equals current item index.
@@ -221,14 +231,20 @@ declare namespace ApiElements {
      * @param body Currently selected body.
      */
     _computeTypeName(body: object|null): String|null|undefined;
+    _apiChangedHandler(e: any): void;
+    _hasExamplesHandler(e: any): void;
 
     /**
-     * Computes value for `bodyName`.
-     *
-     * @param schema Computed body schema
-     * @returns Computed body name
+     * A template to render for "Any" AMF model.
      */
-    _computeBodyName(schema: object|null): String|null|undefined;
+    _anyTypeTemplate(): TemplateResult|null;
+
+    /**
+     * A template to render for any AMF model\ that is different than "any".
+     */
+    _typedTemplate(): TemplateResult|null;
+    _mediaTypesTemplate(): any;
+    render(): any;
   }
 }
 
@@ -238,5 +254,3 @@ declare global {
     "api-body-document": ApiElements.ApiBodyDocument;
   }
 }
-
-export {};

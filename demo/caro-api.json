@@ -181,6 +181,18 @@
 "@value": "[(51,4)-(54,0)]"
 }
 ]
+},
+{
+"http://a.ml/vocabularies/document-source-maps#element": [
+{
+"@value": "amf://id#29"
+}
+],
+"http://a.ml/vocabularies/document-source-maps#value": [
+{
+"@value": "[(51,0)-(63,0)]"
+}
+]
 }
 ]
 }
@@ -245,13 +257,17 @@
 {
 "@id": "amf://id#35",
 "@type": [
-"http://a.ml/vocabularies/data#Object"
+"http://a.ml/vocabularies/data#Object",
+"http://a.ml/vocabularies/data#Node",
+"http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/data#status": [
 {
 "@id": "amf://id#36",
 "@type": [
-"http://a.ml/vocabularies/data#Scalar"
+"http://a.ml/vocabularies/data#Scalar",
+"http://a.ml/vocabularies/data#Node",
+"http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/data#value": [
 {
@@ -421,6 +437,20 @@
 "@id": "amf://id#33/source-map",
 "@type": [
 "http://a.ml/vocabularies/document-source-maps#SourceMap"
+],
+"http://a.ml/vocabularies/document-source-maps#auto-generated-name": [
+{
+"http://a.ml/vocabularies/document-source-maps#element": [
+{
+"@value": "amf://id#33"
+}
+],
+"http://a.ml/vocabularies/document-source-maps#value": [
+{
+"@value": ""
+}
+]
+}
 ],
 "http://a.ml/vocabularies/document-source-maps#lexical": [
 {
@@ -1582,7 +1612,9 @@
 {
 "@id": "amf://id#12",
 "@type": [
-"http://a.ml/vocabularies/data#Scalar"
+"http://a.ml/vocabularies/data#Scalar",
+"http://a.ml/vocabularies/data#Node",
+"http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/data#value": [
 {
@@ -1618,7 +1650,9 @@
 {
 "@id": "amf://id#13",
 "@type": [
-"http://a.ml/vocabularies/data#Scalar"
+"http://a.ml/vocabularies/data#Scalar",
+"http://a.ml/vocabularies/data#Node",
+"http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/data#value": [
 {
@@ -1654,7 +1688,9 @@
 {
 "@id": "amf://id#14",
 "@type": [
-"http://a.ml/vocabularies/data#Scalar"
+"http://a.ml/vocabularies/data#Scalar",
+"http://a.ml/vocabularies/data#Node",
+"http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/data#value": [
 {
@@ -2524,7 +2560,9 @@
 {
 "@id": "amf://id#12",
 "@type": [
-"http://a.ml/vocabularies/data#Scalar"
+"http://a.ml/vocabularies/data#Scalar",
+"http://a.ml/vocabularies/data#Node",
+"http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/data#value": [
 {
@@ -2560,7 +2598,9 @@
 {
 "@id": "amf://id#13",
 "@type": [
-"http://a.ml/vocabularies/data#Scalar"
+"http://a.ml/vocabularies/data#Scalar",
+"http://a.ml/vocabularies/data#Node",
+"http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/data#value": [
 {
@@ -2596,7 +2636,9 @@
 {
 "@id": "amf://id#14",
 "@type": [
-"http://a.ml/vocabularies/data#Scalar"
+"http://a.ml/vocabularies/data#Scalar",
+"http://a.ml/vocabularies/data#Node",
+"http://a.ml/vocabularies/document#DomainElement"
 ],
 "http://a.ml/vocabularies/data#value": [
 {

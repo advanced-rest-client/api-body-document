@@ -1,42 +1,19 @@
-import {PolymerElement} from '../../@polymer/polymer/polymer-element.js';
-import {afterNextRender} from '../../@polymer/polymer/lib/utils/render-status.js';
-import {AmfHelperMixin} from '../../@api-components/amf-helper-mixin/amf-helper-mixin.js';
-import {html} from '../../@polymer/polymer/lib/utils/html-tag.js';
-import '../../@api-components/raml-aware/raml-aware.js';
-import '../../@polymer/iron-flex-layout/iron-flex-layout.js';
-import '../../@api-components/api-type-document/api-type-document.js';
-import '../../@polymer/iron-collapse/iron-collapse.js';
-import '../../@polymer/iron-icon/iron-icon.js';
-import '../../@advanced-rest-client/arc-icons/arc-icons.js';
-import '../../@polymer/paper-button/paper-button.js';
-import '../../@api-components/api-schema-document/api-schema-document.js';
-import '../../@advanced-rest-client/markdown-styles/markdown-styles.js';
-import '../../@polymer/marked-element/marked-element.js';
-import '../../@api-components/api-resource-example-document/api-resource-example-document.js';
+import { LitElement, html, css } from 'lit-element';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import markdownStyles from '@advanced-rest-client/markdown-styles/markdown-styles.js';
+import '@api-components/raml-aware/raml-aware.js';
+import '@api-components/api-type-document/api-type-document.js';
+import '@polymer/iron-collapse/iron-collapse.js';
+import '@polymer/iron-icon/iron-icon.js';
+import '@advanced-rest-client/arc-icons/arc-icons.js';
+import '@polymer/paper-button/paper-button.js';
+import '@api-components/api-schema-document/api-schema-document.js';
+import '@advanced-rest-client/arc-marked/arc-marked.js';
+import '@api-components/api-resource-example-document/api-resource-example-document.js';
 /**
  * `api-body-document`
  *
- * A component to render HTTP method body documentation based on AMF model
- *
- * ## Styling
- *
- * `<api-body-document>` provides the following custom properties and mixins for styling:
- *
- * Custom property | Description | Default
- * ----------------|-------------|----------
- * `--api-body-document` | Mixin applied to this elment | `{}`
- * `--api-body-document-title-border-color` | Border color of the section title | `#e5e5e5`
- * `--api-body-document-title` | Mixni apploied to the title element | `{}`
- * `--api-body-document-toggle-view-color` | Color of the toggle view button | `--arc-toggle-view-icon-color` or `rgba(0, 0, 0, 0.74)`
- * `--api-body-document-toggle-view-hover-color` | Color of the toggle view button when hovered | `var(--arc-toggle-view-icon-hover-color` or `rgba(0, 0, 0, 0.88)`
- * `--api-body-document-description-color` | Color of the type description | `rgba(0, 0, 0, 0.74)`
- * `--arc-font-subhead` | Mixin applied to the resource title | `{}`
- * `--api-body-document-media-button-background-color` | Selection color of the media type selector | `#CDDC39`
- * `--api-body-document-examples-title-color` | Color of examples section title | ``
- * `--api-body-document-examples-border-color` | Example section border color | `transparent`
- * `--code-background-color` | Background color of the examples section | ``
- * `--api-body-document-media-type-label-font-weight` | Font weight of the media type label (when selection is not available) | `500`
- * `--api-body-document-title-narrow` | Mixin applied to the title when in narrow layout | `{}`
+ * A component to render HTTP method body documentation based on AMF model.
  *
  * @customElement
  * @polymer
@@ -44,358 +21,315 @@ import '../../@api-components/api-resource-example-document/api-resource-example
  * @memberof ApiElements
  * @appliesMixin AmfHelperMixin
  */
-class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
-  static get template() {
-    return html`
-    <style include="markdown-styles"></style>
-    <style>
-    :host {
-      display: block;
-      @apply --arc-font-body1;
-      @apply --api-body-document;
-    }
+class ApiBodyDocument extends AmfHelperMixin(LitElement) {
+  static get styles() {
+    return [
+      markdownStyles,
+      css`:host {
+        display: block;
+        font-size: var(--arc-font-body1-font-size);
+        font-weight: var(--arc-font-body1-font-weight);
+        line-height: var(--arc-font-body1-line-height);
+      }
 
-    [hidden] {
-      display: none !important;
-    }
+      [hidden] {
+        display: none !important;
+      }
 
-    .section-title-area {
-      @apply --layout-horizontal;
-      @apply --layout-center;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      border-bottom: 1px var(--api-body-document-title-border-color, #e5e5e5) solid;
-    }
+      .section-title-area {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        border-bottom: 1px var(--api-body-document-title-border-color, #e5e5e5) solid;
+      }
 
-    .section-title-area h3 {
-      @apply --layout-flex;
-      @apply --api-body-document-title;
-    }
+      .section-title-area h3 {
+        flex: 1;
+        flex-basis: 0.000000001px;
+        font-size: var(--api-body-document-title-narrow-font-size, initial);
+      }
 
-    .toggle-button {
-      outline: none;
-      color: var(--api-body-document-toggle-view-color, var(--arc-toggle-view-icon-color, rgba(0, 0, 0, 0.74)));
-      transition: color 0.25s ease-in-out;
-      @apply --toggle-button;
-    }
+      .toggle-button {
+        outline: none;
+        color: var(--api-body-document-toggle-view-color, var(--arc-toggle-view-icon-color, rgba(0, 0, 0, 0.74)));
+        transition: color 0.25s ease-in-out;
+      }
 
-    .toggle-button:hover {
-      color: var(--api-body-document-toggle-view-hover-color, var(--arc-toggle-view-icon-hover-color, rgba(0, 0, 0, 0.88)));
-      @apply --toggle-button-hover;
-    }
+      .toggle-button:hover {
+        color: var(--api-body-document-toggle-view-hover-color,
+          var(--arc-toggle-view-icon-hover-color, rgba(0, 0, 0, 0.88)));
+      }
 
-    .toggle-icon {
-      margin-left: 8px;
-      transform: rotateZ(0deg);
-      transition: transform 0.3s ease-in-out;
-    }
+      .toggle-icon {
+        margin-left: 8px;
+        transform: rotateZ(0deg);
+        transition: transform 0.3s ease-in-out;
+      }
 
-    .toggle-icon.opened {
-      transform: rotateZ(-180deg);
-    }
+      .toggle-icon.opened {
+        transform: rotateZ(-180deg);
+      }
 
-    .table-title {
-      @apply --arc-font-title;
-      @apply --api-body-document-title;
-    }
+      .table-title {
+        font-size: var(--arc-font-title-font-size);
+        font-weight: var(--arc-font-title-font-weight);
+        line-height: var(--arc-font-title-line-height);
+      }
 
-    :host([narrow]) .table-title {
-      @apply --api-body-document-title-narrow;
-    }
+      :host([narrow]) .table-title {
+        font-size: var(--api-body-document-title-narrow-font-size, initial);
+      }
 
-    h4 {
-      @apply --arc-font-subhead;
-    }
+      h4 {
+        font-size: var(--arc-font-subhead-font-size);
+        font-weight: var(--arc-font-subhead-font-weight);
+        line-height: var(--arc-font-subhead-line-height);
+      }
 
-    paper-button[active] {
-      background-color: var(--api-body-document-media-button-background-color, #CDDC39);
-    }
+      paper-button[active] {
+        background-color: var(--api-body-document-media-button-background-color, #CDDC39);
+      }
 
-    .media-type-selector {
-      margin: 20px 0;
-    }
+      .media-type-selector {
+        margin: 20px 0;
+      }
 
-    .markdown-body {
-      margin-bottom: 28px;
-      margin-top: 28px;
-      color: var(--api-body-document-description-color, rgba(0, 0, 0, 0.74));
-      @apply --arc-font-body1;
-    }
+      .markdown-html {
+        margin-bottom: 28px;
+        margin-top: 28px;
+        color: var(--api-body-document-description-color, rgba(0, 0, 0, 0.74));
+      }
 
-    .markdown-body[data-with-title] {
-      margin-top: 0;
-    }
+      .markdown-html[data-with-title] {
+        margin-top: 0;
+      }
 
-    .examples {
-      margin-top: 12px;
-      border: 1px var(--api-body-document-examples-border-color, transparent) solid;
-    }
+      .examples {
+        margin-top: 12px;
+        border: 1px var(--api-body-document-examples-border-color, transparent) solid;
+      }
 
-    .examples,
-    api-schema-document {
-      background-color: var(--code-background-color);
-    }
+      .examples,
+      api-schema-document {
+        background-color: var(--code-background-color);
+      }
 
-    .examples-section-title {
-      @apply --arc-font-body1;
-      font-size: 16px;
-      padding: 16px 12px;
-      margin: 0;
-      color: var(--api-body-document-examples-title-color);
-    }
+      .examples-section-title {
+        font-size: 16px;
+        padding: 16px 12px;
+        margin: 0;
+        color: var(--api-body-document-examples-title-color);
+      }
 
-    api-resource-example-document,
-    api-schema-document {
-      padding: 8px;
-      color: var(--api-body-document-code-color);
-    }
+      api-resource-example-document,
+      api-schema-document {
+        padding: 8px;
+        color: var(--api-body-document-code-color, initial);
+      }
 
-    .media-type-label {
-      font-weight: var(--api-body-document-media-type-label-font-weight, 500);
-      margin-left: 8px;
-    }
+      .media-type-label {
+        font-weight: var(--api-body-document-media-type-label-font-weight, 500);
+        margin-left: 8px;
+      }
 
-    .media-toggle {
-      outline: none;
-    }
+      .media-toggle {
+        outline: none;
+      }
 
-    .any-info,
-    .any-info-description {
-      @apply --arc-font-body1;
-      color: var(--api-body-document-description-color, rgba(0, 0, 0, 0.74));
-    }
+      .any-info,
+      .any-info-description {
+        color: var(--api-body-document-description-color, rgba(0, 0, 0, 0.74));
+      }
 
-    .any-info {
-      font-size: 16px;
-    }
+      .any-info {
+        font-size: var(--api-body-document-any-info-font-size, 16px);
+      }
 
-    .body-name {
-      font-weight: 500;
-    }
-    </style>
-    <template is="dom-if" if="[[aware]]">
-      <raml-aware raml="{{amfModel}}" scope="[[aware]]"></raml-aware>
-    </template>
-    <div class="section-title-area" on-click="toggle" title="Toogle body details">
-      <h3 class="table-title">Body</h3>
-      <div class="title-area-actions">
-        <paper-button class="toggle-button">
-          [[_computeToggleActionLabel(opened)]]
-          <iron-icon icon="arc:expand-more" class\$="[[_computeToggleIconClass(opened)]]"></iron-icon>
-        </paper-button>
-      </div>
-    </div>
-    <iron-collapse opened="[[opened]]">
-      <template is="dom-if" if="[[isAnyType]]" restamp="">
-        <template is="dom-if" if="[[hasBodyName]]">
-          <h4 class="body-name">[[bodyName]]</h4>
-        </template>
-        <template is="dom-if" if="[[hasDescription]]">
-          <marked-element markdown="[[description]]">
-            <div slot="markdown-html" class="markdown-body" data-with-title\$="[[hasTypeName]]"></div>
-          </marked-element>
-        </template>
-        <p class="any-info">Any instance of data is allowed.</p>
-        <p class="any-info-description">The API file specifies body for this request but it does not specify the data model.</p>
-        <section class="examples" hidden\$="[[!_hasAnyExamples]]">
-          <h5 class="examples-section-title">Examples</h5>
-          <api-resource-example-document amf-model="[[amfModel]]" examples="[[selectedBody]]" media-type="[[selectedMediaType]]" type-name="[[typeName]]" payload-id="[[selectedBodyId]]" has-examples="{{_hasAnyExamples}}"></api-resource-example-document>
-        </section>
-      </template>
-      <template is="dom-if" if="[[!isAnyType]]">
-        <div class="media-type-selector">
-          <span>Media type:</span>
-          <template is="dom-if" if="[[renderMediaSelector]]">
-            <template is="dom-repeat" items="[[mediaTypes]]">
-              <paper-button class="media-toggle" active="[[_mediaTypeActive(selected, index)]]" on-click="_selectMediaType" title\$="Select [[item.label]] media type">[[item.label]]</paper-button>
-            </template>
-          </template>
-          <template is="dom-if" if="[[!renderMediaSelector]]">
-            <span class="media-type-label">[[selectedMediaType]]</span>
-          </template>
-        </div>
-        <template is="dom-if" if="[[hasBodyName]]">
-          <h4 class="body-name">[[bodyName]]</h4>
-        </template>
-        <template is="dom-if" if="[[hasTypeName]]">
-          <h4>[[typeName]]</h4>
-        </template>
-        <template is="dom-if" if="[[hasDescription]]">
-          <marked-element markdown="[[description]]">
-            <div slot="markdown-html" class="markdown-body" data-with-title\$="[[hasTypeName]]"></div>
-          </marked-element>
-        </template>
-        <template is="dom-if" if="[[isObject]]" restamp="">
-          <api-type-document amf-model="[[amfModel]]" selected-body-id="[[selectedBodyId]]" type="[[selectedSchema]]" narrow="[[narrow]]" media-type="[[selectedMediaType]]"></api-type-document>
-        </template>
-        <template is="dom-if" if="[[isSchema]]">
-          <api-schema-document amf-model="[[amfModel]]" shape="[[selectedSchema]]"></api-schema-document>
-        </template>
-      </template>
-    </iron-collapse>
-`;
+      .body-name {
+        font-weight: var(--api-body-document-any-info-font-weight, 500);
+      }
+
+      arc-marked {
+        background-color: transparent;
+        padding: 0px;
+      }`
+    ];
   }
 
-  static get is() {
-    return 'api-body-document';
-  }
   static get properties() {
     return {
       /**
        * `raml-aware` scope property to use.
        */
-      aware: String,
+      aware: { type: String },
       /**
        * Set to true to open the body view.
        * Autormatically updated when the view is toggled from the UI.
        */
-      opened: Boolean,
+      opened: { type: Boolean },
       /**
        * AMF model for body as a `http://raml.org/vocabularies/http#payload`
        * type.
        * @type {Array<Object>}
        */
-      body: Array,
+      body: { type: Array },
       /**
        * List of discovered media types in the `body`.
        * @type {Array<Object>}
        */
-      mediaTypes: {
-        type: Array,
-        readOnly: true
-      },
+      _mediaTypes: { type: Array },
       /**
        * Computed value. True when mediaTypes has more than one item.
        */
-      renderMediaSelector: {
-        type: Boolean,
-        readOnly: true,
-        value: false,
-        computed: '_computeRenderMediaSelector(mediaTypes.*)'
-      },
+      _renderMediaSelector: { type: Boolean },
       /**
        * Currently selected media type.
        * It is an index of a media type in `mediaTypes` array.
        * It is set to `0` each time the body changes.
        */
-      selected: Number,
+      selected: { type: Number },
       /**
        * A body model for selected media type.
        * Computed automatically when selection change.
        */
-      selectedBody: {
-        type: Object,
-        computed: '_computeSelectedBody(selected, body)',
-        observer: '_selectedBodyChanged'
-      },
+      _selectedBody: { type: Object },
       /**
        * Selected body ID.
        * It is computed here and passed to the type document to render
        * examples.
        */
-      selectedBodyId: {
-        type: String,
-        computed: '_computeSelectedId(selectedBody)',
-      },
+      _selectedBodyId: { type: String },
       /**
        * Computed AMF schema object for the body.
        */
-      selectedSchema: {
-        type: Object,
-        computed: '_computeSelectedSchema(selectedBody)',
-        observer: '_selectedSchemaChanged'
-      },
+      _selectedSchema: { type: Object },
       /**
        * Name of the selected media type.
        */
-      selectedMediaType: {
-        type: String,
-        readOnly: true,
-        computed: '_computeSelectedMediaName(selected, body)'
-      },
+      _selectedMediaType: { type: String },
       /**
        * True if selected body is a structured object
        */
-      isObject: {
-        type: Boolean,
-        readOnly: true
-      },
+      _isObject: { type: Boolean },
       /**
        * True if selected body is a schema (JSON, XML, ...) data
        */
-      isSchema: {
-        type: Boolean,
-        readOnly: true
-      },
+      _isSchema: { type: Boolean },
       /**
        * Computed value, true if the body is of "any" type.
        */
-      isAnyType: {
-        type: Boolean,
-        value: false,
-        readOnly: true
-      },
+      _isAnyType: { type: Boolean },
       /**
        * Name of the resource type if any.
        */
-      typeName: {
-        type: String,
-        computed: '_computeTypeName(selectedSchema)'
-      },
+      _typeName: { type: String },
       /**
        * Computed value, true if `typeName` is set.
        */
-      hasTypeName: {
-        type: Boolean,
-        computed: '_computeHasStringValue(typeName)'
-      },
+      _hasTypeName: { type: Boolean },
       /**
        * Body name, if defined
        */
-      bodyName: {
-        type: String,
-        computed: '_computeBodyName(selectedSchema)'
-      },
-      /**
-       * Computed value, true if `bodyName` is set.
-       */
-      hasBodyName: {
-        type: Boolean,
-        computed: '_computeHasStringValue(bodyName)'
-      },
+      _bodyName: { type: String },
       /**
        * Name of the resource type if any.
        */
-      description: {
-        type: String,
-        computed: '_computeDescription(selectedSchema)'
-      },
-      /**
-       * Computed value, true if `typeName` is set.
-       */
-      hasDescription: {
-        type: Boolean,
-        computed: '_computeHasStringValue(description)'
-      },
+      _description: { type: String },
       /**
        * Set to render a mobile friendly view.
        */
        narrow: {
          type: Boolean,
-         reflectToAttribute: true
+         reflect: true
        },
-       _hasObjectExamples: {type: Boolean, value: false},
-       _hasAnyExamples: {type: Boolean, value: false}
+       _hasObjectExamples: { type: Boolean },
+       _hasAnyExamples: { type: Boolean }
     };
   }
+  get _mediaTypes() {
+    return this.__mediaTypes;
+  }
+  set _mediaTypes(value) {
+    if (this._sop('_mediaTypes', value)) {
+      this._renderMediaSelector = this._computeRenderMediaSelector(value);
+    }
+  }
+  get _selectedBody() {
+    return this.__selectedBody;
+  }
+  set _selectedBody(value) {
+    if (this._sop('_selectedBody', value)) {
+      this._selectedBodyChanged(value);
+    }
+  }
+  get _selectedSchema() {
+    return this.__selectedSchema;
+  }
+  set _selectedSchema(value) {
+    if (this._sop('_selectedSchema', value)) {
+      this._selectedSchemaChanged(value);
+    }
+  }
 
-  static get observers() {
-    return [
-      '_bodyChanged(body, amfModel)'
-    ];
+  get selected() {
+    return this._selected;
+  }
+
+  set selected(value) {
+    if (this._sop('selected', value)) {
+      this._selectedBody = this._computeSelectedBody(value, this.body);
+      this._selectedMediaType = this._computeSelectedMediaName(value, this.body);
+    }
+  }
+
+  get body() {
+    return this._body;
+  }
+
+  set body(value) {
+    if (this._sop('body', value)) {
+      this._selectedBody = this._computeSelectedBody(this.selected, value);
+      this._selectedMediaType = this._computeSelectedMediaName(this.selected, value);
+      this._bodyChanged();
+    }
+  }
+
+  get amf() {
+    return this._amf;
+  }
+
+  set amf(value) {
+    if (this._sop('amf', value)) {
+      this._bodyChanged();
+    }
+  }
+  /**
+   * Sets observable property that causes render action.
+   * @param {String} prop Property name
+   * @param {any} value Value to set
+   * @return {Boolean} True when the property has been updated.
+   */
+  _sop(prop, value) {
+    const key = '_' + prop;
+    const old = this[key];
+    if (old === value) {
+      return false;
+    }
+    this[key] = value;
+    this.requestUpdate(prop, old);
+    return true;
+  }
+
+  constructor() {
+    super();
+    this._renderMediaSelector = false;
+    this._hasObjectExamples = false;
+    this._hasAnyExamples = false;
   }
 
   _bodyChanged() {
@@ -403,7 +337,7 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
       return;
     }
     this.__bodyChangedDebounce = true;
-    afterNextRender(this, () => {
+    setTimeout(() => {
       this.__bodyChangedDebounce = false;
       this.__bodyChanged(this.body);
     });
@@ -419,12 +353,14 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
       return;
     }
     this.selected = -1;
-    const media = this._computeMediaTypes(this.body);
-    this._setMediaTypes(media);
+    const media = this._computeMediaTypes(body);
+    this._mediaTypes = media;
     this.selected = 0;
   }
 
-  _selectedBodyChanged() {
+  _selectedBodyChanged(value) {
+    this._selectedBodyId = value && value['@id'];
+    this._selectedSchema = this._computeSelectedSchema(value);
     this._hasObjectExamples = false;
     this._hasAnyExamples = false;
   }
@@ -445,12 +381,11 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
   }
   /**
    * Computes value for `renderMediaSelector` properety.
-   * @param {Object} record `mediaTypes` change record.
-   * @return {Boolean} True if there's more than one item in mediaType
+   * @param {Object} types `mediaTypes` change record.
+   * @return {Boolean}
    */
-  _computeRenderMediaSelector(record) {
-    const body = record && record.base;
-    return !!(body && body.length && body.length > 1);
+  _computeRenderMediaSelector(types) {
+    return !!(types && types.length && types.length > 1);
   }
   /**
    * Computes if `selected` equals current item index.
@@ -469,7 +404,10 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
    * @param {ClickEvent} e
    */
   _selectMediaType(e) {
-    const index = e.model.get('index');
+    const index = Number(e.target.dataset.index);
+    if (index !== index) {
+      return;
+    }
     if (index !== this.selected) {
       this.selected = index;
     } else {
@@ -522,9 +460,9 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
    * @param {Object} body Currently computed body.
    */
   _selectedSchemaChanged(body) {
-    if (!body) {
-      return;
-    }
+    this._typeName = this._computeTypeName(body);
+    this._bodyName = this._getValue(body, this.ns.schema.schemaName);
+    this._description = this._computeDescription(body);
     let isObject = false;
     let isSchema = false;
     let isAnyType = false;
@@ -539,9 +477,9 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
     } else if (this._hasType(body, this.ns.raml.vocabularies.shapes + 'AnyShape')) {
       isAnyType = true;
     }
-    this._setIsObject(isObject);
-    this._setIsSchema(isSchema);
-    this._setIsAnyType(isAnyType);
+    this._isObject = isObject;
+    this._isSchema = isSchema;
+    this._isAnyType = isAnyType;
   }
   // Computes a label for the section toggle buttons.
   _computeToggleActionLabel(opened) {
@@ -575,17 +513,136 @@ class ApiBodyDocument extends AmfHelperMixin(PolymerElement) {
     }
     return value;
   }
-  /**
-   * Computes value for `bodyName`.
-   * @param {Object} schema Computed body schema
-   * @return {String|undefined} Computed body name
-   */
-  _computeBodyName(schema) {
-    return this._getValue(schema, this.ns.schema.schemaName);
+
+  _apiChangedHandler(e) {
+    const { value } = e.detail;
+    this.amf = value;
   }
 
-  _computeSelectedId(selectedBody) {
-    return selectedBody && selectedBody['@id'];
+  _hasExamplesHandler(e) {
+    const { value } = e.detail;
+    this._hasAnyExamples = value;
+  }
+  /**
+   * A template to render for "Any" AMF model.
+   * @return {TemplateResult}
+   */
+  _anyTypeTemplate() {
+    const {
+      _bodyName,
+      _description,
+      _typeName,
+      _hasAnyExamples,
+      _selectedBody,
+      _selectedMediaType,
+      _selectedBodyId
+    } = this;
+    const hasBodyName = !!_bodyName;
+    const hasDescription = !!_description;
+    const hasTypeName = !!_typeName;
+
+    return html`
+    ${hasBodyName ? html`<h4 class="body-name">${_bodyName}</h4>` : undefined}
+    ${hasDescription ? html`<arc-marked .markdown="${_description}">
+      <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
+    </arc-marked>` : undefined}
+    <p class="any-info">Any instance of data is allowed.</p>
+    <p class="any-info-description">
+      The API file specifies body for this request but it does not specify the data model.
+    </p>
+    <section class="examples" ?hidden="${!_hasAnyExamples}">
+      <h5 class="examples-section-title">Examples</h5>
+      <api-resource-example-document
+        .amf="${this.amf}"
+        .examples="${_selectedBody}"
+        .mediaType="${_selectedMediaType}"
+        .typeName="${_typeName}"
+        .payloadId="${_selectedBodyId}"
+        @has-examples-changed="${this._hasExamplesHandler}"></api-resource-example-document>
+    </section>`;
+  }
+  /**
+   * A template to render for any AMF model\ that is different than "any".
+   * @return {TemplateResult}
+   */
+  _typedTemplate() {
+    const {
+      _bodyName,
+      _description,
+      _typeName,
+      _selectedSchema,
+      _selectedMediaType,
+      _selectedBodyId,
+      _renderMediaSelector,
+      _isObject,
+      _isSchema,
+      amf,
+      narrow
+    } = this;
+    const hasBodyName = !!_bodyName;
+    const hasDescription = !!_description;
+    const hasTypeName = !!_typeName;
+
+    return html`
+    <div class="media-type-selector">
+      <span>Media type:</span>
+      ${_renderMediaSelector ?
+        this._mediaTypesTemplate() :
+        html`<span class="media-type-label">${_selectedMediaType}</span>`}
+    </div>
+    ${hasBodyName ? html`<h4 class="body-name">${_bodyName}</h4>` : undefined}
+    ${hasTypeName ? html`<h4>${_typeName}</h4>` : undefined}
+    ${hasDescription ? html`
+    <arc-marked .markdown="${_description}">
+      <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
+    </arc-marked>` : undefined}
+
+    ${_isObject ?
+      html`<api-type-document
+      .amf="${amf}"
+      .selectedBodyId="${_selectedBodyId}"
+      .type="${_selectedSchema}"
+      .narrow="${narrow}"
+      .mediaType="${_selectedMediaType}"></api-type-document>` : undefined}
+    ${_isSchema ?
+      html`<api-schema-document .amf="${amf}" .shape="${_selectedSchema}"></api-schema-document>` :
+      undefined}`;
+  }
+
+  _mediaTypesTemplate() {
+    const items = this._mediaTypes;
+    if (!items || !items.length) {
+      return;
+    }
+    const selected = this.selected;
+    return items.map((item, index) =>
+      html`<paper-button
+        class="media-toggle"
+        data-index="${index}"
+        title="Select ${item.label} media type"
+        .active="${selected === index}"
+        @click="${this._selectMediaType}">${item.label}</paper-button>`);
+  }
+
+  render() {
+    const { opened, _isAnyType, aware } = this;
+    return html`
+    ${aware ?
+      html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}
+
+    <div class="section-title-area" @click="${this.toggle}" title="Toogle body details">
+      <h3 class="table-title">Body</h3>
+      <div class="title-area-actions">
+        <paper-button class="toggle-button">
+          ${this._computeToggleActionLabel(opened)}
+          <iron-icon icon="arc:expand-more" class="${this._computeToggleIconClass(opened)}"></iron-icon>
+        </paper-button>
+      </div>
+    </div>
+
+    <iron-collapse .opened="${opened}">
+      ${_isAnyType ? this._anyTypeTemplate() : this._typedTemplate()}
+    </iron-collapse>`;
   }
 }
-window.customElements.define(ApiBodyDocument.is, ApiBodyDocument);
+window.customElements.define('api-body-document', ApiBodyDocument);
