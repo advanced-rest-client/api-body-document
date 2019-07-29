@@ -1,4 +1,4 @@
-import { html, render } from 'lit-html';
+import { html } from 'lit-html';
 import { LitElement } from 'lit-element';
 import { ApiDemoPageBase } from '@advanced-rest-client/arc-demo-helper/ApiDemoPage.js';
 import '@api-components/raml-aware/raml-aware.js';
@@ -102,21 +102,16 @@ class ApiDemo extends ApiDemoPageBase {
     <paper-item data-src="SE-11508.json">SE-11508 - compact model</paper-item>`;
   }
 
-  render() {
-    render(html `
-    ${this.headerTemplate()}
+  contentTemplate() {
+    return html`
+    <demo-element id="helper" .amf="${this.amf}"></demo-element>
     <raml-aware .api="${this.amf}" scope="model"></raml-aware>
-
-    <section role="main" class="centered card">
-      ${this._apiNavigationTemplate()}
-      ${this.hasData ?
-        html`<div class="list">
-          <api-body-document aware="model" .body="${this.payloads}" opened></api-body-document>
-        </div>` :
-        html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
-    </section>
-
-    <demo-element id="helper" .amf="${this.amf}"></demo-element>`, document.querySelector('#demo'));
+    ${this.hasData ?
+      html`<div class="list">
+        <api-body-document aware="model" .body="${this.payloads}" opened></api-body-document>
+      </div>` :
+      html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
+    `;
   }
 }
 const instance = new ApiDemo();

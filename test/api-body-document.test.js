@@ -15,6 +15,13 @@ describe('<api-body-document>', function() {
     return (await fixture(`<api-body-document opened narrow></api-body-document>`));
   }
 
+  async function awareFixture() {
+    return (await fixture(`<div>
+      <api-body-document aware="test-model"></api-body-document>
+      <raml-aware scope="test-model"></raml-aware>
+      </div>`));
+  }
+
   function computeOperation(element, amf, endpoint, method) {
     const webApi = element._computeWebApi(amf);
     const endPoint = element._computeEndpointByPath(webApi, endpoint);
@@ -42,6 +49,55 @@ describe('<api-body-document>', function() {
     const payload = response[pKey];
     return payload instanceof Array ? payload : [payload];
   }
+
+  describe('a11y', () => {
+    let element;
+    let amf;
+    let payload;
+    before(async () => {
+      const data = await AmfLoader.load(0, 0);
+      amf = data[0];
+      payload = data[1];
+    });
+
+    beforeEach(async () => {
+      element = await openedFixture();
+      element.amf = amf;
+      element.body = payload;
+      await nextFrame();
+      await aTimeout();
+    });
+
+    it('is accessible', async () => {
+      await assert.isAccessible(element);
+    });
+  });
+
+  describe('Raml aware', () => {
+    let element;
+    let amf;
+    before(async () => {
+      const data = await AmfLoader.load(0, 0);
+      amf = data[0];
+    });
+
+    beforeEach(async () => {
+      const region = await awareFixture();
+      element = region.querySelector('api-body-document');
+      region.querySelector('raml-aware').api = amf;
+      await aTimeout();
+    });
+
+    it('renders raml-aware', () => {
+      const node = element.shadowRoot.querySelector('raml-aware');
+      assert.ok(node);
+    });
+
+    it('sets amf value from aware', async () => {
+      await aTimeout();
+      assert.typeOf(element.amf, 'array');
+    });
+  });
 
   describe('Basic', () => {
     let element;

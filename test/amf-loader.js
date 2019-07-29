@@ -1,11 +1,11 @@
-import {ns} from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import { ns } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 export const AmfLoader = {};
 AmfLoader.load = async function(endpointIndex, methodIndex, compact, fileName) {
   endpointIndex = endpointIndex || 0;
   methodIndex = methodIndex || 0;
   fileName = fileName || 'demo-api';
   const file = '/' + fileName + (compact ? '-compact' : '') + '.json';
-  const url = location.protocol + '//' + location.host + '/demo/'+ file;
+  const url = location.protocol + '//' + location.host + '/base/demo/' + file;
   return new Promise((resolve) => {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', (e) => {
