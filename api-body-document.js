@@ -299,14 +299,8 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     }
   }
 
-  get amf() {
-    return this._amf;
-  }
-
-  set amf(value) {
-    if (this._sop('amf', value)) {
-      this._bodyChanged();
-    }
+  __amfChanged() {
+    this._bodyChanged();
   }
   /**
    * Sets observable property that causes render action.
@@ -374,7 +368,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     body.forEach((item) => {
       const label = this._getValue(item, this.ns.raml.vocabularies.http + 'mediaType');
       if (label) {
-        result.push({label});
+        result.push({ label });
       }
     });
     return result.length ? result : undefined;

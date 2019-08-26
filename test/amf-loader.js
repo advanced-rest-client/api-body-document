@@ -1,52 +1,52 @@
-import { ns } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import { LitElement } from 'lit-element';
+
 export const AmfLoader = {};
-AmfLoader.load = async function(endpointIndex, methodIndex, compact, fileName) {
-  endpointIndex = endpointIndex || 0;
-  methodIndex = methodIndex || 0;
+
+class HelperElement extends AmfHelperMixin(LitElement) {}
+window.customElements.define('helper-element', HelperElement);
+
+const helper = new HelperElement();
+
+AmfLoader.load = async function(compact, fileName) {
+  compact = compact ? '-compact' : '';
   fileName = fileName || 'demo-api';
-  const file = '/' + fileName + (compact ? '-compact' : '') + '.json';
-  const url = location.protocol + '//' + location.host + '/base/demo/' + file;
-  return new Promise((resolve) => {
+  const file = `${fileName}${compact}.json`;
+  const url = location.protocol + '//' + location.host + '/base/demo/'+ file;
+  return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', (e) => {
-      let data = JSON.parse(e.target.response);
-      const original = data;
-      if (data instanceof Array) {
-        data = data[0];
+      let data;
+      try {
+        data = JSON.parse(e.target.response);
+        /* istanbul ignore next */
+      } catch (e) {
+        /* istanbul ignore next */
+        reject(e);
+        /* istanbul ignore next */
+        return;
       }
-      const encKey = compact ? 'doc:encodes' :
-        ns.raml.vocabularies.document + 'encodes';
-      let encodes = data[encKey];
-      if (encodes instanceof Array) {
-        encodes = encodes[0];
-      }
-      const endKey = compact ? 'raml-http:endpoint' :
-        ns.raml.vocabularies.http + 'endpoint';
-      let endpoints = encodes[endKey];
-      if (endpoints && !(endpoints instanceof Array)) {
-        endpoints = [endpoints];
-      }
-      const endpoint = endpoints[endpointIndex];
-      const opKey = compact ? 'hydra:supportedOperation' :
-        ns.w3.hydra.core + 'supportedOperation';
-      let methods = endpoint[opKey];
-      if (!(methods instanceof Array)) {
-        methods = [methods];
-      }
-      const method = methods[methodIndex];
-      const expKey = compact ? 'hydra:expects' : ns.w3.hydra.core + 'expects';
-      let request = method[expKey];
-      if (request instanceof Array) {
-        request = request[0];
-      }
-      const pKey = compact ? 'raml-http:payload' : 'http://a.ml/vocabularies/http#payload';
-      let payload = request[pKey];
-      if (!(payload instanceof Array)) {
-        payload = [payload];
-      }
-      resolve([original, payload]);
+      resolve(data);
     });
+    /* istanbul ignore next */
+    xhr.addEventListener('error',
+      () => reject(new Error('Unable to load model file')));
     xhr.open('GET', url);
     xhr.send();
   });
+};
+
+AmfLoader.lookupOperation = function(model, endpoint, operation) {
+  helper.amf = model;
+  const webApi = helper._computeWebApi(model);
+  const endPoint = helper._computeEndpointByPath(webApi, endpoint);
+  const opKey = helper._getAmfKey(helper.ns.w3.hydra.supportedOperation);
+  const ops = helper._ensureArray(endPoint[opKey]);
+  return ops.find((item) => helper._getValue(item, helper.ns.w3.hydra.core + 'method') === operation);
+};
+
+AmfLoader.lookupPayload = function(model, endpoint, operation) {
+  const op = AmfLoader.lookupOperation(model, endpoint, operation);
+  const expects = helper._computeExpects(op);
+  return helper._ensureArray(helper._computePayload(expects));
 };

@@ -30,12 +30,6 @@ describe('<api-body-document>', function() {
     return ops.find((item) => element._getValue(item, element.ns.w3.hydra.core + 'method') === method);
   }
 
-  function getPayload(element, amf, endpoint, method) {
-    const op = computeOperation(element, amf, endpoint, method);
-    const expects = element._computeExpects(op);
-    return element._ensureArray(element._computePayload(expects));
-  }
-
   function computeReturnsPayload(element, operation, code) {
     const rKey = element._getAmfKey(element.ns.w3.hydra.core + 'returns');
     const returns = element._ensureArray(operation[rKey]);
@@ -55,9 +49,8 @@ describe('<api-body-document>', function() {
     let amf;
     let payload;
     before(async () => {
-      const data = await AmfLoader.load(0, 0);
-      amf = data[0];
-      payload = data[1];
+      amf = await AmfLoader.load();
+      payload = AmfLoader.lookupPayload(amf, '/people', 'post');
     });
 
     beforeEach(async () => {
@@ -77,8 +70,7 @@ describe('<api-body-document>', function() {
     let element;
     let amf;
     before(async () => {
-      const data = await AmfLoader.load(0, 0);
-      amf = data[0];
+      amf = await AmfLoader.load();
     });
 
     beforeEach(async () => {
@@ -124,15 +116,14 @@ describe('<api-body-document>', function() {
     [
       ['Full AMF model', false],
       ['Compact AMF model', true]
-    ].forEach((item) => {
-      describe(item[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(label, () => {
         let element;
         let amf;
         let payload;
         before(async () => {
-          const data = await AmfLoader.load(0, 0);
-          amf = data[0];
-          payload = data[1];
+          amf = await AmfLoader.load(compact);
+          payload = AmfLoader.lookupPayload(amf, '/people', 'post');
         });
 
         beforeEach(async () => {
@@ -204,15 +195,14 @@ describe('<api-body-document>', function() {
     [
       ['Full AMF model', false],
       ['Compact AMF model', true]
-    ].forEach((item) => {
-      describe(item[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(label, () => {
         let element;
         let amf;
         let payload;
         before(async () => {
-          const data = await AmfLoader.load(0, 0);
-          amf = data[0];
-          payload = data[1];
+          amf = await AmfLoader.load(compact);
+          payload = AmfLoader.lookupPayload(amf, '/people', 'post');
         });
 
         beforeEach(async () => {
@@ -241,15 +231,14 @@ describe('<api-body-document>', function() {
     [
       ['Full AMF model', false],
       ['Compact AMF model', true]
-    ].forEach((item) => {
-      describe(item[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(label, () => {
         let element;
         let amf;
         let payload;
         before(async () => {
-          const data = await AmfLoader.load(7, 0);
-          amf = data[0];
-          payload = data[1];
+          amf = await AmfLoader.load(compact);
+          payload = AmfLoader.lookupPayload(amf, '/emptybody', 'post'); // 7
         });
 
         beforeEach(async () => {
@@ -283,15 +272,14 @@ describe('<api-body-document>', function() {
     [
       ['Full AMF model', false],
       ['Compact AMF model', true]
-    ].forEach((item) => {
-      describe(item[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(label, () => {
         let element;
         let amf;
         let payload;
         before(async () => {
-          const data = await AmfLoader.load(8, 0);
-          amf = data[0];
-          payload = data[1];
+          amf = await AmfLoader.load(compact);
+          payload = AmfLoader.lookupPayload(amf, '/unionBody', 'post'); // 8
         });
 
         beforeEach(async () => {
@@ -319,13 +307,12 @@ describe('<api-body-document>', function() {
     [
       ['Full AMF model', false],
       ['Compact AMF model', true]
-    ].forEach((item) => {
-      describe(item[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(label, () => {
         let element;
         let amf;
         before(async () => {
-          const data = await AmfLoader.load(9, 0);
-          amf = data[0];
+          amf = await AmfLoader.load(compact);
         });
 
         beforeEach(async () => {
@@ -334,7 +321,7 @@ describe('<api-body-document>', function() {
         });
 
         it('Renders example for any type', async () => {
-          const type = getPayload(element, amf, '/emptyBodyWithExample', 'post');
+          const type = AmfLoader.lookupPayload(amf, '/emptyBodyWithExample', 'post');
           element.body = type;
           element.selected = 0;
           await nextFrame();
@@ -346,7 +333,7 @@ describe('<api-body-document>', function() {
         });
 
         it('Won\'t render example for any type when example is not defined', async () => {
-          const type = getPayload(element, amf, '/emptyBodyWithName', 'post');
+          const type = AmfLoader.lookupPayload(amf, '/emptyBodyWithName', 'post');
           element.body = type;
           element.selected = 0;
           await aTimeout();
@@ -357,7 +344,7 @@ describe('<api-body-document>', function() {
         });
 
         it('Renders body title', async () => {
-          const type = getPayload(element, amf, '/emptyBodyWithAllProperties', 'post');
+          const type = AmfLoader.lookupPayload(amf, '/emptyBodyWithAllProperties', 'post');
           element.body = type;
           await aTimeout();
           assert.equal(element._bodyName, 'My body name', 'bodyName is set');
@@ -367,7 +354,7 @@ describe('<api-body-document>', function() {
         });
 
         it('Renders body description', async () => {
-          const type = getPayload(element, amf, '/emptyBodyWithAllProperties', 'post');
+          const type = AmfLoader.lookupPayload(amf, '/emptyBodyWithAllProperties', 'post');
           element.body = type;
           await aTimeout();
           assert.equal(element._description, 'My description of `body`.');
@@ -383,13 +370,12 @@ describe('<api-body-document>', function() {
     [
       ['Full AMF model', false],
       ['Compact AMF model', true]
-    ].forEach((item) => {
-      describe(item[0], () => {
+    ].forEach(([label, compact]) => {
+      describe(label, () => {
         let element;
         let amf;
         before(async () => {
-          const data = await AmfLoader.load(0, 0, item[1], 'SE-11508');
-          amf = data[0];
+          amf = await AmfLoader.load(compact, 'SE-11508');
         });
 
         beforeEach(async () => {
