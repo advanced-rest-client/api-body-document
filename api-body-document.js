@@ -248,7 +248,11 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
          reflect: true
        },
        _hasObjectExamples: { type: Boolean },
-       _hasAnyExamples: { type: Boolean }
+       _hasAnyExamples: { type: Boolean },
+       /**
+       * Enables Anypoint legacy styling
+       */
+      legacy: { type: Boolean }
     };
   }
   get _mediaTypes() {
@@ -523,6 +527,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
    */
   _anyTypeTemplate() {
     const {
+      legacy,
       _bodyName,
       _description,
       _typeName,
@@ -552,6 +557,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         .mediaType="${_selectedMediaType}"
         .typeName="${_typeName}"
         .payloadId="${_selectedBodyId}"
+        ?legacy="${legacy}"
         @has-examples-changed="${this._hasExamplesHandler}"></api-resource-example-document>
     </section>`;
   }
@@ -561,6 +567,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
    */
   _typedTemplate() {
     const {
+      legacy,
       _bodyName,
       _description,
       _typeName,
@@ -597,9 +604,10 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       .selectedBodyId="${_selectedBodyId}"
       .type="${_selectedSchema}"
       .narrow="${narrow}"
-      .mediaType="${_selectedMediaType}"></api-type-document>` : undefined}
+      .mediaType="${_selectedMediaType}"
+      ?legacy="${legacy}"></api-type-document>` : undefined}
     ${_isSchema ?
-      html`<api-schema-document .amf="${amf}" .shape="${_selectedSchema}"></api-schema-document>` :
+      html`<api-schema-document ?legacy="${legacy}" .amf="${amf}" .shape="${_selectedSchema}"></api-schema-document>` :
       undefined}`;
   }
 
