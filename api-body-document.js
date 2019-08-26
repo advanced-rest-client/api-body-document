@@ -6,7 +6,7 @@ import '@api-components/api-type-document/api-type-document.js';
 import '@polymer/iron-collapse/iron-collapse.js';
 import '@polymer/iron-icon/iron-icon.js';
 import '@advanced-rest-client/arc-icons/arc-icons.js';
-import '@polymer/paper-button/paper-button.js';
+import '@anypoint-web-components/anypoint-button/anypoint-button.js';
 import '@api-components/api-schema-document/api-schema-document.js';
 import '@advanced-rest-client/arc-marked/arc-marked.js';
 import '@api-components/api-resource-example-document/api-resource-example-document.js';
@@ -91,7 +91,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         line-height: var(--arc-font-subhead-line-height);
       }
 
-      paper-button[active] {
+      anypoint-button[activated] {
         background-color: var(--api-body-document-media-button-background-color, #CDDC39);
       }
 
@@ -409,7 +409,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     if (index !== this.selected) {
       this.selected = index;
     } else {
-      e.target.active = true;
+      e.target.setAttribute('activated', '');
     }
   }
   /**
@@ -616,18 +616,19 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     if (!items || !items.length) {
       return;
     }
-    const selected = this.selected;
+    const { selected, legacy } = this;
     return items.map((item, index) =>
-      html`<paper-button
+      html`<anypoint-button
         class="media-toggle"
         data-index="${index}"
         title="Select ${item.label} media type"
-        .active="${selected === index}"
-        @click="${this._selectMediaType}">${item.label}</paper-button>`);
+        ?activated="${selected === index}"
+        ?legacy="${legacy}"
+        @click="${this._selectMediaType}">${item.label}</anypoint-button>`);
   }
 
   render() {
-    const { opened, _isAnyType, aware } = this;
+    const { opened, _isAnyType, aware, legacy } = this;
     return html`
     ${aware ?
       html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}
@@ -635,10 +636,10 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     <div class="section-title-area" @click="${this.toggle}" title="Toogle body details">
       <h3 class="table-title">Body</h3>
       <div class="title-area-actions">
-        <paper-button class="toggle-button">
+        <anypoint-button class="toggle-button" ?legacy="${legacy}">
           ${this._computeToggleActionLabel(opened)}
           <iron-icon icon="arc:expand-more" class="${this._computeToggleIconClass(opened)}"></iron-icon>
-        </paper-button>
+        </anypoint-button>
       </div>
     </div>
 
