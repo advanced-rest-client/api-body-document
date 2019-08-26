@@ -673,3 +673,14 @@
 
 
 
+## 3.0.2 (2019-08-26)
+
+
+### Features
+
+* adding `headerLevel`, updating styles to match other elements ([87ddb4f](https://github.com/advanced-rest-client/api-body-document/commit/87ddb4f))
+* adding legacy property ([efc55ad](https://github.com/advanced-rest-client/api-body-document/commit/efc55ad))
+* replacing paper button with anyponit version ([0f762ff](https://github.com/advanced-rest-client/api-body-document/commit/0f762ff))
+
+
+
