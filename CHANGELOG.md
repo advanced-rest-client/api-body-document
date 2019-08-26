@@ -663,3 +663,13 @@
 
 
 
+## 3.0.1 (2019-08-26)
+
+
+### Features
+
+* adding legacy property ([efc55ad](https://github.com/advanced-rest-client/api-body-document/commit/efc55ad))
+* replacing paper button with anyponit version ([0f762ff](https://github.com/advanced-rest-client/api-body-document/commit/0f762ff))
+
+
+
