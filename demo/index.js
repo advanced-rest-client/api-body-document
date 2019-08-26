@@ -1,43 +1,55 @@
-import { html } from 'lit-html';
+import { html, render } from 'lit-html';
 import { LitElement } from 'lit-element';
 import { ApiDemoPageBase } from '@advanced-rest-client/arc-demo-helper/ApiDemoPage.js';
-import '@api-components/raml-aware/raml-aware.js';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
+import '@advanced-rest-client/arc-demo-helper/arc-demo-helper.js';
+import '@advanced-rest-client/arc-demo-helper/arc-interactive-demo.js';
 import '@api-components/api-navigation/api-navigation.js';
+import '@api-components/raml-aware/raml-aware.js';
 import '../api-body-document.js';
 
-import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 class DemoElement extends AmfHelperMixin(LitElement) {}
 
 window.customElements.define('demo-element', DemoElement);
 class ApiDemo extends ApiDemoPageBase {
   constructor() {
     super();
-    this.hasData = false;
-  }
+    this._componentName = 'api-request-panel';
 
-  get hasData() {
-    return this._hasData;
-  }
+    this.initObservableProperties([
+      'legacy',
+      'hasData',
+      'payloads'
+    ]);
 
-  set hasData(value) {
-    this._setObservableProperty('hasData', value);
-  }
-
-  get payloads() {
-    return this._payloads;
-  }
-
-  set payloads(value) {
-    this._setObservableProperty('payloads', value);
+    this.demoStates = ['Material', 'Legacy'];
+    this._demoStateHandler = this._demoStateHandler.bind(this);
+    this._toggleMainOption = this._toggleMainOption.bind(this);
   }
 
   get helper() {
     return document.getElementById('helper');
   }
 
+  _demoStateHandler(e) {
+    const state = e.detail.value;
+    switch (state) {
+      case 0:
+        this.legacy = false;
+        break;
+      case 1:
+        this.legacy = true;
+        break;
+    }
+  }
+
+  _toggleMainOption(e) {
+    const { name, checked } = e.target;
+    this[name] = checked;
+  }
+
   _navChanged(e) {
     const { selected, type } = e.detail;
-
     if (type === 'method') {
       this.setData(selected);
     } else {
@@ -87,31 +99,89 @@ class ApiDemo extends ApiDemoPageBase {
   }
 
   _apiListTemplate() {
-    return html`
-    <paper-item data-src="demo-api.json">Demo api</paper-item>
-    <paper-item data-src="demo-api-compact.json">Demo api - compact model</paper-item>
-    <paper-item data-src="examples-api.json">Examples render demo api</paper-item>
-    <paper-item data-src="examples-api-compact.json">Examples render demo - compact model</paper-item>
-    <paper-item data-src="raml-types.json">RAML types with raml examples</paper-item>
-    <paper-item data-src="raml-types-compact.json">RAML types with raml examples - compact model</paper-item>
-    <paper-item data-src="caro-api-compact.json">Carolina API issue - compact model</paper-item>
-    <paper-item data-src="array-example-compact.json">Array examples issue - compact model</paper-item>
-    <paper-item data-src="data-types-union.json">APIC-157</paper-item>
-    <paper-item data-src="data-types-union-compact.json">APIC-157 - compact model</paper-item>
-    <paper-item data-src="SE-11508.json">SE-11508</paper-item>
-    <paper-item data-src="SE-11508.json">SE-11508 - compact model</paper-item>`;
+    return [
+      ['demo-api', 'Demo API'],
+      ['examples-api', 'Examples render demo'],
+      ['raml-types', 'RAML types with raml examples'],
+      ['caro-api', 'Carolina API issue'],
+      ['array-example', 'Array examples issue'],
+      ['data-types-union', 'APIC-157: union data types'],
+      ['SE-11508', 'SE-11508'],
+    ].map(([file, label]) => html`
+      <paper-item data-src="${file}-compact.json">${label} - compact model</paper-item>
+      <paper-item data-src="${file}.json">${label}</paper-item>
+      `);
   }
 
-  contentTemplate() {
+  _demoTemplate() {
+    const {
+      demoStates,
+      darkThemeActive,
+      legacy,
+      hasData,
+      payloads
+    } = this;
     return html`
-    <demo-element id="helper" .amf="${this.amf}"></demo-element>
-    <raml-aware .api="${this.amf}" scope="model"></raml-aware>
-    ${this.hasData ?
-      html`<div class="list">
-        <api-body-document aware="model" .body="${this.payloads}" opened></api-body-document>
-      </div>` :
-      html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
+    <section class="documentation-section">
+      <h3>Interactive demo</h3>
+      <p>
+        This demo lets you preview the OAuth2 authorization method element with various
+        configuration options.
+      </p>
+
+      <section class="horizontal-section-container centered main">
+        ${this._apiNavigationTemplate()}
+        <div class="demo-container">
+
+          <arc-interactive-demo
+            .states="${demoStates}"
+            @state-chanegd="${this._demoStateHandler}"
+            ?dark="${darkThemeActive}"
+          >
+
+            <div slot="content">
+              ${hasData ?
+                html`
+                  <api-body-document
+                    aware="model"
+                    .body="${payloads}"
+                    ?legacy="${legacy}"
+                    opened></api-body-document>
+                ` :
+                html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
+            </div>
+          </arc-interactive-demo>
+        </div>
+      </section>
+    </section>`;
+  }
+
+  _introductionTemplate() {
+    return html`
+      <section class="documentation-section">
+        <h3>Introduction</h3>
+        <p>
+          A web component to render accessible request data editor based on AMF model.
+        </p>
+        <p>
+          This component implements Material Design styles.
+        </p>
+      </section>
     `;
+  }
+
+  _render() {
+    const { amf } = this;
+    render(html`
+      ${this.headerTemplate()}
+      <demo-element id="helper" .amf="${amf}"></demo-element>
+      <raml-aware .api="${amf}" scope="model"></raml-aware>
+      <div role="main">
+        <h2 class="centered main">API request panel</h2>
+        ${this._demoTemplate()}
+        ${this._introductionTemplate()}
+      </div>
+      `, document.querySelector('#demo'));
   }
 }
 const instance = new ApiDemo();
