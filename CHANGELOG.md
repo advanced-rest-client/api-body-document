@@ -684,3 +684,12 @@
 
 
 
+## [3.0.3](https://github.com/advanced-rest-client/api-body-document/compare/3.0.2...3.0.3) (2019-09-04)
+
+
+### Bug Fixes
+
+* restoring lost changes ([44c8416](https://github.com/advanced-rest-client/api-body-document/commit/44c8416))
+
+
+
