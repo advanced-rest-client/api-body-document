@@ -256,6 +256,11 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         * @default 2
         */
        headerLevel: { type: Number },
+       /**
+        * When enabled it renders external types as links and dispatches
+        * `api-navigation-selection-changed` when clicked.
+        */
+       graph: { type: Boolean },
        _hasObjectExamples: { type: Boolean },
        _hasAnyExamples: { type: Boolean }
     };
@@ -584,6 +589,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
   _typedTemplate() {
     const {
       compatibility,
+      graph,
       _bodyName,
       _description,
       _typeName,
@@ -621,7 +627,8 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       .type="${_selectedSchema}"
       .narrow="${narrow}"
       .mediaType="${_selectedMediaType}"
-      ?compatibility="${compatibility}"></api-type-document>` : undefined}
+      ?compatibility="${compatibility}"
+      ?graph="${graph}"></api-type-document>` : undefined}
     ${_isSchema ?
       html`<api-schema-document
         .amf="${amf}"

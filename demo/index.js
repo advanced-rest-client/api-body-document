@@ -147,7 +147,8 @@ class ApiDemo extends ApiDemoPageBase {
                     aware="model"
                     .body="${payloads}"
                     ?compatibility="${legacy}"
-                    opened></api-body-document>
+                    opened
+                    graph></api-body-document>
                 ` :
                 html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
             </div>
