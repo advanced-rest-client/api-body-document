@@ -48,7 +48,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         border-bottom: 1px var(--api-body-document-title-border-color, #e5e5e5) solid;
       }
 
-      .section-title-area h3 {
+      .section-title-area .table-title {
         flex: 1;
         flex-basis: 0.000000001px;
         font-size: var(--api-body-document-title-narrow-font-size, initial);
@@ -71,19 +71,24 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       }
 
       .table-title {
-        font-size: var(--arc-font-title-font-size);
-        font-weight: var(--arc-font-title-font-weight);
-        line-height: var(--arc-font-title-line-height);
+        font-size: var(--arc-font-subhead-font-size);
+        font-weight: var(--arc-font-subhead-font-weight);
+        line-height: var(--arc-font-subhead-line-height);
       }
 
       :host([narrow]) .table-title {
         font-size: var(--api-body-document-title-narrow-font-size, initial);
       }
 
-      h4 {
-        font-size: var(--arc-font-subhead-font-size);
-        font-weight: var(--arc-font-subhead-font-weight);
-        line-height: var(--arc-font-subhead-line-height);
+      .type-title {
+        font-size: var(--arc-font-body2-font-size);
+        font-weight: var(--arc-font-body2-font-weight);
+        line-height: var(--arc-font-body2-line-height);
+      }
+
+      .body-name {
+        font-weight: var(--api-body-document-any-info-font-weight, 500);
+        font-size: 1.1rem;
       }
 
       anypoint-button[active] {
@@ -145,10 +150,6 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
 
       .any-info {
         font-size: var(--api-body-document-any-info-font-size, 16px);
-      }
-
-      .body-name {
-        font-weight: var(--api-body-document-any-info-font-weight, 500);
       }
 
       arc-marked {
@@ -248,6 +249,13 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         * Enables compatibility with Anypoint components.
         */
        compatibility: { type: Boolean },
+       /**
+        * Type of the header in the documentation section.
+        * Should be in range of 1 to 6.
+        *
+        * @default 2
+        */
+       headerLevel: { type: Number },
        _hasObjectExamples: { type: Boolean },
        _hasAnyExamples: { type: Boolean }
     };
@@ -331,6 +339,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     this._renderMediaSelector = false;
     this._hasObjectExamples = false;
     this._hasAnyExamples = false;
+    this.headerLevel = 2;
   }
 
   _bodyChanged() {
@@ -534,6 +543,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
    */
   _anyTypeTemplate() {
     const {
+      compatibility,
       _bodyName,
       _description,
       _typeName,
@@ -547,7 +557,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     const hasTypeName = !!_typeName;
 
     return html`
-    ${hasBodyName ? html`<h4 class="body-name">${_bodyName}</h4>` : undefined}
+    ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : undefined}
     ${hasDescription ? html`<arc-marked .markdown="${_description}">
       <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
     </arc-marked>` : undefined}
@@ -556,13 +566,14 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       The API file specifies body for this request but it does not specify the data model.
     </p>
     <section class="examples" ?hidden="${!_hasAnyExamples}">
-      <h5 class="examples-section-title">Examples</h5>
+      <div class="examples-section-title">Examples</div>
       <api-resource-example-document
         .amf="${this.amf}"
         .examples="${_selectedBody}"
         .mediaType="${_selectedMediaType}"
         .typeName="${_typeName}"
         .payloadId="${_selectedBodyId}"
+        ?compatibility="${compatibility}"
         @has-examples-changed="${this._hasExamplesHandler}"></api-resource-example-document>
     </section>`;
   }
@@ -572,6 +583,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
    */
   _typedTemplate() {
     const {
+      compatibility,
       _bodyName,
       _description,
       _typeName,
@@ -595,8 +607,8 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         this._mediaTypesTemplate() :
         html`<span class="media-type-label">${_selectedMediaType}</span>`}
     </div>
-    ${hasBodyName ? html`<h4 class="body-name">${_bodyName}</h4>` : undefined}
-    ${hasTypeName ? html`<h4>${_typeName}</h4>` : undefined}
+    ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : undefined}
+    ${hasTypeName ? html`<div class="type-title">${_typeName}</div>` : undefined}
     ${hasDescription ? html`
     <arc-marked .markdown="${_description}">
       <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
@@ -608,9 +620,13 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       .selectedBodyId="${_selectedBodyId}"
       .type="${_selectedSchema}"
       .narrow="${narrow}"
-      .mediaType="${_selectedMediaType}"></api-type-document>` : undefined}
+      .mediaType="${_selectedMediaType}"
+      ?compatibility="${compatibility}"></api-type-document>` : undefined}
     ${_isSchema ?
-      html`<api-schema-document .amf="${amf}" .shape="${_selectedSchema}"></api-schema-document>` :
+      html`<api-schema-document
+        .amf="${amf}"
+        .shape="${_selectedSchema}"
+        ?compatibility="${compatibility}"></api-schema-document>` :
       undefined}`;
   }
 
@@ -632,17 +648,17 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
   }
 
   render() {
-    const { opened, _isAnyType, aware } = this;
+    const { opened, _isAnyType, aware, compatibility, headerLevel } = this;
     return html`
     ${aware ?
       html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}
 
     <div class="section-title-area" @click="${this.toggle}" title="Toogle body details">
-      <h3 class="table-title">Body</h3>
+      <div class="table-title" role="heading" aria-level="${headerLevel}">Body</div>
       <div class="title-area-actions">
         <anypoint-button
           class="toggle-button"
-          ?compatibility="${this.compatibility}">
+          ?compatibility="${compatibility}">
           ${this._computeToggleActionLabel(opened)}
           <iron-icon icon="arc:expand-more" class="${this._computeToggleIconClass(opened)}"></iron-icon>
         </anypoint-button>

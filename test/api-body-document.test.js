@@ -387,6 +387,27 @@ describe('<api-body-document>', function() {
     });
   });
 
+  describe('Basic', () => {
+    let element;
+    beforeEach(async () => {
+      element = await basicFixture();
+      await nextFrame();
+      await aTimeout();
+    });
+
+    it('sets default header level', () => {
+      const node = element.shadowRoot.querySelector('.section-title-area [role="heading"]');
+      assert.equal(node.getAttribute('aria-level'), '2');
+    });
+
+    it('sets header level', async () => {
+      element.headerLevel = 4;
+      await aTimeout();
+      const node = element.shadowRoot.querySelector('.section-title-area [role="heading"]');
+      assert.equal(node.getAttribute('aria-level'), '4');
+    });
+  });
+
   describe('Examples from schema [SE-11508]', () => {
     [
       ['Full AMF model', false],
