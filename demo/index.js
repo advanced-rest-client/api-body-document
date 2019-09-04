@@ -6,6 +6,7 @@ import '@advanced-rest-client/arc-demo-helper/arc-demo-helper.js';
 import '@advanced-rest-client/arc-demo-helper/arc-interactive-demo.js';
 import '@api-components/api-navigation/api-navigation.js';
 import '@api-components/raml-aware/raml-aware.js';
+import '@anypoint-web-components/anypoint-styles/colors.js';
 import '../api-body-document.js';
 
 class DemoElement extends AmfHelperMixin(LitElement) {}
@@ -145,7 +146,7 @@ class ApiDemo extends ApiDemoPageBase {
                   <api-body-document
                     aware="model"
                     .body="${payloads}"
-                    ?legacy="${legacy}"
+                    ?compatibility="${legacy}"
                     opened></api-body-document>
                 ` :
                 html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
