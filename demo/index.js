@@ -108,6 +108,7 @@ class ApiDemo extends ApiDemoPageBase {
       ['array-example', 'Array examples issue'],
       ['data-types-union', 'APIC-157: union data types'],
       ['SE-11508', 'SE-11508'],
+      ['SE-12291', 'OAS "and" type']
     ].map(([file, label]) => html`
       <paper-item data-src="${file}-compact.json">${label} - compact model</paper-item>
       <paper-item data-src="${file}.json">${label}</paper-item>

@@ -485,6 +485,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     let isObject = false;
     let isSchema = false;
     let isAnyType = false;
+    let isAnd = false;
     if (this._hasType(body, this.ns.w3.shacl.name + 'NodeShape') ||
       this._hasType(body, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
       isObject = true;
@@ -494,9 +495,14 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     } else if (this._hasType(body, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
       isObject = true;
     } else if (this._hasType(body, this.ns.raml.vocabularies.shapes + 'AnyShape')) {
-      isAnyType = true;
+      const key = this._getAmfKey(this.ns.w3.shacl.name + 'and');
+      if (key in body) {
+        isAnd = true;
+      } else {
+        isAnyType = true;
+      }
     }
-    this._isObject = isObject;
+    this._isObject = isObject || isAnd;
     this._isSchema = isSchema;
     this._isAnyType = isAnyType;
   }

@@ -50,3 +50,18 @@ AmfLoader.lookupPayload = function(model, endpoint, operation) {
   const expects = helper._computeExpects(op);
   return helper._ensureArray(helper._computePayload(expects));
 };
+
+AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
+  const op = AmfLoader.lookupOperation(model, endpoint, operation);
+  const rKey = helper._getAmfKey(helper.ns.w3.hydra.core + 'returns');
+  const returns = helper._ensureArray(op[rKey]);
+  const response = returns.find((item) => {
+    if (helper._getValue(item, helper.ns.w3.hydra.core + 'statusCode') === String(code)) {
+      return true;
+    }
+    return false;
+  });
+  const pKey = helper._getAmfKey(helper.ns.raml.vocabularies.http + 'payload');
+  const payload = response[pKey];
+  return payload instanceof Array ? payload : [payload];
+};
