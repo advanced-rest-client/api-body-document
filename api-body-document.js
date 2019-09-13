@@ -1,11 +1,10 @@
 import { LitElement, html, css } from 'lit-element';
 import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
 import markdownStyles from '@advanced-rest-client/markdown-styles/markdown-styles.js';
+import { expandMore } from '@advanced-rest-client/arc-icons/ArcIcons.js';
 import '@api-components/raml-aware/raml-aware.js';
 import '@api-components/api-type-document/api-type-document.js';
 import '@polymer/iron-collapse/iron-collapse.js';
-import '@polymer/iron-icon/iron-icon.js';
-import '@advanced-rest-client/arc-icons/arc-icons.js';
 import '@anypoint-web-components/anypoint-button/anypoint-button.js';
 import '@api-components/api-schema-document/api-schema-document.js';
 import '@advanced-rest-client/arc-marked/arc-marked.js';
@@ -56,8 +55,6 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
 
       .toggle-button {
         outline: none;
-        color: var(--api-body-document-toggle-view-color, var(--arc-toggle-view-icon-color, rgba(0, 0, 0, 0.74)));
-        transition: color 0.25s ease-in-out;
       }
 
       .toggle-icon {
@@ -155,6 +152,13 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       arc-marked {
         background-color: transparent;
         padding: 0px;
+      }
+
+      .icon {
+        display: block;
+        width: 24px;
+        height: 24px;
+        fill: currentColor;
       }`
     ];
   }
@@ -662,6 +666,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
 
   render() {
     const { opened, _isAnyType, aware, compatibility, headerLevel } = this;
+    const iconClass = this._computeToggleIconClass(opened);
     return html`
     ${aware ?
       html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}
@@ -673,7 +678,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
           class="toggle-button"
           ?compatibility="${compatibility}">
           ${this._computeToggleActionLabel(opened)}
-          <iron-icon icon="arc:expand-more" class="${this._computeToggleIconClass(opened)}"></iron-icon>
+          <span class="icon ${iconClass}">${expandMore}</span>
         </anypoint-button>
       </div>
     </div>
