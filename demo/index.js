@@ -15,7 +15,7 @@ window.customElements.define('demo-element', DemoElement);
 class ApiDemo extends ApiDemoPageBase {
   constructor() {
     super();
-    this._componentName = 'api-request-panel';
+    this._componentName = 'api-body-document';
 
     this.initObservableProperties([
       'legacy',
@@ -108,7 +108,8 @@ class ApiDemo extends ApiDemoPageBase {
       ['array-example', 'Array examples issue'],
       ['data-types-union', 'APIC-157: union data types'],
       ['SE-11508', 'SE-11508'],
-      ['SE-12291', 'OAS "and" type']
+      ['SE-12291', 'OAS "and" type'],
+      ['demo-api-v4', 'Demo API - AMF v4']
     ].map(([file, label]) => html`
       <paper-item data-src="${file}-compact.json">${label} - compact model</paper-item>
       <paper-item data-src="${file}.json">${label}</paper-item>
@@ -121,7 +122,8 @@ class ApiDemo extends ApiDemoPageBase {
       darkThemeActive,
       legacy,
       hasData,
-      payloads
+      payloads,
+      amf
     } = this;
     return html`
     <section class="documentation-section">
@@ -146,6 +148,7 @@ class ApiDemo extends ApiDemoPageBase {
                 html`
                   <api-body-document
                     aware="model"
+                    .amf="${amf}"
                     .body="${payloads}"
                     ?compatibility="${legacy}"
                     opened
@@ -159,30 +162,15 @@ class ApiDemo extends ApiDemoPageBase {
     </section>`;
   }
 
-  _introductionTemplate() {
-    return html`
-      <section class="documentation-section">
-        <h3>Introduction</h3>
-        <p>
-          A web component to render accessible request data editor based on AMF model.
-        </p>
-        <p>
-          This component implements Material Design styles.
-        </p>
-      </section>
-    `;
-  }
-
   _render() {
     const { amf } = this;
     render(html`
       ${this.headerTemplate()}
       <demo-element id="helper" .amf="${amf}"></demo-element>
-      <raml-aware .api="${amf}" scope="model"></raml-aware>
+      <!-- <raml-aware .api="${amf}" scope="model"></raml-aware> -->
       <div role="main">
-        <h2 class="centered main">API request panel</h2>
+        <h2 class="centered main">API body document</h2>
         ${this._demoTemplate()}
-        ${this._introductionTemplate()}
       </div>
       `, document.querySelector('#demo'));
   }
