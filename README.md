@@ -8,6 +8,10 @@
 
 A component to render HTTP method body documentation based on AMF model generated from API spec file.
 
+## Version compatibility
+
+This version only works with AMF model version 2 (AMF parser >= 4.0.0).
+For compatibility with previous model version use `3.x.x` version of the component.
 
 ## Styling
 

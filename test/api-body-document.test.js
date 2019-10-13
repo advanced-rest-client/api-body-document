@@ -25,21 +25,21 @@ describe('<api-body-document>', function() {
   function computeOperation(element, amf, endpoint, method) {
     const webApi = element._computeWebApi(amf);
     const endPoint = element._computeEndpointByPath(webApi, endpoint);
-    const opKey = element._getAmfKey(element.ns.w3.hydra.supportedOperation);
+    const opKey = element._getAmfKey(element.ns.aml.vocabularies.apiContract.supportedOperation);
     const ops = element._ensureArray(endPoint[opKey]);
-    return ops.find((item) => element._getValue(item, element.ns.w3.hydra.core + 'method') === method);
+    return ops.find((item) => element._getValue(item, element.ns.aml.vocabularies.apiContract.method) === method);
   }
 
   function computeReturnsPayload(element, operation, code) {
-    const rKey = element._getAmfKey(element.ns.w3.hydra.core + 'returns');
+    const rKey = element._getAmfKey(element.ns.aml.vocabularies.apiContract.returns);
     const returns = element._ensureArray(operation[rKey]);
     const response = returns.find((item) => {
-      if (element._getValue(item, element.ns.w3.hydra.core + 'statusCode') === String(code)) {
+      if (element._getValue(item, element.ns.aml.vocabularies.apiContract.statusCode) === String(code)) {
         return true;
       }
       return false;
     });
-    const pKey = element._getAmfKey(element.ns.raml.vocabularies.http + 'payload');
+    const pKey = element._getAmfKey(element.ns.aml.vocabularies.apiContract.payload);
     const payload = response[pKey];
     return payload instanceof Array ? payload : [payload];
   }
@@ -349,8 +349,8 @@ describe('<api-body-document>', function() {
           await aTimeout();
           assert.isTrue(element._isAnyType, 'isAnyType is set');
           await nextFrame();
-          const node = element.shadowRoot.querySelector('.examples');
-          assert.isFalse(node.hasAttribute('hidden'), 'Examples section is rendered');
+          const node = element.shadowRoot.querySelector('api-resource-example-document');
+          assert.isTrue(node.hasExamples, 'Examples section is rendered');
         });
 
         it('Won\'t render example for any type when example is not defined', async () => {
@@ -360,8 +360,8 @@ describe('<api-body-document>', function() {
           await aTimeout();
           assert.isTrue(element._isAnyType, 'isAnyType is set');
           await nextFrame();
-          const node = element.shadowRoot.querySelector('.examples');
-          assert.isTrue(node.hasAttribute('hidden'), 'Examples section is not rendered');
+          const node = element.shadowRoot.querySelector('api-resource-example-document');
+          assert.isFalse(node.hasExamples, 'Examples section is not rendered');
         });
 
         it('Renders body title', async () => {

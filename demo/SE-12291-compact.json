@@ -11,23 +11,23 @@
 {
 "@id": "#45",
 "@type": [
-"schema-org:WebAPI",
+"apiContract:WebAPI",
 "doc:RootDomainElement",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "Example"
 }
 ],
-"raml-http:server": [
+"apiContract:server": [
 {
 "@id": "#46",
 "@type": [
-"raml-http:Server",
+"apiContract:Server",
 "doc:DomainElement"
 ],
-"raml-http:url": [
+"core:urlTemplate": [
 {
 "@value": "sample"
 }
@@ -42,7 +42,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:url"
+"@value": "core:urlTemplate"
 }
 ],
 "sourcemaps:value": [
@@ -70,96 +70,96 @@
 ]
 }
 ],
-"raml-http:scheme": [
+"apiContract:scheme": [
 {
 "@value": "https"
 }
 ],
-"schema-org:version": [
+"core:version": [
 {
 "@value": "v1"
 }
 ],
-"raml-http:endpoint": [
+"apiContract:endpoint": [
 {
 "@id": "#47",
 "@type": [
-"raml-http:EndPoint",
+"apiContract:EndPoint",
 "doc:DomainElement"
 ],
-"raml-http:path": [
+"apiContract:path": [
 {
 "@value": "/api/investment-administration/capital-system/v1/portfolios"
 }
 ],
-"hydra:supportedOperation": [
+"apiContract:supportedOperation": [
 {
 "@id": "#48",
 "@type": [
-"hydra:Operation",
+"apiContract:Operation",
 "doc:DomainElement"
 ],
-"hydra:method": [
+"apiContract:method": [
 {
 "@value": "get"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "Portfolio_GetPortfolios"
 }
 ],
-"raml-http:guiSummary": [
+"apiContract:guiSummary": [
 {
 "@value": "Returns the portfolios"
 }
 ],
-"raml-http:accepts": [],
-"raml-http:contentType": [
+"apiContract:accepts": [],
+"core:mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"hydra:expects": [
+"apiContract:expects": [
 {
 "@id": "#49",
 "@type": [
-"raml-http:Request",
+"apiContract:Request",
 "doc:DomainElement"
 ],
-"raml-http:parameter": [
+"apiContract:parameter": [
 {
 "@id": "#50",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "resultCount"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "resultCount"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Limit Results to a certain amount"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "query"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#51",
 "@type": [
@@ -184,7 +184,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Limit Results to a certain amount"
 }
@@ -213,7 +213,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -273,7 +273,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -285,7 +285,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -297,7 +297,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -321,7 +321,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -333,7 +333,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -345,7 +345,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -361,35 +361,35 @@
 {
 "@id": "#52",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "containsValueFields"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "containsValueFields"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Defaults to 1/PortfolioName. Choose which fields to find a contained value. 1 = PortfolioName, 2 = InvestmentPortfolioName, 3 = either"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "query"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#53",
 "@type": [
@@ -414,7 +414,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Defaults to 1/PortfolioName. Choose which fields to find a contained value. 1 = PortfolioName, 2 = InvestmentPortfolioName, 3 = either"
 }
@@ -443,7 +443,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -503,7 +503,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -515,7 +515,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -527,7 +527,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -551,7 +551,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -563,7 +563,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -575,7 +575,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -591,35 +591,35 @@
 {
 "@id": "#54",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "portfolioUids"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "portfolioUids"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Filters the portfolios to this set of portfolio ids"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "query"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#55",
 "@type": [
@@ -726,7 +726,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Filters the portfolios to this set of portfolio ids"
 }
@@ -755,7 +755,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -803,7 +803,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -815,7 +815,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -827,7 +827,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -851,7 +851,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -863,7 +863,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -875,7 +875,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -891,35 +891,35 @@
 {
 "@id": "#57",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "containsValue"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "containsValue"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Find portfolios that contain a specific value."
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "query"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#58",
 "@type": [
@@ -939,7 +939,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Find portfolios that contain a specific value."
 }
@@ -968,7 +968,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -1016,7 +1016,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -1028,7 +1028,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -1040,7 +1040,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -1064,7 +1064,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -1076,7 +1076,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -1088,7 +1088,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -1104,35 +1104,35 @@
 {
 "@id": "#59",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "investmentPortfolioProperty.value"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "investmentPortfolioProperty.value"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "[Requires Property Name, Cannot be Filtered Alone] The value of the property must be equal to"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "query"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#60",
 "@type": [
@@ -1152,7 +1152,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "[Requires Property Name, Cannot be Filtered Alone] The value of the property must be equal to"
 }
@@ -1181,7 +1181,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -1229,7 +1229,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -1241,7 +1241,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -1253,7 +1253,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -1277,7 +1277,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -1289,7 +1289,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -1301,7 +1301,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -1317,35 +1317,35 @@
 {
 "@id": "#61",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "investmentPortfolioProperty.name"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "investmentPortfolioProperty.name"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "The name of the property to filter by"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "query"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#62",
 "@type": [
@@ -1365,7 +1365,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "The name of the property to filter by"
 }
@@ -1394,7 +1394,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -1442,7 +1442,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -1454,7 +1454,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -1466,7 +1466,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -1490,7 +1490,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -1502,7 +1502,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -1514,7 +1514,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -1530,35 +1530,35 @@
 {
 "@id": "#63",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "portfolioCategory"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "portfolioCategory"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Category of the portfolios"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "query"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#64",
 "@type": [
@@ -1578,7 +1578,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Category of the portfolios"
 }
@@ -1605,7 +1605,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -1652,7 +1652,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -1699,7 +1699,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -1790,7 +1790,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -1814,7 +1814,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -1826,7 +1826,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -1838,7 +1838,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -1862,7 +1862,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -1874,7 +1874,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -1886,7 +1886,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -1902,35 +1902,35 @@
 {
 "@id": "#66",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "investmentPortfolioType"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "investmentPortfolioType"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Filters the portfolio by portfolio type (not valid for portfolio category of index or composite)"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "query"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#67",
 "@type": [
@@ -1950,7 +1950,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Filters the portfolio by portfolio type (not valid for portfolio category of index or composite)"
 }
@@ -1977,7 +1977,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2024,7 +2024,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2071,7 +2071,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2118,7 +2118,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2165,7 +2165,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2212,7 +2212,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2259,7 +2259,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2306,7 +2306,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2353,7 +2353,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2400,7 +2400,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2447,7 +2447,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2494,7 +2494,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2541,7 +2541,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2588,7 +2588,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2635,7 +2635,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2682,7 +2682,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2729,7 +2729,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2776,7 +2776,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2823,7 +2823,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2870,7 +2870,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2917,7 +2917,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -2964,7 +2964,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -3011,7 +3011,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -3058,7 +3058,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -3105,7 +3105,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -3196,7 +3196,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -3220,7 +3220,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -3232,7 +3232,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -3244,7 +3244,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -3268,7 +3268,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -3280,7 +3280,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -3292,7 +3292,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -3306,39 +3306,39 @@
 ]
 }
 ],
-"raml-http:header": [
+"apiContract:header": [
 {
 "@id": "#69",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "clientId"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "clientId"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "HTTP Header Parameter - Client system name that invoked this api"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "header"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#70",
 "@type": [
@@ -3358,7 +3358,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "HTTP Header Parameter - Client system name that invoked this api"
 }
@@ -3387,7 +3387,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -3435,7 +3435,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -3447,7 +3447,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -3459,7 +3459,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -3483,7 +3483,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -3495,7 +3495,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -3507,7 +3507,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -3523,35 +3523,35 @@
 {
 "@id": "#71",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "CG-CorrelationId"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "CG-CorrelationId"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "HTTP Header Parameter - GUID to uniquely identify requests and correlate request & response, end-to-end"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "header"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#72",
 "@type": [
@@ -3571,7 +3571,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "HTTP Header Parameter - GUID to uniquely identify requests and correlate request & response, end-to-end"
 }
@@ -3600,7 +3600,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -3648,7 +3648,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -3660,7 +3660,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -3672,7 +3672,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -3696,7 +3696,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -3708,7 +3708,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -3720,7 +3720,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -3736,35 +3736,35 @@
 {
 "@id": "#73",
 "@type": [
-"raml-http:Parameter",
+"apiContract:Parameter",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "metaData"
 }
 ],
-"raml-http:paramName": [
+"apiContract:paramName": [
 {
 "@value": "metaData"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "HTTP Header Parameter -  Comma separated name-value pairs of key elements of request"
 }
 ],
-"hydra:required": [
+"apiContract:required": [
 {
 "@value": false
 }
 ],
-"raml-http:binding": [
+"apiContract:binding": [
 {
 "@value": "header"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#74",
 "@type": [
@@ -3784,7 +3784,7 @@
 "@value": "schema"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "HTTP Header Parameter -  Comma separated name-value pairs of key elements of request"
 }
@@ -3813,7 +3813,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -3861,7 +3861,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:schema"
+"@value": "raml-shapes:schema"
 }
 ],
 "sourcemaps:value": [
@@ -3873,7 +3873,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:required"
+"@value": "apiContract:required"
 }
 ],
 "sourcemaps:value": [
@@ -3885,7 +3885,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:paramName"
+"@value": "apiContract:paramName"
 }
 ],
 "sourcemaps:value": [
@@ -3909,7 +3909,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -3921,7 +3921,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -3933,7 +3933,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:binding"
+"@value": "apiContract:binding"
 }
 ],
 "sourcemaps:value": [
@@ -3957,7 +3957,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:header"
+"@value": "apiContract:header"
 }
 ],
 "sourcemaps:value": [
@@ -3969,7 +3969,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:parameter"
+"@value": "apiContract:parameter"
 }
 ],
 "sourcemaps:value": [
@@ -3983,41 +3983,41 @@
 ]
 }
 ],
-"hydra:returns": [
+"apiContract:returns": [
 {
 "@id": "#75",
 "@type": [
-"raml-http:Response",
+"apiContract:Response",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "200"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Success"
 }
 ],
-"hydra:statusCode": [
+"apiContract:statusCode": [
 {
 "@value": "200"
 }
 ],
-"raml-http:payload": [
+"apiContract:payload": [
 {
 "@id": "#76",
 "@type": [
-"raml-http:Payload",
+"apiContract:Payload",
 "doc:DomainElement"
 ],
-"raml-http:mediaType": [
+"core:mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#40/linked_3",
 "@type": [
@@ -4037,6 +4037,28 @@
 }
 ]
 }
+],
+"sourcemaps:sources": [
+{
+"@id": "#76/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#76"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(144,12)-(146,13)]"
+}
+]
+}
+]
+}
 ]
 }
 ],
@@ -4050,7 +4072,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -4078,25 +4100,25 @@
 {
 "@id": "#77",
 "@type": [
-"raml-http:Response",
+"apiContract:Response",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "204"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "NoContent"
 }
 ],
-"hydra:statusCode": [
+"apiContract:statusCode": [
 {
 "@value": "204"
 }
 ],
-"raml-http:payload": [],
+"apiContract:payload": [],
 "sourcemaps:sources": [
 {
 "@id": "#77/source-map",
@@ -4107,7 +4129,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -4135,37 +4157,37 @@
 {
 "@id": "#78",
 "@type": [
-"raml-http:Response",
+"apiContract:Response",
 "doc:DomainElement"
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "500"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Internal Server Error"
 }
 ],
-"hydra:statusCode": [
+"apiContract:statusCode": [
 {
 "@value": "500"
 }
 ],
-"raml-http:payload": [
+"apiContract:payload": [
 {
 "@id": "#79",
 "@type": [
-"raml-http:Payload",
+"apiContract:Payload",
 "doc:DomainElement"
 ],
-"raml-http:mediaType": [
+"core:mediaType": [
 {
 "@value": "application/json"
 }
 ],
-"raml-http:schema": [
+"raml-shapes:schema": [
 {
 "@id": "#1/linked_3",
 "@type": [
@@ -4185,6 +4207,28 @@
 }
 ]
 }
+],
+"sourcemaps:sources": [
+{
+"@id": "#79/source-map",
+"@type": [
+"sourcemaps:SourceMap"
+],
+"sourcemaps:lexical": [
+{
+"sourcemaps:element": [
+{
+"@value": "amf://id#79"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(153,12)-(155,13)]"
+}
+]
+}
+]
+}
 ]
 }
 ],
@@ -4198,7 +4242,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -4231,7 +4275,7 @@
 "security:ParametrizedSecurityScheme",
 "doc:DomainElement"
 ],
-"security:name": [
+"core:name": [
 {
 "@value": "basicAuth"
 }
@@ -4243,7 +4287,7 @@
 "security:SecurityScheme",
 "doc:DomainElement"
 ],
-"security:name": [
+"core:name": [
 {
 "@value": "basicAuth"
 }
@@ -4253,7 +4297,7 @@
 "@value": "Basic Authentication"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Basic HTTP Authentication"
 }
@@ -4282,7 +4326,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -4294,7 +4338,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "security:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -4356,7 +4400,7 @@
 ]
 }
 ],
-"raml-http:tag": [
+"apiContract:tag": [
 {
 "@value": "Portfolio"
 }
@@ -4371,7 +4415,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:tag"
+"@value": "apiContract:tag"
 }
 ],
 "sourcemaps:value": [
@@ -4383,7 +4427,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:accepts"
+"@value": "apiContract:accepts"
 }
 ],
 "sourcemaps:value": [
@@ -4395,7 +4439,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -4419,7 +4463,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:guiSummary"
+"@value": "apiContract:guiSummary"
 }
 ],
 "sourcemaps:value": [
@@ -4431,7 +4475,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "hydra:returns"
+"@value": "apiContract:returns"
 }
 ],
 "sourcemaps:value": [
@@ -4493,7 +4537,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:endpoint"
+"@value": "apiContract:endpoint"
 }
 ],
 "sourcemaps:value": [
@@ -4505,7 +4549,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "raml-http:scheme"
+"@value": "apiContract:scheme"
 }
 ],
 "sourcemaps:value": [
@@ -4529,7 +4573,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -4541,7 +4585,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:version"
+"@value": "core:version"
 }
 ],
 "sourcemaps:value": [
@@ -4553,6 +4597,11 @@
 ]
 }
 ]
+}
+],
+"doc:version": [
+{
+"@value": "2.0.0"
 }
 ],
 "doc:declares": [
@@ -4574,7 +4623,7 @@
 "@value": "Error"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Represents a generic custom error (this is not a replacement for the HTTP errors)"
 }
@@ -4689,7 +4738,7 @@
 "@value": "id"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Unique identifier of the error message"
 }
@@ -4718,7 +4767,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -4834,7 +4883,7 @@
 "@value": "code"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Mnemonic identifier"
 }
@@ -4863,7 +4912,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -4979,7 +5028,7 @@
 "@value": "message"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Detailed message of the error"
 }
@@ -5008,7 +5057,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -5129,7 +5178,7 @@
 "@value": "createdDate"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Timestamp the error was created"
 }
@@ -5158,7 +5207,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -5259,7 +5308,7 @@
 "@value": "ErrorMessage"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "The detailed contents of an error"
 }
@@ -5288,7 +5337,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -5345,7 +5394,7 @@
 "@value": "errors"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Details of why the error occurred"
 }
@@ -5374,7 +5423,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -5480,7 +5529,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(208,9)]"
+"@value": "[(194,8)-(208,9)]"
 }
 ]
 }
@@ -5549,7 +5598,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -5615,7 +5664,7 @@
 "@value": "portfolioUid"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Identifiers of a Portfolio"
 }
@@ -5644,7 +5693,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -5772,7 +5821,7 @@
 "@value": "name"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "PortfolioName of a Portfolio"
 }
@@ -5801,7 +5850,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -5917,7 +5966,7 @@
 "@value": "category"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Category of a Portfolio"
 }
@@ -5944,7 +5993,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -5991,7 +6040,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6038,7 +6087,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6129,7 +6178,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -6226,7 +6275,7 @@
 "@value": "investmentPortfolioTypeUid"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "InvestmentPortfolioType of a Portfolio"
 }
@@ -6255,7 +6304,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -6388,7 +6437,7 @@
 "@value": "investmentPortfolioTypeCode"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "InvestmentPortfolioTypeCode of a Portfolio"
 }
@@ -6415,7 +6464,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6462,7 +6511,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6509,7 +6558,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6556,7 +6605,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6603,7 +6652,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6650,7 +6699,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6697,7 +6746,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6744,7 +6793,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6791,7 +6840,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6838,7 +6887,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6885,7 +6934,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6932,7 +6981,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -6979,7 +7028,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7026,7 +7075,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7073,7 +7122,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7120,7 +7169,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7167,7 +7216,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7214,7 +7263,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7261,7 +7310,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7308,7 +7357,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7355,7 +7404,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7402,7 +7451,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7449,7 +7498,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7496,7 +7545,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7543,7 +7592,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -7634,7 +7683,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -7714,7 +7763,7 @@
 "@value": "investmentPortfolioNumber"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "InvestmentPortfolioNumber of a Portfolio"
 }
@@ -7743,7 +7792,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -7847,7 +7896,7 @@
 "@value": "investmentPortfolioName"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "InvestmentPortfolioName of a Portfolio"
 }
@@ -7876,7 +7925,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -7980,7 +8029,7 @@
 "@value": "portfolioAliasName"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "PortfolioAliasName of a Portfolio"
 }
@@ -8009,7 +8058,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -8086,7 +8135,7 @@
 "@value": "Portfolio"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Definition of a generic portfolio"
 }
@@ -8115,7 +8164,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -8299,7 +8348,7 @@
 "@value": "portfolioUid"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Identifiers of a Portfolio"
 }
@@ -8328,7 +8377,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -8456,7 +8505,7 @@
 "@value": "name"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "PortfolioName of a Portfolio"
 }
@@ -8485,7 +8534,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -8601,7 +8650,7 @@
 "@value": "category"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Category of a Portfolio"
 }
@@ -8628,7 +8677,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -8675,7 +8724,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -8722,7 +8771,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -8813,7 +8862,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -8910,7 +8959,7 @@
 "@value": "investmentPortfolioTypeUid"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "InvestmentPortfolioType of a Portfolio"
 }
@@ -8939,7 +8988,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -9072,7 +9121,7 @@
 "@value": "investmentPortfolioTypeCode"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "InvestmentPortfolioTypeCode of a Portfolio"
 }
@@ -9099,7 +9148,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9146,7 +9195,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9193,7 +9242,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9240,7 +9289,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9287,7 +9336,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9334,7 +9383,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9381,7 +9430,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9428,7 +9477,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9475,7 +9524,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9522,7 +9571,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9569,7 +9618,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9616,7 +9665,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9663,7 +9712,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9710,7 +9759,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9757,7 +9806,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9804,7 +9853,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9851,7 +9900,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9898,7 +9947,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9945,7 +9994,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -9992,7 +10041,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -10039,7 +10088,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -10086,7 +10135,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -10133,7 +10182,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -10180,7 +10229,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -10227,7 +10276,7 @@
 "@id": "http://www.w3.org/2001/XMLSchema#string"
 }
 ],
-"schema-org:name": [
+"core:name": [
 {
 "@value": "scalar_1"
 }
@@ -10318,7 +10367,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -10398,7 +10447,7 @@
 "@value": "investmentPortfolioNumber"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "InvestmentPortfolioNumber of a Portfolio"
 }
@@ -10427,7 +10476,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -10531,7 +10580,7 @@
 "@value": "investmentPortfolioName"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "InvestmentPortfolioName of a Portfolio"
 }
@@ -10560,7 +10609,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -10664,7 +10713,7 @@
 "@value": "portfolioAliasName"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "PortfolioAliasName of a Portfolio"
 }
@@ -10693,7 +10742,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -10770,7 +10819,7 @@
 "@value": "Portfolio"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Definition of a generic portfolio"
 }
@@ -10799,7 +10848,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -10974,7 +11023,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(1,0)-(185,9)]"
+"@value": "[(172,8)-(185,9)]"
 }
 ]
 }
@@ -11092,7 +11141,7 @@
 "@value": "apiVersion"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "The version number of the API"
 }
@@ -11121,7 +11170,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -11242,7 +11291,7 @@
 "@value": "timestamp"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Timestamp the response was created"
 }
@@ -11271,7 +11320,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -11372,7 +11421,7 @@
 "@value": "ApiResponseMetaData"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Meta data describing the response to a request"
 }
@@ -11401,7 +11450,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -11500,7 +11549,7 @@
 "@value": "id"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Unique identifier of the error message"
 }
@@ -11529,7 +11578,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -11645,7 +11694,7 @@
 "@value": "code"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Mnemonic identifier"
 }
@@ -11674,7 +11723,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -11790,7 +11839,7 @@
 "@value": "message"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Detailed message of the error"
 }
@@ -11819,7 +11868,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -11940,7 +11989,7 @@
 "@value": "createdDate"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Timestamp the error was created"
 }
@@ -11969,7 +12018,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -12070,7 +12119,7 @@
 "@value": "ErrorMessage"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "The detailed contents of an error"
 }
@@ -12099,7 +12148,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -12227,7 +12276,7 @@
 "@value": "apiVersion"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "The version number of the API"
 }
@@ -12256,7 +12305,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -12377,7 +12426,7 @@
 "@value": "timestamp"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Timestamp the response was created"
 }
@@ -12406,7 +12455,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -12507,7 +12556,7 @@
 "@value": "ApiResponseMetaData"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Meta data describing the response to a request"
 }
@@ -12536,7 +12585,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -12639,7 +12688,7 @@
 "@value": "ApiResponse"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Abstract representation of a success/error response"
 }
@@ -12668,7 +12717,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -12725,7 +12774,7 @@
 "security:SecurityScheme",
 "doc:DomainElement"
 ],
-"security:name": [
+"core:name": [
 {
 "@value": "basicAuth"
 }
@@ -12735,7 +12784,7 @@
 "@value": "Basic Authentication"
 }
 ],
-"schema-org:description": [
+"core:description": [
 {
 "@value": "Basic HTTP Authentication"
 }
@@ -12764,7 +12813,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "schema-org:description"
+"@value": "core:description"
 }
 ],
 "sourcemaps:value": [
@@ -12776,7 +12825,7 @@
 {
 "sourcemaps:element": [
 {
-"@value": "security:name"
+"@value": "core:name"
 }
 ],
 "sourcemaps:value": [
@@ -12816,16 +12865,15 @@
 ],
 "@context": {
 "@base": "amf://id",
-"raml-http": "http://a.ml/vocabularies/http#",
 "shacl": "http://www.w3.org/ns/shacl#",
 "raml-shapes": "http://a.ml/vocabularies/shapes#",
 "security": "http://a.ml/vocabularies/security#",
 "data": "http://a.ml/vocabularies/data#",
 "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
 "doc": "http://a.ml/vocabularies/document#",
-"sourcemaps": "http://a.ml/vocabularies/document-source-maps#",
-"schema-org": "http://schema.org/",
-"hydra": "http://www.w3.org/ns/hydra/core#"
+"apiContract": "http://a.ml/vocabularies/apiContract#",
+"core": "http://a.ml/vocabularies/core#",
+"sourcemaps": "http://a.ml/vocabularies/document-source-maps#"
 }
 }
 ]

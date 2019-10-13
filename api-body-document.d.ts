@@ -21,32 +21,11 @@ declare namespace ApiElements {
   /**
    * `api-body-document`
    *
-   * A component to render HTTP method body documentation based on AMF model
-   *
-   * ## Styling
-   *
-   * `<api-body-document>` provides the following custom properties and mixins for styling:
-   *
-   * Custom property | Description | Default
-   * ----------------|-------------|----------
-   * `--api-body-document` | Mixin applied to this elment | `{}`
-   * `--api-body-document-title-border-color` | Border color of the section title | `#e5e5e5`
-   * `--api-body-document-title` | Mixni apploied to the title element | `{}`
-   * `--api-body-document-toggle-view-color` | Color of the toggle view button | `--arc-toggle-view-icon-color` or `rgba(0, 0, 0, 0.74)`
-   * `--api-body-document-toggle-view-hover-color` | Color of the toggle view button when hovered | `var(--arc-toggle-view-icon-hover-color` or `rgba(0, 0, 0, 0.88)`
-   * `--api-body-document-description-color` | Color of the type description | `rgba(0, 0, 0, 0.74)`
-   * `--arc-font-subhead` | Mixin applied to the resource title | `{}`
-   * `--api-body-document-media-button-background-color` | Selection color of the media type selector | `#CDDC39`
-   * `--api-body-document-examples-title-color` | Color of examples section title | ``
-   * `--api-body-document-examples-border-color` | Example section border color | `transparent`
-   * `--code-background-color` | Background color of the examples section | ``
-   * `--api-body-document-media-type-label-font-weight` | Font weight of the media type label (when selection is not available) | `500`
-   * `--api-body-document-title-narrow` | Mixin applied to the title when in narrow layout | `{}`
+   * A component to render HTTP method body documentation based on AMF model.
    */
   class ApiBodyDocument extends
     AmfHelperMixin(
     Object) {
-    amf: any;
 
     /**
      * List of discovered media types in the `body`.
@@ -144,8 +123,24 @@ declare namespace ApiElements {
      * Set to render a mobile friendly view.
      */
     narrow: boolean|null|undefined;
+
+    /**
+     * Enables compatibility with Anypoint components.
+     */
+    compatibility: boolean|null|undefined;
+
+    /**
+     * Type of the header in the documentation section.
+     * Should be in range of 1 to 6.
+     */
+    headerLevel: number|null|undefined;
+
+    /**
+     * When enabled it renders external types as links and dispatches
+     * `api-navigation-selection-changed` when clicked.
+     */
+    graph: boolean|null|undefined;
     _hasObjectExamples: boolean|null|undefined;
-    _hasAnyExamples: boolean|null|undefined;
 
     /**
      * Sets observable property that causes render action.
@@ -232,7 +227,6 @@ declare namespace ApiElements {
      */
     _computeTypeName(body: object|null): String|null|undefined;
     _apiChangedHandler(e: any): void;
-    _hasExamplesHandler(e: any): void;
 
     /**
      * A template to render for "Any" AMF model.

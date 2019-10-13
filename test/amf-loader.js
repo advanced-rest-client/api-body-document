@@ -40,9 +40,9 @@ AmfLoader.lookupOperation = function(model, endpoint, operation) {
   helper.amf = model;
   const webApi = helper._computeWebApi(model);
   const endPoint = helper._computeEndpointByPath(webApi, endpoint);
-  const opKey = helper._getAmfKey(helper.ns.w3.hydra.supportedOperation);
+  const opKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.supportedOperation);
   const ops = helper._ensureArray(endPoint[opKey]);
-  return ops.find((item) => helper._getValue(item, helper.ns.w3.hydra.core + 'method') === operation);
+  return ops.find((item) => helper._getValue(item, helper.ns.aml.vocabularies.apiContract.method) === operation);
 };
 
 AmfLoader.lookupPayload = function(model, endpoint, operation) {
@@ -53,15 +53,15 @@ AmfLoader.lookupPayload = function(model, endpoint, operation) {
 
 AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
   const op = AmfLoader.lookupOperation(model, endpoint, operation);
-  const rKey = helper._getAmfKey(helper.ns.w3.hydra.core + 'returns');
+  const rKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.returns);
   const returns = helper._ensureArray(op[rKey]);
   const response = returns.find((item) => {
-    if (helper._getValue(item, helper.ns.w3.hydra.core + 'statusCode') === String(code)) {
+    if (helper._getValue(item, helper.ns.aml.vocabularies.apiContract.statusCode) === String(code)) {
       return true;
     }
     return false;
   });
-  const pKey = helper._getAmfKey(helper.ns.raml.vocabularies.http + 'payload');
+  const pKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.payload);
   const payload = response[pKey];
   return payload instanceof Array ? payload : [payload];
 };

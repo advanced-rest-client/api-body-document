@@ -15,7 +15,6 @@ import '@api-components/api-resource-example-document/api-resource-example-docum
  * A component to render HTTP method body documentation based on AMF model.
  *
  * @customElement
- * @polymer
  * @demo demo/index.html
  * @memberof ApiElements
  * @appliesMixin AmfHelperMixin
@@ -106,25 +105,8 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         margin-top: 0;
       }
 
-      .examples {
-        margin-top: 12px;
-        border: 1px var(--api-body-document-examples-border-color, transparent) solid;
-      }
-
-      .examples,
       api-schema-document {
         background-color: var(--code-background-color);
-      }
-
-      .examples-section-title {
-        font-size: 16px;
-        padding: 16px 12px;
-        margin: 0;
-        color: var(--api-body-document-examples-title-color);
-      }
-
-      api-resource-example-document,
-      api-schema-document {
         padding: 8px;
         color: var(--api-body-document-code-color, initial);
         word-break: break-all;
@@ -265,8 +247,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         * `api-navigation-selection-changed` when clicked.
         */
        graph: { type: Boolean },
-       _hasObjectExamples: { type: Boolean },
-       _hasAnyExamples: { type: Boolean }
+       _hasObjectExamples: { type: Boolean }
     };
   }
   get _mediaTypes() {
@@ -342,7 +323,6 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     super();
     this._renderMediaSelector = false;
     this._hasObjectExamples = false;
-    this._hasAnyExamples = false;
     this.headerLevel = 2;
   }
 
@@ -376,7 +356,6 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     this._selectedBodyId = value && value['@id'];
     this._selectedSchema = this._computeSelectedSchema(value);
     this._hasObjectExamples = false;
-    this._hasAnyExamples = false;
   }
   /**
    * Computes list of media types in the `body`
@@ -386,7 +365,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
   _computeMediaTypes(body) {
     const result = [];
     body.forEach((item) => {
-      const label = this._getValue(item, this.ns.raml.vocabularies.http + 'mediaType');
+      const label = this._getValue(item, this.ns.aml.vocabularies.core.mediaType);
       if (label) {
         result.push({
           label
@@ -450,7 +429,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     if (!selectedBody) {
       return;
     }
-    const key = this._getAmfKey(this.ns.raml.vocabularies.http + 'schema');
+    const key = this._getAmfKey(this.ns.aml.vocabularies.shapes.schema);
     let schema = selectedBody[key];
     if (!schema) {
       return;
@@ -471,7 +450,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       return;
     }
     const data = body[selected];
-    return this._getValue(data, this.ns.raml.vocabularies.http + 'mediaType');
+    return this._getValue(data, this.ns.aml.vocabularies.core.mediaType);
   }
   /**
    * Handler for body value change. Computes basic view control properties.
@@ -479,22 +458,23 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
    */
   _selectedSchemaChanged(body) {
     this._typeName = this._computeTypeName(body);
-    this._bodyName = this._getValue(body, this.ns.schema.schemaName);
+    this._bodyName = this._getValue(body, this.ns.aml.vocabularies.core.name);
     this._description = this._computeDescription(body);
     let isObject = false;
     let isSchema = false;
     let isAnyType = false;
     let isAnd = false;
-    if (this._hasType(body, this.ns.w3.shacl.name + 'NodeShape') ||
-      this._hasType(body, this.ns.raml.vocabularies.shapes + 'UnionShape')) {
+    const type = body && body['@type'] && body['@type'][0];
+    if (type === this._getAmfKey(this.ns.w3.shacl.NodeShape) ||
+      type === this._getAmfKey(this.ns.aml.vocabularies.shapes.UnionShape)) {
       isObject = true;
-    } else if (this._hasType(body, this.ns.w3.shacl.name + 'SchemaShape') ||
-      this._hasType(body, this.ns.raml.vocabularies.shapes + 'ScalarShape')) {
+    } else if (type === this._getAmfKey(this.ns.aml.vocabularies.shapes.SchemaShape) ||
+      type === this._getAmfKey(this.ns.aml.vocabularies.shapes.ScalarShape)) {
       isSchema = true;
-    } else if (this._hasType(body, this.ns.raml.vocabularies.shapes + 'ArrayShape')) {
+    } else if (type === this._getAmfKey(this.ns.aml.vocabularies.shapes.ArrayShape)) {
       isObject = true;
-    } else if (this._hasType(body, this.ns.raml.vocabularies.shapes + 'AnyShape')) {
-      const key = this._getAmfKey(this.ns.w3.shacl.name + 'and');
+    } else if (type === this._getAmfKey(this.ns.aml.vocabularies.shapes.AnyShape)) {
+      const key = this._getAmfKey(this.ns.w3.shacl.and);
       if (key in body) {
         isAnd = true;
       } else {
@@ -531,7 +511,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
    * @return {String|undefined}
    */
   _computeTypeName(body) {
-    let value = this._getValue(body, this.ns.w3.shacl.name + 'name');
+    let value = this._getValue(body, this.ns.w3.shacl.name);
     if (value && (value === 'schema' || value.indexOf('amf_inline_type') === 0)) {
       value = undefined;
     }
@@ -541,11 +521,6 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
   _apiChangedHandler(e) {
     const { value } = e.detail;
     this.amf = value;
-  }
-
-  _hasExamplesHandler(e) {
-    const { value } = e.detail;
-    this._hasAnyExamples = value;
   }
   /**
    * A template to render for "Any" AMF model.
@@ -557,7 +532,6 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       _bodyName,
       _description,
       _typeName,
-      _hasAnyExamples,
       _selectedBody,
       _selectedMediaType,
       _selectedBodyId
@@ -565,7 +539,6 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     const hasBodyName = !!_bodyName;
     const hasDescription = !!_description;
     const hasTypeName = !!_typeName;
-
     return html`
     ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : undefined}
     ${hasDescription ? html`<arc-marked .markdown="${_description}" sanitize>
@@ -575,17 +548,16 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     <p class="any-info-description">
       The API file specifies body for this request but it does not specify the data model.
     </p>
-    <section class="examples" ?hidden="${!_hasAnyExamples}">
-      <div class="examples-section-title">Examples</div>
-      <api-resource-example-document
-        .amf="${this.amf}"
-        .examples="${_selectedBody}"
-        .mediaType="${_selectedMediaType}"
-        .typeName="${_typeName}"
-        .payloadId="${_selectedBodyId}"
-        ?compatibility="${compatibility}"
-        @has-examples-changed="${this._hasExamplesHandler}"></api-resource-example-document>
-    </section>`;
+
+    <api-resource-example-document
+      .amf="${this.amf}"
+      .examples="${_selectedBody}"
+      .mediaType="${_selectedMediaType}"
+      .typeName="${_typeName}"
+      .payloadId="${_selectedBodyId}"
+      ?compatibility="${compatibility}"
+    ></api-resource-example-document>
+    `;
   }
   /**
    * A template to render for any AMF model\ that is different than "any".
