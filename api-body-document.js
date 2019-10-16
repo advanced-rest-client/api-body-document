@@ -44,6 +44,11 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         -ms-user-select: none;
         user-select: none;
         border-bottom: 1px var(--api-body-document-title-border-color, #e5e5e5) solid;
+        transition: border-bottom-color 0.15s ease-in-out;
+      }
+
+      .section-title-area[opened] {
+        border-bottom-color: transparent;
       }
 
       .section-title-area .table-title {
@@ -638,7 +643,12 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     ${aware ?
       html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}
 
-    <div class="section-title-area" @click="${this.toggle}" title="Toogle body details">
+    <div
+      class="section-title-area"
+      @click="${this.toggle}" 
+      title="Toogle body details"
+      ?opened="${opened}"
+    >
       <div class="table-title" role="heading" aria-level="${headerLevel}">Body</div>
       <div class="title-area-actions">
         <anypoint-button
