@@ -614,6 +614,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     ${_isSchema ?
       html`<api-schema-document
         .amf="${amf}"
+        .mediaType="${_selectedMediaType}"
         .shape="${_selectedSchema}"
         ?compatibility="${compatibility}"></api-schema-document>` :
       undefined}`;
@@ -645,7 +646,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
 
     <div
       class="section-title-area"
-      @click="${this.toggle}" 
+      @click="${this.toggle}"
       title="Toogle body details"
       ?opened="${opened}"
     >
