@@ -595,8 +595,8 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         this._mediaTypesTemplate() :
         html`<span class="media-type-label">${_selectedMediaType}</span>`}
     </div>
-    ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : undefined}
-    ${hasTypeName ? html`<div class="type-title">${_typeName}</div>` : undefined}
+    ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : ''}
+    ${hasTypeName ? html`<div class="type-title">${_typeName}</div>` : ''}
     ${hasDescription ? html`
     <arc-marked .markdown="${_description}" sanitize>
       <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
@@ -610,13 +610,15 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       .narrow="${narrow}"
       .mediaType="${_selectedMediaType}"
       ?compatibility="${compatibility}"
-      ?graph="${graph}"></api-type-document>` : undefined}
+      ?graph="${graph}"></api-type-document>` : ''}
     ${_isSchema ?
       html`<api-schema-document
         .amf="${amf}"
+        .mediaType="${_selectedMediaType}"
+        .partentTypeId="${_selectedBodyId}"
         .shape="${_selectedSchema}"
         ?compatibility="${compatibility}"></api-schema-document>` :
-      undefined}`;
+      ''}`;
   }
 
   _mediaTypesTemplate() {
@@ -641,11 +643,11 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     const iconClass = this._computeToggleIconClass(opened);
     return html`<style>${this.styles}</style>
     ${aware ?
-      html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : undefined}
+      html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : ''}
 
     <div
       class="section-title-area"
-      @click="${this.toggle}" 
+      @click="${this.toggle}"
       title="Toogle body details"
       ?opened="${opened}"
     >
