@@ -703,3 +703,13 @@
 
 
 
+## [4.0.4](https://github.com/advanced-rest-client/api-body-document/compare/3.0.2...4.0.4) (2019-11-09)
+
+
+### Bug Fixes
+
+* fixes SE-12291 - body rendering for OAS' "and" type ([3f36237](https://github.com/advanced-rest-client/api-body-document/commit/3f36237ffbacc833e4938846cfaf46ee2b258c30))
+* restoring lost changes ([44c8416](https://github.com/advanced-rest-client/api-body-document/commit/44c8416882b2759f40b17e19fd58e597c010ef48))
+
+
+
