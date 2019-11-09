@@ -20,7 +20,7 @@ import '@api-components/api-resource-example-document/api-resource-example-docum
  * @appliesMixin AmfHelperMixin
  */
 class ApiBodyDocument extends AmfHelperMixin(LitElement) {
-  static get styles() {
+  get styles() {
     return [
       markdownStyles,
       css`:host {
@@ -641,7 +641,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
   render() {
     const { opened, _isAnyType, aware, compatibility, headerLevel } = this;
     const iconClass = this._computeToggleIconClass(opened);
-    return html`
+    return html`<style>${this.styles}</style>
     ${aware ?
       html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : ''}
 
