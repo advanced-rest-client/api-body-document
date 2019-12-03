@@ -377,7 +377,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         });
       }
     });
-    return result.length ? result : undefined;
+    return result.length ? result : '';
   }
   /**
    * Computes value for `renderMediaSelector` properety.
@@ -545,10 +545,10 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     const hasDescription = !!_description;
     const hasTypeName = !!_typeName;
     return html`
-    ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : undefined}
+    ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : ''}
     ${hasDescription ? html`<arc-marked .markdown="${_description}" sanitize>
       <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
-    </arc-marked>` : undefined}
+    </arc-marked>` : ''}
     <p class="any-info">Any instance of data is allowed.</p>
     <p class="any-info-description">
       The API file specifies body for this request but it does not specify the data model.
@@ -600,7 +600,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     ${hasDescription ? html`
     <arc-marked .markdown="${_description}" sanitize>
       <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
-    </arc-marked>` : undefined}
+    </arc-marked>` : ''}
 
     ${_isObject ?
       html`<api-type-document

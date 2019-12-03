@@ -164,15 +164,13 @@ class ApiDemo extends ApiDemoPageBase {
 
   _render() {
     const { amf } = this;
-    render(html`
-      ${this.headerTemplate()}
+    const content = html`${this.headerTemplate()}
       <demo-element id="helper" .amf="${amf}"></demo-element>
-      <!-- <raml-aware .api="${amf}" scope="model"></raml-aware> -->
       <div role="main">
         <h2 class="centered main">API body document</h2>
         ${this._demoTemplate()}
-      </div>
-      `, document.querySelector('#demo'));
+      </div>`;
+    render(content, document.querySelector('#demo'));
   }
 }
 const instance = new ApiDemo();
