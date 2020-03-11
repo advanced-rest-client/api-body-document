@@ -469,21 +469,23 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     let isSchema = false;
     let isAnyType = false;
     let isAnd = false;
-    const type = body && body['@type'] && body['@type'][0];
-    if (type === this._getAmfKey(this.ns.w3.shacl.NodeShape) ||
-      type === this._getAmfKey(this.ns.aml.vocabularies.shapes.UnionShape)) {
-      isObject = true;
-    } else if (type === this._getAmfKey(this.ns.aml.vocabularies.shapes.SchemaShape) ||
-      type === this._getAmfKey(this.ns.aml.vocabularies.shapes.ScalarShape)) {
-      isSchema = true;
-    } else if (type === this._getAmfKey(this.ns.aml.vocabularies.shapes.ArrayShape)) {
-      isObject = true;
-    } else if (type === this._getAmfKey(this.ns.aml.vocabularies.shapes.AnyShape)) {
-      const key = this._getAmfKey(this.ns.w3.shacl.and);
-      if (key in body) {
-        isAnd = true;
-      } else {
-        isAnyType = true;
+    const types = body && body['@type'];
+    if (types) {
+      if (types.indexOf(this._getAmfKey(this.ns.w3.shacl.NodeShape)) > -1 ||
+        types.indexOf(this._getAmfKey(this.ns.aml.vocabularies.shapes.UnionShape)) > -1) {
+        isObject = true;
+      } else if (types.indexOf(this._getAmfKey(this.ns.aml.vocabularies.shapes.SchemaShape)) > -1 ||
+        types.indexOf(this._getAmfKey(this.ns.aml.vocabularies.shapes.ScalarShape)) > -1) {
+        isSchema = true;
+      } else if (types.indexOf(this._getAmfKey(this.ns.aml.vocabularies.shapes.ArrayShape)) > -1) {
+        isObject = true;
+      } else if (types.indexOf(this._getAmfKey(this.ns.aml.vocabularies.shapes.AnyShape)) > -1) {
+        const key = this._getAmfKey(this.ns.w3.shacl.and);
+        if (key in body) {
+          isAnd = true;
+        } else {
+          isAnyType = true;
+        }
       }
     }
     this._isObject = isObject || isAnd;
