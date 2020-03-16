@@ -951,3 +951,12 @@
  [1455ffe](https://github.com/advanced-rest-client/api-body-document/commit/1455ffebbc7e286bde47f3cc9573b1427614ca73) by Pawel Psztyc
 
 
+<a name="4.0.7"></a>
+## [4.0.7](https://github.com/advanced-rest-client/api-body-document/compare/4.0.5...4.0.7) (2020-03-16)
+
+### Update
+
+* bump amf-helper-mixing and regenerate models (#6) [bump-version] [8c42d78](https://github.com/advanced-rest-client/api-body-document/commit/8c42d780451c0c2b621fb4a5657b3e4a71273ed3) by Leandro Bauret
+* [ci skip] automated merge master->stage. syncing main branches [4190c90](https://github.com/advanced-rest-client/api-body-document/commit/4190c906bf5ed3a1d9d2fcbd12b3bb1e7a72d087) by Ci agent
+
+
