@@ -253,6 +253,9 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         */
        graph: { type: Boolean },
        _hasObjectExamples: { type: Boolean },
+       /**
+        * When enabled it renders properties that are marked as `readOnly`
+        */
        renderReadOnly: { type: Boolean },
     };
   }
