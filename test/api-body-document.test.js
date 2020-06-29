@@ -133,6 +133,14 @@ describe('<api-body-document>', function() {
       const node = element.shadowRoot.querySelector('.section-title-area [role="heading"]');
       assert.equal(node.getAttribute('aria-level'), '4');
     });
+
+    it('passes renderReadOnly prop to api-type-document', async () => {
+      element.renderReadOnly = true;
+      element._isAnyType = false;
+      element._isObject = true;
+      await aTimeout(0);
+      assert.isTrue(element.shadowRoot.querySelector('api-type-document').renderReadOnly);
+    })
   });
 
   describe('With data', () => {
