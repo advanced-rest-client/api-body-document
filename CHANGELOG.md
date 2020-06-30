@@ -960,3 +960,13 @@
 * [ci skip] automated merge master->stage. syncing main branches [4190c90](https://github.com/advanced-rest-client/api-body-document/commit/4190c906bf5ed3a1d9d2fcbd12b3bb1e7a72d087) by Ci agent
 
 
+<a name="4.1.0"></a>
+## [4.1.0](https://github.com/advanced-rest-client/api-body-document/compare/4.0.6...4.1.0) (2020-06-30)
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [f7763df](https://github.com/advanced-rest-client/api-body-document/commit/f7763df41f68a35f90c80e75e421046b58e8bd77) by Ci agent
+* bump amf-helper-mixing and regenerate models (#6) [bump-version] [8c42d78](https://github.com/advanced-rest-client/api-body-document/commit/8c42d780451c0c2b621fb4a5657b3e4a71273ed3) by Leandro Bauret
+* [ci skip] automated merge master->stage. syncing main branches [4190c90](https://github.com/advanced-rest-client/api-body-document/commit/4190c906bf5ed3a1d9d2fcbd12b3bb1e7a72d087) by Ci agent
+
+
