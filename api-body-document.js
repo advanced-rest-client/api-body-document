@@ -567,8 +567,8 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       .mediaType="${_selectedMediaType}"
       .typeName="${_typeName}"
       .payloadId="${_selectedBodyId}"
+      .renderReadOnly="${renderReadOnly}"
       ?compatibility="${compatibility}"
-      ?renderReadOnly="${renderReadOnly}"
     ></api-resource-example-document>
     `;
   }
