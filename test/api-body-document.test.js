@@ -393,6 +393,26 @@ describe('<api-body-document>', function() {
           const node = element.shadowRoot.querySelector('.markdown-html');
           assert.ok(node, 'Example is rendered');
         });
+
+        it('renders api-resource-example-document with renderReadOnly property set to false', async () => {
+          const type = AmfLoader.lookupPayload(amf, '/emptyBodyWithExample', 'post');
+          element.body = type;
+          element.selected = 0;
+          element.renderReadOnly = false;
+          await nextFrame();
+          const node = element.shadowRoot.querySelector('api-resource-example-document');
+          assert.isFalse(node.renderReadOnly);
+        });
+
+        it('renders api-resource-example-document with renderReadOnly property set to true', async () => {
+          const type = AmfLoader.lookupPayload(amf, '/emptyBodyWithExample', 'post');
+          element.body = type;
+          element.selected = 0;
+          element.renderReadOnly = true;
+          await nextFrame();
+          const node = element.shadowRoot.querySelector('api-resource-example-document');
+          assert.isTrue(node.renderReadOnly);
+        });
       });
     });
   });
