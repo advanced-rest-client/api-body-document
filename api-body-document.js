@@ -545,7 +545,8 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       _typeName,
       _selectedBody,
       _selectedMediaType,
-      _selectedBodyId
+      _selectedBodyId,
+      renderReadOnly,
     } = this;
     const hasBodyName = !!_bodyName;
     const hasDescription = !!_description;
@@ -567,6 +568,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       .typeName="${_typeName}"
       .payloadId="${_selectedBodyId}"
       ?compatibility="${compatibility}"
+      ?renderReadOnly="${renderReadOnly}"
     ></api-resource-example-document>
     `;
   }
