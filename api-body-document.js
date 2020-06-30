@@ -252,7 +252,11 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
         * `api-navigation-selection-changed` when clicked.
         */
        graph: { type: Boolean },
-       _hasObjectExamples: { type: Boolean }
+       _hasObjectExamples: { type: Boolean },
+       /**
+        * When enabled it renders properties that are marked as `readOnly`
+        */
+       renderReadOnly: { type: Boolean },
     };
   }
   get _mediaTypes() {
@@ -584,7 +588,8 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       _isObject,
       _isSchema,
       amf,
-      narrow
+      narrow,
+      renderReadOnly,
     } = this;
     const hasBodyName = !!_bodyName;
     const hasDescription = !!_description;
@@ -607,6 +612,7 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
     ${_isObject ?
       html`<api-type-document
       .amf="${amf}"
+      ?renderReadOnly="${renderReadOnly}"
       .selectedBodyId="${_selectedBodyId}"
       .type="${_selectedSchema}"
       .narrow="${narrow}"
