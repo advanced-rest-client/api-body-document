@@ -970,3 +970,12 @@
 * [ci skip] automated merge master->stage. syncing main branches [4190c90](https://github.com/advanced-rest-client/api-body-document/commit/4190c906bf5ed3a1d9d2fcbd12b3bb1e7a72d087) by Ci agent
 
 
+<a name="4.1.1"></a>
+## [4.1.1](https://github.com/advanced-rest-client/api-body-document/compare/4.0.7...4.1.1) (2020-07-01)
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [8904080](https://github.com/advanced-rest-client/api-body-document/commit/89040805c6ee9ab7040af0e33f1cc61a9b91a0ed) by Ci agent
+* [ci skip] automated merge master->stage. syncing main branches [f7763df](https://github.com/advanced-rest-client/api-body-document/commit/f7763df41f68a35f90c80e75e421046b58e8bd77) by Ci agent
+
+
