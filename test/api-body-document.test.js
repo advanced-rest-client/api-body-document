@@ -290,10 +290,14 @@ describe('<api-body-document>', function() {
           assert.ok(label);
         });
 
-        it('Does not render media types', async () => {
+        it('renderMediaSelector is false', () => {
+          assert.isFalse(element._renderMediaSelector);
+        });
+
+        it('Renders media types', async () => {
           await nextFrame();
           const node = element.shadowRoot.querySelector('.media-type-selector');
-          assert.notOk(node);
+          assert.ok(node);
         });
       });
     });
@@ -478,6 +482,41 @@ describe('<api-body-document>', function() {
             assert.equal(node.renderedExamples[0].title, '400_badrequest_validate_customer_account_hash');
             done();
           }, 120);
+        });
+      });
+    });
+  });
+
+  describe('Any type rendering when multiple media types', () => {
+    [
+      ['APIC-463', false],
+      ['Compact APIC-463 model', true]
+    ].forEach(([label, compact]) => {
+      describe(label, () => {
+        let element;
+        let amf;
+        let payload;
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'APIC-463');
+          payload = AmfLoader.lookupPayload(amf, '/test', 'post');
+        });
+
+        beforeEach(async () => {
+          element = await openedFixture();
+          element.amf = amf;
+          element.body = payload;
+          await nextFrame();
+          await aTimeout();
+        });
+
+        it('Renders media types', async () => {
+          await nextFrame();
+          const node = element.shadowRoot.querySelector('.media-type-selector');
+          assert.ok(node);
+        });
+
+        it('renderMediaSelector is true', () => {
+          assert.isTrue(element._renderMediaSelector);
         });
       });
     });
