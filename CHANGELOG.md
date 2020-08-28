@@ -979,3 +979,29 @@
 * [ci skip] automated merge master->stage. syncing main branches [f7763df](https://github.com/advanced-rest-client/api-body-document/commit/f7763df41f68a35f90c80e75e421046b58e8bd77) by Ci agent
 
 
+<a name="4.1.2"></a>
+## [4.1.2](https://github.com/advanced-rest-client/api-body-document/compare/4.1.0...4.1.2) (2020-08-28)
+
+### Build
+
+* bump version [3b584a8](https://github.com/advanced-rest-client/api-body-document/commit/3b584a8afb9d17883be23d6b39df9c26dbb17e76) by Carolina Wright
+
+
+### Update
+
+* ignore generated demo files [df12b1f](https://github.com/advanced-rest-client/api-body-document/commit/df12b1f43822a2aaa480230f1d684bbade34a189) by Carolina Wright
+* [ci skip] automated merge master->stage. syncing main branches [4d6415d](https://github.com/advanced-rest-client/api-body-document/commit/4d6415d4892b5d7645104e3a31bc6d070cc1ab96) by Ci agent
+* [ci skip] automated merge master->stage. syncing main branches [8904080](https://github.com/advanced-rest-client/api-body-document/commit/89040805c6ee9ab7040af0e33f1cc61a9b91a0ed) by Ci agent
+
+
+### Bug Fixes
+
+* apic-463 missing media types when selected one has any type [dff4e3c](https://github.com/advanced-rest-client/api-body-document/commit/dff4e3ca0806928f82feb5ccf5d81a418deeceb6) by Carolina Wright
+
+
+### Testing
+
+* generated models [ea64338](https://github.com/advanced-rest-client/api-body-document/commit/ea6433890187807157386cef1d402bc0318acd36) by Carolina Wright
+* render media types when any type selected [43daca7](https://github.com/advanced-rest-client/api-body-document/commit/43daca77b1ba90113324097c8c22e9bd9bb441fb) by Carolina Wright
+
+
