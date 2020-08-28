@@ -547,11 +547,18 @@ class ApiBodyDocument extends AmfHelperMixin(LitElement) {
       _selectedMediaType,
       _selectedBodyId,
       renderReadOnly,
+      _renderMediaSelector
     } = this;
     const hasBodyName = !!_bodyName;
     const hasDescription = !!_description;
     const hasTypeName = !!_typeName;
     return html`
+    <div class="media-type-selector">
+      <span>Media type:</span>
+      ${_renderMediaSelector ?
+      this._mediaTypesTemplate() :
+      html`<span class="media-type-label">${_selectedMediaType}</span>`}
+    </div>
     ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : ''}
     ${hasDescription ? html`<arc-marked .markdown="${_description}" sanitize>
       <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>

@@ -123,7 +123,7 @@
 ],
 "raml-shapes:schema": [
 {
-"@id": "#15/link-32009719",
+"@id": "#15/link-759553291",
 "@type": [
 "shacl:NodeShape",
 "raml-shapes:AnyShape",
@@ -3895,11 +3895,31 @@
 ]
 }
 ],
+"shacl:name": [
+{
+"@value": "other"
+}
+],
 "sourcemaps:sources": [
 {
 "@id": "#24/source-map",
 "@type": [
 "sourcemaps:SourceMap"
+],
+"sourcemaps:type-property-lexical-info": [
+{
+"@id": "#24/source-map/type-property-lexical-info/element_0",
+"sourcemaps:element": [
+{
+"@value": "amf://id#24"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(47,6)-(47,10)]"
+}
+]
+}
 ],
 "sourcemaps:lexical": [
 {
@@ -3911,7 +3931,7 @@
 ],
 "sourcemaps:value": [
 {
-"@value": "[(47,6)-(49,0)]"
+"@value": "[(45,4)-(49,0)]"
 }
 ]
 }

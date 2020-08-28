@@ -133,7 +133,7 @@
 ],
 "http://a.ml/vocabularies/shapes#items": [
 {
-"@id": "amf://id#48/link-936576810",
+"@id": "amf://id#48/link-606175198",
 "@type": [
 "http://www.w3.org/ns/shacl#NodeShape",
 "http://a.ml/vocabularies/shapes#AnyShape",
@@ -151,6 +151,11 @@
 "@value": "customer"
 }
 ]
+}
+],
+"http://www.w3.org/ns/shacl#name": [
+{
+"@value": "schema"
 }
 ],
 "http://a.ml/vocabularies/document-source-maps#sources": [
@@ -184,7 +189,22 @@
 ],
 "http://a.ml/vocabularies/document-source-maps#value": [
 {
-"@value": "[(200,8)-(201,0)]"
+"@value": "[(199,6)-(201,0)]"
+}
+]
+}
+],
+"http://a.ml/vocabularies/document-source-maps#type-property-lexical-info": [
+{
+"@id": "amf://id#185/source-map/type-property-lexical-info/element_0",
+"http://a.ml/vocabularies/document-source-maps#element": [
+{
+"@value": "amf://id#185"
+}
+],
+"http://a.ml/vocabularies/document-source-maps#value": [
+{
+"@value": "[(200,8)-(200,12)]"
 }
 ]
 }
