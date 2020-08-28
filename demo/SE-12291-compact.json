@@ -4195,7 +4195,7 @@
 ],
 "raml-shapes:schema": [
 {
-"@id": "#66/link--1371783372",
+"@id": "#66/link--1045201492",
 "@type": [
 "raml-shapes:AnyShape",
 "shacl:Shape",
@@ -4372,7 +4372,7 @@
 ],
 "raml-shapes:schema": [
 {
-"@id": "#1/link-614416671",
+"@id": "#1/link-67232232",
 "@type": [
 "raml-shapes:AnyShape",
 "shacl:Shape",
@@ -4661,6 +4661,11 @@
 ]
 }
 ],
+"apiContract:operationId": [
+{
+"@value": "Portfolio_GetPortfolios"
+}
+],
 "sourcemaps:sources": [
 {
 "@id": "#74/source-map",
@@ -4684,7 +4689,59 @@
 ],
 "sourcemaps:lexical": [
 {
-"@id": "#74/source-map/lexical/element_5",
+"@id": "#74/source-map/lexical/element_6",
+"sourcemaps:element": [
+{
+"@value": "apiContract:tag"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(14,8)-(16,9)]"
+}
+]
+},
+{
+"@id": "#74/source-map/lexical/element_4",
+"sourcemaps:element": [
+{
+"@value": "core:name"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(18,8)-(18,48)]"
+}
+]
+},
+{
+"@id": "#74/source-map/lexical/element_2",
+"sourcemaps:element": [
+{
+"@value": "apiContract:guiSummary"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(17,8)-(17,43)]"
+}
+]
+},
+{
+"@id": "#74/source-map/lexical/element_0",
+"sourcemaps:element": [
+{
+"@value": "apiContract:operationId"
+}
+],
+"sourcemaps:value": [
+{
+"@value": "[(18,8)-(18,48)]"
+}
+]
+},
+{
+"@id": "#74/source-map/lexical/element_1",
 "sourcemaps:element": [
 {
 "@value": "apiContract:returns"
@@ -4710,7 +4767,7 @@
 ]
 },
 {
-"@id": "#74/source-map/lexical/element_1",
+"@id": "#74/source-map/lexical/element_5",
 "sourcemaps:element": [
 {
 "@value": "apiContract:accepts"
@@ -4719,45 +4776,6 @@
 "sourcemaps:value": [
 {
 "@value": "[(19,8)-(19,22)]"
-}
-]
-},
-{
-"@id": "#74/source-map/lexical/element_0",
-"sourcemaps:element": [
-{
-"@value": "apiContract:tag"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(14,8)-(16,9)]"
-}
-]
-},
-{
-"@id": "#74/source-map/lexical/element_2",
-"sourcemaps:element": [
-{
-"@value": "core:name"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(18,8)-(18,48)]"
-}
-]
-},
-{
-"@id": "#74/source-map/lexical/element_4",
-"sourcemaps:element": [
-{
-"@value": "apiContract:guiSummary"
-}
-],
-"sourcemaps:value": [
-{
-"@value": "[(17,8)-(17,43)]"
 }
 ]
 }
