@@ -1005,3 +1005,34 @@
 * render media types when any type selected [43daca7](https://github.com/advanced-rest-client/api-body-document/commit/43daca77b1ba90113324097c8c22e9bd9bb441fb) by Carolina Wright
 
 
+<a name="4.2.0"></a>
+## [4.2.0](https://github.com/advanced-rest-client/api-body-document/compare/4.1.1...4.2.0) (2020-09-21)
+
+### Build
+
+* bump version [3b584a8](https://github.com/advanced-rest-client/api-body-document/commit/3b584a8afb9d17883be23d6b39df9c26dbb17e76) by Carolina Wright
+
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [84b891a](https://github.com/advanced-rest-client/api-body-document/commit/84b891a963a3fbb493902917c6b39cf0ec5175d1) by Ci agent
+* ignore generated demo files [df12b1f](https://github.com/advanced-rest-client/api-body-document/commit/df12b1f43822a2aaa480230f1d684bbade34a189) by Carolina Wright
+* [ci skip] automated merge master->stage. syncing main branches [4d6415d](https://github.com/advanced-rest-client/api-body-document/commit/4d6415d4892b5d7645104e3a31bc6d070cc1ab96) by Ci agent
+
+
+### Bug Fixes
+
+* apic-463 missing media types when selected one has any type [dff4e3c](https://github.com/advanced-rest-client/api-body-document/commit/dff4e3ca0806928f82feb5ccf5d81a418deeceb6) by Carolina Wright
+
+
+### Refactor
+
+* upgrading to the latest ARC standards (#13) [c88104b](https://github.com/advanced-rest-client/api-body-document/commit/c88104bba82c771355f75540001499d03689f02f) by Paweł Psztyć
+
+
+### Testing
+
+* generated models [ea64338](https://github.com/advanced-rest-client/api-body-document/commit/ea6433890187807157386cef1d402bc0318acd36) by Carolina Wright
+* render media types when any type selected [43daca7](https://github.com/advanced-rest-client/api-body-document/commit/43daca77b1ba90113324097c8c22e9bd9bb441fb) by Carolina Wright
+
+
