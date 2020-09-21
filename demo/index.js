@@ -1,52 +1,17 @@
-import { html, render } from 'lit-html';
-import { LitElement } from 'lit-element';
-import { ApiDemoPageBase } from '@advanced-rest-client/arc-demo-helper/ApiDemoPage.js';
-import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
-import '@advanced-rest-client/arc-demo-helper/arc-demo-helper.js';
+import { html } from 'lit-html';
+import { ApiDemoPage } from '@advanced-rest-client/arc-demo-helper';
 import '@advanced-rest-client/arc-demo-helper/arc-interactive-demo.js';
-import '@api-components/api-navigation/api-navigation.js';
-import '@api-components/raml-aware/raml-aware.js';
 import '@anypoint-web-components/anypoint-styles/colors.js';
 import '../api-body-document.js';
 
-class DemoElement extends AmfHelperMixin(LitElement) {}
-
-window.customElements.define('demo-element', DemoElement);
-class ApiDemo extends ApiDemoPageBase {
+class ApiDemo extends ApiDemoPage {
   constructor() {
     super();
-    this._componentName = 'api-body-document';
-
     this.initObservableProperties([
-      'legacy',
-      'hasData',
       'payloads'
     ]);
-
-    this.demoStates = ['Material', 'Legacy'];
-    this._demoStateHandler = this._demoStateHandler.bind(this);
-    this._toggleMainOption = this._toggleMainOption.bind(this);
-  }
-
-  get helper() {
-    return document.getElementById('helper');
-  }
-
-  _demoStateHandler(e) {
-    const state = e.detail.value;
-    switch (state) {
-      case 0:
-        this.legacy = false;
-        break;
-      case 1:
-        this.legacy = true;
-        break;
-    }
-  }
-
-  _toggleMainOption(e) {
-    const { name, checked } = e.target;
-    this[name] = checked;
+    this.compatibility = false;
+    this.componentName = 'api-body-document';
   }
 
   _navChanged(e) {
@@ -59,9 +24,8 @@ class ApiDemo extends ApiDemoPageBase {
   }
 
   setData(selected) {
-    const helper = this.helper;
-    const webApi = helper._computeWebApi(this.amf);
-    const method = helper._computeMethodModel(webApi, selected);
+    const webApi = this._computeWebApi(this.amf);
+    const method = this._computeMethodModel(webApi, selected);
     const payloads = this.computePayloads(method);
     this.payloads = payloads;
     this.hasData = true;
@@ -69,26 +33,25 @@ class ApiDemo extends ApiDemoPageBase {
 
   computePayloads(model) {
     if (!model) {
-      return;
+      return undefined;
     }
-    const helper = this.helper;
     let result = [];
-    const expects = helper._computeExpects(model);
+    const expects = this._computeExpects(model);
     if (expects) {
-      let payloads = helper._computePayload(expects);
+      let payloads = this._computePayload(expects);
       if (payloads) {
-        if (!(payloads instanceof Array)) {
+        if (!Array.isArray(payloads)) {
           payloads = [payloads];
         }
         result = payloads;
       }
     }
-    const returns = helper._computeReturns(model);
+    const returns = this._computeReturns(model);
     if (returns) {
       for (let i = 0, len = returns.length; i < len; i++) {
-        let payloads = helper._computePayload(returns[i]);
+        let payloads = this._computePayload(returns[i]);
         if (payloads) {
-          if (!(payloads instanceof Array)) {
+          if (!Array.isArray(payloads)) {
             payloads = [payloads];
           }
           result = result.concat(payloads);
@@ -112,8 +75,8 @@ class ApiDemo extends ApiDemoPageBase {
       ['demo-api-v4', 'Demo API - AMF v4'],
       ['APIC-463', 'APIC-463']
     ].map(([file, label]) => html`
-      <paper-item data-src="${file}-compact.json">${label} - compact model</paper-item>
-      <paper-item data-src="${file}.json">${label}</paper-item>
+      <anypoint-item data-src="${file}-compact.json">${label} - compact model</anypoint-item>
+      <anypoint-item data-src="${file}.json">${label}</anypoint-item>
       `);
   }
 
@@ -121,7 +84,7 @@ class ApiDemo extends ApiDemoPageBase {
     const {
       demoStates,
       darkThemeActive,
-      legacy,
+      compatibility,
       hasData,
       payloads,
       amf
@@ -130,50 +93,37 @@ class ApiDemo extends ApiDemoPageBase {
     <section class="documentation-section">
       <h3>Interactive demo</h3>
       <p>
-        This demo lets you preview the OAuth2 authorization method element with various
+        This demo lets you preview the API body document element with various
         configuration options.
       </p>
-
-      <section class="horizontal-section-container centered main">
-        ${this._apiNavigationTemplate()}
-        <div class="demo-container">
-
-          <arc-interactive-demo
-            .states="${demoStates}"
-            @state-chanegd="${this._demoStateHandler}"
-            ?dark="${darkThemeActive}"
-          >
-
-            <div slot="content">
-              ${hasData ?
-                html`
-                  <api-body-document
-                    aware="model"
-                    .amf="${amf}"
-                    .body="${payloads}"
-                    ?compatibility="${legacy}"
-                    opened
-                    graph></api-body-document>
-                ` :
-                html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
-            </div>
-          </arc-interactive-demo>
+      <arc-interactive-demo
+        .states="${demoStates}"
+        @state-chanegd="${this._demoStateHandler}"
+        ?dark="${darkThemeActive}"
+      >
+        <div slot="content">
+          ${hasData ?
+            html`
+              <api-body-document
+                aware="model"
+                .amf="${amf}"
+                .body="${payloads}"
+                ?compatibility="${compatibility}"
+                opened
+                graph></api-body-document>
+            ` :
+            html`<p>Select a HTTP method in the navigation to see the demo.</p>`}
         </div>
-      </section>
+      </arc-interactive-demo>
     </section>`;
   }
 
-  _render() {
-    const { amf } = this;
-    const content = html`${this.headerTemplate()}
-      <demo-element id="helper" .amf="${amf}"></demo-element>
-      <div role="main">
-        <h2 class="centered main">API body document</h2>
-        ${this._demoTemplate()}
-      </div>`;
-    render(content, document.querySelector('#demo'));
+  contentTemplate() {
+    return html`
+    <h2>API body document</h2>
+    ${this._demoTemplate()}
+    `;
   }
 }
 const instance = new ApiDemo();
 instance.render();
-window._demo = instance;
