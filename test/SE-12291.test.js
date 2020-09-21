@@ -2,22 +2,29 @@ import { fixture, assert, nextFrame, aTimeout, html } from '@open-wc/testing';
 import { AmfLoader } from './amf-loader.js';
 import '../api-body-document.js';
 // Rendering of OAS' "and" type.
-describe('SE-12291', function() {
+
+/** @typedef {import('../index').ApiBodyDocumentElement} ApiBodyDocumentElement */
+
+describe('SE-12291 - test', () => {
+  /**
+   * @return {Promise<ApiBodyDocumentElement>}
+   */
   async function basicFixture(amf, payload) {
-    const element = (await fixture(html`<api-body-document
+    const element = /** @type ApiBodyDocumentElement */ (await fixture(html`<api-body-document
       .amf="${amf}"
       .body="${payload}"></api-body-document>`));
     await nextFrame();
-    await aTimeout();
+    await aTimeout(0);
     return element;
   }
   const apiFile = 'SE-12291';
+
   [
     ['Full AMF model', false],
     ['Compact AMF model', true]
   ].forEach(([label, compact]) => {
-    describe(label, () => {
-      let element;
+    describe(String(label), () => {
+      let element = /** @type ApiBodyDocumentElement */ (null);
       let amf;
       let payload;
       before(async () => {

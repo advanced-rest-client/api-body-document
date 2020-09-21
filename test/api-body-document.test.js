@@ -2,21 +2,35 @@ import { fixture, assert, nextFrame, aTimeout } from '@open-wc/testing';
 import { AmfLoader } from './amf-loader.js';
 import '../api-body-document.js';
 
-describe('<api-body-document>', function() {
+/** @typedef {import('../index').ApiBodyDocumentElement} ApiBodyDocumentElement */
+
+describe('ApiBodyDocumentElement', () => {
+  /**
+   * @return {Promise<ApiBodyDocumentElement>}
+   */
   async function basicFixture() {
-    return (await fixture(`<api-body-document></api-body-document>`));
+    return (fixture(`<api-body-document></api-body-document>`));
   }
 
+  /**
+   * @return {Promise<ApiBodyDocumentElement>}
+   */
   async function openedFixture() {
-    return (await fixture(`<api-body-document opened></api-body-document>`));
+    return (fixture(`<api-body-document opened></api-body-document>`));
   }
 
+  /**
+   * @return {Promise<ApiBodyDocumentElement>}
+   */
   async function narrowFixture() {
-    return (await fixture(`<api-body-document opened narrow></api-body-document>`));
+    return (fixture(`<api-body-document opened narrow></api-body-document>`));
   }
 
+  /**
+   * @return {Promise<ApiBodyDocumentElement>}
+   */
   async function awareFixture() {
-    return (await fixture(`<div>
+    return (fixture(`<div>
       <api-body-document aware="test-model"></api-body-document>
       <raml-aware scope="test-model"></raml-aware>
       </div>`));
@@ -45,7 +59,7 @@ describe('<api-body-document>', function() {
   }
 
   describe('a11y', () => {
-    let element;
+    let element = /** @type ApiBodyDocumentElement */ (null);
     let amf;
     let payload;
     before(async () => {
@@ -58,7 +72,7 @@ describe('<api-body-document>', function() {
       element.amf = amf;
       element.body = payload;
       await nextFrame();
-      await aTimeout();
+      await aTimeout(0);
     });
 
     it('is accessible', async () => {
@@ -69,7 +83,7 @@ describe('<api-body-document>', function() {
   });
 
   describe('Raml aware', () => {
-    let element;
+    let element = /** @type ApiBodyDocumentElement */ (null);
     let amf;
     before(async () => {
       amf = await AmfLoader.load();
@@ -79,7 +93,7 @@ describe('<api-body-document>', function() {
       const region = await awareFixture();
       element = region.querySelector('api-body-document');
       region.querySelector('raml-aware').api = amf;
-      await aTimeout();
+      await aTimeout(0);
     });
 
     it('renders raml-aware', () => {
@@ -88,21 +102,21 @@ describe('<api-body-document>', function() {
     });
 
     it('sets amf value from aware', async () => {
-      await aTimeout();
+      await aTimeout(0);
       assert.typeOf(element.amf, 'array');
     });
   });
 
   describe('Basic', () => {
-    let element;
+    let element = /** @type ApiBodyDocumentElement */ (null);
     beforeEach(async () => {
       element = await basicFixture();
       await nextFrame();
-      await aTimeout();
+      await aTimeout(0);
     });
 
     it('Toggle button opens the table', async () => {
-      const button = element.shadowRoot.querySelector('.section-title-area');
+      const button = /** @type HTMLElement */ (element.shadowRoot.querySelector('.section-title-area'));
       button.click();
       await nextFrame();
       const collapse = element.shadowRoot.querySelector('iron-collapse');
@@ -115,11 +129,11 @@ describe('<api-body-document>', function() {
   });
 
   describe('Basic', () => {
-    let element;
+    let element = /** @type ApiBodyDocumentElement */ (null);
     beforeEach(async () => {
       element = await basicFixture();
       await nextFrame();
-      await aTimeout();
+      await aTimeout(0);
     });
 
     it('sets default header level', () => {
@@ -129,7 +143,7 @@ describe('<api-body-document>', function() {
 
     it('sets header level', async () => {
       element.headerLevel = 4;
-      await aTimeout();
+      await aTimeout(0);
       const node = element.shadowRoot.querySelector('.section-title-area [role="heading"]');
       assert.equal(node.getAttribute('aria-level'), '4');
     });
@@ -148,8 +162,8 @@ describe('<api-body-document>', function() {
       ['Full AMF model', false],
       ['Compact AMF model', true]
     ].forEach(([label, compact]) => {
-      describe(label, () => {
-        let element;
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
         let amf;
         let payload;
         before(async () => {
@@ -162,7 +176,7 @@ describe('<api-body-document>', function() {
           element.amf = amf;
           element.body = payload;
           await nextFrame();
-          await aTimeout();
+          await aTimeout(0);
         });
 
         it('renderMediaSelector is true', () => {
@@ -204,7 +218,7 @@ describe('<api-body-document>', function() {
 
         it('Media type click changes selection', async () => {
           await nextFrame();
-          const button = element.shadowRoot.querySelectorAll('.media-toggle')[1];
+          const button = /** @type HTMLElement */ (element.shadowRoot.querySelectorAll('.media-toggle')[1]);
           button.click();
           assert.isFalse(element._isObject);
           assert.isTrue(element._isSchema);
@@ -227,8 +241,8 @@ describe('<api-body-document>', function() {
       ['Full AMF model', false],
       ['Compact AMF model', true]
     ].forEach(([label, compact]) => {
-      describe(label, () => {
-        let element;
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
         let amf;
         let payload;
         before(async () => {
@@ -241,7 +255,7 @@ describe('<api-body-document>', function() {
           element.amf = amf;
           element.body = payload;
           await nextFrame();
-          await aTimeout();
+          await aTimeout(0);
         });
 
         it('Has narrow attribute', () => {
@@ -263,8 +277,8 @@ describe('<api-body-document>', function() {
       ['Full AMF model', false],
       ['Compact AMF model', true]
     ].forEach(([label, compact]) => {
-      describe(label, () => {
-        let element;
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
         let amf;
         let payload;
         before(async () => {
@@ -277,7 +291,7 @@ describe('<api-body-document>', function() {
           element.amf = amf;
           element.body = payload;
           await nextFrame();
-          await aTimeout();
+          await aTimeout(0);
         });
 
         it('Computes isAnyType attribute', () => {
@@ -286,8 +300,8 @@ describe('<api-body-document>', function() {
 
         it('Renders "any" mode info message', async () => {
           await nextFrame();
-          const label = element.shadowRoot.querySelector('.any-info');
-          assert.ok(label);
+          const node = /** @type HTMLElement */ (element.shadowRoot.querySelector('.any-info'));
+          assert.ok(node);
         });
 
         it('renderMediaSelector is false', () => {
@@ -308,8 +322,8 @@ describe('<api-body-document>', function() {
       ['Full AMF model', false],
       ['Compact AMF model', true]
     ].forEach(([label, compact]) => {
-      describe(label, () => {
-        let element;
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
         let amf;
         let payload;
         before(async () => {
@@ -322,7 +336,7 @@ describe('<api-body-document>', function() {
           element.amf = amf;
           element.body = payload;
           await nextFrame();
-          await aTimeout();
+          await aTimeout(0);
         });
 
         it('Computes isObject attribute', () => {
@@ -331,8 +345,8 @@ describe('<api-body-document>', function() {
 
         it('Renders api-type-document', async () => {
           await nextFrame();
-          const label = element.shadowRoot.querySelector('api-type-document');
-          assert.ok(label);
+          const node = /** @type HTMLElement */ (element.shadowRoot.querySelector('api-type-document'));
+          assert.ok(node);
         });
       });
     });
@@ -343,8 +357,8 @@ describe('<api-body-document>', function() {
       ['Full AMF model', false],
       ['Compact AMF model', true]
     ].forEach(([label, compact]) => {
-      describe(label, () => {
-        let element;
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
         let amf;
         before(async () => {
           amf = await AmfLoader.load(compact);
@@ -360,7 +374,7 @@ describe('<api-body-document>', function() {
           element.body = type;
           element.selected = 0;
           await nextFrame();
-          await aTimeout();
+          await aTimeout(0);
           assert.isTrue(element._isAnyType, 'isAnyType is set');
           await nextFrame();
           const node = element.shadowRoot.querySelector('api-resource-example-document');
@@ -371,7 +385,7 @@ describe('<api-body-document>', function() {
           const type = AmfLoader.lookupPayload(amf, '/emptyBodyWithName', 'post');
           element.body = type;
           element.selected = 0;
-          await aTimeout();
+          await aTimeout(0);
           assert.isTrue(element._isAnyType, 'isAnyType is set');
           await nextFrame();
           const node = element.shadowRoot.querySelector('api-resource-example-document');
@@ -381,7 +395,7 @@ describe('<api-body-document>', function() {
         it('Renders body title', async () => {
           const type = AmfLoader.lookupPayload(amf, '/emptyBodyWithAllProperties', 'post');
           element.body = type;
-          await aTimeout();
+          await aTimeout(0);
           assert.equal(element._bodyName, 'My body name', 'bodyName is set');
           await nextFrame();
           const node = element.shadowRoot.querySelector('.body-name');
@@ -391,7 +405,7 @@ describe('<api-body-document>', function() {
         it('Renders body description', async () => {
           const type = AmfLoader.lookupPayload(amf, '/emptyBodyWithAllProperties', 'post');
           element.body = type;
-          await aTimeout();
+          await aTimeout(0);
           assert.equal(element._description, 'My description of `body`.');
           await nextFrame();
           const node = element.shadowRoot.querySelector('.markdown-html');
@@ -422,11 +436,11 @@ describe('<api-body-document>', function() {
   });
 
   describe('Basic', () => {
-    let element;
+    let element = /** @type ApiBodyDocumentElement */ (null);
     beforeEach(async () => {
       element = await basicFixture();
       await nextFrame();
-      await aTimeout();
+      await aTimeout(0);
     });
 
     it('sets default header level', () => {
@@ -436,7 +450,7 @@ describe('<api-body-document>', function() {
 
     it('sets header level', async () => {
       element.headerLevel = 4;
-      await aTimeout();
+      await aTimeout(0);
       const node = element.shadowRoot.querySelector('.section-title-area [role="heading"]');
       assert.equal(node.getAttribute('aria-level'), '4');
     });
@@ -447,8 +461,8 @@ describe('<api-body-document>', function() {
       ['Full AMF model', false],
       ['Compact AMF model', true]
     ].forEach(([label, compact]) => {
-      describe(label, () => {
-        let element;
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
         let amf;
         before(async () => {
           amf = await AmfLoader.load(compact, 'SE-11508');
@@ -465,7 +479,7 @@ describe('<api-body-document>', function() {
           const payload = computeReturnsPayload(element, op, '400');
           element.body = payload;
           await nextFrame();
-          await aTimeout();
+          await aTimeout(0);
           await nextFrame();
           const typeNode = element.shadowRoot.querySelector('api-type-document');
           assert.typeOf(typeNode.selectedBodyId, 'string', 'selected body id is set');
@@ -492,8 +506,8 @@ describe('<api-body-document>', function() {
       ['APIC-463', false],
       ['Compact APIC-463 model', true]
     ].forEach(([label, compact]) => {
-      describe(label, () => {
-        let element;
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
         let amf;
         let payload;
         before(async () => {
@@ -506,7 +520,7 @@ describe('<api-body-document>', function() {
           element.amf = amf;
           element.body = payload;
           await nextFrame();
-          await aTimeout();
+          await aTimeout(0);
         });
 
         it('Renders media types', async () => {
