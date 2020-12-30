@@ -1036,3 +1036,17 @@
 * render media types when any type selected [43daca7](https://github.com/advanced-rest-client/api-body-document/commit/43daca77b1ba90113324097c8c22e9bd9bb441fb) by Carolina Wright
 
 
+<a name="4.2.1"></a>
+## [4.2.1](https://github.com/advanced-rest-client/api-body-document/compare/4.1.2...4.2.1) (2020-12-30)
+
+### Update
+
+* [ci skip] automated merge master->stage. syncing main branches [5b372b8](https://github.com/advanced-rest-client/api-body-document/commit/5b372b893cadc0e78cdaf9d4b7226d762ac9ab8b) by Ci agent
+* [ci skip] automated merge master->stage. syncing main branches [84b891a](https://github.com/advanced-rest-client/api-body-document/commit/84b891a963a3fbb493902917c6b39cf0ec5175d1) by Ci agent
+
+
+### Refactor
+
+* upgrading to the latest ARC standards (#13) [c88104b](https://github.com/advanced-rest-client/api-body-document/commit/c88104bba82c771355f75540001499d03689f02f) by Paweł Psztyć
+
+
