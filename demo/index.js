@@ -24,7 +24,7 @@ class ApiDemo extends ApiDemoPage {
   }
 
   setData(selected) {
-    const webApi = this._computeWebApi(this.amf);
+    const webApi = this._computeApi(this.amf);
     const method = this._computeMethodModel(webApi, selected);
     const payloads = this.computePayloads(method);
     this.payloads = payloads;
@@ -73,7 +73,8 @@ class ApiDemo extends ApiDemoPage {
       ['SE-11508', 'SE-11508'],
       ['SE-12291', 'OAS "and" type'],
       ['demo-api-v4', 'Demo API - AMF v4'],
-      ['APIC-463', 'APIC-463']
+      ['APIC-463', 'APIC-463'],
+      ['anyOf', 'AnyOf'],
     ].map(([file, label]) => html`
       <anypoint-item data-src="${file}-compact.json">${label} - compact model</anypoint-item>
       <anypoint-item data-src="${file}.json">${label}</anypoint-item>
