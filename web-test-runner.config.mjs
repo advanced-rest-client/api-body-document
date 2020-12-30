@@ -12,7 +12,6 @@ export default {
   testRunnerHtml: (testFramework) =>
     `<html>
 		<body>
-		  <script src="node_modules/codemirror/lib/codemirror.js"></script>
 		  <script type="module" src="${testFramework}"></script>
 		</body>
 	  </html>`
