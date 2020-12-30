@@ -363,6 +363,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     let isSchema = false;
     let isAnyType = false;
     let isAnd = false;
+    let isOr = false;
     const types = body && body['@type'];
     if (types) {
       if (types.indexOf(this._getAmfKey(this.ns.w3.shacl.NodeShape)) > -1 ||
@@ -374,15 +375,18 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
       } else if (types.indexOf(this._getAmfKey(this.ns.aml.vocabularies.shapes.ArrayShape)) > -1) {
         isObject = true;
       } else if (types.indexOf(this._getAmfKey(this.ns.aml.vocabularies.shapes.AnyShape)) > -1) {
-        const key = this._getAmfKey(this.ns.w3.shacl.and);
-        if (key in body) {
+        const andKey = this._getAmfKey(this.ns.w3.shacl.and);
+        const orKey = this._getAmfKey(this.ns.w3.shacl.or);
+        if (andKey in body) {
           isAnd = true;
-        } else {
+        } else if (orKey in body) {
+          isOr = true;
+        }else {
           isAnyType = true;
         }
       }
     }
-    this._isObject = isObject || isAnd;
+    this._isObject = isObject || isAnd || isOr;
     this._isSchema = isSchema;
     this._isAnyType = isAnyType;
   }
