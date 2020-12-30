@@ -70,7 +70,8 @@
     "test": "karma start --coverage",
     "test:watch": "karma start --auto-watch=true --single-run=false",
     "test:sl": "karma start karma.sl.config.js --compatibility auto --coverage",
-    "generate-model": "node demo/model.js"
+    "generate-model": "node demo/model.js",
+    "prepare": "npm run generate-model"
   },
   "eslintConfig": {
     "extends": [
