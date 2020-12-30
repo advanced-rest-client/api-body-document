@@ -37,7 +37,7 @@ describe('ApiBodyDocumentElement', () => {
   }
 
   function computeOperation(element, amf, endpoint, method) {
-    const webApi = element._computeWebApi(amf);
+    const webApi = element._computeApi(amf);
     const endPoint = element._computeEndpointByPath(webApi, endpoint);
     const opKey = element._getAmfKey(element.ns.aml.vocabularies.apiContract.supportedOperation);
     const ops = element._ensureArray(endPoint[opKey]);
@@ -531,6 +531,36 @@ describe('ApiBodyDocumentElement', () => {
 
         it('renderMediaSelector is true', () => {
           assert.isTrue(element._renderMediaSelector);
+        });
+      });
+    });
+  });
+
+  describe('APIC-561', () => {
+    [
+      ['Full AMF model', false],
+      ['Compact AMF model', true]
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
+        let amf;
+        let payload;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'anyOf');
+          payload = AmfLoader.lookupPayload(amf, 'test', 'publish');
+        });
+
+        beforeEach(async () => {
+          element = await narrowFixture();
+          element.amf = amf;
+          element.body = payload;
+          await nextFrame();
+          await aTimeout(0);
+        });
+
+        it('Renders api-type-document for anyOf payload', () => {
+          assert.exists(element.shadowRoot.querySelector('api-type-document'));
         });
       });
     });

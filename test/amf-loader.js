@@ -12,7 +12,8 @@ AmfLoader.load = async function(compact, fileName) {
   compact = compact ? '-compact' : '';
   fileName = fileName || 'demo-api';
   const file = `${fileName}${compact}.json`;
-  const url = location.protocol + '//' + location.host + '/base/demo/'+ file;
+  // eslint-disable-next-line no-restricted-globals
+  const url = `${location.protocol  }//${  location.host  }/base/demo/${ file}`;
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
     xhr.addEventListener('load', (e) => {
@@ -20,9 +21,9 @@ AmfLoader.load = async function(compact, fileName) {
       try {
         data = JSON.parse(e.target.response);
         /* istanbul ignore next */
-      } catch (e) {
+      } catch (ex) {
         /* istanbul ignore next */
-        reject(e);
+        reject(ex);
         /* istanbul ignore next */
         return;
       }
@@ -38,7 +39,7 @@ AmfLoader.load = async function(compact, fileName) {
 
 AmfLoader.lookupOperation = function(model, endpoint, operation) {
   helper.amf = model;
-  const webApi = helper._computeWebApi(model);
+  const webApi = helper._computeApi(model);
   const endPoint = helper._computeEndpointByPath(webApi, endpoint);
   const opKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.supportedOperation);
   const ops = helper._ensureArray(endPoint[opKey]);
