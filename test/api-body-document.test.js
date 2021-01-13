@@ -1,4 +1,4 @@
-import { fixture, assert, nextFrame, aTimeout } from '@open-wc/testing';
+import { fixture, assert, nextFrame, aTimeout, waitUntil } from '@open-wc/testing';
 import { AmfLoader } from './amf-loader.js';
 import '../api-body-document.js';
 
@@ -559,8 +559,8 @@ describe('ApiBodyDocumentElement', () => {
           await aTimeout(0);
         });
 
-        it('Renders api-type-document for anyOf payload', () => {
-          assert.exists(element.shadowRoot.querySelector('api-type-document'));
+        it('Renders api-type-document for anyOf payload', async () => {
+          await waitUntil(() => !!element.shadowRoot.querySelector('api-type-document'), 'api-type-document should render', { timeout: 1000 });
         });
       });
     });
