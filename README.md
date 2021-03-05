@@ -19,7 +19,7 @@ For compatibility with previous model version use `3.x.x` version of the compone
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--api-body-document-title-border-color` | Border color of the section title | `#e5e5e5`
+`--api-parameters-document-title-border-color` | Border color of the section title | `#e5e5e5`
 `--api-body-document-toggle-view-color` | Color of the toggle view button | `--arc-toggle-view-icon-color` or `rgba(0, 0, 0, 0.74)`
 `--api-body-document-toggle-view-hover-color` | Color of the toggle view button when hovered | `var(--arc-toggle-view-icon-hover-color` or `rgba(0, 0, 0, 0.88)`
 `--api-body-document-description-color` | Color of the type description | `rgba(0, 0, 0, 0.74)`
@@ -28,19 +28,23 @@ Custom property | Description | Default
 `--api-body-document-examples-border-color` | Example section border color | `transparent`
 `--code-background-color` | Background color of the examples section | ``
 `--api-body-document-media-type-label-font-weight` | Font weight of the media type label (when selection is not available) | `500`
-`--api-body-document-title-narrow-font-size`  |   |  `initial`,
+`--arc-font-subhead-font-size` | Font size of the collapsible section title | ``
+`--arc-font-subhead-font-color` | Font color of the collapsible section title | ``
+`--arc-font-subhead-font-font-weight` | Font weight of the collapsible section title | ``
+`--arc-font-subhead-font-line-height` | Line height of the collapsible section title | ``
+`--arc-font-subhead-narrow-font-size`  | Font size of the collapsible section title in mobile-friendly view |  `17px`,
+`--arc-font-body2-font-size` | Font size of the type title | ``
+`--arc-font-body2-font-weight` | Font weight of the type title | ``
+`--arc-font-body2-line-height` | Line height of the type title | ``
 `--api-body-document-code-color`  |   |  `initial`
 `--api-body-document-any-info-font-size`  |   |  `16px`
 `--api-body-document-any-info-font-weight`  |   |  `500`
 
-### API components
-
-This components is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
-
 ## Usage
 
 ### Installation
-```
+
+```sh
 npm install --save @api-components/api-body-document
 ```
 
@@ -90,6 +94,11 @@ npm start
 ```
 
 ### Running the tests
+
 ```sh
 npm test
 ```
+
+## API components
+
+This component is a part of [API components ecosystem](https://elements.advancedrestclient.com/)
