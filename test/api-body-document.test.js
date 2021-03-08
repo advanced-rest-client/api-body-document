@@ -263,7 +263,7 @@ describe('ApiBodyDocumentElement', () => {
         });
 
         it('Narrow style is applied to the URI title', () => {
-          element.style.setProperty('--api-body-document-title-narrow-font-size', '16px');
+          element.style.setProperty('--arc-font-subhead-narrow-font-size', '16px');
           const title = element.shadowRoot.querySelector('.table-title');
           const fontSize = getComputedStyle(title).fontSize;
           assert.equal(fontSize, '16px');
