@@ -42,6 +42,7 @@ export default css`
 
 .heading3 {
   flex: 1;
+  color: var(--arc-font-subhead-color);
   font-size: var(--arc-font-subhead-font-size);
   font-weight: var(--arc-font-subhead-font-weight);
   line-height: var(--arc-font-subhead-line-height);
