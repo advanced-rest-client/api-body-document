@@ -580,7 +580,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
       title="Toogle body details"
       ?opened="${opened}"
     >
-      <div class="table-title" role="heading" aria-level="${headerLevel}">Body</div>
+      <div class="heading3" role="heading" aria-level="${headerLevel}">Body</div>
       <div class="title-area-actions">
         <anypoint-button
           class="toggle-button"

@@ -16,23 +16,14 @@ export default css`
   display: flex;
   flex-direction: row;
   align-items: center;
+  border-bottom: 1px var(--api-parameters-document-title-border-color, var(--api-parameters-document-title-border-color, #e5e5e5)) solid;
   cursor: pointer;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
   user-select: none;
-  border-bottom: 1px var(--api-body-document-title-border-color, #e5e5e5) solid;
   transition: border-bottom-color 0.15s ease-in-out;
 }
 
 .section-title-area[opened] {
   border-bottom-color: transparent;
-}
-
-.section-title-area .table-title {
-  flex: 1;
-  flex-basis: 0.000000001px;
-  font-size: var(--api-body-document-title-narrow-font-size, initial);
 }
 
 .toggle-button {
@@ -49,14 +40,15 @@ export default css`
   transform: rotateZ(-180deg);
 }
 
-.table-title {
+.heading3 {
+  flex: 1;
   font-size: var(--arc-font-subhead-font-size);
   font-weight: var(--arc-font-subhead-font-weight);
   line-height: var(--arc-font-subhead-line-height);
 }
 
-:host([narrow]) .table-title {
-  font-size: var(--api-body-document-title-narrow-font-size, initial);
+:host([narrow]) .heading3 {
+  font-size: var(--api-body-document-title-narrow-font-size, var(--arc-font-subhead-narrow-font-size, 17px));
 }
 
 .type-title {
