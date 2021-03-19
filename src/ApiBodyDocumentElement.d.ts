@@ -1,12 +1,5 @@
 import { LitElement, TemplateResult, CSSResult } from 'lit-element';
-import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
-import '@api-components/raml-aware/raml-aware.js';
-import '@api-components/api-type-document/api-type-document.js';
-import '@polymer/iron-collapse/iron-collapse.js';
-import '@anypoint-web-components/anypoint-button/anypoint-button.js';
-import '@api-components/api-schema-document/api-schema-document.js';
-import '@advanced-rest-client/arc-marked/arc-marked.js';
-import '@api-components/api-resource-example-document/api-resource-example-document.js';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin';
 
 /** @typedef {import('lit-element').TemplateResult} TemplateResult */
 /** @typedef {import('@anypoint-web-components/anypoint-button').AnypointButton} AnypointButton */
@@ -23,16 +16,12 @@ export declare interface ApiBodyDocumentElement extends AmfHelperMixin, LitEleme
  * A component to render HTTP method body documentation based on AMF model.
  */
 export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
-  readonly styles: CSSResult[];
-
-  /**
-   * `raml-aware` scope property to use.
-   * @deprecated Use direct binding instead.
-   */
-  aware: string;
+  get styles(): CSSResult[];
   /**
    * Set to true to open the body view.
-   * Autormatically updated when the view is toggled from the UI.
+   * Automatically updated when the view is toggled from the UI.
+   * 
+   * @attribute
    */
   opened: boolean;
   /**
@@ -52,6 +41,7 @@ export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
    * Currently selected media type.
    * It is an index of a media type in `mediaTypes` array.
    * It is set to `0` each time the body changes.
+   * @attribute
    */
   selected: number;
   /**
@@ -103,10 +93,12 @@ export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
   _description: string;
   /**
    * Set to render a mobile friendly view.
+   * @attribute
    */
   narrow: boolean;
   /**
    * Enables compatibility with Anypoint components.
+   * @attribute
    */
   compatibility: boolean;
   /**
@@ -114,19 +106,24 @@ export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
    * Should be in range of 1 to 6.
    *
    * @default 2
+   * @attribute
    */
   headerLevel: number;
   /**
    * When enabled it renders external types as links and dispatches
    * `api-navigation-selection-changed` when clicked.
+   * @attribute
    */
   graph: boolean;
   _hasObjectExamples: boolean;
   /**
    * When enabled it renders properties that are marked as `readOnly`
+   * @attribute
    */
   renderReadOnly: boolean;
   __bodyChangedDebounce: boolean;
+
+  get toggleActionLabel(): string;
 
   constructor();
 
@@ -146,7 +143,7 @@ export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
   _computeMediaTypes(body: object): MediaTypeItem[]|undefined;
 
   /**
-   * Computes value for `renderMediaSelector` properety.
+   * Computes value for `renderMediaSelector` property.
    * @param types `mediaTypes` change record.
    */
   _computeRenderMediaSelector(types: MediaTypeItem[]): boolean;
@@ -182,16 +179,6 @@ export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
    * @param body Currently computed body.
    */
   _selectedSchemaChanged(body: any): void;
-
-  /**
-   * Computes a label for the section toggle buttons.
-   */
-  _computeToggleActionLabel(opened: boolean): string;
-
-  /**
-   * Computes class for the toggle's button icon.
-   */
-  _computeToggleIconClass(opened: boolean): string;
 
   /**
    * Toggles URI parameters view.

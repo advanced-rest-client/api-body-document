@@ -22,7 +22,7 @@ export default css`
   transition: border-bottom-color 0.15s ease-in-out;
 }
 
-.section-title-area[opened] {
+.section-title-area[data-opened] {
   border-bottom-color: transparent;
 }
 
@@ -110,12 +110,5 @@ api-schema-document {
 arc-marked {
   background-color: transparent;
   padding: 0px;
-}
-
-.icon {
-  display: block;
-  width: 24px;
-  height: 24px;
-  fill: currentColor;
 }
 `;
