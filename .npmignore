@@ -1,8 +1,8 @@
 coverage/
 test/
 demo/
-CONTRIBUTING.md
-.travis.yml
-polymer.json
-karma.*
+tsconfig.json
+web-test-runner.config.mjs
 .*
+*.config.*
+karma.conf.js

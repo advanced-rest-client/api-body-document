@@ -1,12 +1,13 @@
+/* eslint-disable lit-a11y/click-events-have-key-events */
 /* eslint-disable class-methods-use-this */
 
 import { LitElement, html } from 'lit-element';
-import { AmfHelperMixin } from '@api-components/amf-helper-mixin/amf-helper-mixin.js';
-import markdownStyles from '@advanced-rest-client/markdown-styles/markdown-styles.js';
-import { expandMore } from '@advanced-rest-client/arc-icons/ArcIcons.js';
-import '@api-components/raml-aware/raml-aware.js';
+import { classMap } from 'lit-html/directives/class-map.js';
+import { AmfHelperMixin } from '@api-components/amf-helper-mixin';
+import markdownStyles from '@advanced-rest-client/markdown-styles';
+import '@advanced-rest-client/arc-icons/arc-icon.js';
 import '@api-components/api-type-document/api-type-document.js';
-import '@polymer/iron-collapse/iron-collapse.js';
+import '@anypoint-web-components/anypoint-collapse/anypoint-collapse.js';
 import '@anypoint-web-components/anypoint-button/anypoint-button.js';
 import '@api-components/api-schema-document/api-schema-document.js';
 import '@advanced-rest-client/arc-marked/arc-marked.js';
@@ -31,12 +32,8 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
   static get properties() {
     return {
       /**
-       * `raml-aware` scope property to use.
-       */
-      aware: { type: String },
-      /**
        * Set to true to open the body view.
-       * Autormatically updated when the view is toggled from the UI.
+       * Automatically updated when the view is toggled from the UI.
        */
       opened: { type: Boolean },
       /**
@@ -206,6 +203,11 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     this._bodyChanged();
   }
 
+  get toggleActionLabel() {
+    const { opened } = this;
+    return opened ? 'Hide' : 'Show';
+  }
+
   constructor() {
     super();
     this._renderMediaSelector = false;
@@ -215,10 +217,6 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     this.renderReadOnly = false;
     this.graph = false;
     this.narrow = false;
-    /**
-     * @type {string}
-     */
-    this.aware = undefined;
     /**
      * @type {MediaTypeItem[]=}
      */
@@ -263,7 +261,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
 
   /**
    * Computes list of media types in the `body`
-   * @param {object} body Current value of the body.
+   * @param {any} body Current value of the body.
    * @return {MediaTypeItem[]|undefined}
    */
   _computeMediaTypes(body) {
@@ -280,7 +278,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
   }
 
   /**
-   * Computes value for `renderMediaSelector` properety.
+   * Computes value for `renderMediaSelector` property.
    * @param {MediaTypeItem[]} types `mediaTypes` change record.
    * @return {boolean}
    */
@@ -310,10 +308,10 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
 
   /**
    * Computes value of `http://raml.org/vocabularies/http#schema` for body.
-   * @param {Number} selected Index of currently selected media type in
+   * @param {number} selected Index of currently selected media type in
    * `mediaTypes` array
-   * @param {Array<Object>} body List of body in the request.
-   * @return {Object|undefined}
+   * @param {any[]} body List of body in the request.
+   * @return {any|undefined}
    */
   _computeSelectedBody(selected, body) {
     if (!body || (!selected && selected !== 0)) {
@@ -340,7 +338,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
   /**
    * Computes value for `selectedMediaType` property.
    * @param {number} selected Currently selected media type index in the selector.
-   * @param {Array<Object>} body List of body schemas.
+   * @param {any} body List of body schemas.
    * @return {string} Content type value.
    */
   _computeSelectedMediaName(selected, body) {
@@ -353,7 +351,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
 
   /**
    * Handler for body value change. Computes basic view control properties.
-   * @param {Object} body Currently computed body.
+   * @param {any} body Currently computed body.
    */
   _selectedSchemaChanged(body) {
     this._typeName = this._computeTypeName(body);
@@ -391,20 +389,6 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     this._isAnyType = isAnyType;
   }
 
-  // Computes a label for the section toggle buttons.
-  _computeToggleActionLabel(opened) {
-    return opened ? 'Hide' : 'Show';
-  }
-
-  // Computes class for the toggle's button icon.
-  _computeToggleIconClass(opened) {
-    let clazz = 'toggle-icon';
-    if (opened) {
-      clazz += ' opened';
-    }
-    return clazz;
-  }
-
   /**
    * Toggles URI parameters view.
    * Use `pathOpened` property instead.
@@ -425,11 +409,6 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
       value = undefined;
     }
     return value;
-  }
-
-  _apiChangedHandler(e) {
-    const { value } = e.detail;
-    this.amf = value;
   }
 
   /**
@@ -532,7 +511,6 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
       html`<api-schema-document
         .amf="${amf}"
         .mediaType="${_selectedMediaType}"
-        .partentTypeId="${_selectedBodyId}"
         .shape="${_selectedSchema}"
         ?compatibility="${compatibility}"></api-schema-document>` :
       ''}`;
@@ -568,31 +546,32 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
   }
 
   render() {
-    const { opened, _isAnyType, aware, compatibility, headerLevel } = this;
-    const iconClass = this._computeToggleIconClass(opened);
-    return html`<style>${this.styles}</style>
-    ${aware ?
-      html`<raml-aware @api-changed="${this._apiChangedHandler}" .scope="${aware}"></raml-aware>` : ''}
-
+    const { opened, _isAnyType, compatibility, headerLevel } = this;
+    const iconClass = {
+      'toggle-icon': true,
+      opened,
+    };
+    return html`
+    <style>${this.styles}</style>
     <div
       class="section-title-area"
       @click="${this.toggle}"
-      title="Toogle body details"
-      ?opened="${opened}"
+      title="Toggle body details"
+      ?data-opened="${opened}"
     >
       <div class="table-title" role="heading" aria-level="${headerLevel}">Body</div>
       <div class="title-area-actions">
         <anypoint-button
           class="toggle-button"
           ?compatibility="${compatibility}">
-          ${this._computeToggleActionLabel(opened)}
-          <span class="icon ${iconClass}">${expandMore}</span>
+          ${this.toggleActionLabel}
+          <arc-icon class="${classMap(iconClass)}" icon="expandMore"></arc-icon>
         </anypoint-button>
       </div>
     </div>
 
-    <iron-collapse .opened="${opened}">
+    <anypoint-collapse .opened="${opened}">
       ${_isAnyType ? this._anyTypeTemplate() : this._typedTemplate()}
-    </iron-collapse>`;
+    </anypoint-collapse>`;
   }
 }
