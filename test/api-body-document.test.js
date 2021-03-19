@@ -26,16 +26,6 @@ describe('ApiBodyDocumentElement', () => {
     return (fixture(`<api-body-document opened narrow></api-body-document>`));
   }
 
-  /**
-   * @return {Promise<ApiBodyDocumentElement>}
-   */
-  async function awareFixture() {
-    return (fixture(`<div>
-      <api-body-document aware="test-model"></api-body-document>
-      <raml-aware scope="test-model"></raml-aware>
-      </div>`));
-  }
-
   function computeOperation(element, amf, endpoint, method) {
     const webApi = element._computeApi(amf);
     const endPoint = element._computeEndpointByPath(webApi, endpoint);
@@ -82,31 +72,6 @@ describe('ApiBodyDocumentElement', () => {
     });
   });
 
-  describe('Raml aware', () => {
-    let element = /** @type ApiBodyDocumentElement */ (null);
-    let amf;
-    before(async () => {
-      amf = await AmfLoader.load();
-    });
-
-    beforeEach(async () => {
-      const region = await awareFixture();
-      element = region.querySelector('api-body-document');
-      region.querySelector('raml-aware').api = amf;
-      await aTimeout(0);
-    });
-
-    it('renders raml-aware', () => {
-      const node = element.shadowRoot.querySelector('raml-aware');
-      assert.ok(node);
-    });
-
-    it('sets amf value from aware', async () => {
-      await aTimeout(0);
-      assert.typeOf(element.amf, 'array');
-    });
-  });
-
   describe('Basic', () => {
     let element = /** @type ApiBodyDocumentElement */ (null);
     beforeEach(async () => {
@@ -119,7 +84,7 @@ describe('ApiBodyDocumentElement', () => {
       const button = /** @type HTMLElement */ (element.shadowRoot.querySelector('.section-title-area'));
       button.click();
       await nextFrame();
-      const collapse = element.shadowRoot.querySelector('iron-collapse');
+      const collapse = element.shadowRoot.querySelector('anypoint-collapse');
       assert.isTrue(collapse.opened);
     });
 
@@ -265,7 +230,7 @@ describe('ApiBodyDocumentElement', () => {
         it('Narrow style is applied to the URI title', () => {
           element.style.setProperty('--api-body-document-title-narrow-font-size', '16px');
           const title = element.shadowRoot.querySelector('.table-title');
-          const fontSize = getComputedStyle(title).fontSize;
+          const { fontSize } = getComputedStyle(title);
           assert.equal(fontSize, '16px');
         });
       });

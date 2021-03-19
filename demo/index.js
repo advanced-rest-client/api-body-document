@@ -2,6 +2,7 @@ import { html } from 'lit-html';
 import { ApiDemoPage } from '@advanced-rest-client/arc-demo-helper';
 import '@advanced-rest-client/arc-demo-helper/arc-interactive-demo.js';
 import '@anypoint-web-components/anypoint-styles/colors.js';
+import '@anypoint-web-components/anypoint-item/anypoint-item.js';
 import '../api-body-document.js';
 
 class ApiDemo extends ApiDemoPage {
@@ -99,14 +100,13 @@ class ApiDemo extends ApiDemoPage {
       </p>
       <arc-interactive-demo
         .states="${demoStates}"
-        @state-chanegd="${this._demoStateHandler}"
+        @state-changed="${this._demoStateHandler}"
         ?dark="${darkThemeActive}"
       >
         <div slot="content">
           ${hasData ?
             html`
               <api-body-document
-                aware="model"
                 .amf="${amf}"
                 .body="${payloads}"
                 ?compatibility="${compatibility}"
