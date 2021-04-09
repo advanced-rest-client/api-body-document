@@ -429,7 +429,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     } = this;
     const hasBodyName = !!_bodyName;
     const hasDescription = !!_description;
-    const hasTypeName = !!_typeName;
+    const hasTypeName = _typeName && _typeName !== 'default';
     return html`
     <div class="media-type-selector">
       <span>Media type:</span>
@@ -481,7 +481,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     } = this;
     const hasBodyName = !!_bodyName;
     const hasDescription = !!_description;
-    const hasTypeName = !!_typeName;
+    const hasTypeName = _typeName && _typeName !== 'default';
 
     return html`
     <div class="media-type-selector">
