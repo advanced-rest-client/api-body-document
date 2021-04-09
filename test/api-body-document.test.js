@@ -530,4 +530,34 @@ describe('ApiBodyDocumentElement', () => {
       });
     });
   });
+
+  describe('Inline type name', () => {
+    [
+      ['Full AMF model', false],
+      ['Compact AMF model', true]
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
+        let amf;
+        let payload;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'stevetest');
+          payload = AmfLoader.lookupReturnsPayload(amf, '/legal/termsConditionsAcceptReset', 'delete', 400);
+        });
+
+        beforeEach(async () => {
+          element = await openedFixture();
+          element.amf = amf;
+          element.body = payload;
+          await nextFrame();
+          await aTimeout(0);
+        });
+
+        it('Does not render type name when it is "default"', async () => {
+          assert.notExists(element.shadowRoot.querySelector('.type-title'));
+        });
+      });
+    });
+  });
 });
