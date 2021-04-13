@@ -62,7 +62,7 @@ export default css`
 
 .body-name {
   font-weight: var(--api-body-document-any-info-font-weight, 500);
-  font-size: 1.1rem;
+  font-size: var(--api-body-document-body-name-font-size, 1.1rem);
 }
 
 anypoint-button[active] {

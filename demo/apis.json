@@ -8,5 +8,6 @@
   "SE-11508/SE-11508.raml": "RAML 1.0",
   "APIC-463/APIC-463.raml": "RAML 1.0",
   "SE-12291/SE-12291.json": "OAS 2.0",
-  "anyOf/anyOf.yaml": "ASYNC 2.0"
+  "anyOf/anyOf.yaml": "ASYNC 2.0",
+  "steveTest-1/stevetest.json": "OAS 2.0"
 }
