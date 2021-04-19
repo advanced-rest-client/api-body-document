@@ -17,6 +17,7 @@ export default css`
   flex-direction: row;
   align-items: center;
   border-bottom: 1px var(--api-body-document-title-border-color, var(--api-parameters-document-title-border-color, #e5e5e5)) solid;
+  border: var(--api-body-document-title-border);
   cursor: pointer;
   user-select: none;
   transition: border-bottom-color 0.15s ease-in-out;
@@ -42,10 +43,11 @@ export default css`
 
 .heading3 {
   flex: 1;
-  color: var(--arc-font-subhead-color);
-  font-size: var(--arc-font-subhead-font-size);
-  font-weight: var(--arc-font-subhead-font-weight);
-  line-height: var(--arc-font-subhead-line-height);
+  font-family: var(--api-body-document-h3-font-family, var(--arc-font-subhead-font-family));
+  color: var(--api-body-document-h3-font-color, var(--arc-font-subhead-color));
+  font-size: var(--api-body-document-h3-font-size, var(--arc-font-subhead-font-size));
+  font-weight: var(--api-body-document-h3-font-weight, var(--arc-font-subhead-font-weight));
+  line-height: var(--api-body-document-h3-line-height, var(--arc-font-subhead-line-height));
 }
 
 :host([narrow]) .heading3 {
