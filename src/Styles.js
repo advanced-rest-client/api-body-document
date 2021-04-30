@@ -66,11 +66,17 @@ export default css`
 }
 
 anypoint-button[active] {
+  color: var(--api-body-document-media-button-color);
   background-color: var(--api-body-document-media-button-background-color, #CDDC39);
+  text-decoration: var(--api-body-document-media-button-text-decoration);
+  text-underline-offset: var(--api-body-document-media-button-text-underline-offset);
 }
 
 .media-type-selector {
   margin: 20px 0;
+  color: var(--api-body-document-media-type-selector-color);
+  font-size: var(--api-body-document-media-type-selector-font-size);
+  font-weight: var(--api-body-document-media-type-selector-font-weight);
 }
 
 .markdown-html {
@@ -98,6 +104,8 @@ api-schema-document {
 .media-toggle {
   outline: none;
   color: var(--api-body-document-toggle-view-color, var(--arc-toggle-view-icon-color, rgba(0, 0, 0, 0.74)));
+  font-size: var(--api-body-document-toggle-view-font-size);
+  font-weight: var(--api-body-document-toggle-view-font-weight);
 }
 
 .any-info,
