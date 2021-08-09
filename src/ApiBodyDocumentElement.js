@@ -553,25 +553,27 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     };
     return html`
     <style>${this.styles}</style>
-    <div
-      class="section-title-area"
-      @click="${this.toggle}"
-      title="Toggle body details"
-      ?data-opened="${opened}"
-    >
-      <div class="heading3" role="heading" aria-level="${headerLevel}">Body</div>
-      <div class="title-area-actions">
-        <anypoint-button
-          class="toggle-button"
-          ?compatibility="${compatibility}">
-          ${this.toggleActionLabel}
-          <arc-icon class="${classMap(iconClass)}" icon="expandMore"></arc-icon>
-        </anypoint-button>
+    <section class="body">
+      <div
+        class="section-title-area body"
+        @click="${this.toggle}"
+        title="Toggle body details"
+        ?data-opened="${opened}"
+      >
+        <div class="heading3" role="heading" aria-level="${headerLevel}">Body</div>
+        <div class="title-area-actions" data-toggle="body">
+          <anypoint-button
+            class="toggle-button"
+            ?compatibility="${compatibility}">
+            ${this.toggleActionLabel}
+            <arc-icon class="${classMap(iconClass)}" icon="expandMore"></arc-icon>
+          </anypoint-button>
+        </div>
       </div>
-    </div>
-
-    <anypoint-collapse .opened="${opened}">
-      ${_isAnyType ? this._anyTypeTemplate() : this._typedTemplate()}
-    </anypoint-collapse>`;
+  
+      <anypoint-collapse .opened="${opened}">
+        ${_isAnyType ? this._anyTypeTemplate() : this._typedTemplate()}
+      </anypoint-collapse>
+    </section>`;
   }
 }
