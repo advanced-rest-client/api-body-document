@@ -564,7 +564,8 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         <div class="title-area-actions" data-toggle="body">
           <anypoint-button
             class="toggle-button"
-            ?compatibility="${compatibility}">
+            ?compatibility="${compatibility}"
+            data-toggle="body">
             ${this.toggleActionLabel}
             <arc-icon class="${classMap(iconClass)}" icon="expandMore"></arc-icon>
           </anypoint-button>
