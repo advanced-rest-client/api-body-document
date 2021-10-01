@@ -1,8 +1,8 @@
-# api-body-document
+# DEPRECATED
 
-[![Published on NPM](https://img.shields.io/npm/v/@api-components/api-body-document.svg)](https://www.npmjs.com/package/@api-components/api-body-document)
+This component is being deprecated. The code base has been moved to [api-documentation](https://github.com/advanced-rest-client/api-documentation) module. This module will be archived when [PR 37](https://github.com/advanced-rest-client/api-documentation/pull/37) is merged.
 
-[![Tests and publishing](https://github.com/advanced-rest-client/api-body-document/actions/workflows/deployment.yml/badge.svg)](https://github.com/advanced-rest-client/api-body-document/actions/workflows/deployment.yml)
+-----
 
 A component to render HTTP method body documentation based on AMF model generated from API spec file.
 
