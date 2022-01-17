@@ -42,6 +42,10 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
        */
       body: { type: Array },
       /**
+       * requestBody description for OAS 3.0 specs
+       */
+      bodyDescription: { type: String },
+      /**
        * List of discovered media types in the `body`.
        */
       _mediaTypes: { type: Array },
@@ -201,6 +205,19 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     this._selectedBody = this._computeSelectedBody(this.selected, value);
     this._selectedMediaType = this._computeSelectedMediaName(this.selected, value);
     this._bodyChanged();
+  }
+
+  get bodyDescription() {
+    return this._bodyDescription;
+  }
+
+  set bodyDescription(value) {
+    const old = this._bodyDescription;
+    if (old === value) {
+      return;
+    }
+    this._bodyDescription = value;
+    this.requestUpdate('bodyDescription', old);
   }
 
   get toggleActionLabel() {
@@ -478,10 +495,12 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
       amf,
       narrow,
       renderReadOnly,
+      bodyDescription
     } = this;
     const hasBodyName = !!_bodyName;
     const hasDescription = !!_description;
     const hasTypeName = _typeName && _typeName !== 'default';
+    const hasBodyDescription = !!bodyDescription
 
     return html`
     <div class="media-type-selector">
@@ -490,6 +509,10 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         this._mediaTypesTemplate() :
         html`<span class="media-type-label">${_selectedMediaType}</span>`}
     </div>
+    ${hasBodyDescription ? html`
+        <arc-marked .markdown="${bodyDescription}" sanitize>
+            <div slot="markdown-html" class="markdown-html" part="markdown-html"></div>
+        </arc-marked>` : ''}
     ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : ''}
     ${hasTypeName ? html`<div class="type-title">${_typeName}</div>` : ''}
     ${hasDescription ? html`
