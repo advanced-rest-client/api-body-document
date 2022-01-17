@@ -560,4 +560,35 @@ describe('ApiBodyDocumentElement', () => {
       });
     });
   });
+
+  describe('OAS 3.0', () => {
+    [
+      ['Full AMF model', false],
+      ['Compact AMF model', true]
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
+        let amf;
+        let payload;
+
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'APIC-758');
+          payload = AmfLoader.lookupReturnsPayload(amf, '/pets', 'post', 201);
+        });
+
+        beforeEach(async () => {
+          element = await openedFixture();
+          element.amf = amf;
+          element.body = payload;
+          element.bodyDescription = 'Pet to add';
+          await nextFrame();
+          await aTimeout(0);
+        });
+
+        it('Sets body description value', async () => {
+          assert.equal(element._bodyDescription, 'Pet to add');
+        });
+      });
+    });
+  });
 });

@@ -30,6 +30,14 @@ export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
    */
   body: any[];
   /**
+   * requestBody description for OAS 3.0 specs
+   */
+  bodyDescription: string;
+  /**
+   * requestBody description for OAS 3.0 specs
+   */
+  _bodyDescription: string;
+  /**
    * List of discovered media types in the `body`.
    */
   _mediaTypes: any[];
