@@ -131,6 +131,11 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         * When enabled it renders properties that are marked as `readOnly`
         */
        renderReadOnly: { type: Boolean },
+       /**
+        * Bindings for the type document.
+        * This is a map of the type name to the binding name.
+        */
+       bindings: { type: Object},
     };
   }
 
@@ -225,6 +230,19 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     return opened ? 'Hide' : 'Show';
   }
 
+  get bindings() {
+    return this._bindings
+  }
+
+  set bindings(value) {
+    const old = this._bindings;
+    if (old === value) {
+      return;
+    }
+    this._bindings = value
+    this.setBinding(value);
+  }
+
   constructor() {
     super();
     this._renderMediaSelector = false;
@@ -238,6 +256,17 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
      * @type {MediaTypeItem[]=}
      */
     this._mediaTypes = undefined;
+  }
+
+  setBinding(value) {
+      if (value) {
+        const messageKey = this._getAmfKey(this.ns.aml.vocabularies.apiBinding.messageKey)
+        const typeKey = this._getAmfKey(this.ns.aml.vocabularies.apiBinding.type)
+        this.binding = {
+          key: value[0][messageKey][0][this.ns.aml.vocabularies.core.description][0]['@value'],
+          type: this._getValue(value[0], typeKey),
+        }
+      }
   }
 
   __amfChanged() {
@@ -458,6 +487,15 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     ${hasDescription ? html`<arc-marked .markdown="${_description}" sanitize>
       <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
     </arc-marked>` : ''}
+    ${!!this.binding ?
+      html`
+        <div class="bindings-container">
+          <p class="bindins-info"><label>Operation specific information:<label><span class="binding-type"> ${this.binding?.type}</span></p>
+          <p class="bindins-info"><label>key: </label><span class="binding-type">${this.binding?.key}</span></p>
+        </div>`
+      : undefined
+    }
+
     <p class="any-info">Any instance of data is allowed.</p>
     <p class="any-info-description">
       The API file specifies body for this request but it does not specify the data model.
@@ -509,7 +547,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         this._mediaTypesTemplate() :
         html`<span class="media-type-label">${_selectedMediaType}</span>`}
     </div>
-    ${hasBodyDescription ? html`
+     ${hasBodyDescription ? html`
         <arc-marked .markdown="${bodyDescription}" sanitize>
             <div slot="markdown-html" class="markdown-html" part="markdown-html"></div>
         </arc-marked>` : ''}
@@ -594,7 +632,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
           </anypoint-button>
         </div>
       </div>
-  
+
       <anypoint-collapse .opened="${opened}">
         ${_isAnyType ? this._anyTypeTemplate() : this._typedTemplate()}
       </anypoint-collapse>
