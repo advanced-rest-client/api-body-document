@@ -20,7 +20,7 @@ export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
   /**
    * Set to true to open the body view.
    * Automatically updated when the view is toggled from the UI.
-   * 
+   *
    * @attribute
    */
   opened: boolean;
@@ -130,6 +130,11 @@ export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
    */
   renderReadOnly: boolean;
   __bodyChangedDebounce: boolean;
+  /**
+  * Bindings for the type document.
+  * This is a map of the type name to the binding name.
+  */
+  bindings: any[];
 
   get toggleActionLabel(): string;
 

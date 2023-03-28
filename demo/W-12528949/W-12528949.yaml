@@ -1,0 +1,60 @@
+asyncapi: 2.0.0
+info:
+  title: title-async-api
+  version: 1.0.0
+  description:
+    This Async API provides Currency data from IDH. Currency records span
+    various types (e.g. Country, Region, Province, State, etc). Each record includes
+    all attributes of Currency available from its source. Refer https://anypoint.mulesoft.com/exchange/243c2b69-65ef-42de-8a22-b7a5d052650e/currencies/minor/2.0/
+    for more API details
+  contact:
+    name: mule support
+    email: IS-Mulesoft-Support@capgroup.com
+channels:
+  idh.op-cpz.reference-data-management.fundamental.currency.v1:
+    description: Currency data in Avro format
+    publish:
+      operationId: currencyDataavro
+      message:
+        contentType: application/octec-stream
+        bindings:
+          kafka:
+            key:
+              type: integer
+              description: currencyUniqueIdentifier
+        payload:
+          description: https://cg-event-streaming-catalog-oz/schema/config/idh.op-oz.reference-data-management.fundamental.currency.v1.ite12-value/detail/download?id=kafka7-oz1
+      bindings:
+        kafka:
+          clientId:
+            type: string
+asyncapi: 2.0.0
+info:
+  title: title-async-api
+  version: 1.0.0
+  description:
+    This Async API provides Currency data from IDH. Currency records span
+    various types (e.g. Country, Region, Province, State, etc). Each record includes
+    all attributes of Currency available from its source. Refer https://anypoint.mulesoft.com/exchange/243c2b69-65ef-42de-8a22-b7a5d052650e/currencies/minor/2.0/
+    for more API details
+  contact:
+    name: mule support
+    email: IS-Mulesoft-Support@capgroup.com
+channels:
+  idh.op-cpz.reference-data-management.fundamental.currency.v1:
+    description: Currency data in Avro format
+    publish:
+      operationId: currencyDataavro
+      message:
+        contentType: application/octec-stream
+        bindings:
+          kafka:
+            key:
+              type: integer
+              description: currencyUniqueIdentifier
+        payload:
+          description: https://cg-event-streaming-catalog-oz/schema/config/idh.op-oz.reference-data-management.fundamental.currency.v1.ite12-value/detail/download?id=kafka7-oz1
+      bindings:
+        kafka:
+          clientId:
+            type: string

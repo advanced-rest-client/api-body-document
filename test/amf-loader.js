@@ -52,6 +52,17 @@ AmfLoader.lookupPayload = function(model, endpoint, operation) {
   return helper._ensureArray(helper._computePayload(expects));
 };
 
+AmfLoader.lookupPayloadBindings = function(payload) {
+  let result = [];
+  if (!payload) {
+    result = [];
+  }
+  const keyBinding = helper._getAmfKey(helper.ns.aml.vocabularies.apiBinding.binding)
+  const keyBindings = helper._getAmfKey(helper.ns.aml.vocabularies.apiBinding.bindings)
+  result = payload && payload[keyBinding] ? payload[keyBinding][0][keyBindings] : []
+  return result
+};
+
 AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
   const op = AmfLoader.lookupOperation(model, endpoint, operation);
   const rKey = helper._getAmfKey(helper.ns.aml.vocabularies.apiContract.returns);
@@ -66,3 +77,5 @@ AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
   const payload = response[pKey];
   return payload instanceof Array ? payload : [payload];
 };
+
+AmfLoader.loadBindings

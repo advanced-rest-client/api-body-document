@@ -131,7 +131,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         * When enabled it renders properties that are marked as `readOnly`
         */
        renderReadOnly: { type: Boolean },
-           /**
+       /**
         * Bindings for the type document.
         * This is a map of the type name to the binding name.
         */
