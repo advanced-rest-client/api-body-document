@@ -135,7 +135,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         * Bindings for the type document.
         * This is a map of the type name to the binding name.
         */
-       bindings: { type: Object},
+       bindings: { type: Array },
     };
   }
 
