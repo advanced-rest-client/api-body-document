@@ -42,6 +42,10 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
        */
       body: { type: Array },
       /**
+       * requestBody description for OAS 3.0 specs
+       */
+      bodyDescription: { type: String },
+      /**
        * List of discovered media types in the `body`.
        */
       _mediaTypes: { type: Array },
@@ -282,7 +286,6 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     this._mediaTypes = undefined;
   }
 
-
   __amfChanged() {
     this._bodyChanged();
   }
@@ -499,6 +502,8 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     </div>
     ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : ''}
     ${hasDescription ? html`<arc-marked .markdown="${_description}" sanitize>
+      <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
+    </arc-marked>` : ''}
     ${!!this.bindings ?
       html`<ul class="bindings-container-list">
         ${this.bindings.map(item => html`<li>
@@ -650,7 +655,6 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
           </anypoint-button>
         </div>
       </div>
-
       <anypoint-collapse .opened="${opened}">
         ${_isAnyType ? this._anyTypeTemplate() : this._typedTemplate()}
       </anypoint-collapse>
