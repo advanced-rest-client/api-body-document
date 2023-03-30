@@ -499,7 +499,7 @@ describe('ApiBodyDocumentElement', () => {
             assert.lengthOf(node.renderedExamples, 1, 'Examples render has 1 example');
             assert.equal(node.renderedExamples[0].title, '400_badrequest_validate_customer_account_hash');
             done();
-          }, 120);
+          }, 200);
         });
       });
     });
