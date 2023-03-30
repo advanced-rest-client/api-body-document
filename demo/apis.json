@@ -10,5 +10,6 @@
   "SE-12291/SE-12291.json": "OAS 2.0",
   "anyOf/anyOf.yaml": "ASYNC 2.0",
   "steveTest-1/stevetest.json": "OAS 2.0",
-  "APIC-758/APIC-758.yaml": "OAS 3.0"
+  "APIC-758/APIC-758.yaml": "OAS 3.0",
+  "W-12528949/W-12528949.yaml": "ASYNC 2.0"
 }

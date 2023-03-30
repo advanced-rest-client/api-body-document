@@ -121,4 +121,26 @@ arc-marked {
   background-color: transparent;
   padding: 0px;
 }
+
+.bindings-container-list {
+  padding: 0;
+  list-style-type: none;
+
+}
+
+.bindings-container-list li .bindings-header {
+ font-weight: 400;
+}
+
+.bindings-container-list li .bindings-header > .binding-type {
+ font-weight: 600;
+}
+
+.bindings-container-list li .bindings-body > label {
+  display: block;
+}
+
+.bindings-container-list li .bindings-body > .binding-data-type {
+  text-transform: capitalize;
+}
 `;

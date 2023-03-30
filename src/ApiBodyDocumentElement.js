@@ -131,6 +131,11 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         * When enabled it renders properties that are marked as `readOnly`
         */
        renderReadOnly: { type: Boolean },
+       /**
+        * Bindings for the type document.
+        * This is a map of the type name to the binding name.
+        */
+       bindings: { type: Array },
     };
   }
 
@@ -223,6 +228,47 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
   get toggleActionLabel() {
     const { opened } = this;
     return opened ? 'Hide' : 'Show';
+  }
+
+  get bindings() {
+    return this._bindings
+  }
+
+  set bindings(value) {
+    const old = this._bindings;
+    if (old === value) {
+      return;
+    }
+
+    const messageKey = this._getAmfKey(this.ns.aml.vocabularies.apiBinding.messageKey)
+    const typeKey = this._getAmfKey(this.ns.aml.vocabularies.apiBinding.type)
+    const dataTypeKey = this._getAmfKey(this.ns.w3.shacl.datatype)
+
+    this._bindings = value?.map((item) => ({
+      key: item[messageKey][0][this.ns.aml.vocabularies.core.description][0]['@value'],
+      dataType: item[messageKey][0][dataTypeKey] ? this._getDataType(item[messageKey][0][dataTypeKey][0]['@id']) : 'any', // integer, number, long, float, double, boolean
+      bindingType: this._getValue(item, typeKey), // kafka, AMQP, etc
+    }))
+  }
+
+  _getDataType(type){
+    const xmlSchema = this.ns.w3.xmlSchema;
+    switch (type) {
+      case this._getAmfKey(xmlSchema.number):
+          return 'number';
+      case this._getAmfKey(xmlSchema.long):
+        return 'long';
+      case this._getAmfKey(xmlSchema.integer):
+        return 'integer';
+      case this._getAmfKey(xmlSchema.float):
+        return 'float';
+      case this._getAmfKey(xmlSchema.double):
+        return 'double';
+      case this._getAmfKey(xmlSchema.boolean):
+        return 'boolean';
+      default:
+        return 'any';
+    }
   }
 
   constructor() {
@@ -458,6 +504,21 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     ${hasDescription ? html`<arc-marked .markdown="${_description}" sanitize>
       <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
     </arc-marked>` : ''}
+    ${!!this.bindings ?
+      html`<ul class="bindings-container-list">
+        ${this.bindings.map(item => html`<li>
+          <p class="bindings-header">
+            <label>Message specific information:</label>
+            <span class="binding-type"> ${item.bindingType}</span>
+          </p>
+          <div class="bindings-body">
+            <label>key</label>
+            <span class="binding-key">${item.key}</span>
+            <span class="binding-data-type">${item.dataType}</span>
+          </div>
+        </li>`)}
+      </ul>`
+    : ''}
     <p class="any-info">Any instance of data is allowed.</p>
     <p class="any-info-description">
       The API file specifies body for this request but it does not specify the data model.
@@ -594,7 +655,6 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
           </anypoint-button>
         </div>
       </div>
-  
       <anypoint-collapse .opened="${opened}">
         ${_isAnyType ? this._anyTypeTemplate() : this._typedTemplate()}
       </anypoint-collapse>

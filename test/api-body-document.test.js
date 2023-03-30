@@ -282,6 +282,44 @@ describe('ApiBodyDocumentElement', () => {
     });
   });
 
+  describe('"Any" type view async api with bindings', () => {
+    [
+      ['Full AMF model', false],
+      ['Compact AMF model', true]
+    ].forEach(([label, compact]) => {
+      describe(String(label), () => {
+        let element = /** @type ApiBodyDocumentElement */ (null);
+        let amf;
+        let payload;
+        let bindings;
+        before(async () => {
+          amf = await AmfLoader.load(compact, 'W-12528949');
+          payload = AmfLoader.lookupPayload(amf, 'idh.op-cpz.reference-data-management.fundamental.currency.v1', 'publish');
+          bindings = AmfLoader.lookupPayloadBindings(payload);
+        });
+
+        beforeEach(async () => {
+          element = await narrowFixture();
+          element.amf = amf;
+          element.body = payload;
+          element.bindings = bindings;
+          await nextFrame();
+          await aTimeout(0);
+        });
+
+        it('Computes isAnyType attribute', () => {
+          assert.isTrue(element._isAnyType);
+        });
+
+        it('Renders bindings', async () => {
+          await nextFrame();
+          const node = element.shadowRoot.querySelector('.bindings-container-list');
+          assert.ok(node);
+        });
+      });
+    });
+  });
+
   describe('"Union" type view', () => {
     [
       ['Full AMF model', false],
