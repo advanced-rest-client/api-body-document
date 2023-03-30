@@ -69,6 +69,7 @@ describe('ApiBodyDocumentElement', () => {
       await assert.isAccessible(element, {
         ignoredRules: ['color-contrast']
       });
+      await aTimeout(0);
     });
   });
 
