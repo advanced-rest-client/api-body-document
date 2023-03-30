@@ -32,7 +32,7 @@ describe('SE-12291 - test', () => {
         payload = AmfLoader.lookupReturnsPayload(amf,
           '/api/investment-administration/capital-system/v1/portfolios',
           'get',
-          200);
+          400);
       });
 
       beforeEach(async () => {
