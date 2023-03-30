@@ -489,17 +489,18 @@ describe('ApiBodyDocumentElement', () => {
           assert.typeOf(typeNode.selectedBodyId, 'string', 'selected body id is set');
         });
 
-        it('api-type-document renders api-resource-example-document element', (done) => {
+        it('api-type-document renders api-resource-example-document element', async () => {
           const op = computeOperation(element, amf, '/validatecustomeraccounthash', 'post');
           const payload = computeReturnsPayload(element, op, '400');
           element.body = payload;
-          setTimeout(() => {
-            const typeNode = element.shadowRoot.querySelector('api-type-document');
-            const node = typeNode.shadowRoot.querySelector('api-resource-example-document');
-            assert.lengthOf(node.renderedExamples, 1, 'Examples render has 1 example');
-            assert.equal(node.renderedExamples[0].title, '400_badrequest_validate_customer_account_hash');
-            done();
-          }, 200);
+          await aTimeout(0);
+          const typeNode = element.shadowRoot.querySelector('api-type-document');
+          const node = typeNode.shadowRoot.querySelector('api-resource-example-document');
+          await aTimeout(0);
+          assert.lengthOf(node.renderedExamples, 1, 'Examples render has 1 example');
+          await aTimeout(0);
+          assert.equal(node.renderedExamples[0].title, '400_badrequest_validate_customer_account_hash');
+          await aTimeout(0);
         });
       });
     });
