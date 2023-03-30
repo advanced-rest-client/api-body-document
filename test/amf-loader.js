@@ -77,5 +77,3 @@ AmfLoader.lookupReturnsPayload = function(model, endpoint, operation, code) {
   const payload = response[pKey];
   return payload instanceof Array ? payload : [payload];
 };
-
-AmfLoader.loadBindings
