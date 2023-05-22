@@ -243,9 +243,10 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     const messageKey = this._getAmfKey(this.ns.aml.vocabularies.apiBinding.messageKey)
     const typeKey = this._getAmfKey(this.ns.aml.vocabularies.apiBinding.type)
     const dataTypeKey = this._getAmfKey(this.ns.w3.shacl.datatype)
+    const descriptionKey = this._getAmfKey(this.ns.aml.vocabularies.core.description)
 
     this._bindings = value?.map((item) => ({
-      key: item[messageKey][0][this.ns.aml.vocabularies.core.description][0]['@value'],
+      key: item[messageKey][0][descriptionKey][0]['@value'],
       dataType: item[messageKey][0][dataTypeKey] ? this._getDataType(item[messageKey][0][dataTypeKey][0]['@id']) : 'any', // integer, number, long, float, double, boolean
       bindingType: this._getValue(item, typeKey), // kafka, AMQP, etc
     }))
