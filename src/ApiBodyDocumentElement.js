@@ -126,6 +126,11 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         * `api-navigation-selection-changed` when clicked.
         */
        graph: { type: Boolean },
+       /**
+         * Method's endpoint definition as a
+         * `http://raml.org/vocabularies/http#endpoint` of AMF model.
+         */
+       endpoint: { type: Object },
        _hasObjectExamples: { type: Boolean },
        /**
         * When enabled it renders properties that are marked as `readOnly`
@@ -151,6 +156,24 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     this.__mediaTypes = value;
     this.requestUpdate('_mediaTypes', old);
     this._renderMediaSelector = this._computeRenderMediaSelector(value);
+  }
+
+  get messageId() {
+    try {
+      const apiContractsupportedOperation = this._getAmfKey(this.ns.aml.vocabularies.apiContract.supportedOperation)
+      const apiContractExpects = this._getAmfKey(this.ns.aml.vocabularies.apiContract.expects)
+      const apiContractMessageId = this._getAmfKey(this.ns.aml.vocabularies.apiContract.messageId)
+      const coreName = this._getAmfKey(this.ns.schema.name)    
+      const expects = this.endpoint[apiContractsupportedOperation][0][apiContractExpects][0];
+      const messageId = expects[apiContractMessageId] || expects[coreName]
+      return messageId[0]['@value']
+    } catch(e) {
+      return ''
+    }
+  }
+
+  get hasMessageId() {
+    return this._isAsyncAPI(this.amf) && !!this.messageId
   }
 
   get _selectedBody() {
@@ -245,11 +268,16 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     const dataTypeKey = this._getAmfKey(this.ns.w3.shacl.datatype)
     const descriptionKey = this._getAmfKey(this.ns.aml.vocabularies.core.description)
 
-    this._bindings = value?.map((item) => ({
-      key: item[messageKey][0][descriptionKey][0]['@value'],
-      dataType: item[messageKey][0][dataTypeKey] ? this._getDataType(item[messageKey][0][dataTypeKey][0]['@id']) : 'any', // integer, number, long, float, double, boolean
-      bindingType: this._getValue(item, typeKey), // kafka, AMQP, etc
-    }))
+    try {
+      this._bindings = value?.map((item) => ({
+        key: item[messageKey][0][descriptionKey][0]['@value'],
+        dataType: item[messageKey][0][dataTypeKey] ? this._getDataType(item[messageKey][0][dataTypeKey][0]['@id']) : 'any', // integer, number, long, float, double, boolean
+        bindingType: this._getValue(item, typeKey), // kafka, AMQP, etc
+      }))
+    } catch(e) {
+      console.log(e)
+    }
+
   }
 
   _getDataType(type){
@@ -561,7 +589,9 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
       amf,
       narrow,
       renderReadOnly,
-      bodyDescription
+      bodyDescription,
+      hasMessageId,
+      messageId
     } = this;
     const hasBodyName = !!_bodyName;
     const hasDescription = !!_description;
@@ -575,6 +605,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         this._mediaTypesTemplate() :
         html`<span class="media-type-label">${_selectedMediaType}</span>`}
     </div>
+    ${hasMessageId ? html`<div class="message-id-container">Message ID <span class="message-id-tag">${messageId}</span></div>` : ''}
     ${hasBodyDescription ? html`
         <arc-marked .markdown="${bodyDescription}" sanitize>
             <div slot="markdown-html" class="markdown-html" part="markdown-html"></div>
