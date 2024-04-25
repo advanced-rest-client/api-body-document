@@ -143,4 +143,18 @@ arc-marked {
 .bindings-container-list li .bindings-body > .binding-data-type {
   text-transform: capitalize;
 }
+
+.message-id-container {
+  background-color: white;
+  font-size: 14px;
+  padding: 1em;
+}
+
+.message-id-tag {
+  border: 1px solid #D67300;
+  border-radius: 4px;
+  padding: 4px 19px;
+  color: #D67300;
+  margin-left: 20px;
+}
 `;
