@@ -270,8 +270,8 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
 
     try {
       this._bindings = value?.map((item) => ({
-        key: item[messageKey][0][descriptionKey][0]['@value'],
-        dataType: item[messageKey][0][dataTypeKey] ? this._getDataType(item[messageKey][0][dataTypeKey][0]['@id']) : 'any', // integer, number, long, float, double, boolean
+        key: item[messageKey] ? item[messageKey][0][descriptionKey][0]['@value']: false,
+        dataType: item[messageKey] && item[messageKey][0][dataTypeKey] ? this._getDataType(item[messageKey][0][dataTypeKey][0]['@id']) : 'any', // integer, number, long, float, double, boolean
         bindingType: this._getValue(item, typeKey), // kafka, AMQP, etc
       }))
     } catch(e) {
@@ -616,6 +616,27 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     <arc-marked .markdown="${_description}" sanitize>
       <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
     </arc-marked>` : ''}
+
+    ${this._isAsyncAPI(this.amf) && !!this.bindings ?
+      html`<ul class="bindings-container-list">
+        ${this.bindings.map(item => html`<li>
+          <p class="bindings-header">
+            <label>Message specific information:</label>
+            <span class="binding-type"> ${item.bindingType}</span>
+          </p>
+          ${item.key!==false ? 
+            html `
+            <div class="bindings-body">
+              <label>key</label>
+              <span class="binding-key">${item.key}</span>
+              <span class="binding-data-type">${item.dataType}</span>
+            </div>
+            `  
+          : ''}
+          
+        </li>`)}
+      </ul>`
+    : ''}
 
     ${_isObject ?
       html`<api-type-document
