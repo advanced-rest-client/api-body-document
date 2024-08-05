@@ -1,7 +1,7 @@
 {
   "name": "@api-components/api-body-document",
   "description": "A component to render HTTP method body documentation based on AMF model",
-  "version": "4.4.10",
+  "version": "4.4.11",
   "license": "Apache-2.0",
   "main": "index.js",
   "module": "index.js",
