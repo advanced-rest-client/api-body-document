@@ -66,6 +66,7 @@ class ApiDemo extends ApiDemoPage {
   _apiListTemplate() {
     return [
       ['demo-api', 'Demo API'],
+      ['avro', 'avro'],
       ['examples-api', 'Examples render demo'],
       ['raml-types', 'RAML types with raml examples'],
       ['caro-api', 'Carolina API issue'],

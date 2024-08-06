@@ -438,7 +438,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
       return undefined;
     }
     const data = body[selected];
-    return /** @type string */ (this._getValue(data, this.ns.aml.vocabularies.core.mediaType));
+    return /** @type string */ (this._getValue(data, this.ns.aml.vocabularies.core.mediaType) || this._getValue(data, this.ns.aml.vocabularies.apiContract.schemaMediaType));
   }
 
   /**
