@@ -30,10 +30,10 @@
     "@advanced-rest-client/markdown-styles": "^3.1.5",
     "@anypoint-web-components/anypoint-button": "^1.2.3",
     "@anypoint-web-components/anypoint-collapse": "^0.1.2",
-    "@api-components/amf-helper-mixin": "^4.5.22",
+    "@api-components/amf-helper-mixin": "^4.5.29",
     "@api-components/api-resource-example-document": "^4.3.3",
     "@api-components/api-schema-document": "^4.3.0",
-    "@api-components/api-type-document": "^4.2.15",
+    "@api-components/api-type-document": "^4.2.33",
     "lit-element": "^2.5.1",
     "lit-html": "^1.4.1"
   },
