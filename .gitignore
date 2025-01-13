@@ -63,3 +63,4 @@ dist/
 demo/*.json
 !demo/apis.json
 !demo/models/avro.json
+.codegenie
