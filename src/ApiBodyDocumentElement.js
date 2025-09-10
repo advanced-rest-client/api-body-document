@@ -141,6 +141,18 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         * This is a map of the type name to the binding name.
         */
        bindings: { type: Array },
+      /**
+       * Agent parameters containing PII information
+       */
+      agentParameters: { type: Object },
+      /**
+       * Whether the current schema contains PII data
+       */
+      isPii: { type: Boolean },
+      /**
+       * Whether the agent parameters section is opened
+       */
+      _agentOpened: { type: Boolean },
     };
   }
 
@@ -202,6 +214,10 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     this.__selectedSchema = value;
     this.requestUpdate('_selectedSchema', old);
     this._selectedSchemaChanged(value);
+    // Recalculate PII when schema changes
+    if (value) {
+      setTimeout(() => this._computePiiFromSchema(value), 0);
+    }
   }
 
   get selected() {
@@ -309,6 +325,8 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     this.renderReadOnly = false;
     this.graph = false;
     this.narrow = false;
+    this.agentParameters = undefined;
+    this.isPii = false;
     /**
      * @type {MediaTypeItem[]=}
      */
@@ -507,6 +525,100 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     return value;
   }
 
+
+  /**
+   * Computes a label for the section toggle buttons.
+   * @param {boolean} opened
+   * @returns {string}
+   */
+  _agentToggleActionLabel(opened) {
+    return opened ? 'Hide' : 'Show';
+  }
+
+  /**
+   * Computes state of toggle button.
+   * @param {boolean} opened
+   * @returns {string}
+   */
+  _agentToggleButtonState(opened) {
+    return opened ? 'Collapsed' : 'Expanded';
+  }
+
+  /**
+   * Computes class for the toggle's button icon.
+   * @param {boolean} opened
+   * @returns {string}
+   */
+  _agentToggleIconClass(opened) {
+    let classes = 'toggle-icon';
+    if (opened) {
+      classes += ' opened';
+    }
+    return classes;
+  }
+
+  _computePiiFromSchema(schema) {
+    if (!schema) {
+      return false
+    }
+    try {
+      const agentParams = this._computeAgentPrivacyBySchema(schema);
+      this.agentParameters = agentParams;
+      this.isPii = agentParams ? agentParams.isPii : false;
+      
+      return this.isPii;
+    } catch (error) {
+      this.agentParameters = undefined;
+      this.isPii = false;
+      return false;
+    }
+  }
+
+   /**
+   * Toggles agent parameters section.
+   */
+  _toggleAgent() {
+    this._agentOpened = !this._agentOpened;
+  }
+
+
+  _computeAgentPrivacyBySchema(schema) {
+    if (!schema) {
+      return undefined;
+    }
+
+    // Use the mixin method to get agent privacy data
+    const agentPrivacy = this._computeAgentPrivacy(schema);
+    if (!agentPrivacy || !Array.isArray(agentPrivacy) || agentPrivacy.length === 0) {
+      return undefined;
+    }
+   
+    // Process the privacy data to extract PII information
+    let isPiiValue = false;
+    
+    // Check each privacy item for PII indicators
+    for (const privacyItem of agentPrivacy) {
+      if (!privacyItem) continue;
+      
+      // Look for isPii property
+      const isPiiKey = this._getAmfKey(this.ns.aml.vocabularies.data.isPii);
+      if (isPiiKey && privacyItem[isPiiKey]) {
+        const isPiiNode = this._getValueArray(privacyItem, isPiiKey);
+        if (isPiiNode && isPiiNode.length > 0) {
+          const value = this._getValue(isPiiNode[0], this.ns.aml.vocabularies.data.value);
+          if (value === 'true' || value === true) {
+            isPiiValue = true;
+            break;
+          }
+        }
+      }
+    }
+ 
+    return {
+      isPII: isPiiValue,
+    };
+  }
+
   /**
    * A template to render for "Any" AMF model.
    * @return {TemplateResult}
@@ -686,6 +798,46 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     >${item.label}</anypoint-button>`;
   }
 
+  /**
+   * A template to render for agent parameters.
+   * @return {TemplateResult}
+   */
+  _getAgentTemplate() {
+    const { agentParameters } = this;
+    if (!agentParameters || Object.keys(agentParameters).length === 0) {
+      return '';
+    }
+    const { _agentOpened, compatibility } = this;
+    const label = this._agentToggleActionLabel(_agentOpened);
+    const buttonState = this._agentToggleButtonState(_agentOpened);
+    const iconClass = this._agentToggleIconClass(_agentOpened);
+    return html`<section class="agent-parameters">
+      <div
+        class="section-title-area"
+        @click="${this._toggleAgent}"
+        title="Toggle agent parameters"
+        ?opened="${_agentOpened}"
+      >
+        <div class="heading3 table-title" role="heading" aria-level="2">Agent parameters</div>
+        <div class="title-area-actions" aria-label="${buttonState}">
+          <anypoint-button class="toggle-button" ?compatibility="${compatibility}" data-toggle="agent-parameters">
+            ${label}
+            <arc-icon class="icon ${iconClass}" icon="expandMore"></arc-icon>
+          </anypoint-button>
+        </div>
+      </div>
+      <anypoint-collapse .opened="${_agentOpened}">
+        <div class="parameters-container">
+        ${Object.keys(agentParameters).map((key) => html`
+          <div class="property-item">
+            <div class="property-name">${key}: <strong>${String(agentParameters[key])}</strong></div>
+          </div>
+        `)}
+        </div>
+      </anypoint-collapse>
+    </section>`;
+  }
+
   render() {
     const { opened, _isAnyType, compatibility, headerLevel } = this;
     const iconClass = {
@@ -694,6 +846,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     };
     return html`
     <style>${this.styles}</style>
+    ${this._getAgentTemplate()}
     <section class="body">
       <div
         class="section-title-area body"
