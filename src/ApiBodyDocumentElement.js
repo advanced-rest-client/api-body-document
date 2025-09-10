@@ -525,7 +525,6 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     return value;
   }
 
-
   /**
    * Computes a label for the section toggle buttons.
    * @param {boolean} opened
