@@ -32,8 +32,8 @@ jobs:
             ${{ runner.os }}-node-
       - name: Install dependencies
         run: npm install
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium firefox webkit
+      - name: Setup Playwright
+        uses: microsoft/playwright-github-action@v1
       - name: Run tests
         run: npm test
   test_win:
@@ -53,7 +53,7 @@ jobs:
       - name: Install dependencies
         run: npm install
       - name: Install Playwright Browsers
-        run: npx playwright install --with-deps chromium firefox webkit
+        run: npx playwright install chromium
       - name: Run tests
         run: npm test
   tag:
