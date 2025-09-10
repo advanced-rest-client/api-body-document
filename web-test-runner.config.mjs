@@ -9,10 +9,10 @@ export default {
       return next();
     }
   ],
-  // testRunnerHtml: (testFramework) =>
-  //   `<html>
-	// 	<body>
-	// 	  <script type="module" src="${testFramework}"></script>
-	// 	</body>
-	//   </html>`
+  testRunnerHtml: (testFramework) =>
+    `<html>
+		<body>
+		  <script type="module" src="${testFramework}"></script>
+		</body>
+	  </html>`
 };
