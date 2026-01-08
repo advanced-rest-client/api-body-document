@@ -54,6 +54,15 @@ export default css`
   font-size: var(--api-body-document-title-narrow-font-size, var(--arc-font-subhead-narrow-font-size, 17px));
 }
 
+.heading2 {
+  flex: 1;
+  font-family: var(--api-body-document-h2-font-family, var(--arc-font-subhead-font-family));
+  color: var(--api-body-document-h2-font-color, var(--arc-font-subhead-color));
+  font-size: var(--api-body-document-h2-font-size, 1.25rem) !important;
+  font-weight: var(--api-body-document-h2-font-weight, var(--arc-font-subhead-font-weight));
+  line-height: var(--api-body-document-h2-line-height, var(--arc-font-subhead-line-height));
+}
+
 .type-title {
   font-size: var(--arc-font-body2-font-size);
   font-weight: var(--arc-font-body2-font-weight);
@@ -156,5 +165,17 @@ arc-marked {
   padding: 4px 19px;
   color: #D67300;
   margin-left: 20px;
+}
+
+.grpc-fields-title {
+  font-size: var(--api-body-document-grpc-fields-font-size, 14px);
+  font-weight: var(--api-body-document-grpc-fields-font-weight, var(--arc-font-body2-font-weight));
+  color: var(--api-body-document-description-color, rgba(0, 0, 0, 0.74));
+  margin: 16px 0 8px 0;
+}
+
+api-type-document.grpc-indented {
+  padding-left: var(--api-body-document-grpc-indent, 16px);
+  display: block;
 }
 `;

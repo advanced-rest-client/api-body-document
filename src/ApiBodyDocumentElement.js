@@ -149,10 +149,15 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
        * Whether the current schema contains PII data
        */
       isPii: { type: Boolean },
-      /**
-       * Whether the agent parameters section is opened
-       */
+       /**
+        * Whether the agent parameters section is opened
+        */
       _agentOpened: { type: Boolean },
+      /**
+       * Indicates if this body document is being used for a response (reply)
+       * rather than a request. Used to determine the appropriate title for gRPC.
+       */
+      isResponse: { type: Boolean },
     };
   }
 
@@ -327,6 +332,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     this.narrow = false;
     this.agentParameters = undefined;
     this.isPii = false;
+    this.isResponse = false;
     /**
      * @type {MediaTypeItem[]=}
      */
@@ -708,6 +714,12 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     const hasDescription = !!_description;
     const hasTypeName = _typeName && _typeName !== 'default';
     const hasBodyDescription = !!bodyDescription
+    const isGrpc = this._isGrpcBody();
+    
+    // For gRPC, extract just the message name (last part after the last dot)
+    const displayName = isGrpc && hasTypeName ? 
+      _typeName.split('.').pop() : 
+      _typeName;
 
     return html`
     <div class="media-type-selector">
@@ -716,13 +728,18 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         this._mediaTypesTemplate() :
         html`<span class="media-type-label">${_selectedMediaType}</span>`}
     </div>
+    ${isGrpc && hasTypeName ? html`
+    <div class="media-type-selector">
+      <span>Message:</span>
+      <span class="media-type-label">${displayName}</span>
+    </div>` : ''}
     ${hasMessageId ? html`<div class="message-id-container">Message ID <span class="message-id-tag">${messageId}</span></div>` : ''}
     ${hasBodyDescription ? html`
         <arc-marked .markdown="${bodyDescription}" sanitize>
             <div slot="markdown-html" class="markdown-html" part="markdown-html"></div>
         </arc-marked>` : ''}
-    ${hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : ''}
-    ${hasTypeName ? html`<div class="type-title">${_typeName}</div>` : ''}
+    ${!isGrpc && hasBodyName ? html`<div class="body-name type-title">${_bodyName}</div>` : ''}
+    ${!isGrpc && hasTypeName ? html`<div class="type-title">${_typeName}</div>` : ''}
     ${hasDescription ? html`
     <arc-marked .markdown="${_description}" sanitize>
       <div slot="markdown-html" class="markdown-html" part="markdown-html" ?data-with-title="${hasTypeName}"></div>
@@ -750,7 +767,10 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     : ''}
 
     ${_isObject ?
-      html`<api-type-document
+      html`
+      ${isGrpc ? html`<div class="grpc-fields-title">Fields:</div>` : ''}
+      <api-type-document
+      class="${isGrpc ? 'grpc-indented' : ''}"
       .amf="${amf}"
       ?renderReadOnly="${renderReadOnly}"
       .selectedBodyId="${_selectedBodyId}"
@@ -837,12 +857,60 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     </section>`;
   }
 
+  /**
+   * Checks if the current operation is a gRPC operation
+   * Uses AmfHelperMixin._isGrpcOperation method when endpoint is available,
+   * otherwise checks payload media types directly
+   * @return {boolean} True if it's a gRPC operation
+   */
+  _isGrpcBody() {
+    const { endpoint, body } = this;
+    
+    // Preferred: Use the mixin's _isGrpcOperation method when endpoint is available
+    if (endpoint) {
+      const opKey = this._getAmfKey(this.ns.aml.vocabularies.apiContract.supportedOperation);
+      const operations = endpoint[opKey];
+      if (operations) {
+        const operationsList = this._ensureArray(operations);
+        if (operationsList.length > 0) {
+          return operationsList.some(operation => this._isGrpcOperation(operation));
+        }
+      }
+    }
+    
+    // Fallback: Check payload media types directly when endpoint is not available
+    // This is necessary because body can be passed without endpoint
+    if (!body || !Array.isArray(body)) {
+      return false;
+    }
+    
+    return body.some(p => {
+      const mediaType = this._getValue(p, this.ns.aml.vocabularies.core.mediaType);
+      return mediaType === 'application/grpc' || mediaType === 'application/grpc+proto';
+    });
+  }
+
+  /**
+   * Gets the appropriate title for the body section
+   * @return {string} "Request" or "Response" for gRPC, "Body" otherwise
+   */
+  _getBodyTitle() {
+    if (this._isGrpcBody()) {
+      return this.isResponse ? 'Response' : 'Request';
+    }
+    return 'Body';
+  }
+
   render() {
     const { opened, _isAnyType, compatibility, headerLevel } = this;
     const iconClass = {
       'toggle-icon': true,
       opened,
     };
+    const bodyTitle = this._getBodyTitle();
+    const isGrpc = this._isGrpcBody();
+    const headingClass = isGrpc ? 'heading2' : 'heading3';
+    
     return html`
     <style>${this.styles}</style>
     ${this._getAgentTemplate()}
@@ -853,7 +921,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
         title="Toggle body details"
         ?data-opened="${opened}"
       >
-        <div class="heading3" role="heading" aria-level="${headerLevel}">Body</div>
+        <div class="${headingClass}" role="heading" aria-level="${headerLevel}">${bodyTitle}</div>
         <div class="title-area-actions" data-toggle="body">
           <anypoint-button
             class="toggle-button"
