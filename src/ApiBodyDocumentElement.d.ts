@@ -9,7 +9,12 @@ export declare interface MediaTypeItem {
 }
 
 export declare interface ApiBodyDocumentElement extends AmfHelperMixin, LitElement {
-
+  /**
+   * Method's endpoint definition as a
+   * `http://raml.org/vocabularies/http#endpoint` of AMF model.
+   * Optional - used to determine gRPC operations when available.
+   */
+  endpoint?: object;
 }
 
 /**
@@ -123,6 +128,12 @@ export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
    * @attribute
    */
   graph: boolean;
+  /**
+   * Method's endpoint definition as a
+   * `http://raml.org/vocabularies/http#endpoint` of AMF model.
+   * Optional - used to determine gRPC operations when available.
+   */
+  endpoint?: object;
   _hasObjectExamples: boolean;
   /**
    * When enabled it renders properties that are marked as `readOnly`
@@ -135,6 +146,12 @@ export declare class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
   * This is a map of the type name to the binding name.
   */
   bindings: any[];
+  /**
+   * Indicates if this body document is being used for a response (reply)
+   * rather than a request. Used to determine the appropriate title for gRPC.
+   * @attribute
+   */
+  isResponse: boolean;
 
   get toggleActionLabel(): string;
 

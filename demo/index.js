@@ -47,6 +47,14 @@ class ApiDemo extends ApiDemoPage {
         result = payloads;
       }
     }
+    
+    // For gRPC operations, only show request payloads, not response payloads
+    // Check if this is a gRPC operation
+    if (this._isGrpcOperation(model)) {
+      return result.length ? result : undefined;
+    }
+    
+    // For non-gRPC operations, include response payloads (original behavior)
     const returns = this._computeReturns(model);
     if (returns) {
       for (let i = 0, len = returns.length; i < len; i++) {
@@ -65,6 +73,7 @@ class ApiDemo extends ApiDemoPage {
 
   _apiListTemplate() {
     return [
+      ['grpc-test', 'GRPC API'],
       ['demo-api', 'Demo API'],
       ['avro', 'avro'],
       ['examples-api', 'Examples render demo'],
