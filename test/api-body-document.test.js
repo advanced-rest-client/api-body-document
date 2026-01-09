@@ -496,7 +496,7 @@ describe('ApiBodyDocumentElement', () => {
             const typeNode = element.shadowRoot.querySelector('api-type-document');
             const node = typeNode.shadowRoot.querySelector('api-resource-example-document');
             assert.lengthOf(node.renderedExamples, 1, 'Examples render has 1 example');
-            assert.equal(node.renderedExamples[0].title, '400_badrequest_validate_customer_account_hash');
+            assert.equal(node.renderedExamples[0].title, 'A bad request for Customer Account Hash');
             done();
           }, 500);
         });
