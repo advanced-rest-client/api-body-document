@@ -64,4 +64,6 @@ demo/*.json
 !demo/apis.json
 !demo/models/avro.json
 !demo/grpc-test.json
+!demo/oas32-query-sse.json
+!demo/oas32-query-sse-compact.json
 .codegenie

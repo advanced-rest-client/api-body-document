@@ -443,6 +443,13 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     const key = this._getAmfKey(this.ns.aml.vocabularies.shapes.schema);
     let schema = selectedBody[key];
     if (!schema) {
+      // SSE (text/event-stream) payloads carry the streamed event shape under
+      // `shapes#itemSchema` instead of `shapes#schema`. The namespace has no
+      // `itemSchema` constant, so build the key from the shapes prefix.
+      const itemSchemaKey = this._getAmfKey(`${this.ns.aml.vocabularies.shapes.key}itemSchema`);
+      schema = selectedBody[itemSchemaKey];
+    }
+    if (!schema) {
       return undefined;
     }
     if (Array.isArray(schema)) {
@@ -525,7 +532,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
    */
   _computeTypeName(body) {
     let value = /** @type string */ (this._getValue(body, this.ns.w3.shacl.name));
-    if (value && (value === 'schema' || value.indexOf('amf_inline_type') === 0)) {
+    if (value && (value === 'schema' || value === 'itemSchema' || value.indexOf('amf_inline_type') === 0)) {
       value = undefined;
     }
     return value;
