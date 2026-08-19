@@ -95,10 +95,11 @@ describe('SSE streaming body (fixture)', () => {
       .filter(Boolean);
   }
 
-  [
+  const variants = /** @type {Array<[string, boolean]>} */ ([
     ['Full AMF model', false],
     ['Compact AMF model', true],
-  ].forEach(([label, compact]) => {
+  ]);
+  variants.forEach(([label, compact]) => {
     describe(String(label), () => {
       let element = /** @type ApiBodyDocumentElement */ (null);
       let rawModel;
