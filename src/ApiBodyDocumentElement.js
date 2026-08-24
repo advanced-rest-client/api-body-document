@@ -91,6 +91,11 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
        */
       _isAnyType: { type: Boolean },
       /**
+       * True when `_selectedSchema` was resolved through the `shapes#itemSchema`
+       * fallback (SSE / text/event-stream payloads) instead of `shapes#schema`.
+       */
+      _isSseSchema: { type: Boolean },
+      /**
        * Name of the resource type if any.
        */
       _typeName: { type: String },
@@ -372,7 +377,25 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
   _selectedBodyChanged(value) {
     this._selectedBodyId = value && value['@id'];
     this._selectedSchema = this._computeSelectedSchema(value);
+    this._isSseSchema = this._computeIsSseSchema(value);
     this._hasObjectExamples = false;
+  }
+
+  /**
+   * @param {any} selectedBody
+   * @return {boolean} True when the body only carries `shapes#itemSchema` (SSE),
+   * not `shapes#schema`.
+   */
+  _computeIsSseSchema(selectedBody) {
+    if (!selectedBody) {
+      return false;
+    }
+    const key = this._getAmfKey(this.ns.aml.vocabularies.shapes.schema);
+    if (selectedBody[key]) {
+      return false;
+    }
+    const itemSchemaKey = this._getAmfKey(`${this.ns.aml.vocabularies.shapes.key}itemSchema`);
+    return !!selectedBody[itemSchemaKey];
   }
 
   /**
@@ -710,6 +733,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
       _renderMediaSelector,
       _isObject,
       _isSchema,
+      _isSseSchema,
       amf,
       narrow,
       renderReadOnly,
@@ -776,6 +800,7 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
     ${_isObject ?
       html`
       ${isGrpc ? html`<div class="grpc-fields-title">Fields:</div>` : ''}
+      <div class="${classMap({ 'sse-payload': !!_isSseSchema })}">
       <api-type-document
       class="${isGrpc ? 'grpc-indented' : ''}"
       .amf="${amf}"
@@ -785,13 +810,16 @@ export class ApiBodyDocumentElement extends AmfHelperMixin(LitElement) {
       .narrow="${narrow}"
       .mediaType="${_selectedMediaType}"
       ?compatibility="${compatibility}"
-      ?graph="${graph}"></api-type-document>` : ''}
+      ?graph="${graph}"></api-type-document>
+      </div>` : ''}
     ${_isSchema ?
-      html`<api-schema-document
+      html`<div class="${classMap({ 'sse-payload': !!_isSseSchema })}">
+      <api-schema-document
         .amf="${amf}"
         .mediaType="${_selectedMediaType}"
         .shape="${_selectedSchema}"
-        ?compatibility="${compatibility}"></api-schema-document>` :
+        ?compatibility="${compatibility}"></api-schema-document>
+      </div>` :
       ''}`;
   }
 
