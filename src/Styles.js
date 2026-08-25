@@ -74,12 +74,6 @@ export default css`
   font-size: var(--api-body-document-body-name-font-size, 1.1rem);
 }
 
-.sse-payload {
-  border: var(--api-body-document-sse-payload-border, 2px dashed var(--api-body-document-sse-payload-border-color, #0F9D9D));
-  border-radius: var(--api-body-document-sse-payload-border-radius, 4px);
-  padding: var(--api-body-document-sse-payload-padding, 8px);
-}
-
 anypoint-button[active] {
   color: var(--api-body-document-media-button-color);
   background-color: var(--api-body-document-media-button-background-color, #CDDC39);
