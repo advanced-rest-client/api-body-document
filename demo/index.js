@@ -73,6 +73,7 @@ class ApiDemo extends ApiDemoPage {
 
   _apiListTemplate() {
     return [
+      ['oas32-query-sse', 'OAS 3.2 QUERY + SSE'],
       ['grpc-test', 'GRPC API'],
       ['demo-api', 'Demo API'],
       ['avro', 'avro'],
