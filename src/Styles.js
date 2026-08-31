@@ -16,8 +16,9 @@ export default css`
   display: flex;
   flex-direction: row;
   align-items: center;
-  border-bottom: 1px var(--api-body-document-title-border-color, var(--api-parameters-document-title-border-color, #e5e5e5)) solid;
-  border: var(--api-body-document-title-border);
+  border-bottom: var(--api-body-document-title-border-bottom,
+    1px var(--api-body-document-title-border-color, var(--api-parameters-document-title-border-color, #e5e5e5)) solid
+  );
   cursor: pointer;
   user-select: none;
   transition: border-bottom-color 0.15s ease-in-out;
